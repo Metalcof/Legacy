@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Un negocio que fluye · Conceptos de Nexo Studio</title>
+  <meta name="description" content="Seis proyectos interactivos de automatización para cafeterías, arquitectura, tiendas, bienestar, restaurantes y marcas personales.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="sector-automation.css">
+  <script src="../config.js" defer></script>
+  <script src="sector-automation.js" defer></script>
+</head>
+<body data-palette="original">
+  <a class="skip-link" href="#workspace">Ir al proyecto</a>
+  <header class="studio-header">
+    <a class="back-link" href="../index.html#proyectos">← <span data-brand>Nexo Studio</span></a>
+    <p>Ideas que trabajan contigo.</p>
+    <a class="contact-link" href="../index.html#contacto">Hablemos de tu negocio ↗</a>
+  </header>
+  <div class="concept-strip"><span class="status-dot" aria-hidden="true"></span> Proyectos conceptuales · Datos ficticios · Prueba local sin envíos ni pagos</div>
+  <div class="workspace" id="workspace">
+    <aside class="sidebar">
+      <div class="sidebar-heading"><span class="eyebrow">SEIS NEGOCIOS, SEIS IDEAS</span><h1>Menos pendientes.<br>Más tiempo.</h1><p>Entra a un negocio y prueba su operación.</p></div>
+      <nav class="sector-tabs" role="tablist" aria-label="Elegir proyecto de automatización">
+        <button id="tab-cafeteria" role="tab" aria-controls="cafeteria" aria-selected="true" tabindex="0" data-sector-tab="cafeteria"><span class="tab-number">01</span><span><strong>Maré</strong><small>Cafetería · pedidos para recoger</small></span><span class="tab-arrow" aria-hidden="true">↗</span></button>
+        <button id="tab-arquitectura" role="tab" aria-controls="arquitectura" aria-selected="false" tabindex="-1" data-sector-tab="arquitectura"><span class="tab-number">02</span><span><strong>AURA</strong><small>Arquitectura · proyectos en orden</small></span><span class="tab-arrow" aria-hidden="true">↗</span></button>
+        <button id="tab-tienda" role="tab" aria-controls="tienda" aria-selected="false" tabindex="-1" data-sector-tab="tienda"><span class="tab-number">03</span><span><strong>WAV</strong><small>Tienda · pedidos y existencias</small></span><span class="tab-arrow" aria-hidden="true">↗</span></button>
+        <button id="tab-clinica" role="tab" aria-controls="clinica" aria-selected="false" tabindex="-1" data-sector-tab="clinica"><span class="tab-number">04</span><span><strong>ALMA</strong><small>Bienestar · agenda con espacio</small></span><span class="tab-arrow" aria-hidden="true">↗</span></button>
+        <button id="tab-restaurante" role="tab" aria-controls="restaurante" aria-selected="false" tabindex="-1" data-sector-tab="restaurante"><span class="tab-number">05</span><span><strong>LUMBRE</strong><small>Restaurante · mesas preparadas</small></span><span class="tab-arrow" aria-hidden="true">↗</span></button>
+        <button id="tab-personal" role="tab" aria-controls="personal" aria-selected="false" tabindex="-1" data-sector-tab="personal"><span class="tab-number">06</span><span><strong>Valeria Ríos</strong><small>Marca personal · de idea a propuesta</small></span><span class="tab-arrow" aria-hidden="true">↗</span></button>
+      </nav>
+      <div class="sidebar-tools">
+        <fieldset class="palette-picker"><legend>Elige una paleta</legend><div class="palette-options"><button type="button" data-palette="original" aria-pressed="true">Original</button><button type="button" data-palette="verde" aria-pressed="false">Verde</button><button type="button" data-palette="cian" aria-pressed="false">Cian</button><button type="button" data-palette="violeta" aria-pressed="false">Violeta</button></div></fieldset>
+        <button type="button" class="reset-global" data-action="reset-all">Reiniciar los seis proyectos</button>
+        <p class="storage-note">Los cambios se guardan solo en este navegador. Puedes volver al ejemplo inicial cuando quieras.</p>
+      </div>
+    </aside>
+    <main class="project-area" id="sector-panels">
+      <section class="sector-panel" id="cafeteria" role="tabpanel" aria-labelledby="tab-cafeteria" tabindex="-1"><p>Preparando la operación de Maré…</p></section>
+      <section class="sector-panel" id="arquitectura" role="tabpanel" aria-labelledby="tab-arquitectura" tabindex="-1" hidden></section>
+      <section class="sector-panel" id="tienda" role="tabpanel" aria-labelledby="tab-tienda" tabindex="-1" hidden></section>
+      <section class="sector-panel" id="clinica" role="tabpanel" aria-labelledby="tab-clinica" tabindex="-1" hidden></section>
+      <section class="sector-panel" id="restaurante" role="tabpanel" aria-labelledby="tab-restaurante" tabindex="-1" hidden></section>
+      <section class="sector-panel" id="personal" role="tabpanel" aria-labelledby="tab-personal" tabindex="-1" hidden></section>
+    </main>
+  </div>
+  <footer class="studio-footer"><p>Un concepto de <span data-brand>Nexo Studio</span>. Fotografías generadas con IA.</p><a href="../index.html#contacto">Quiero algo así para mi empresa ↗</a></footer>
+  <div class="sr-only" id="global-feedback" role="status" aria-live="polite"></div>
+  <noscript><p class="noscript">Activa JavaScript para probar estos proyectos. <a href="../index.html#contacto">Puedes contactar con el estudio aquí.</a></p></noscript>
+</body>
+</html>
