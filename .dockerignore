@@ -1,0 +1,9 @@
+node_modules
+sgi.db*
+archivos
+backups
+antes-de-restaurar-*
+.env
+*.log
+prueba-*.js
+.git
