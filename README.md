@@ -1,6 +1,6 @@
 # Tu estudio digital
 
-Página estática en español con diseño editorial oscuro, fotografías realistas generadas con IA y texto principal de 18 px. Se adapta a celular e incluye seis proyectos web ampliados y seis automatizaciones relacionadas con esos negocios, un recorrido interactivo de un proyecto y contacto por WhatsApp o correo. Las categorías filtran un proyecto web y una automatización por sector. El selector de tema funciona en la portada y en todas las demos.
+Página estática en español para una agencia de desarrollo web, integraciones y plataformas de gestión. Diseño claro con un acento amarillo y bloques oscuros, fotografías realistas generadas con IA y texto principal de 18 px. Se adapta a celular e incluye seis proyectos web ampliados y seis automatizaciones relacionadas con esos negocios, un recorrido interactivo de un proyecto y contacto por WhatsApp o correo. Las categorías filtran un proyecto web y una automatización por sector. Cada demo conserva su propio selector de paleta.
 
 ## Cambiar el nombre y el contacto
 
@@ -42,6 +42,24 @@ Para actualizar la web, vuelve a generar el ZIP después de editar los archivos 
 
 `scripts/build.mjs` copia los archivos del sitio a `dist/`, la carpeta de publicación. Ejecuta `node scripts/build.mjs` después de editar los archivos para actualizarla. La configuración de Sites está en `.openai/hosting.json`. Este flujo es independiente del ZIP para cPanel. Ambos conservan las imágenes WebP optimizadas y excluyen una lista concreta de los PNG originales y los antiguos robots; otros PNG que agregues al proyecto se copian normalmente.
 
+## Sistema visual de la portada
+
+La portada sigue el modelo de las páginas de producto de software: lienzo blanco, un único acento amarillo, fotografías de personas trabajando con tarjetas de interfaz de ejemplo flotando encima, bloques que alternan imagen y texto, cifras, preguntas frecuentes y un pie completo. Los colores y la tipografía están en variables al inicio de `styles.css`:
+
+| Variable | Valor | Uso |
+| --- | --- | --- |
+| `--tinta` | `#15171a` | Texto, panel del diagrama, contacto y pie |
+| `--amarillo` | `#ffc62b` | Botones principales, marcas y datos destacados |
+| `--amarillo-suave` | `#fff1c4` | Fondos de etiquetas y de "dos caminos" |
+| `--niebla` | `#f4f5f3` | Secciones de apoyo |
+| `--suave` | `#50565c` | Texto secundario |
+
+Para cambiar el acento, modifica `--amarillo` y `--amarillo-suave`. Si eliges un color más oscuro, comprueba que el texto `--tinta` sobre los botones mantiene un contraste de al menos 4,5 : 1 (con el amarillo actual es de 11,4 : 1).
+
+Las tarjetas de interfaz (agenda, pedido, citas del día) son maquetas HTML con datos de ejemplo, marcadas como tales. No se conectan a ningún sistema. Si cambias una foto, revisa que la tarjeta no tape lo importante.
+
+La tipografía es Archivo variable (`assets/archivo-var.woff2`), con los ejes de peso y de ancho. Si cambias de fuente, conserva la declaración `font-stretch` del `@font-face`.
+
 ## Demos y automatizaciones
 
 Las seis demos son conceptos navegables con fotografía realista, contacto conectado a `config.js` y selector de tema:
@@ -82,7 +100,7 @@ El formulario de contacto abre WhatsApp o la aplicación de correo del visitante
 
 `project-journey.js` muestra el caso conceptual de la cafetería Maré en cuatro etapas: la idea, la conversación, la propuesta visual antes de programar y la web terminada. Puedes avanzar con las pestañas, los botones anterior/siguiente o las flechas del teclado; Inicio y Fin seleccionan la primera y la última etapa. La propuesta visual permite probar dos paletas. La etapa final carga la demo funcional dentro de una vista previa y permite abrirla completa. La marca, las personas y la conversación son ficticias.
 
-Se incluyen tipografía Manrope local, navegación con teclado, etiquetas accesibles, control de pausa y soporte de la preferencia de movimiento reducido. En la portada, `effects.js` alterna entre un degradado RGB en los títulos y un acento fijo verde, cian, violeta o magenta. Todas las demos incluyen su propio selector de paleta; las de Maré, AURA y WAV permiten elegir Original, Verde, Cian o Violeta y conservan la elección por demo en el navegador. Las animaciones suaves se limitan a elementos concretos; la página no usa robot, canvas de partículas ni un ciclo global de tonos.
+Se incluyen tipografía Archivo local en la portada (licencia en `assets/OFL-Archivo.txt`), navegación con teclado, etiquetas accesibles, un botón de pausa para el diagrama de la portada y soporte de la preferencia de movimiento reducido. `effects.js` conserva el filtro por sector del catálogo y el cambio de color de los audífonos de ejemplo. Las demos siguen usando Manrope e incluyen su propio selector de paleta; las de Maré, AURA y WAV permiten elegir Original, Verde, Cian o Violeta y conservan la elección por demo en el navegador. La única animación de la portada son los paquetes de datos del diagrama; no hay robot, canvas de partículas ni selector global de color.
 
 Los enlaces internos usan navegación nativa con saltos inmediatos. Las fotografías se sirven en WebP, con versiones pequeñas para pantallas de menor tamaño y carga diferida en imágenes secundarias. La vista previa del caso Maré se crea solo al abrir la última etapa.
 
