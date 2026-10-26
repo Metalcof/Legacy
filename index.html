@@ -3,126 +3,550 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#090b0f">
-  <meta name="description" content="Diseño web para empresas y marcas personales. De tu primera idea a una página, tienda o automatización que puedas ver, entender y usar.">
-  <title>Nexo Studio — De tu idea a tu nueva web</title>
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Desarrollamos sitios web, integraciones entre tus herramientas y plataformas de gestión a medida, para negocios que atienden todos los días y para empresas con sistemas propios.">
+  <title>Nexo Studio — Web, integraciones y plataformas de gestión</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="assets/manrope.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
   <script src="config.js" defer></script>
   <script src="app.js" defer></script>
   <script src="effects.js" defer></script>
   <script src="project-journey.js" defer></script>
 </head>
-<body class="rgb-live">
+<body>
   <a class="skip-link" href="#contenido">Ir al contenido</a>
+
   <header class="header">
-    <a class="brand" href="#inicio" aria-label="Ir al inicio"><span class="brand-icon" aria-hidden="true">✳</span><span data-brand>Nexo Studio</span></a>
+    <a class="brand" href="#inicio" aria-label="Ir al inicio">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8"/><path d="M11.5 12 20.5 20"/><circle cx="9" cy="10" r="3.2"/><circle cx="23" cy="22" r="3.2"/></svg>
+      <span data-brand>Nexo Studio</span>
+    </a>
     <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navigation"><span></span><span></span></button>
     <nav id="navigation" class="navigation" aria-label="Navegación principal">
-      <a href="#servicios">Qué hacemos</a><a href="#proyectos">Diseños</a><a href="#automatizaciones">Automatizaciones</a><a href="#proceso">El proceso</a>
-      <button class="button button-lime nav-cta" data-open-brief>Hablemos <span aria-hidden="true">↗</span></button>
+      <a href="#servicios">Servicios</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#proceso">Cómo trabajamos</a>
+      <a href="#preguntas">Preguntas</a>
+      <a class="button button-line nav-cta" href="#proyectos">Ver proyectos</a>
+      <button class="button button-accent nav-cta" type="button" data-open-brief>Hablemos</button>
     </nav>
   </header>
 
   <main id="contenido">
-    <section class="section-shell hero" id="inicio">
-      <div class="hero-copy">
-        <span class="eyebrow"><i class="status-dot" aria-hidden="true"></i> DISEÑO WEB CON UNA IDEA DETRÁS</span>
-        <h1>Tu idea merece<br>una web<br><span class="color-word">extraordinaria.</span></h1>
-        <p>Diseñamos páginas, tiendas y automatizaciones para empresas y marcas personales. Tú pones la idea. Nosotros la hacemos funcionar.</p>
-        <div class="hero-actions"><button class="button button-lime" data-open-brief>Cuéntanos tu idea <span aria-hidden="true">↗</span></button><a class="text-link" href="#proceso">Mira cómo la hacemos realidad <span aria-hidden="true">↓</span></a></div>
-        <p class="hero-footnote"><span aria-hidden="true">✳</span> Tu marca tiene su propio lenguaje.<br>Tu web también debería tenerlo.</p>
-      </div>
-      <div class="hero-showcase">
-        <div class="showcase-corner" aria-hidden="true">IDEA → DISEÑO → WEB</div>
-        <div class="site-browser">
-          <div class="browser-topbar"><span class="browser-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>maré / una idea hecha web</span><span aria-hidden="true">↗</span></div>
-          <div class="concept-header"><strong>maré.</strong><span>El café &nbsp; · &nbsp; El lugar</span><a href="demos/cafeteria.html">Explorar ↗</a></div>
-          <div class="concept-photo"><img src="assets/cafe-editorial.webp" srcset="assets/cafe-editorial-small.webp 800w, assets/cafe-editorial.webp 1600w" sizes="(max-width: 800px) 90vw, 45vw" alt="Cafetería luminosa de madera y piedra, una fotografía realista creada con IA" width="1600" height="900" fetchpriority="high" decoding="async"><div class="concept-photo-copy"><span>CAFÉ, SIN PRISA.</span><h2>Un buen café.<br>Un mejor momento.</h2><a href="demos/cafeteria.html">Descubre este diseño <span aria-hidden="true">↗</span></a></div></div>
-          <div class="concept-footer"><span>Un espacio para quedarse.</span><span>Diseño conceptual / Maré</span></div>
+
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <h1 id="hero-title">Tu web, tus sistemas y tu operación, trabajando juntos.</h1>
+          <p class="lead">Desarrollamos sitios web, integraciones entre tus herramientas y plataformas de gestión a medida, para negocios que atienden todos los días y para empresas con sistemas propios.</p>
+          <div class="hero-actions">
+            <button class="button button-accent" type="button" data-open-brief data-service="Automatización">Quiero ordenar mi negocio</button>
+            <button class="button button-line" type="button" data-open-brief data-service="Plataforma de gestión">Necesito un sistema a medida</button>
+          </div>
+          <div class="hero-proof">
+            <p><strong>12 proyectos de ejemplo</strong> para explorar, en seis sectores</p>
+            <ul class="chip-row"><li>Cafetería</li><li>Arquitectura</li><li>Tienda online</li><li>Clínica</li><li>Restaurante</li><li>Marca personal</li></ul>
+          </div>
         </div>
-        <div class="showcase-note"><span class="note-icon" aria-hidden="true">↗</span><div><strong>Así podría empezar tu próxima web.</strong><span>Ábrela. Explórala. Imagina la tuya.</span></div></div>
+
+        <div class="hero-visual" role="group" aria-label="Ejemplo: agenda y avisos automáticos de una clínica">
+          <figure class="photo-frame photo-hero">
+            <img src="assets/auto-clinica-small.webp" srcset="assets/auto-clinica-small.webp 800w, assets/auto-clinica.webp 1600w" sizes="(max-width:960px) 92vw, 50vw" width="1600" height="900" alt="Recepción de una clínica luminosa, con una persona anotando en la agenda; fotografía realista creada con IA" fetchpriority="high" decoding="async">
+          </figure>
+          <div class="ui-card ui-card-chart">
+            <div class="ui-card-head"><strong>Citas de la semana</strong><span class="ui-chip ui-chip-ok">Ejemplo</span></div>
+            <div class="mini-bars" role="img" aria-label="Gráfica de ejemplo: citas de lunes a viernes">
+              <span style="--h:46%"><i></i><b>L</b></span><span style="--h:62%"><i></i><b>M</b></span><span style="--h:54%"><i></i><b>X</b></span><span style="--h:78%" class="is-top"><i></i><b>J</b></span><span style="--h:40%"><i></i><b>V</b></span>
+            </div>
+            <p class="ui-card-foot">Cupos libres actualizados al reservar o cancelar.</p>
+          </div>
+          <div class="ui-card ui-card-alert">
+            <span class="ui-icon" aria-hidden="true"></span>
+            <div>
+              <div class="ui-card-head"><strong>Cita confirmada</strong><time>10:02</time></div>
+              <p>Aviso enviado por WhatsApp y agenda actualizada.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <div class="section-shell experience-bar">
-      <div><strong>Un poco de color. Mucha personalidad.</strong><span>Elige el acento que va contigo.</span></div>
-      <div class="experience-actions"><div class="rgb-controls" role="group" aria-label="Color de la página"><button class="rgb-auto" data-rgb="auto" aria-pressed="true"><i aria-hidden="true"></i> RGB</button><button class="color-swatch swatch-green" data-rgb="green" aria-label="Color verde" aria-pressed="false"></button><button class="color-swatch swatch-cyan" data-rgb="cyan" aria-label="Color cian" aria-pressed="false"></button><button class="color-swatch swatch-violet" data-rgb="violet" aria-label="Color violeta" aria-pressed="false"></button><button class="color-swatch swatch-pink" data-rgb="pink" aria-label="Color magenta" aria-pressed="false"></button></div><button class="motion-toggle" aria-pressed="false" aria-label="Pausar animaciones" title="Pausar animaciones"><span aria-hidden="true">Ⅱ</span></button></div>
-    </div>
-
-    <section class="section-shell services-section" id="servicios">
-      <div class="section-heading"><div><span class="eyebrow section-kicker">LO QUE PODEMOS CREAR CONTIGO</span><h2>Lo que necesitas.<br><span class="accent-text">Con tu personalidad.</span></h2></div><p>Un proyecto pequeño o el siguiente paso de tu empresa. Empezamos por entender qué quieres conseguir.</p></div>
-      <div class="services-list">
-        <article class="service-row"><span class="service-number">01</span><div><h3>Una página que te represente.</h3><p>Para tu empresa, tu marca personal o esa idea que llevas tiempo imaginando. Clara, adaptable y hecha para conectar.</p><div class="service-tags"><span>Empresas</span><span>Profesionales</span><span>Marcas personales</span></div></div><button class="service-action" data-open-brief data-service="Página web" aria-label="Consultar por una página web"><span>Quiero mi web</span><i aria-hidden="true">↗</i></button></article>
-        <article class="service-row"><span class="service-number">02</span><div><h3>Tu producto, en primer plano.</h3><p>Una tienda con catálogo y una experiencia de compra fácil de recorrer. Del primer vistazo al siguiente paso.</p><div class="service-tags"><span>Tiendas online</span><span>Catálogos</span><span>Productos</span></div></div><button class="service-action" data-open-brief data-service="Tienda online" aria-label="Consultar por una tienda online"><span>Crear mi tienda</span><i aria-hidden="true">↗</i></button></article>
-        <article class="service-row"><span class="service-number">03</span><div><h3>Más tiempo para lo importante.</h3><p>Formularios, consultas y seguimiento conectados. Diseñamos automatizaciones alrededor de cómo trabaja tu negocio.</p><div class="service-tags"><span>Automatizaciones</span><span>Integraciones</span><span>Procesos</span></div></div><button class="service-action" data-open-brief data-service="Automatización" aria-label="Consultar por una automatización"><span>Simplificar mi día</span><i aria-hidden="true">↗</i></button></article>
+    <section class="section services" id="servicios" aria-labelledby="services-title">
+      <div class="shell services-grid">
+        <figure class="photo-frame photo-tall">
+          <img src="assets/creative-conversation-small.webp" srcset="assets/creative-conversation-small.webp 800w, assets/creative-conversation.webp 1600w" sizes="(max-width:960px) 92vw, 40vw" width="1600" height="900" alt="Dos personas revisan un proyecto en un portátil sobre una mesa de trabajo; fotografía realista creada con IA" loading="lazy" decoding="async">
+        </figure>
+        <div class="services-copy">
+          <h2 id="services-title">Tres piezas que se combinan para que tu negocio opere.</h2>
+          <p class="section-lead">Empezamos por entender cómo trabajas hoy y qué te hace perder tiempo. Después elegimos qué se construye primero.</p>
+          <div class="service-list">
+            <article class="service">
+              <h3>Desarrollo web</h3>
+              <p>Sitios y tiendas a medida, rápidos y fáciles de mantener por tu equipo.</p>
+              <button class="text-link" type="button" data-open-brief data-service="Página web">Consultar por una web</button>
+            </article>
+            <article class="service">
+              <h3>Integraciones</h3>
+              <p>Pagos, mensajería, correo y CRM conversando entre sí, sin copiar datos a mano.</p>
+              <button class="text-link" type="button" data-open-brief data-service="Integración de sistemas">Consultar por una integración</button>
+            </article>
+            <article class="service">
+              <h3>Plataformas de gestión</h3>
+              <p>Paneles a medida para que tu equipo controle pedidos, citas, inventario y reportes.</p>
+              <button class="text-link" type="button" data-open-brief data-service="Plataforma de gestión">Consultar por una plataforma</button>
+            </article>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="section-shell projects-section sector-catalog" id="proyectos">
-  <div class="section-heading"><div><span class="eyebrow section-kicker">SEIS SECTORES. DOCE PROYECTOS PARA EXPLORAR.</span><h2>Cada negocio.<br><span class="color-word">Un proyecto completo.</span></h2></div><p>Elige un sector. Explora su página y prueba una automatización pensada para cómo trabaja ese negocio.</p></div>
-  <div class="catalog-filters" role="group" aria-label="Filtrar proyectos por sector"><button type="button" data-sector-filter="all" aria-pressed="true">Todos <span>12</span></button><button type="button" data-sector-filter="cafeteria" aria-pressed="false">Cafetería</button><button type="button" data-sector-filter="arquitectura" aria-pressed="false">Arquitectura</button><button type="button" data-sector-filter="tienda" aria-pressed="false">Tienda online</button><button type="button" data-sector-filter="clinica" aria-pressed="false">Clínica</button><button type="button" data-sector-filter="restaurante" aria-pressed="false">Restaurante</button><button type="button" data-sector-filter="personal" aria-pressed="false">Marca personal</button></div>
-  <p class="catalog-summary" id="catalog-summary" role="status" aria-live="polite">12 proyectos: 6 páginas web y 6 automatizaciones.</p>
-  <div class="catalog-group-heading"><div><span>01 / ASÍ SE VE TU NEGOCIO</span><h3>Una web con su propia historia.</h3></div><p data-web-count>6 proyectos web</p></div>
-  <div class="case-catalog-grid" id="website-catalog"><a class="business-case business-case-cafeteria" data-sector-case="cafeteria" id="caso-cafe" href="demos/cafeteria.html"><div class="business-photo"><img src="assets/cafe-editorial-small.webp" srcset="assets/cafe-editorial-small.webp 800w, assets/cafe-editorial.webp 1600w" sizes="(max-width:700px) 90vw, 45vw" width="1600" height="900" alt="Cafetería de especialidad con barra de madera y jardín, fotografía realista creada con IA" loading="lazy" decoding="async"><span class="business-case-number">01 / CAFETERÍA</span><strong class="business-case-brand">maré.</strong><span class="business-photo-open" aria-hidden="true">↗</span></div><div class="business-case-copy"><span class="business-type">PROYECTO WEB</span><h3>Una cafetería que invita a quedarse.</h3><p>Una carta con fotos propias, café de especialidad y un lugar con personalidad. Del primer vistazo a tu próximo pedido.</p><div class="business-tags"><span>Carta con filtros</span><span>Café y repostería</span><span>Pedidos para recoger</span></div><span class="business-case-action">Abrir maré. <i aria-hidden="true">↗</i></span></div></a>
-<a class="business-case business-case-arquitectura" data-sector-case="arquitectura" id="caso-arquitectura" href="demos/arquitectura.html"><div class="business-photo"><img src="assets/architecture-editorial-small.webp" srcset="assets/architecture-editorial-small.webp 800w, assets/architecture-editorial.webp 1600w" sizes="(max-width:700px) 90vw, 45vw" width="1600" height="900" alt="Casa contemporánea rodeada de vegetación tropical, fotografía realista creada con IA" loading="lazy" decoding="async"><span class="business-case-number">02 / ARQUITECTURA</span><strong class="business-case-brand">AURA</strong><span class="business-photo-open" aria-hidden="true">↗</span></div><div class="business-case-copy"><span class="business-type">PROYECTO WEB</span><h3>Un estudio que deja hablar al espacio.</h3><p>Casas, interiores y materiales que se pueden explorar de cerca. Una presencia editorial con información de cada proyecto.</p><div class="business-tags"><span>Galería de proyectos</span><span>Fichas de espacios</span><span>Solicitudes de diseño</span></div><span class="business-case-action">Abrir AURA <i aria-hidden="true">↗</i></span></div></a>
-<a class="business-case business-case-tienda" data-sector-case="tienda" id="caso-tienda" href="demos/tienda.html"><div class="business-photo"><img src="assets/case-wav-lifestyle-small.webp" srcset="assets/case-wav-lifestyle-small.webp 800w, assets/case-wav-lifestyle.webp 1600w" sizes="(max-width:700px) 90vw, 45vw" width="1600" height="900" alt="Persona adulta usando auriculares premium lavanda en un entorno urbano, fotografía realista creada con IA" loading="lazy" decoding="async"><span class="business-case-number">03 / TIENDA ONLINE</span><strong class="business-case-brand">wav.</strong><span class="business-photo-open" aria-hidden="true">↗</span></div><div class="business-case-copy"><span class="business-type">PROYECTO WEB</span><h3>Un producto que se quiere tocar.</h3><p>Fotos de producto, escenas de uso y tres acabados. Una tienda donde eliges el color, ajustas cantidades y preparas tu bolsa.</p><div class="business-tags"><span>Tres acabados</span><span>Carrito por color</span><span>Inventario de pedidos</span></div><span class="business-case-action">Abrir wav. <i aria-hidden="true">↗</i></span></div></a>
-<a class="business-case business-case-clinica" data-sector-case="clinica" id="caso-clinica" href="demos/clinica.html"><div class="business-photo"><img src="assets/wellness-editorial-small.webp" srcset="assets/wellness-editorial-small.webp 800w, assets/wellness-editorial.webp 1600w" sizes="(max-width:700px) 90vw, 45vw" width="1600" height="900" alt="Espacio de atención luminoso con mobiliario natural, fotografía realista creada con IA" loading="lazy" decoding="async"><span class="business-case-number">04 / CLÍNICA</span><strong class="business-case-brand">alma.</strong><span class="business-photo-open" aria-hidden="true">↗</span></div><div class="business-case-copy"><span class="business-type">PROYECTO WEB</span><h3>Una experiencia clara desde la primera visita.</h3><p>Un centro de bienestar con espacios, equipo y servicios propios. Una agenda sencilla para elegir el siguiente paso.</p><div class="business-tags"><span>Equipo y espacios</span><span>Servicios claros</span><span>Agenda con cupos</span></div><span class="business-case-action">Abrir alma. <i aria-hidden="true">↗</i></span></div></a>
-<a class="business-case business-case-restaurante" data-sector-case="restaurante" id="caso-restaurante" href="demos/restaurante.html"><div class="business-photo"><img src="assets/restaurant-editorial-small.webp" srcset="assets/restaurant-editorial-small.webp 800w, assets/restaurant-editorial.webp 1600w" sizes="(max-width:700px) 90vw, 45vw" width="1600" height="900" alt="Restaurante de cocina latina con ambiente cálido y platos servidos, fotografía realista creada con IA" loading="lazy" decoding="async"><span class="business-case-number">05 / RESTAURANTE</span><strong class="business-case-brand">lumbre.</strong><span class="business-photo-open" aria-hidden="true">↗</span></div><div class="business-case-copy"><span class="business-type">PROYECTO WEB</span><h3>Una cocina que abre el apetito.</h3><p>Una foto diferente para cada plato, una carta fácil de recorrer y una selección que puedes ajustar antes de pedir.</p><div class="business-tags"><span>Fotos de cada plato</span><span>Carta por categoría</span><span>Reservas de mesa</span></div><span class="business-case-action">Abrir lumbre. <i aria-hidden="true">↗</i></span></div></a>
-<a class="business-case business-case-personal" data-sector-case="personal" id="caso-personal" href="demos/portfolio.html"><div class="business-photo"><img src="assets/professional-editorial-small.webp" srcset="assets/professional-editorial-small.webp 800w, assets/professional-editorial.webp 1600w" sizes="(max-width:700px) 90vw, 45vw" width="1600" height="900" alt="Consultora creativa ficticia en su espacio de trabajo, fotografía realista creada con IA" loading="lazy" decoding="async"><span class="business-case-number">06 / MARCA PERSONAL</span><strong class="business-case-brand">Valeria Ríos.</strong><span class="business-photo-open" aria-hidden="true">↗</span></div><div class="business-case-copy"><span class="business-type">PROYECTO WEB</span><h3>Un nombre. Una mirada propia.</h3><p>Un portfolio con proyectos de cosmética, hotelería y talleres creativos. Cada caso cuenta una idea y cómo toma forma.</p><div class="business-tags"><span>Tres casos propios</span><span>Servicios de marca</span><span>Propuestas organizadas</span></div><span class="business-case-action">Abrir Valeria Ríos. <i aria-hidden="true">↗</i></span></div></a></div>
-  <div data-catalog-product><article class="product-case" id="producto-wav"><div class="product-case-copy"><span class="eyebrow">03 / UNA TIENDA CON OTRA FRECUENCIA</span><h3>Tu producto.<br>Su propio universo.</h3><p>Un producto que puedes mirar, personalizar y llevar a la bolsa. Prueba sus colores aquí y explora la tienda completa.</p><div class="preview-colors" role="group" aria-label="Color de los audífonos de ejemplo"><button type="button" data-preview-color="lavanda" aria-pressed="true"><i class="preview-lavanda" aria-hidden="true"></i>Lavanda</button><button type="button" data-preview-color="grafito" aria-pressed="false"><i class="preview-grafito" aria-hidden="true"></i>Grafito</button><button type="button" data-preview-color="lima" aria-pressed="false"><i class="preview-lima" aria-hidden="true"></i>Lima</button></div><a class="product-case-link" href="demos/tienda.html">Explorar la tienda WAV <span aria-hidden="true">↗</span></a></div><div class="product-case-art"><span class="product-art-word" aria-hidden="true">wav.</span><img data-preview-product-image src="assets/headphones-lavanda.webp" alt="Audífonos premium en color lavanda, fotografía de producto creada con IA" width="1200" height="1200" loading="lazy" decoding="async"><span class="product-art-caption">WAVE ONE / FOTOGRAFÍA DE PRODUCTO CON IA</span></div></article></div>
-  <div class="catalog-automation-heading" id="automatizaciones"><div><span class="eyebrow section-kicker">02 / ASÍ SE ORGANIZA EL TRABAJO</span><h2>Lo que se ve.<br><span class="accent-text">Y lo que hace que funcione.</span></h2></div><p>Seis procesos que puedes recorrer con tus propios datos de ejemplo. Cada uno muestra un resultado, un registro y un siguiente paso.</p></div>
-  <div class="automation-catalog-topline"><span><i aria-hidden="true"></i> PROYECTOS QUE PUEDES PROBAR</span><p data-auto-count>6 automatizaciones por sector</p></div>
-  <div class="sector-automation-grid" id="automation-catalog"><a class="sector-automation-case" data-sector-case="cafeteria" href="demos/sector-automation.html#cafeteria"><div class="sector-automation-photo"><img src="assets/auto-cafeteria-small.webp" srcset="assets/auto-cafeteria-small.webp 800w, assets/auto-cafeteria.webp 1600w" sizes="(max-width:700px) 90vw, (max-width:1000px) 45vw, 30vw" width="1600" height="900" alt="Contexto de trabajo de cafetería, fotografía realista creada con IA" loading="lazy" decoding="async"><span>maré. / AUTOMATIZACIÓN</span></div><div class="sector-automation-copy"><span class="sector-auto-number">01 / CAFETERÍA</span><h3>Pedidos que llegan listos a la barra.</h3><p>Elige bebidas, cantidades y hora de recogida. La cola de la barra se actualiza y cada pedido tiene su propio ticket.</p><div class="sector-flow" aria-label="Proceso"><span>Carta</span><i aria-hidden="true">→</i><span>Ticket</span><i aria-hidden="true">→</i><span>Recogida</span></div><span class="sector-automation-action">Probar pedidos de café<i aria-hidden="true">↗</i></span></div></a>
-<a class="sector-automation-case" data-sector-case="arquitectura" href="demos/sector-automation.html#arquitectura"><div class="sector-automation-photo"><img src="assets/auto-arquitectura-small.webp" srcset="assets/auto-arquitectura-small.webp 800w, assets/auto-arquitectura.webp 1600w" sizes="(max-width:700px) 90vw, (max-width:1000px) 45vw, 30vw" width="1600" height="900" alt="Contexto de trabajo de arquitectura, fotografía realista creada con IA" loading="lazy" decoding="async"><span>AURA / AUTOMATIZACIÓN</span></div><div class="sector-automation-copy"><span class="sector-auto-number">02 / ARQUITECTURA</span><h3>Del primer mensaje a un proyecto organizado.</h3><p>Define el espacio, los metros y el plazo. La solicitud se convierte en un brief con checklist y una fase de seguimiento.</p><div class="sector-flow" aria-label="Proceso"><span>Solicitud</span><i aria-hidden="true">→</i><span>Brief</span><i aria-hidden="true">→</i><span>Revisión</span></div><span class="sector-automation-action">Probar solicitud de arquitectura<i aria-hidden="true">↗</i></span></div></a>
-<a class="sector-automation-case" data-sector-case="tienda" href="demos/sector-automation.html#tienda"><div class="sector-automation-photo"><img src="assets/auto-tienda-small.webp" srcset="assets/auto-tienda-small.webp 800w, assets/auto-tienda.webp 1600w" sizes="(max-width:700px) 90vw, (max-width:1000px) 45vw, 30vw" width="1600" height="900" alt="Contexto de trabajo de tienda online, fotografía realista creada con IA" loading="lazy" decoding="async"><span>wav. / AUTOMATIZACIÓN</span></div><div class="sector-automation-copy"><span class="sector-auto-number">03 / TIENDA ONLINE</span><h3>Cada venta mueve las piezas correctas.</h3><p>Crea un pedido de Wave One y mira cómo cambia el inventario de cada acabado. El comprobante conserva cantidades y total.</p><div class="sector-flow" aria-label="Proceso"><span>Pedido</span><i aria-hidden="true">→</i><span>Stock</span><i aria-hidden="true">→</i><span>Comprobante</span></div><span class="sector-automation-action">Probar pedidos de tienda<i aria-hidden="true">↗</i></span></div></a>
-<a class="sector-automation-case" data-sector-case="clinica" href="demos/sector-automation.html#clinica"><div class="sector-automation-photo"><img src="assets/auto-clinica-small.webp" srcset="assets/auto-clinica-small.webp 800w, assets/auto-clinica.webp 1600w" sizes="(max-width:700px) 90vw, (max-width:1000px) 45vw, 30vw" width="1600" height="900" alt="Contexto de trabajo de clínica, fotografía realista creada con IA" loading="lazy" decoding="async"><span>alma. / AUTOMATIZACIÓN</span></div><div class="sector-automation-copy"><span class="sector-auto-number">04 / CLÍNICA</span><h3>Una cita, un espacio bien reservado.</h3><p>Elige servicio, fecha y horario. La agenda ocupa el cupo y prepara una confirmación; al cancelar, el espacio vuelve a quedar libre.</p><div class="sector-flow" aria-label="Proceso"><span>Horario</span><i aria-hidden="true">→</i><span>Reserva</span><i aria-hidden="true">→</i><span>Confirmación</span></div><span class="sector-automation-action">Probar agenda de clínica<i aria-hidden="true">↗</i></span></div></a>
-<a class="sector-automation-case" data-sector-case="restaurante" href="demos/sector-automation.html#restaurante"><div class="sector-automation-photo"><img src="assets/auto-restaurante-small.webp" srcset="assets/auto-restaurante-small.webp 800w, assets/auto-restaurante.webp 1600w" sizes="(max-width:700px) 90vw, (max-width:1000px) 45vw, 30vw" width="1600" height="900" alt="Contexto de trabajo de restaurante, fotografía realista creada con IA" loading="lazy" decoding="async"><span>lumbre. / AUTOMATIZACIÓN</span></div><div class="sector-automation-copy"><span class="sector-auto-number">05 / RESTAURANTE</span><h3>La mesa correcta para cada encuentro.</h3><p>Indica cuántas personas vienen y a qué hora. El sistema asigna una mesa disponible y permite liberar la reserva.</p><div class="sector-flow" aria-label="Proceso"><span>Personas</span><i aria-hidden="true">→</i><span>Mesa</span><i aria-hidden="true">→</i><span>Reserva</span></div><span class="sector-automation-action">Probar reservas de restaurante<i aria-hidden="true">↗</i></span></div></a>
-<a class="sector-automation-case" data-sector-case="personal" href="demos/sector-automation.html#personal"><div class="sector-automation-photo"><img src="assets/auto-personal-small.webp" srcset="assets/auto-personal-small.webp 800w, assets/auto-personal.webp 1600w" sizes="(max-width:700px) 90vw, (max-width:1000px) 45vw, 30vw" width="1600" height="900" alt="Contexto de trabajo de marca personal, fotografía realista creada con IA" loading="lazy" decoding="async"><span>Valeria Ríos. / AUTOMATIZACIÓN</span></div><div class="sector-automation-copy"><span class="sector-auto-number">06 / MARCA PERSONAL</span><h3>Una idea de marca que encuentra dirección.</h3><p>Define objetivo y paquete. El brief prepara una propuesta con alcance y permite recorrer sus fases de revisión.</p><div class="sector-flow" aria-label="Proceso"><span>Brief</span><i aria-hidden="true">→</i><span>Propuesta</span><i aria-hidden="true">→</i><span>Revisión</span></div><span class="sector-automation-action">Probar propuestas de marca<i aria-hidden="true">↗</i></span></div></a></div>
-  <div class="catalog-conclusion"><p>Tu negocio puede necesitar otra combinación.<br><strong>Empezamos por entender la tuya.</strong></p><div><button class="catalog-reset" type="button" data-reset-catalog>Ver todos los proyectos</button><button class="button button-lime" data-open-brief data-service="Quiero explorar una idea">Hablemos de tu proyecto <span aria-hidden="true">↗</span></button></div></div>
-  <p class="projects-note">Proyectos y marcas conceptuales, con fotografías creadas con IA. Las automatizaciones usan datos locales de ejemplo; no generan reservas, compras ni mensajes reales.</p>
-</section>
-
-    <section id="proceso" class="journey-section" aria-labelledby="journey-heading" data-journey-step="0" data-journey-palette="amber">
-  <div class="section-shell journey-shell">
-    <div class="section-heading journey-heading">
-      <div><span class="eyebrow section-kicker">DE TU IDEA A TU NUEVA WEB</span><h2 id="journey-heading">Así se ve<br>dar el siguiente paso.</h2></div>
-      <p>Recorre un proyecto de principio a fin.<br>Una idea, una conversación y algo que puedes ver.</p>
-    </div>
-    <div class="journey-case-label"><span class="journey-case-tag">CASO CONCEPTUAL / MARÉ</span><p>Una cafetería imaginada para mostrar cómo trabajamos contigo.</p></div>
-    <div class="journey-tabs" role="tablist" aria-label="Etapas del proyecto de Maré">
-      <button type="button" id="journey-tab-0" class="journey-tab active" role="tab" data-journey-step="0" aria-selected="true" aria-controls="journey-panel" tabindex="0"><span class="journey-tab-number">01</span><span>La idea</span><span class="journey-tab-arrow" aria-hidden="true">↗</span></button>
-      <button type="button" id="journey-tab-1" class="journey-tab" role="tab" data-journey-step="1" aria-selected="false" aria-controls="journey-panel" tabindex="-1"><span class="journey-tab-number">02</span><span>La conversación</span><span class="journey-tab-arrow" aria-hidden="true">↗</span></button>
-      <button type="button" id="journey-tab-2" class="journey-tab" role="tab" data-journey-step="2" aria-selected="false" aria-controls="journey-panel" tabindex="-1"><span class="journey-tab-number">03</span><span>La propuesta visual</span><span class="journey-tab-arrow" aria-hidden="true">↗</span></button>
-      <button type="button" id="journey-tab-3" class="journey-tab" role="tab" data-journey-step="3" aria-selected="false" aria-controls="journey-panel" tabindex="-1"><span class="journey-tab-number">04</span><span>La web terminada</span><span class="journey-tab-arrow" aria-hidden="true">↗</span></button>
-    </div>
-    <div id="journey-panel" class="journey-panel" role="tabpanel" aria-labelledby="journey-tab-0" tabindex="0" data-journey-step="0">
-      <div class="journey-stage-copy"><span class="journey-mini-label">01 / LA IDEA</span><h3>Todo empieza con algo que quieres hacer realidad.</h3><p>Imaginemos a Lucía, la dueña de Maré: una cafetería con personalidad que quiere llevar su experiencia a internet.</p></div>
-      <div class="journey-idea-layout">
-        <figure class="journey-image-frame"><img class="journey-photo" src="assets/case-cafe-barista.webp" alt="Una persona prepara café de especialidad en la barra de Maré, fotografía creada con IA" width="1200" height="900" loading="lazy" decoding="async"><figcaption><span>MARÉ / EL PUNTO DE PARTIDA</span><strong>Una buena experiencia merece llegar más lejos.</strong></figcaption></figure>
-        <div class="journey-brief"><span class="journey-mini-label">EL PRIMER MENSAJE</span><blockquote>“Tengo una cafetería. Quiero que las personas vean nuestra carta, conozcan el lugar y puedan preguntarnos por una mesa.”</blockquote><span class="journey-brief-author">Lucía · dueña de Maré · personaje de ejemplo</span><dl class="journey-brief-facts"><div><dt>El negocio</dt><dd>Café de especialidad y encuentros de barrio.</dd></div><div><dt>La necesidad</dt><dd>Una web que muestre la carta y la esencia del lugar.</dd></div><div><dt>El siguiente paso</dt><dd>Facilitar el contacto y las consultas sobre reservas.</dd></div></dl><p class="journey-takeaway">Puedes empezar así: con una idea y lo que necesitas conseguir.</p></div>
+    <section class="section feature" aria-labelledby="feature-web">
+      <div class="shell feature-grid">
+        <div class="feature-copy">
+          <h2 id="feature-web">Una web que también recibe pedidos y citas.</h2>
+          <p class="feature-tagline">Tu sitio deja de ser solo un folleto.</p>
+          <ul class="check-list">
+            <li>Carta, catálogo o servicios presentados con claridad.</li>
+            <li>Reservas, pedidos o consultas que llegan ordenados.</li>
+            <li>Pensada para celular y para computador.</li>
+          </ul>
+          <a class="text-link" href="#proyectos">Ver webs de ejemplo</a>
+        </div>
+        <div class="feature-visual" role="group" aria-label="Ejemplo: pedido para recoger en una cafetería">
+          <figure class="photo-frame">
+            <img src="assets/auto-cafeteria-small.webp" srcset="assets/auto-cafeteria-small.webp 800w, assets/auto-cafeteria.webp 1600w" sizes="(max-width:960px) 92vw, 50vw" width="1600" height="900" alt="Barista preparando bebidas en una cafetería de especialidad; fotografía realista creada con IA" loading="lazy" decoding="async">
+          </figure>
+          <div class="ui-card ui-card-ticket">
+            <div class="ui-card-head"><strong>Pedido 1043</strong><span class="ui-chip ui-chip-warn">En barra</span></div>
+            <ul class="ticket-lines"><li><span>2 × Flat white</span><span>$ 14.000</span></li><li><span>1 × Croissant</span><span>$ 7.500</span></li></ul>
+            <p class="ui-card-foot">Recoger a las 10:15. Datos de ejemplo.</p>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="journey-navigation"><button type="button" class="journey-nav-button" data-journey-nav="previous" disabled><span aria-hidden="true">←</span> Paso anterior</button><p class="journey-progress" data-journey-status role="status" aria-live="polite" aria-atomic="true">01 / 04 · La idea</p><button type="button" class="journey-nav-button" data-journey-nav="next">Siguiente paso <span aria-hidden="true">→</span></button></div>
-    <p class="journey-concept-note">Maré es un proyecto conceptual. Las personas, la conversación y la marca son ilustrativas.</p>
-  </div>
-</section>
-
-
-    <section class="section-shell studio-section">
-      <div class="studio-photo"><img src="assets/case-personal-workshop.webp" srcset="assets/case-personal-workshop-small.webp 800w, assets/case-personal-workshop.webp 1600w" sizes="(max-width: 800px) 90vw, 45vw" alt="Un equipo trabaja en una sesión creativa con libretas y referencias, fotografía generada con IA" width="1600" height="900" loading="lazy" decoding="async"><span>Todo empieza escuchándote.</span></div>
-      <div class="studio-copy"><span class="eyebrow section-kicker">PERSONAS PRIMERO. PANTALLAS DESPUÉS.</span><h2>Una conversación<br>puede cambiar<br><span class="accent-text">lo que viene.</span></h2><p>Sabes de tu negocio. Nosotros sabemos cómo darle forma en la web. Juntamos las dos cosas para construir algo que tenga sentido para ti.</p><ul><li>Ves una propuesta antes de construir.</li><li>Sabes qué incluye tu proyecto.</li><li>Recibes una web que puedas entender y usar.</li></ul><button class="text-link studio-cta" data-open-brief>Empecemos por tu idea <span aria-hidden="true">↗</span></button></div>
     </section>
 
-    <section class="section-shell faq-section"><div><span class="eyebrow section-kicker">CLARO DESDE EL PRINCIPIO</span><h2>Lo que quizá<br>te estás preguntando.</h2><p>Si tu pregunta no está aquí, conversemos.</p><a class="text-link" data-whatsapp href="https://wa.me/573185314299" target="_blank" rel="noopener noreferrer">Escríbenos por WhatsApp ↗</a></div><div class="faq-list"><details><summary>¿Necesito tener toda la idea lista?<span>+</span></summary><p>No. Podemos empezar con lo que tienes y ayudarte a definir qué necesita tu proyecto para dar el primer paso.</p></details><details><summary>¿También hacen páginas personales?<span>+</span></summary><p>Sí. Diseñamos páginas para empresas, profesionales, emprendimientos y marcas personales. Cada proyecto se adapta a sus objetivos.</p></details><details><summary>¿Cuánto cuesta y cuánto tarda?<span>+</span></summary><p>Depende de las secciones, el contenido y las funciones. Después de conocer tu idea, acordamos una propuesta con alcance, precio y tiempos antes de empezar.</p></details><details><summary>¿Podré actualizar mi web después?<span>+</span></summary><p>Desde el inicio definimos qué contenidos quieres administrar y elegimos una solución adecuada. También podemos acordar acompañamiento y mantenimiento.</p></details></div></section>
+    <section class="section feature feature-reverse feature-soft" aria-labelledby="feature-int">
+      <div class="shell feature-grid">
+        <div class="feature-copy">
+          <h2 id="feature-int">Tus herramientas, hablando entre sí.</h2>
+          <p class="feature-tagline">Un dato se escribe una sola vez.</p>
+          <ul class="check-list">
+            <li>Un pedido en la web actualiza el inventario y genera su comprobante.</li>
+            <li>Confirmaciones y recordatorios que salen solos.</li>
+            <li>Cada paso queda registrado para poder revisarlo.</li>
+          </ul>
+          <a class="text-link" href="#automatizaciones">Ver automatizaciones de ejemplo</a>
+        </div>
+        <div class="feature-visual">
+          <div class="hero-panel on-dark" role="group" aria-label="Ejemplo de una plataforma conectada">
+            <div class="panel-top">
+              <strong>Plataforma de ejemplo</strong>
+              <span class="status-chip"><i aria-hidden="true"></i>Sincronizado</span>
+              <button class="motion-toggle" type="button" aria-pressed="false" aria-label="Pausar animaciones" title="Pausar animaciones"><span aria-hidden="true">Ⅱ</span></button>
+            </div>
+            <svg class="panel-diagram" viewBox="0 0 440 300" role="img" aria-label="Diagrama: la plataforma conecta la web, el chat, los pagos, el inventario, el correo y el CRM">
+              <path class="dl" d="M70,52 L220,148"/><path class="dl" d="M370,50 L220,148"/><path class="dl" d="M405,152 L220,148"/>
+              <path class="dl" d="M335,252 L220,148"/><path class="dl" d="M85,248 L220,148"/><path class="dl" d="M38,152 L220,148"/>
+              <circle class="pk" r="4"><animateMotion dur="2.8s" repeatCount="indefinite" path="M70,52 L220,148"/></circle>
+              <circle class="pk" r="4"><animateMotion dur="3.4s" begin="-1s" repeatCount="indefinite" path="M220,148 L370,50"/></circle>
+              <circle class="pk" r="4"><animateMotion dur="3s" begin="-2s" repeatCount="indefinite" path="M405,152 L220,148"/></circle>
+              <circle class="pk" r="4"><animateMotion dur="3.6s" begin="-.5s" repeatCount="indefinite" path="M220,148 L335,252"/></circle>
+              <circle class="pk" r="4"><animateMotion dur="3.2s" begin="-1.7s" repeatCount="indefinite" path="M85,248 L220,148"/></circle>
+              <circle class="nd" cx="70" cy="52" r="28"/><circle class="nd" cx="370" cy="50" r="28"/><circle class="nd" cx="405" cy="152" r="27"/>
+              <circle class="nd" cx="335" cy="252" r="28"/><circle class="nd" cx="85" cy="248" r="28"/><circle class="nd" cx="38" cy="152" r="25"/>
+              <circle class="hb" cx="220" cy="148" r="48"/>
+              <text class="tx" x="70" y="56">web</text><text class="tx" x="370" y="54">chat</text><text class="tx" x="405" y="156">pagos</text>
+              <text class="tx" x="335" y="256">stock</text><text class="tx" x="85" y="252">correo</text><text class="tx" x="38" y="156">crm</text>
+              <text class="tx2" x="220" y="146">Tu</text><text class="tx2" x="220" y="163">plataforma</text>
+            </svg>
+            <ul class="panel-log" aria-label="Flujo de ejemplo">
+              <li><time>10:42:07</time><b>web</b><span>pedido 1043 recibido</span></li>
+              <li><time>10:42:07</time><b>stock</b><span>disponibilidad descontada</span></li>
+              <li><time>10:42:08</time><b>pagos</b><span>cobro confirmado</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <section class="contact-section" id="contacto"><div class="section-shell contact-inner"><div><span class="eyebrow">TU SIGUIENTE PASO NO TIENE QUE SER COMPLICADO</span><h2>Tienes una idea.<br><span>Hagámosla real.</span></h2><p>Cuéntanos lo que tienes en mente y empecemos.</p></div><button class="button contact-button" data-open-brief>Hablemos de tu proyecto <span aria-hidden="true">↗</span></button></div></section>
+    <section class="section feature" aria-labelledby="feature-pl">
+      <div class="shell feature-grid">
+        <div class="feature-copy">
+          <h2 id="feature-pl">Un panel donde tu equipo ve todo.</h2>
+          <p class="feature-tagline">Menos hojas sueltas, más control.</p>
+          <ul class="check-list">
+            <li>Pedidos, citas e inventario en un mismo lugar.</li>
+            <li>Cada persona ve lo que necesita, con roles y permisos.</li>
+            <li>Reportes claros para decidir qué sigue.</li>
+          </ul>
+          <button class="text-link" type="button" data-open-brief data-service="Plataforma de gestión">Consultar por una plataforma</button>
+        </div>
+        <div class="feature-visual" role="group" aria-label="Ejemplo: panel de citas del día">
+          <figure class="photo-frame">
+            <img src="assets/case-clinic-team-small.webp" srcset="assets/case-clinic-team-small.webp 800w, assets/case-clinic-team.webp 1600w" sizes="(max-width:960px) 92vw, 50vw" width="1600" height="900" alt="Equipo de una clínica en la recepción, una persona de pie con una tableta; fotografía realista creada con IA" loading="lazy" decoding="async">
+          </figure>
+          <div class="ui-card ui-card-table">
+            <div class="ui-card-head"><strong>Citas de hoy</strong><span class="ui-chip">Ejemplo</span></div>
+            <table>
+              <tbody>
+                <tr><td>09:00</td><td>Valoración inicial</td><td><span class="ui-chip ui-chip-ok">Confirmada</span></td></tr>
+                <tr><td>10:30</td><td>Control</td><td><span class="ui-chip ui-chip-warn">Pendiente</span></td></tr>
+                <tr><td>11:15</td><td>Primera consulta</td><td><span class="ui-chip">Cupo libre</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="paths" aria-labelledby="paths-title">
+      <h2 id="paths-title" class="visually-hidden">Dos formas de empezar</h2>
+      <div class="path path-ops">
+        <div class="path-inner">
+          <h3>Atiendes a diario y quieres ordenar tu operación.</h3>
+          <ul>
+            <li>Una web que muestre con claridad lo que ofreces.</li>
+            <li>Reservas, pedidos o citas sin hojas sueltas.</li>
+            <li>Avisos automáticos para tus clientes.</li>
+          </ul>
+          <button class="button button-dark" type="button" data-open-brief data-service="Automatización">Quiero ordenar mi negocio</button>
+        </div>
+      </div>
+      <div class="path path-sys on-dark">
+        <div class="path-inner">
+          <h3>Ya tienes sistemas y necesitas que trabajen juntos.</h3>
+          <ul>
+            <li>Conectar tu CRM, tu tienda y tu facturación.</li>
+            <li>Una plataforma interna a medida, con roles y reportes.</li>
+            <li>Pasar procesos manuales a un sistema que tu equipo use a diario.</li>
+            <li>Un punto de partida claro: qué se conecta primero y qué después.</li>
+          </ul>
+          <button class="button button-accent" type="button" data-open-brief data-service="Integración de sistemas">Necesito un sistema a medida</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats" aria-labelledby="stats-title">
+      <div class="shell">
+        <h2 id="stats-title" class="visually-hidden">Los proyectos de ejemplo en cifras</h2>
+        <div class="stats-grid">
+          <div><strong>6</strong><span>sectores, cada uno con su web y su automatización</span></div>
+          <div><strong>12</strong><span>proyectos de ejemplo que puedes recorrer ahora</span></div>
+          <div><strong>3</strong><span>servicios que se combinan: web, integraciones y plataformas</span></div>
+        </div>
+        <p class="stats-note">Son proyectos conceptuales con datos de muestra, creados para mostrar cómo trabajamos.</p>
+      </div>
+    </section>
+
+    <section class="section sector-catalog" id="proyectos" aria-labelledby="projects-title">
+      <div class="shell">
+        <div class="section-head">
+          <h2 id="projects-title">Proyectos de ejemplo, listos para explorar.</h2>
+          <p>Cada sector tiene una web y una automatización que puedes recorrer. Son conceptos con datos de muestra: así puedes ver cómo funcionaría algo parecido para tu negocio.</p>
+        </div>
+        <div class="catalog-filters" role="group" aria-label="Filtrar proyectos por sector">
+          <button type="button" data-sector-filter="all" aria-pressed="true">Todos <span>12</span></button>
+          <button type="button" data-sector-filter="cafeteria" aria-pressed="false">Cafetería</button>
+          <button type="button" data-sector-filter="arquitectura" aria-pressed="false">Arquitectura</button>
+          <button type="button" data-sector-filter="tienda" aria-pressed="false">Tienda online</button>
+          <button type="button" data-sector-filter="clinica" aria-pressed="false">Clínica</button>
+          <button type="button" data-sector-filter="restaurante" aria-pressed="false">Restaurante</button>
+          <button type="button" data-sector-filter="personal" aria-pressed="false">Marca personal</button>
+        </div>
+        <p class="catalog-summary" id="catalog-summary" role="status" aria-live="polite">12 proyectos: 6 páginas web y 6 automatizaciones.</p>
+
+        <div class="catalog-group-heading"><h3>Webs a medida</h3><p data-web-count>6 proyectos web</p></div>
+        <div class="case-catalog-grid" id="website-catalog">
+          <a class="business-case" data-sector-case="cafeteria" id="caso-cafe" href="demos/cafeteria.html">
+            <div class="business-photo"><img src="assets/cafe-editorial-small.webp" srcset="assets/cafe-editorial-small.webp 800w, assets/cafe-editorial.webp 1600w" sizes="(max-width:700px) 92vw, 55vw" width="1600" height="900" alt="Cafetería de especialidad con barra de madera y jardín, fotografía realista creada con IA" loading="lazy" decoding="async"></div>
+            <div class="business-case-copy">
+              <span class="business-sector">Cafetería</span>
+              <h4>Maré: carta con filtros y pedidos para recoger.</h4>
+              <p>Una web con carta propia, fotos de cada bebida y un pedido que llega ordenado a la barra.</p>
+              <ul class="business-tags"><li>Carta con filtros</li><li>Pedidos para recoger</li><li>Fotos propias</li></ul>
+              <span class="business-case-action">Abrir Maré <i aria-hidden="true">↗</i></span>
+            </div>
+          </a>
+          <a class="business-case" data-sector-case="arquitectura" id="caso-arquitectura" href="demos/arquitectura.html">
+            <div class="business-photo"><img src="assets/architecture-editorial-small.webp" srcset="assets/architecture-editorial-small.webp 800w, assets/architecture-editorial.webp 1600w" sizes="(max-width:700px) 92vw, 40vw" width="1600" height="900" alt="Casa contemporánea rodeada de vegetación tropical, fotografía realista creada con IA" loading="lazy" decoding="async"></div>
+            <div class="business-case-copy">
+              <span class="business-sector">Arquitectura</span>
+              <h4>AURA: galería de proyectos y solicitudes de diseño.</h4>
+              <p>Casas e interiores con ficha de cada espacio y un formulario para iniciar una solicitud.</p>
+              <ul class="business-tags"><li>Galería de proyectos</li><li>Fichas de espacios</li><li>Solicitudes</li></ul>
+              <span class="business-case-action">Abrir AURA <i aria-hidden="true">↗</i></span>
+            </div>
+          </a>
+          <a class="business-case" data-sector-case="tienda" id="caso-tienda" href="demos/tienda.html">
+            <div class="business-photo"><img src="assets/case-wav-lifestyle-small.webp" srcset="assets/case-wav-lifestyle-small.webp 800w, assets/case-wav-lifestyle.webp 1600w" sizes="(max-width:700px) 92vw, 40vw" width="1600" height="900" alt="Persona adulta usando auriculares premium lavanda en un entorno urbano, fotografía realista creada con IA" loading="lazy" decoding="async"></div>
+            <div class="business-case-copy">
+              <span class="business-sector">Tienda online</span>
+              <h4>WAV: tienda con tres acabados y carrito.</h4>
+              <p>Fotos de producto, escenas de uso y un carrito que recuerda el acabado elegido.</p>
+              <ul class="business-tags"><li>Tres acabados</li><li>Carrito por color</li><li>Inventario</li></ul>
+              <span class="business-case-action">Abrir WAV <i aria-hidden="true">↗</i></span>
+            </div>
+          </a>
+          <a class="business-case" data-sector-case="clinica" id="caso-clinica" href="demos/clinica.html">
+            <div class="business-photo"><img src="assets/wellness-editorial-small.webp" srcset="assets/wellness-editorial-small.webp 800w, assets/wellness-editorial.webp 1600w" sizes="(max-width:700px) 92vw, 55vw" width="1600" height="900" alt="Espacio de atención luminoso con mobiliario natural, fotografía realista creada con IA" loading="lazy" decoding="async"></div>
+            <div class="business-case-copy">
+              <span class="business-sector">Clínica</span>
+              <h4>ALMA: equipo, servicios y agenda con cupos.</h4>
+              <p>Un centro de bienestar con sus espacios y una agenda para elegir horario.</p>
+              <ul class="business-tags"><li>Equipo y espacios</li><li>Servicios</li><li>Agenda con cupos</li></ul>
+              <span class="business-case-action">Abrir ALMA <i aria-hidden="true">↗</i></span>
+            </div>
+          </a>
+          <a class="business-case" data-sector-case="restaurante" id="caso-restaurante" href="demos/restaurante.html">
+            <div class="business-photo"><img src="assets/restaurant-editorial-small.webp" srcset="assets/restaurant-editorial-small.webp 800w, assets/restaurant-editorial.webp 1600w" sizes="(max-width:700px) 92vw, 45vw" width="1600" height="900" alt="Restaurante de cocina latina con ambiente cálido y platos servidos, fotografía realista creada con IA" loading="lazy" decoding="async"></div>
+            <div class="business-case-copy">
+              <span class="business-sector">Restaurante</span>
+              <h4>LUMBRE: carta por categoría y pedido con cantidades.</h4>
+              <p>Una foto por plato, filtros de carta y un pedido que se ajusta antes de enviarlo.</p>
+              <ul class="business-tags"><li>Fotos de cada plato</li><li>Carta por categoría</li><li>Reservas de mesa</li></ul>
+              <span class="business-case-action">Abrir LUMBRE <i aria-hidden="true">↗</i></span>
+            </div>
+          </a>
+          <a class="business-case" data-sector-case="personal" id="caso-personal" href="demos/portfolio.html">
+            <div class="business-photo"><img src="assets/professional-editorial-small.webp" srcset="assets/professional-editorial-small.webp 800w, assets/professional-editorial.webp 1600w" sizes="(max-width:700px) 92vw, 45vw" width="1600" height="900" alt="Consultora creativa ficticia en su espacio de trabajo, fotografía realista creada con IA" loading="lazy" decoding="async"></div>
+            <div class="business-case-copy">
+              <span class="business-sector">Marca personal</span>
+              <h4>Valeria Ríos: portfolio con tres casos.</h4>
+              <p>Cosmética, hotelería y talleres creativos, cada caso con su propia historia y propuesta.</p>
+              <ul class="business-tags"><li>Tres casos propios</li><li>Servicios</li><li>Propuestas</li></ul>
+              <span class="business-case-action">Abrir el portfolio <i aria-hidden="true">↗</i></span>
+            </div>
+          </a>
+        </div>
+
+        <div data-catalog-product>
+          <article class="product-case" id="producto-wav">
+            <div class="product-case-copy">
+              <h3>Una tienda donde el producto cambia contigo.</h3>
+              <p>Prueba los tres acabados de los auriculares de ejemplo. La tienda completa guarda tu elección en el carrito.</p>
+              <div class="preview-colors" role="group" aria-label="Color de los audífonos de ejemplo">
+                <button type="button" data-preview-color="lavanda" aria-pressed="true"><i class="preview-lavanda" aria-hidden="true"></i>Lavanda</button>
+                <button type="button" data-preview-color="grafito" aria-pressed="false"><i class="preview-grafito" aria-hidden="true"></i>Grafito</button>
+                <button type="button" data-preview-color="lima" aria-pressed="false"><i class="preview-lima" aria-hidden="true"></i>Lima</button>
+              </div>
+              <a class="text-link" href="demos/tienda.html">Explorar la tienda WAV <i aria-hidden="true">↗</i></a>
+            </div>
+            <div class="product-case-art">
+              <img data-preview-product-image src="assets/headphones-lavanda.webp" alt="Audífonos premium en color lavanda, fotografía de producto creada con IA" width="1200" height="1200" loading="lazy" decoding="async">
+            </div>
+          </article>
+        </div>
+
+        <div class="catalog-group-heading automation-heading" id="automatizaciones"><h3>Lo que funciona por dentro</h3><p data-auto-count>6 automatizaciones por sector</p></div>
+        <p class="automation-intro">Seis procesos que puedes recorrer con datos de ejemplo. Cada uno muestra un resultado, un registro y un siguiente paso.</p>
+        <div class="sector-automation-grid" id="automation-catalog">
+          <a class="sector-automation-case" data-sector-case="cafeteria" href="demos/sector-automation.html#cafeteria">
+            <div class="sector-automation-photo"><img src="assets/auto-cafeteria-small.webp" srcset="assets/auto-cafeteria-small.webp 800w, assets/auto-cafeteria.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1000px) 45vw, 30vw" width="1600" height="900" alt="Contexto de trabajo de cafetería, fotografía realista creada con IA" loading="lazy" decoding="async"></div>
+            <div class="sector-automation-copy">
+              <span class="business-sector">Cafetería</span>
+              <h4>Pedidos que llegan listos a la barra.</h4>
+              <p>Elige bebidas, cantidades y hora de recogida. La cola de la barra se actualiza y cada pedido tiene su propio ticket.</p>
+              <div class="sector-flow" aria-label="Proceso"><span>Carta</span><i aria-hidden="true"></i><span>Ticket</span><i aria-hidden="true"></i><span>Recogida</span></div>
+              <span class="sector-automation-action">Probar pedidos de café <i aria-hidden="true">↗</i></span>
+            </div>
+          </a>
+          <a class="sector-automation-case" data-sector-case="arquitectura" href="demos/sector-automation.html#arquitectura">
+            <div class="sector-automation-photo"><img src="assets/auto-arquitectura-small.webp" srcset="assets/auto-arquitectura-small.webp 800w, assets/auto-arquitectura.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1000px) 45vw, 30vw" width="1600" height="900" alt="Contexto de trabajo de arquitectura, fotografía realista creada con IA" loading="lazy" decoding="async"></div>
+            <div class="sector-automation-copy">
+              <span class="business-sector">Arquitectura</span>
+              <h4>Del primer mensaje a un proyecto organizado.</h4>
+              <p>Define el espacio, los metros y el plazo. La solicitud se convierte en un brief con checklist y una fase de seguimiento.</p>
+              <div class="sector-flow" aria-label="Proceso"><span>Solicitud</span><i aria-hidden="true"></i><span>Brief</span><i aria-hidden="true"></i><span>Revisión</span></div>
+              <span class="sector-automation-action">Probar solicitud de arquitectura <i aria-hidden="true">↗</i></span>
+            </div>
+          </a>
+          <a class="sector-automation-case" data-sector-case="tienda" href="demos/sector-automation.html#tienda">
+            <div class="sector-automation-photo"><img src="assets/auto-tienda-small.webp" srcset="assets/auto-tienda-small.webp 800w, assets/auto-tienda.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1000px) 45vw, 30vw" width="1600" height="900" alt="Contexto de trabajo de tienda online, fotografía realista creada con IA" loading="lazy" decoding="async"></div>
+            <div class="sector-automation-copy">
+              <span class="business-sector">Tienda online</span>
+              <h4>Cada venta mueve las piezas correctas.</h4>
+              <p>Crea un pedido de Wave One y mira cómo cambia el inventario de cada acabado. El comprobante conserva cantidades y total.</p>
+              <div class="sector-flow" aria-label="Proceso"><span>Pedido</span><i aria-hidden="true"></i><span>Stock</span><i aria-hidden="true"></i><span>Comprobante</span></div>
+              <span class="sector-automation-action">Probar pedidos de tienda <i aria-hidden="true">↗</i></span>
+            </div>
+          </a>
+          <a class="sector-automation-case" data-sector-case="clinica" href="demos/sector-automation.html#clinica">
+            <div class="sector-automation-photo"><img src="assets/auto-clinica-small.webp" srcset="assets/auto-clinica-small.webp 800w, assets/auto-clinica.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1000px) 45vw, 30vw" width="1600" height="900" alt="Contexto de trabajo de clínica, fotografía realista creada con IA" loading="lazy" decoding="async"></div>
+            <div class="sector-automation-copy">
+              <span class="business-sector">Clínica</span>
+              <h4>Una cita, un espacio bien reservado.</h4>
+              <p>Elige servicio, fecha y horario. La agenda ocupa el cupo y prepara una confirmación; al cancelar, el espacio vuelve a quedar libre.</p>
+              <div class="sector-flow" aria-label="Proceso"><span>Horario</span><i aria-hidden="true"></i><span>Reserva</span><i aria-hidden="true"></i><span>Confirmación</span></div>
+              <span class="sector-automation-action">Probar agenda de clínica <i aria-hidden="true">↗</i></span>
+            </div>
+          </a>
+          <a class="sector-automation-case" data-sector-case="restaurante" href="demos/sector-automation.html#restaurante">
+            <div class="sector-automation-photo"><img src="assets/auto-restaurante-small.webp" srcset="assets/auto-restaurante-small.webp 800w, assets/auto-restaurante.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1000px) 45vw, 30vw" width="1600" height="900" alt="Contexto de trabajo de restaurante, fotografía realista creada con IA" loading="lazy" decoding="async"></div>
+            <div class="sector-automation-copy">
+              <span class="business-sector">Restaurante</span>
+              <h4>La mesa correcta para cada encuentro.</h4>
+              <p>Indica cuántas personas vienen y a qué hora. El sistema asigna una mesa disponible y permite liberar la reserva.</p>
+              <div class="sector-flow" aria-label="Proceso"><span>Personas</span><i aria-hidden="true"></i><span>Mesa</span><i aria-hidden="true"></i><span>Reserva</span></div>
+              <span class="sector-automation-action">Probar reservas de restaurante <i aria-hidden="true">↗</i></span>
+            </div>
+          </a>
+          <a class="sector-automation-case" data-sector-case="personal" href="demos/sector-automation.html#personal">
+            <div class="sector-automation-photo"><img src="assets/auto-personal-small.webp" srcset="assets/auto-personal-small.webp 800w, assets/auto-personal.webp 1600w" sizes="(max-width:700px) 92vw, (max-width:1000px) 45vw, 30vw" width="1600" height="900" alt="Contexto de trabajo de marca personal, fotografía realista creada con IA" loading="lazy" decoding="async"></div>
+            <div class="sector-automation-copy">
+              <span class="business-sector">Marca personal</span>
+              <h4>Una idea de marca que encuentra dirección.</h4>
+              <p>Define objetivo y paquete. El brief prepara una propuesta con alcance y permite recorrer sus fases de revisión.</p>
+              <div class="sector-flow" aria-label="Proceso"><span>Brief</span><i aria-hidden="true"></i><span>Propuesta</span><i aria-hidden="true"></i><span>Revisión</span></div>
+              <span class="sector-automation-action">Probar propuestas de marca <i aria-hidden="true">↗</i></span>
+            </div>
+          </a>
+        </div>
+
+        <div class="catalog-conclusion">
+          <p>Tu negocio puede necesitar otra combinación. Empezamos por entender la tuya.</p>
+          <div>
+            <button class="button button-line" type="button" data-reset-catalog>Ver todos los proyectos</button>
+            <button class="button button-accent" type="button" data-open-brief data-service="Quiero explorar una idea">Hablemos de tu proyecto</button>
+          </div>
+        </div>
+        <p class="projects-note">Proyectos y marcas conceptuales, con fotografías creadas con IA. Las automatizaciones usan datos locales de ejemplo; no generan reservas, compras ni mensajes reales.</p>
+      </div>
+    </section>
+
+    <section class="cta-band" aria-labelledby="cta-title">
+      <div class="shell cta-band-inner">
+        <div>
+          <h2 id="cta-title">Cuéntanos tu caso y armamos una propuesta.</h2>
+          <p>Con alcance, precio y tiempos acordados antes de empezar.</p>
+        </div>
+        <button class="button button-dark" type="button" data-open-brief>Hablemos de tu proyecto</button>
+      </div>
+    </section>
+
+    <section id="proceso" class="section journey-section" aria-labelledby="journey-heading" data-journey-step="0" data-journey-palette="amber">
+      <div class="shell journey-shell">
+        <div class="section-head">
+          <h2 id="journey-heading">Cómo trabajamos, de la idea a producción.</h2>
+          <p>Recorre un proyecto de ejemplo de principio a fin: una idea, una conversación, una propuesta y algo que puedes probar.</p>
+        </div>
+        <p class="journey-case-label"><strong>Caso conceptual: Maré.</strong> Una cafetería imaginada para mostrar cómo trabajamos contigo.</p>
+        <div class="journey-tabs" role="tablist" aria-label="Etapas del proyecto de Maré">
+          <button type="button" id="journey-tab-0" class="journey-tab active" role="tab" data-journey-step="0" aria-selected="true" aria-controls="journey-panel" tabindex="0"><span class="journey-tab-number">1</span><span>La idea</span></button>
+          <button type="button" id="journey-tab-1" class="journey-tab" role="tab" data-journey-step="1" aria-selected="false" aria-controls="journey-panel" tabindex="-1"><span class="journey-tab-number">2</span><span>La conversación</span></button>
+          <button type="button" id="journey-tab-2" class="journey-tab" role="tab" data-journey-step="2" aria-selected="false" aria-controls="journey-panel" tabindex="-1"><span class="journey-tab-number">3</span><span>La propuesta visual</span></button>
+          <button type="button" id="journey-tab-3" class="journey-tab" role="tab" data-journey-step="3" aria-selected="false" aria-controls="journey-panel" tabindex="-1"><span class="journey-tab-number">4</span><span>La web terminada</span></button>
+        </div>
+        <div id="journey-panel" class="journey-panel" role="tabpanel" aria-labelledby="journey-tab-0" tabindex="0" data-journey-step="0">
+          <div class="journey-stage-copy"><span class="journey-mini-label">Paso 1 de 4</span><h3>Todo empieza con algo que quieres hacer realidad.</h3><p>Imaginemos a Lucía, la dueña de Maré: una cafetería con personalidad que quiere llevar su experiencia a internet.</p></div>
+        </div>
+        <div class="journey-navigation">
+          <button type="button" class="journey-nav-button" data-journey-nav="previous" disabled>Paso anterior</button>
+          <p class="journey-progress" data-journey-status role="status" aria-live="polite" aria-atomic="true">Paso 1 de 4: La idea</p>
+          <button type="button" class="journey-nav-button" data-journey-nav="next">Siguiente paso</button>
+        </div>
+        <p class="journey-concept-note">Maré es un proyecto conceptual. Las personas, la conversación y la marca son ilustrativas.</p>
+      </div>
+    </section>
+
+    <section class="section faq" id="preguntas" aria-labelledby="faq-title">
+      <div class="shell faq-grid">
+        <div class="faq-intro">
+          <h2 id="faq-title">Lo que quizá te estás preguntando.</h2>
+          <p>Si tu pregunta no está aquí, conversemos.</p>
+          <a class="text-link" data-whatsapp href="https://wa.me/573185314299" target="_blank" rel="noopener noreferrer">Escríbenos por WhatsApp <i aria-hidden="true">↗</i></a>
+        </div>
+        <div class="faq-list">
+          <details><summary>¿Necesito tener todo definido para empezar?<span aria-hidden="true"></span></summary><p>No. Podemos empezar con lo que tienes y ayudarte a definir qué necesita tu proyecto para dar el primer paso.</p></details>
+          <details><summary>¿Cuál es la diferencia entre una web y una plataforma de gestión?<span aria-hidden="true"></span></summary><p>Una web presenta tu negocio a quien te visita. Una plataforma de gestión es el sistema que usa tu equipo por dentro: pedidos, citas, inventario, clientes o reportes. Muchos proyectos necesitan las dos y conectadas.</p></details>
+          <details><summary>¿Pueden conectarse con las herramientas que ya uso?<span aria-hidden="true"></span></summary><p>Depende de cada herramienta. Revisamos qué ofrece (conexiones, exportaciones o interfaces de programación) y te decimos qué se puede conectar y cómo antes de acordar el alcance.</p></details>
+          <details><summary>¿Cuánto cuesta y cuánto tarda?<span aria-hidden="true"></span></summary><p>Depende de las secciones, el contenido y las funciones. Después de conocer tu proyecto, acordamos una propuesta con alcance, precio y tiempos antes de empezar.</p></details>
+          <details><summary>¿Podré actualizar o ampliar el sistema después?<span aria-hidden="true"></span></summary><p>Desde el inicio definimos qué contenidos quieres administrar y elegimos una solución adecuada. También podemos acordar acompañamiento y mantenimiento.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact on-dark" id="contacto" aria-labelledby="contact-title">
+      <div class="shell contact-inner">
+        <h2 id="contact-title">¿Qué debería hacer por ti tu próximo sistema?</h2>
+        <div class="contact-actions">
+          <button class="button button-accent" type="button" data-open-brief>Hablemos de tu proyecto</button>
+          <a class="text-link" data-whatsapp href="https://wa.me/573185314299" target="_blank" rel="noopener noreferrer">O escríbenos por WhatsApp <i aria-hidden="true">↗</i></a>
+        </div>
+      </div>
+    </section>
   </main>
-  <footer class="section-shell footer"><div class="footer-main"><a class="brand" href="#inicio"><span class="brand-icon" aria-hidden="true">✳</span><span data-brand>Nexo Studio</span></a><a data-email href="mailto:hernan.pipe12@gmail.com">hernan.pipe12@gmail.com ↗</a></div><div class="footer-bottom"><span>© <span id="year">2026</span> <span data-brand>Nexo Studio</span></span><span>De tu idea a tu próxima web.</span><a data-whatsapp href="https://wa.me/573185314299" target="_blank" rel="noopener noreferrer">Conversemos en WhatsApp ↗</a></div></footer>
+
+  <footer class="footer on-dark">
+    <div class="shell footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#inicio">
+          <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8"/><path d="M11.5 12 20.5 20"/><circle cx="9" cy="10" r="3.2"/><circle cx="23" cy="22" r="3.2"/></svg>
+          <span data-brand>Nexo Studio</span>
+        </a>
+        <p>Desarrollo web, integraciones y plataformas de gestión a medida.</p>
+      </div>
+      <nav class="footer-col" aria-label="Servicios">
+        <h2>Servicios</h2>
+        <ul>
+          <li><a href="#servicios">Desarrollo web</a></li>
+          <li><a href="#servicios">Integraciones</a></li>
+          <li><a href="#servicios">Plataformas de gestión</a></li>
+          <li><a href="#proceso">Cómo trabajamos</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Proyectos de ejemplo">
+        <h2>Proyectos de ejemplo</h2>
+        <ul>
+          <li><a href="demos/cafeteria.html">Cafetería</a></li>
+          <li><a href="demos/arquitectura.html">Arquitectura</a></li>
+          <li><a href="demos/tienda.html">Tienda online</a></li>
+          <li><a href="demos/clinica.html">Clínica</a></li>
+          <li><a href="demos/restaurante.html">Restaurante</a></li>
+          <li><a href="demos/portfolio.html">Marca personal</a></li>
+        </ul>
+      </nav>
+      <div class="footer-col">
+        <h2>Contacto</h2>
+        <ul>
+          <li><a data-email href="mailto:hernan.pipe12@gmail.com">hernan.pipe12@gmail.com</a></li>
+          <li><a data-whatsapp href="https://wa.me/573185314299" target="_blank" rel="noopener noreferrer">WhatsApp <i aria-hidden="true">↗</i></a></li>
+          <li><button class="text-link" type="button" data-open-brief>Cuéntanos tu proyecto</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="shell footer-bottom">
+      <small>© <span id="year">2026</span> <span data-brand>Nexo Studio</span></small>
+      <small>Los proyectos y marcas de ejemplo son conceptuales y sus fotografías se crearon con IA.</small>
+    </div>
+  </footer>
+
   <a class="whatsapp-float" data-whatsapp href="https://wa.me/573185314299" target="_blank" rel="noopener noreferrer" aria-label="Hablar por WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M27 15.6A11 11 0 0 1 10.7 25.2L4 27l1.8-6.4A11 11 0 1 1 27 15.6Z"/><path d="M11.3 9.6c.7-.3 1.4 1.6 1.8 2.4.2.4-.4 1.2-.8 1.6.7 1.8 2.1 3.1 4.1 4 .6-.5 1.1-1.5 1.6-1.3l2.5 1.2c1.3.7-.3 2.8-1.8 2.8-3.8 0-9-4.6-9-8.5 0-.9.7-2 1.6-2.2Z"/></svg></a>
 
-  <dialog id="brief-dialog" class="brief-dialog" aria-labelledby="brief-title"><div class="brief-header"><span class="eyebrow">HAGAMOS ALGO INCREÍBLE</span><button type="button" class="close-dialog" aria-label="Cerrar formulario">×</button></div><h2 id="brief-title">Tu idea empieza aquí<span>.</span></h2><p class="brief-intro">Unos detalles y empezamos la conversación.</p><form id="brief-form"><label for="client-name">¿Cómo te llamas?</label><input id="client-name" name="name" autocomplete="name" placeholder="Tu nombre" required maxlength="100"><label for="project-type">¿Qué tienes en mente?</label><select id="project-type" name="service"><option>Página web</option><option>Tienda online</option><option>Marca personal</option><option>Automatización</option><option>Quiero explorar una idea</option></select><label for="project-description">Cuéntanos un poco de tu proyecto</label><textarea id="project-description" name="description" placeholder="Tengo un negocio y me gustaría…" rows="4" required maxlength="2000"></textarea><fieldset class="contact-method"><legend>¿Por dónde prefieres conversar?</legend><label><input type="radio" name="channel" value="whatsapp" checked> WhatsApp</label><label><input type="radio" name="channel" value="email"> Correo</label></fieldset><button class="button button-lime brief-submit" type="submit">Enviar por WhatsApp <span aria-hidden="true">↗</span></button><p class="brief-notice">Abriremos WhatsApp con tu mensaje preparado. Tú decides cuándo enviarlo.</p><p id="brief-feedback" role="status" aria-live="polite"></p></form></dialog>
+  <dialog id="brief-dialog" class="brief-dialog" aria-labelledby="brief-title">
+    <div class="brief-header"><span class="brief-kicker">Cuéntanos tu proyecto</span><button type="button" class="close-dialog" aria-label="Cerrar formulario">×</button></div>
+    <h2 id="brief-title">Empecemos la conversación</h2>
+    <p class="brief-intro">Unos detalles y preparamos tu mensaje.</p>
+    <form id="brief-form">
+      <label for="client-name">¿Cómo te llamas?</label>
+      <input id="client-name" name="name" autocomplete="name" placeholder="Tu nombre" required maxlength="100">
+      <label for="project-type">¿Qué necesitas?</label>
+      <select id="project-type" name="service">
+        <option>Página web</option>
+        <option>Tienda online</option>
+        <option>Integración de sistemas</option>
+        <option>Plataforma de gestión</option>
+        <option>Automatización</option>
+        <option>Quiero explorar una idea</option>
+      </select>
+      <label for="project-description">Cuéntanos un poco de tu proyecto</label>
+      <textarea id="project-description" name="description" placeholder="Tengo un negocio y me gustaría…" rows="4" required maxlength="2000"></textarea>
+      <fieldset class="contact-method"><legend>¿Por dónde prefieres conversar?</legend><label><input type="radio" name="channel" value="whatsapp" checked> WhatsApp</label><label><input type="radio" name="channel" value="email"> Correo</label></fieldset>
+      <button class="button button-accent brief-submit" type="submit">Enviar por WhatsApp <span aria-hidden="true"></span></button>
+      <p class="brief-notice">Abriremos WhatsApp con tu mensaje preparado. Tú decides cuándo enviarlo.</p>
+      <p id="brief-feedback" role="status" aria-live="polite"></p>
+    </form>
+  </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>

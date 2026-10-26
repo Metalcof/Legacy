@@ -1,8 +1,14 @@
 node_modules/
+sgi.db*
+archivos/
+backups/
+antes-de-restaurar-*/
+.env
+*.log
+qa/
 .sites-runtime/
 .sites-checkout/
 *.tar.gz
 *.tar
 .DS_Store
-qa/
 assets/*.png
