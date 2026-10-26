@@ -1,5 +1,14 @@
 'use strict';
 (() => {
+  const colors = { green:'#b7f58a', cyan:'#83e5f5', violet:'#c7a0ff', pink:'#f4a5d1' };
+  const buttons=[...document.querySelectorAll('[data-rgb]')];
+  buttons.forEach(button=>button.addEventListener('click',()=>{
+    const mode=button.dataset.rgb;
+    document.body.classList.toggle('rgb-live',mode==='auto');
+    if(mode==='auto') document.body.style.removeProperty('--accent');
+    else if(colors[mode]) document.body.style.setProperty('--accent',colors[mode]);
+    buttons.forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+  }));
   const productColors = { lavanda:'lavanda', grafito:'grafito', lima:'lima' };
   const productImage = document.querySelector('[data-preview-product-image]');
   const productButtons = [...document.querySelectorAll('[data-preview-color]')];
@@ -33,5 +42,6 @@
       catalog.querySelector('.catalog-filters').scrollIntoView({behavior:'auto',block:'start'});
       filters[0].focus({preventScroll:true});
     });
+    document.querySelector('.navigation a[href="#automatizaciones"]')?.addEventListener('click',()=>selectSector('all'));
   }
 })();

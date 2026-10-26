@@ -5,9 +5,9 @@
   const phone = String(config.phone || '573185314299').replace(/\D/g, '');
   const email = config.email || 'hernan.pipe12@gmail.com';
   document.querySelectorAll('[data-brand]').forEach(el => { el.textContent = brand; });
-  document.title = brand + ' — Web, integraciones y plataformas de gestión';
+  document.title = brand + ' — De tu idea a tu nueva web';
   document.getElementById('year').textContent = new Intl.DateTimeFormat('en', {year:'numeric',timeZone:'America/Bogota'}).format(new Date());
-  document.querySelectorAll('[data-email]').forEach(el => { el.href='mailto:'+email; el.textContent=email; });
+  document.querySelectorAll('[data-email]').forEach(el => { el.href='mailto:'+email; el.textContent=email+' ↗'; });
   document.querySelectorAll('[data-whatsapp]').forEach(el => { el.href='https://wa.me/'+phone+'?text='+encodeURIComponent('Hola, '+brand+'. Me gustaría hablar sobre un proyecto.'); });
 
   const menu = document.querySelector('.menu-toggle');
@@ -50,11 +50,6 @@
     motionButton.setAttribute('aria-label',paused?'Activar animaciones':'Pausar animaciones');
     motionButton.title=paused?'Activar animaciones':'Pausar animaciones';
     motionButton.querySelector('span').textContent=paused?'▷':'Ⅱ';
-    // Los paquetes del diagrama usan animaciones SVG: no responden a CSS, se pausan desde aquí.
-    document.querySelectorAll('svg').forEach(svg=>{
-      if(typeof svg.pauseAnimations!=='function') return;
-      if(paused) svg.pauseAnimations(); else svg.unpauseAnimations();
-    });
   }
   motionButton.addEventListener('click',()=>{
     if(reducedMotion.matches) { toast('Tu dispositivo tiene activada la opción de reducir movimiento.'); return; }

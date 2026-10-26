@@ -1,171 +1,107 @@
-# SGI — Gestión documental
+# Tu estudio digital
 
-Sistema independiente que replica la funcionalidad de gestión documental de Almera
-(ver `../ESPECIFICACION.md`). Node.js 22+ con SQLite incluido, Express y JavaScript sin frameworks.
+Página estática en español con diseño editorial oscuro, fotografías realistas generadas con IA y texto principal de 18 px. Se adapta a celular e incluye seis proyectos web ampliados y seis automatizaciones relacionadas con esos negocios, un recorrido interactivo de un proyecto y contacto por WhatsApp o correo. Las categorías filtran un proyecto web y una automatización por sector. El selector de tema funciona en la portada y en todas las demos.
 
-## Arrancar
-```bash
-npm install
-node server.js        # http://localhost:3100
-node prueba-flujo.js  # prueba de punta a punta (con el servidor corriendo y la base limpia)
+## Cambiar el nombre y el contacto
+
+Edita `config.js`. El nombre se aplica a la página principal y a los créditos de las demos:
+
+```js
+window.SITE_CONFIG = {
+  name: 'El nombre de tu empresa',
+  phone: '573185314299',
+  email: 'hernan.pipe12@gmail.com'
+};
 ```
-La base `sgi.db` se crea sola con los procesos de Metalcof. Para empezar de cero, borra `sgi.db` y la carpeta `archivos/`.
 
-## Usuarios de prueba
-| Usuario | Clave | Rol |
-|---|---|---|
-| admin | admin123 | Administrador |
-| calidad | calidad123 | Líder de Calidad (aprueba, devuelve, publica, resuelve solicitudes) |
-| produccion | produccion123 | Líder de proceso de Producción (elabora y envía a revisión) |
-| consulta | consulta123 | Solo ve documentos vigentes |
+WhatsApp usa el número internacional sin espacios ni signo `+`. Actualmente se configuró Colombia (`57`).
 
-Cambia estas claves antes de usarlo en serio.
+## Ver la página
 
-## Qué incluye
-- **Mi plan de trabajo**: transiciones pendientes, solicitudes por resolver y documentos por vencer.
-- **Mapa de procesos**: Estratégico, Misional y Apoyo, con el conteo de documentos vigentes.
-- **Listado maestro**: filtros por tipo, proceso, clase, origen, estado y fechas. Exporta a CSV.
-- **Ficha del documento**: flujo visual, archivos por versión y trazabilidad completa.
-- **Flujo**: Elaboración → Revisión → Publicación → Vigente (más Eliminado). Al iniciar una modificación se abre una versión nueva.
-  Los estados y transiciones están en las tablas `estados` y `transiciones`, así que se pueden configurar.
-- **Solicitudes** de creación, modificación y eliminación, con aprobación de Calidad.
-- **Listado maestro de registros**: retención, disposición final, ubicación, etc.
-- **Estadísticas**: documentos por estado y por proceso, y reporte de transiciones con filtros.
+Con Apache encendido en XAMPP, abre `http://localhost/Miempresa/`. No necesitas instalar paquetes, configurar una base de datos ni compilar para verla localmente.
 
-## Indicadores y cuadro de mando
-- **Cuadro de mando** (`#/tablero`): plan estratégico → 4 perspectivas BSC → objetivos → indicadores.
-  El cumplimiento de un objetivo es el promedio del cumplimiento de sus indicadores (tope 100 %).
-- **Indicadores** (`#/indicadores`): hoja de vida (fórmula, frecuencia, sentido, meta, tolerancia, responsable), tendencia y periodos sin medir.
-- **Ficha del indicador**: gráfica de resultado contra meta, registro y corrección de mediciones, y planes de acción.
-  - El cálculo puede ser por numerador/denominador o por valor directo.
-  - El análisis es obligatorio cuando el resultado no cumple la meta.
-  - No se pueden registrar periodos que todavía no han ocurrido.
-- **Semáforo**: verde si cumple. Amarillo si queda dentro de la tolerancia (por defecto 10 % de la meta). Rojo si no.
-  En los indicadores descendentes la regla se invierte.
-- **Seguimiento** (`#/seguimiento`): árbol Categoría → Proceso → Indicador con medición previa, último valor y meta, como el "Seguimiento MOP" de Almera.
-  Se exporta a CSV o se imprime a PDF.
-- **Permisos**: Calidad crea y edita indicadores y objetivos. Mide el responsable del indicador o el líder del proceso. Consulta solo ve.
-- **Mi plan de trabajo** muestra también las mediciones atrasadas.
-- **Datos iniciales**: los 15 indicadores que Metalcof tiene en Almera, con las mediciones 2026 de agua y energía tomadas de allí.
-  Las fórmulas son de referencia; ajústalas.
+También puedes servirla con PHP desde esta carpeta:
 
-Pruebas: `node prueba-indicadores.js` (servidor corriendo y base limpia).
+```powershell
+C:\xampp\php\php.exe -S 127.0.0.1:4173
+```
 
-## Riesgos y controles
-- **Matriz de riesgos** (`#/riesgos`):
-  - Filtros por proceso, tipo (los 10 de Metalcof) y zona.
-  - Mapa de calor 5×5 con vista de riesgo absoluto o residual. Al hacer clic en una casilla se filtra la lista.
-  - Distribución por proceso o por tipo, con opción de apilar al 100 %. Exporta a CSV.
-- **Escalas**:
-  - Probabilidad: 1 Rara vez … 5 Casi seguro.
-  - Impacto: 1 Insignificante … 5 Catastrófico.
-  - Zona según P×I: Baja (1–4), Moderada (5–9), Alta (10–14), Extrema (15–25).
-- **Riesgo residual**: cada control baja 2 niveles si es fuerte, 1 si es moderado y 0 si es débil.
-  Baja la probabilidad, el impacto o ambos, según lo que mitigue, sin bajar de 1.
-- **Ficha del riesgo**:
-  - Recorrido absoluto → controles → residual.
-  - Controles: clasificación, efectividad, frecuencia, evidencia, responsables de gestión y de revisión.
-  - Reporte mensual de ejecución (monitoreo) y planes de acción.
-- **Controles** (`#/controles`): listado de todos los controles con filtros por proceso, clasificación y responsable. Exporta a CSV.
-- **Permisos**:
-  - Calidad: todo.
-  - Líder de proceso: los riesgos y controles de su proceso.
-  - Responsable de un control: puede reportar su ejecución.
-  - Consulta: solo ve.
-- **Datos iniciales**: 3 riesgos marcados "(Ejemplo)". Reemplázalos por los de la matriz ES-GER-MAT-05 real.
+## Publicar en tu dominio con cPanel
 
-Pruebas: `node prueba-riesgos.js` (servidor corriendo y base limpia).
+El sitio está hecho con HTML, CSS y JavaScript. Puede funcionar directamente en Apache: el servidor no necesita Node, compilación ni base de datos.
 
-## Evaluaciones (auditorías) y acciones correctivas
-- **Evaluaciones** (`#/auditorias`):
-  - Programa por año, con tipo (interna, externa, autoevaluación, inspección).
-  - Evaluador: Coordinador de Calidad, Dueños de proceso o Externo.
-  - Filtros por proceso y estado.
-- **Flujo de la evaluación**: Planeación → Ejecución → Evaluación → Terminada.
-  - Para pasar a Ejecución hacen falta procesos, auditor y lista de verificación.
-  - Para pasar a Evaluación hay que tener todas las preguntas respondidas.
-  - Para terminar hacen falta conclusiones. Solo Calidad termina.
-- **Lista de verificación**: preguntas propias o la plantilla ISO 9001 (10 numerales por proceso), con agenda por proceso.
-  Responder "No conforme" u "Observación" genera el hallazgo automáticamente.
-- **Hallazgos**: vienen de auditorías o de otras fuentes (quejas, indicadores, riesgos, producto no conforme…).
-  Tipos: NC mayor, NC menor, observación y oportunidad de mejora.
-- **Acciones**: Análisis → Ejecución → Verificación → Cerrada.
-  - Para ejecutar hace falta la causa raíz (5 porqués, Ishikawa…) y al menos una actividad.
-  - Cada actividad cumplida exige evidencia.
-  - Calidad verifica la eficacia, nunca el mismo responsable de la acción. Si no fue eficaz, la acción se reabre y queda contada.
-  - Se marcan las acciones vencidas y todo queda en la trazabilidad.
-- **Estadísticas**: abiertas, vencidas, eficaces, reaperturas, % de eficacia (sirve para el indicador IND-SIG-02) y hallazgos por proceso.
-- **Mi plan de trabajo** muestra las acciones a tu cargo, las que esperan verificación y las evaluaciones donde eres auditor.
+1. Edita `config.js` con el nombre de tu empresa y tus datos de contacto.
+2. Desde esta carpeta, ejecuta `powershell -ExecutionPolicy Bypass -File scripts/package-cpanel.ps1`. Se creará `.sites-runtime/nexo-studio-cpanel.zip` con los archivos necesarios del sitio. No incluye herramientas de desarrollo, capturas ni configuración de Sites.
+3. En el administrador de archivos de cPanel, abre `public_html` o la carpeta de documentos asignada a tu dominio. Si allí ya hay una web, guarda una copia antes de reemplazarla.
+4. Sube el ZIP y extráelo en esa carpeta. `index.html`, `styles.css`, `app.js`, `effects.js`, `project-journey.js`, `config.js`, `assets/` y `demos/` deben quedar directamente allí, sin una carpeta `dist/` intermedia. El paquete incluye `.htaccess` si existe en el proyecto.
+5. Cuando el dominio apunte a tu alojamiento y tengas el certificado SSL activo, abre tu dominio y comprueba el formulario, las seis demos, el laboratorio de automatizaciones y los enlaces de contacto. Puedes borrar el ZIP del alojamiento después de extraerlo.
 
-Pruebas: `node prueba-auditorias.js` (servidor corriendo y base limpia).
+Para actualizar la web, vuelve a generar el ZIP después de editar los archivos y sube su contenido. También puedes modificar `config.js` directamente en cPanel para cambiar el nombre o los contactos.
 
-## Administración: usuarios e importación (`#/admin`)
-- **Usuarios** (solo el administrador): crear, editar rol y proceso, restablecer clave, desactivar y reactivar.
-  - La clave temporal se muestra una sola vez y se debe cambiar al primer ingreso.
-  - Desactivar o cambiar el rol cierra las sesiones abiertas del usuario.
-  - Siempre debe quedar al menos un administrador activo.
-- **Mi clave** (botón de la barra superior): mínimo 8 caracteres, con letras y números.
-- **Seguridad del ingreso**: 5 intentos fallidos bloquean ese usuario durante 15 minutos.
-- **Importar datos** (Calidad y administrador), desde CSV (guarda tu Excel como CSV):
-  - Tipos: usuarios (solo administrador), documentos del listado maestro, riesgos, controles y mediciones históricas de indicadores.
-  - El archivo se revisa fila por fila y solo se importa si **todas** las filas son válidas.
-  - Cada tipo tiene su plantilla descargable.
-  - Aceptan coma decimal, fechas AAAA-MM-DD o DD/MM/AAAA, y nombre o sigla de proceso, tipo y clase.
-  - Los documentos importados entran como Vigentes, sin archivo adjunto.
-  - Orden recomendado: usuarios → documentos → riesgos → controles → mediciones.
+## Publicación con Sites
 
-Pruebas: `node prueba-admin.js` (servidor corriendo y base limpia).
+`scripts/build.mjs` copia los archivos del sitio a `dist/`, la carpeta de publicación. Ejecuta `node scripts/build.mjs` después de editar los archivos para actualizarla. La configuración de Sites está en `.openai/hosting.json`. Este flujo es independiente del ZIP para cPanel. Ambos conservan las imágenes WebP optimizadas y excluyen una lista concreta de los PNG originales y los antiguos robots; otros PNG que agregues al proyecto se copian normalmente.
 
-## Armazón (igual a Almera)
+## Demos y automatizaciones
 
-La interfaz sigue la organización de Almera: menú gris arriba con los desplegables Gestión de Calidad, Documentos, Riesgos y Cuadro de Mando; panel izquierdo (ancho ajustable arrastrando el divisor) con logo, usuario y las pestañas Plan Individual, Sistemas, Buscar y Admin; y el contenido al centro. Los listados se paginan de 15 en 15 y sus columnas se ordenan con un clic, y las listas de selección múltiple se muestran como el "Seleccione" de Almera. Todo esto vive en `public/armazon.js` y `public/styles.css`.
+Las seis demos son conceptos navegables con fotografía realista, contacto conectado a `config.js` y selector de tema:
 
-El logo de Estufas Ecoeficientes ya está en `public/logo.png`; si se borra, vuelve a mostrarse el nombre de la empresa.
+| Demo | Archivo | Ejemplo de uso |
+| --- | --- | --- |
+| Maré | `demos/cafeteria.html` | Carta con fotos individuales, barista, historia del lugar y recogida. |
+| WAV | `demos/tienda.html` | Tienda con escenas de uso, detalles, tres acabados y carrito local. |
+| AURA | `demos/arquitectura.html` | Galería de arquitectura, interiores, fichas de espacios y solicitudes. |
+| ALMA | `demos/clinica.html` | Equipo, consulta, servicios y agenda de visitas. |
+| LUMBRE | `demos/restaurante.html` | Una fotografía por plato, filtros y pedido con cantidades. |
+| Valeria Ríos | `demos/portfolio.html` | Casos propios de cosmética, hotelería y talleres creativos. |
 
-## Mecanismos de integración (`#/mecanismos`)
+`demos/sector-automation.html` reúne seis proyectos interactivos, cada uno con fotografías y reglas específicas del negocio:
 
-Igual a Almera (ver `../MECANISMOS-Y-PROCESOS-ALMERA.md`):
-- **Administración** (`#/mecanismos`): filtros por tipo, estado y fechas; pestañas *Mecanismos de Integración* (ID, tipo, nombre, # actas, administradores, otros, activo), *Seguimiento compromisos* (actas, actividades, cerradas, cumplimiento, invitados, asistentes, asistencia) y *Actas* (listado global exportable a XLSX/CSV). Calidad adiciona Comités, Comités Primarios o Reuniones. Vienen cargados los 18 mecanismos que Metalcof tiene en Almera (sin actas).
-- **Configuración**: nombre, tipo, coordinador, periodicidad, objetivo, miembros, funciones; integrantes (Principal/Suplente, privilegio Administrador / Administrador - Miembro / Miembro, "puede adicionar actas"); opciones de las actas (lugar, tipo de reunión, asistentes, control de asistencia, compromisos, arrastrar compromisos abiertos, miembros adicionan compromisos…) y codificación automática con patrón (`%C` consecutivo con padding, `%M` mes, `%Y` año; ej. `COPASST%C`) o manual.
-- **Ficha** (`#/mecanismo/N`): Información General, Actas (por año), Seguimiento (compromisos por estado, fecha y acta) y Estadísticas (sesiones, asistencia, cumplimiento y cierre a tiempo).
-- **Acta** (`#/acta/N`): Planeación (fecha, horas, lugar, tipo de reunión, asistentes con "Asiste", agenda, adjuntos), Desarrollo (contenido y adjuntos, p. ej. la plantilla Word del comité) y Compromisos (responsables, fecha fin, avance, días de adelanto/atraso y avance ponderado; con "arrastrar", los abiertos de actas anteriores). Cerrar, anular y reabrir solo lo hacen los administradores; un acta cerrada o anulada no se edita y la anulada no cuenta en las estadísticas.
-- **Compromiso** (`#/compromiso/N`): Información general y Seguimientos. Cada seguimiento lleva porcentaje (0–100, obligatorio), fecha, descripción y archivo opcional; con 100 % queda Terminada. Se reprograma con nueva fecha y causa (queda el historial). Estados: Planeación (sin seguimientos), Ejecución, Terminada.
-- **Mi Plan de Trabajo**: árbol Mecanismos de Integración → Comités / Comités Primarios / Reuniones → cada mecanismo, y "Mis compromisos" abiertos.
+| Categoría | Enlace al proyecto | Qué permite probar |
+| --- | --- | --- |
+| Cafetería | `demos/sector-automation.html#cafeteria` | Pedido para recoger, ticket, cola de preparación y estado listo. |
+| Arquitectura | `demos/sector-automation.html#arquitectura` | Solicitud, brief, checklist y fases de revisión. |
+| Tienda online | `demos/sector-automation.html#tienda` | Pedido por acabado, total, inventario y reversión. |
+| Clínica | `demos/sector-automation.html#clinica` | Horario disponible, reserva y cancelación que libera el cupo. |
+| Restaurante | `demos/sector-automation.html#restaurante` | Capacidad de mesas, asignación, reserva y liberación. |
+| Marca personal | `demos/sector-automation.html#personal` | Brief, alcance, propuesta y seguimiento por fases. |
 
-Pruebas: `node prueba-mecanismos.js` (servidor corriendo; crea su propio comité de prueba y al final lo deja inactivo).
+Los módulos tienen formularios, resultados y registros locales. El selector de sector de la portada muestra el sitio web y el proceso relacionados. Los botones de navegación y los enlaces de cada web abren el módulo correspondiente.
 
-**Datos reales de Almera**: `node importar-almera-mecanismos.js ../datos-almera/mecanismos-actas.json` simula y `--aplicar` importa actas, asistentes, compromisos y seguimientos exportados de Almera. Asocia los comités por nombre, pone cada compromiso en su acta de origen, deja a los asistentes como integrantes y crea las personas que no existen (rol consulta, sin clave utilizable hasta que un administrador la asigne). No duplica si se ejecuta otra vez (guarda el ID de Almera). Los archivos adjuntos no se traen: su nombre queda anotado en el desarrollo del acta. Importado el 2026-10-23: 43 actas, 207 compromisos y 248 seguimientos; los 14 comités cuadran con Almera.
+El laboratorio general anterior sigue disponible en `demos/automatizaciones.html`:
 
-## Documentos de procesos → Listado maestro
+- `#leads`: recibir consultas y calcular su prioridad.
+- `#reservas`: consultar disponibilidad y generar una confirmación.
+- `#pedidos`: calcular el total, comprobar stock y preparar un comprobante.
 
-`node importar-documentos-de-procesos.js --aplicar` convierte en documentos reales (estado Vigente) las 304 referencias que trajo la importación de procesos (tabla `proceso_documentacion`; no vuelve a tocar Almera, usa lo que ya está en la base). La mayoría de esas referencias en Almera solo traen el código (ej. `ES-PRO-FOR-01`), sin el título del documento; esos quedan con el nombre **"(sin confirmar)"** para que alguien los complete a mano desde la ficha del documento. Cuando el código y el título venían juntos (ej. "ES-PRO-FOR-07 Control e Inspección de Obra Blanca") se separan bien. Lo que no tenía forma de código (materias primas del almacén, algunos registros) se guarda con su nombre tal cual y un código propio generado. Importado el 2026-10-26: 294 documentos nuevos. Además se crearon 3 indicadores reales que faltaban (código y nombre confirmados por Almera: ES-GCO-FTE-05, ES-PRO-FTE-01, ES-MAN-FTE-01); como Almera no entregó su meta ni frecuencia reales, quedaron con valores neutros y una nota "Pendiente de configurar" en su propósito, para no confundirlos con datos reales.
+Estos flujos son simulaciones locales: no envían datos a servicios externos, no gestionan reservas reales y no procesan pagos. Una integración de producción necesita conectar los servicios del negocio.
 
-## Seguimiento al MOP (`#/seguimiento`)
+## Cómo funciona
 
-Reporte igual al de Almera: árbol Estratégico / Misional / Apoyo → proceso → indicador, con "+ Expandir / - Colapsar", mini gráfica del año, medición previa, flecha Mejor/Peor (según el sentido del indicador), último valor en el color del semáforo, meta y semáforo. "Exportar" pide el formato (XLSX o CSV) y descarga desde `/api/mop/exportar?anio=&formato=`; el archivo trae además los valores de cada mes del año (cada periodo en el mes en que cierra). El XLSX se genera sin librerías (`xlsx.js`). El botón de impresora imprime solo el reporte, con todo expandido.
+El formulario de contacto abre WhatsApp o la aplicación de correo del visitante con el mensaje preparado; el visitante confirma el envío. No almacena datos de consultas en un servidor. Las seis demos son conceptos de diseño. El carrito de WAV guarda productos solo en el navegador y no procesa pagos. Su selector Lavanda / Grafito / Lima cambia a una imagen fotográfica del producto en el color elegido, conservando la misma pose y el mismo encuadre.
 
-Pruebas: `node prueba-mop.js` (servidor corriendo).
+`project-journey.js` muestra el caso conceptual de la cafetería Maré en cuatro etapas: la idea, la conversación, la propuesta visual antes de programar y la web terminada. Puedes avanzar con las pestañas, los botones anterior/siguiente o las flechas del teclado; Inicio y Fin seleccionan la primera y la última etapa. La propuesta visual permite probar dos paletas. La etapa final carga la demo funcional dentro de una vista previa y permite abrirla completa. La marca, las personas y la conversación son ficticias.
 
-## Ficha de caracterización de procesos (`#/proceso/N`)
+Se incluyen tipografía Manrope local, navegación con teclado, etiquetas accesibles, control de pausa y soporte de la preferencia de movimiento reducido. En la portada, `effects.js` alterna entre un degradado RGB en los títulos y un acento fijo verde, cian, violeta o magenta. Todas las demos incluyen su propio selector de paleta; las de Maré, AURA y WAV permiten elegir Original, Verde, Cian o Violeta y conservan la elección por demo en el navegador. Las animaciones suaves se limitan a elementos concretos; la página no usa robot, canvas de partículas ni un ciclo global de tonos.
 
-Igual a Almera (ver `../MECANISMOS-Y-PROCESOS-ALMERA.md`): encabezado con código, fecha y versión; franja Estratégico/Misional/Apoyo; secciones plegables (Objetivo, Dueño, Alcance, Recursos, Documentos y registros asociados, Requisitos aplicables, y las propias de cada ficha); indicadores con su código real; subprocesos; documentación relacionada; y la tabla de entradas y salidas (Proveedor | Entrada | Actividad con ciclo P/H/V/A | Salida | Cliente), que enlaza al subproceso cuando corresponde. Pestañas Matriz de Riesgos, Medición y Planes de mejora reusan los listados de esos módulos filtrados por proceso. Historial con cada edición como una nueva versión. Solo Calidad edita, y debe describir el cambio.
+Los enlaces internos usan navegación nativa con saltos inmediatos. Las fotografías se sirven en WebP, con versiones pequeñas para pantallas de menor tamaño y carga diferida en imágenes secundarias. La vista previa del caso Maré se crea solo al abrir la última etapa.
 
-**Datos reales de Almera**: `node importar-almera-procesos.js ../DATA/procesos-almera.json` simula y `--aplicar` importa los 16 procesos y 13 subprocesos/procedimientos. Empareja por nombre, crea los subprocesos bajo su proceso, enlaza las entradas y salidas al subproceso correspondiente, y actualiza el código de los indicadores de la réplica al código real de Almera (moviendo el indicador de proceso si hace falta). Un proceso que ya se editó en la réplica (versión > 1) no se sobrescribe salvo con `--forzar`. Importado el 2026-10-26.
+## Recursos visuales
 
-## Glosario y buscador global
+Las fotografías se generaron con IA y se optimizaron para la web:
 
-- **Glosario** (`#/glosario`): términos con descripción, fuente (ej. ISO 9000:2015, 3.12.2) y glosario al que pertenecen. Filtro por texto, glosario y letra inicial. Solo Calidad y Administración crean, editan o quitan términos; el resto los consulta. No se repite un término dentro del mismo glosario.
-- **Buscador global** (caja "Buscar…" de la barra superior o `#/buscar?q=`): busca a la vez en documentos (menos los eliminados), registros, glosario, riesgos, controles, indicadores, evaluaciones y acciones de mejora. No distingue tildes ni mayúsculas ("accion" encuentra "Acción"). Cada resultado lleva a su ficha.
+- `assets/cafe-editorial.webp`: cafetería luminosa, utilizada en la portada y el caso Maré.
+- `assets/creative-conversation.webp`: conversación sobre un proyecto en un estudio creativo.
+- `assets/architecture-editorial.webp`: casa contemporánea abierta a un jardín tropical, utilizada en el concepto AURA.
+- `assets/interior-editorial.webp`: interior con materiales naturales para los proyectos de AURA.
+- `assets/coffee-menu.webp`: café y repostería para la carta de Maré.
+- `assets/wellness-editorial.webp`: espacio de bienestar para la demo de clínica.
+- `assets/restaurant-editorial.webp`: ambiente gastronómico para la demo de restaurante.
+- `assets/professional-editorial.webp`: fotografía profesional para el portfolio.
+- `assets/headphones-lavanda.webp`, `assets/headphones-grafito.webp` y `assets/headphones-lima.webp`: tres variantes fotográficas de los auriculares WAV, con fondo transparente.
 
-Pruebas: `node prueba-glosario.js` (servidor corriendo; crea y borra su propio término, así que funciona también con una base usada).
+La ampliación añade 23 fotografías independientes: cuatro para la cafetería, dos de arquitectura, dos de los auriculares en uso y detalle, dos del centro de bienestar, cuatro platos del restaurante, tres proyectos propios del portfolio y seis contextos de automatización. Cada activo tiene una imagen diferente; la carta ya no reutiliza una panorámica recortada y el portfolio ya no repite Maré, AURA y ALMA como sus propios casos.
 
-## Puesta en producción
-La guía completa está en **[DESPLIEGUE.md](DESPLIEGUE.md)**: Docker + Caddy con HTTPS automático, copias de seguridad diarias,
-restauración, actualización y lista de seguridad.
+Las fotografías editoriales tienen una variante `-small.webp` para pantallas pequeñas. Las fotos nuevas se optimizan a un máximo de 1600 px y sus variantes pequeñas a 800 px. Las tres fotos de auriculares con fondo transparente se optimizan a 1200 px. Los PNG originales permanecen en `assets/` como archivos de edición y quedan fuera de `dist/` y del ZIP para cPanel, junto con las imágenes antiguas de robots. Los nombres, las marcas y las personas de estos ejemplos son ficticios; no son testimonios ni proyectos de clientes reales.
 
-- Con `NODE_ENV=production` no se crean los usuarios de prueba: solo `admin`, con la clave de `ADMIN_CLAVE_INICIAL` o una al azar en el log.
-- **Respaldos**: `node backup.js`, automáticos cada día, o desde Administración → Respaldos.
-  Restaurar: `node restaurar.js <copia>.tar.gz` con el sistema apagado.
-- `/healthz` responde sin sesión, para monitoreo.
-
-Pruebas: `node prueba-produccion.js` (no toca tus datos: usa carpetas temporales y sus propios servidores).
+Las instrucciones de generación se conservan en [los prompts editoriales](qa/editorial-image-prompts.txt), [el prompt de arquitectura](qa/architecture-image-prompt.txt), [el prompt del interior](qa/interior-image-prompt.txt), [el prompt de la carta](qa/coffee-menu-image-prompt.txt), [los prompts de las nuevas demos](qa/new-demo-image-prompts.txt), [las variantes de auriculares](qa/headphone-image-prompts.txt), [las ocho nuevas fotos de café, arquitectura y producto](qa/sector-images-classic.txt), [las nueve fotos de clínica, restaurante y portfolio](qa/sector-images-extra.txt) y [los seis contextos de automatización](qa/sector-images-automation.txt). `qa/` queda fuera de los paquetes de publicación.
