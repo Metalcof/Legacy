@@ -1,6 +1,6 @@
 'use strict';
 // Detalles de webs premiadas: portátil que gira con el scroll, brillo que sigue al mouse,
-// inclinación 3D, botones magnéticos, cursor propio y títulos que se revelan por máscara.
+// inclinación 3D, botones magnéticos y títulos que se revelan por máscara.
 // Todo se desactiva con "reducir movimiento", en pantallas táctiles o con el botón de pausa.
 (() => {
   const root = document.documentElement;
@@ -49,7 +49,7 @@
     });
   }
 
-  /* ---------- 3. Botones magnéticos y cursor propio ---------- */
+  /* ---------- 3. Botones magnéticos ---------- */
   if (fine.matches) {
     const magnets = document.querySelectorAll('.button-accent, .button-ghost, .scene-play, .tour-launch-btn, .whatsapp-float');
     magnets.forEach(el => {
@@ -63,33 +63,6 @@
       el.addEventListener('pointerleave', () => { el.style.removeProperty('--px'); el.style.removeProperty('--py'); });
     });
 
-    const dot = document.createElement('div');
-    dot.className = 'cursor';
-    dot.setAttribute('aria-hidden', 'true');
-    dot.innerHTML = '<span class="cursor-label"></span>';
-    document.body.append(dot);
-    const label = dot.querySelector('.cursor-label');
-    let x = -100, y = -100, cx = x, cy = y, frame;
-    const follow = () => {
-      cx += (x - cx) * .22; cy += (y - cy) * .22;
-      dot.style.transform = `translate(${cx}px, ${cy}px)`;
-      frame = Math.abs(x - cx) + Math.abs(y - cy) > .3 ? requestAnimationFrame(follow) : null;
-    };
-    document.addEventListener('pointermove', event => {
-      if (still() || event.pointerType !== 'mouse') { root.classList.remove('has-cursor'); return; }
-      root.classList.add('has-cursor');
-      x = event.clientX; y = event.clientY;
-      if (!frame) frame = requestAnimationFrame(follow);
-      const target = event.target instanceof Element ? event.target : null;
-      const view = target?.closest('.laptop, .case-screen, .wall-tile, .auto-card');
-      const link = target?.closest('a, button, input, select, textarea, label, summary, [role="tab"]');
-      dot.classList.toggle('is-view', Boolean(view));
-      dot.classList.toggle('is-link', Boolean(link) && !view);
-      label.textContent = view ? (view.classList.contains('auto-card') ? 'Probar' : 'Abrir') : '';
-    }, { passive: true });
-    document.addEventListener('pointerleave', () => root.classList.remove('has-cursor'));
-    document.addEventListener('pointerdown', () => dot.classList.add('is-down'));
-    document.addEventListener('pointerup', () => dot.classList.remove('is-down'));
   }
 
   /* ---------- 4. Títulos que suben desde una máscara, palabra por palabra ---------- */
