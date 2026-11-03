@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0c0d12">
-  <meta name="description" content="Diseñamos webs que venden y sistemas que ordenan tu negocio: pedidos, citas, pagos e inventario conectados. Mira proyectos de ejemplo que puedes abrir y usar.">
-  <title>Nexo Studio — Web, integraciones y plataformas de gestión</title>
+  <meta name="description" content="Páginas web modernas con mantenimiento mensual, agenda y pedidos en línea conectados a WhatsApp y un asistente que responde las 24 horas. Pide una revisión gratuita de 20 minutos.">
+  <title>Nexo Studio — Webs, agenda en línea y asistentes de WhatsApp</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
@@ -15,6 +15,7 @@
   <script src="project-journey.js" defer></script>
   <script src="lab.js" defer></script>
   <script src="motion.js" defer></script>
+  <script src="soluciones.js" defer></script>
   <script src="tour.js" defer></script>
 </head>
 <body>
@@ -27,12 +28,12 @@
     </a>
     <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navigation"><span></span><span></span></button>
     <nav id="navigation" class="navigation" aria-label="Navegación principal">
+      <a href="#diagnostico">Tu web</a>
+      <a href="#sectores">Por sector</a>
       <a href="#proyectos">Proyectos</a>
-      <a href="#laboratorio">Pruébalo</a>
-      <a href="#automatizaciones">Automatizaciones</a>
-      <a href="#proceso">Proceso</a>
+      <a href="#empezar">Cómo empezamos</a>
       <a href="#preguntas">Preguntas</a>
-      <button class="button button-accent nav-cta" type="button" data-open-brief>Hablemos</button>
+      <button class="button button-accent nav-cta" type="button" data-open-brief data-service="Revisión gratuita de mi web">Revisión gratuita</button>
     </nav>
   </header>
 
@@ -40,13 +41,14 @@
 
     <section class="intro on-dark" id="inicio" aria-labelledby="hero-title">
       <div class="shell intro-copy">
-        <p class="intro-note"><span aria-hidden="true"></span>Diseño web y automatización para negocios en Colombia</p>
+        <p class="intro-note"><span aria-hidden="true"></span>Webs y automatización para negocios de Latinoamérica y España</p>
         <h1 id="hero-title">Webs que venden. Sistemas que te devuelven el tiempo.</h1>
-        <p class="lead">Diseñamos la web de tu negocio y conectamos tus herramientas para que pedidos, citas y pagos se ordenen solos.</p>
+        <p class="lead">Una web moderna que se ve bien en el celular, citas y pedidos en línea conectados a tu WhatsApp, y un asistente que responde a tus clientes las 24 horas.</p>
         <div class="intro-actions">
-          <button class="button button-accent" type="button" data-open-brief>Cuéntanos tu proyecto</button>
+          <button class="button button-accent" type="button" data-open-brief data-service="Revisión gratuita de mi web">Pide tu revisión gratuita</button>
           <button class="button button-ghost" type="button" data-tour-open><span class="ghost-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg></span>Ver cómo funciona</button>
         </div>
+        <p class="intro-promise">20 minutos, sin compromiso: te mostramos qué mejoraríamos en tu web y cuánto costaría.</p>
       </div>
       <div class="wall" aria-label="Webs de ejemplo que puedes abrir">
         <div class="wall-row"><div class="wall-track"><div class="wall-set"><a class="wall-tile" href="demos/cafeteria.html"><span class="wall-bar"><i></i><i></i><i></i><b>mare.co</b></span><img src="assets/shots/cafeteria-d1.webp" alt="Web de ejemplo de la cafetería Maré" width="1200" height="725" loading="eager" decoding="async"><span class="wall-label">Maré<small>Cafetería</small></span></a><a class="wall-tile" href="demos/arquitectura.html"><span class="wall-bar"><i></i><i></i><i></i><b>aura.studio</b></span><img src="assets/shots/arquitectura-d1.webp" alt="Web de ejemplo del estudio de arquitectura AURA" width="1200" height="725" loading="eager" decoding="async"><span class="wall-label">AURA<small>Arquitectura</small></span></a><a class="wall-tile" href="demos/tienda.html"><span class="wall-bar"><i></i><i></i><i></i><b>wav.store</b></span><img src="assets/shots/tienda-d1.webp" alt="Web de ejemplo de la tienda de audífonos WAV" width="1200" height="725" loading="eager" decoding="async"><span class="wall-label">WAV<small>Tienda online</small></span></a><a class="wall-tile" href="demos/clinica.html"><span class="wall-bar"><i></i><i></i><i></i><b>alma.health</b></span><img src="assets/shots/clinica-d1.webp" alt="Web de ejemplo del centro de bienestar ALMA" width="1200" height="725" loading="eager" decoding="async"><span class="wall-label">ALMA<small>Clínica</small></span></a><a class="wall-tile" href="demos/restaurante.html"><span class="wall-bar"><i></i><i></i><i></i><b>lumbre.co</b></span><img src="assets/shots/restaurante-d1.webp" alt="Web de ejemplo del restaurante LUMBRE" width="1200" height="725" loading="eager" decoding="async"><span class="wall-label">LUMBRE<small>Restaurante</small></span></a><a class="wall-tile" href="demos/portfolio.html"><span class="wall-bar"><i></i><i></i><i></i><b>valeriarios.co</b></span><img src="assets/shots/personal-d1.webp" alt="Web de ejemplo de la consultora Valeria Ríos" width="1200" height="725" loading="eager" decoding="async"><span class="wall-label">Valeria Ríos<small>Marca personal</small></span></a></div><div class="wall-set" aria-hidden="true"><a class="wall-tile" href="demos/cafeteria.html" aria-hidden="true" tabindex="-1"><span class="wall-bar"><i></i><i></i><i></i><b>mare.co</b></span><img src="assets/shots/cafeteria-d1.webp" alt="" width="1200" height="725" loading="lazy" decoding="async"><span class="wall-label">Maré<small>Cafetería</small></span></a><a class="wall-tile" href="demos/arquitectura.html" aria-hidden="true" tabindex="-1"><span class="wall-bar"><i></i><i></i><i></i><b>aura.studio</b></span><img src="assets/shots/arquitectura-d1.webp" alt="" width="1200" height="725" loading="lazy" decoding="async"><span class="wall-label">AURA<small>Arquitectura</small></span></a><a class="wall-tile" href="demos/tienda.html" aria-hidden="true" tabindex="-1"><span class="wall-bar"><i></i><i></i><i></i><b>wav.store</b></span><img src="assets/shots/tienda-d1.webp" alt="" width="1200" height="725" loading="lazy" decoding="async"><span class="wall-label">WAV<small>Tienda online</small></span></a><a class="wall-tile" href="demos/clinica.html" aria-hidden="true" tabindex="-1"><span class="wall-bar"><i></i><i></i><i></i><b>alma.health</b></span><img src="assets/shots/clinica-d1.webp" alt="" width="1200" height="725" loading="lazy" decoding="async"><span class="wall-label">ALMA<small>Clínica</small></span></a><a class="wall-tile" href="demos/restaurante.html" aria-hidden="true" tabindex="-1"><span class="wall-bar"><i></i><i></i><i></i><b>lumbre.co</b></span><img src="assets/shots/restaurante-d1.webp" alt="" width="1200" height="725" loading="lazy" decoding="async"><span class="wall-label">LUMBRE<small>Restaurante</small></span></a><a class="wall-tile" href="demos/portfolio.html" aria-hidden="true" tabindex="-1"><span class="wall-bar"><i></i><i></i><i></i><b>valeriarios.co</b></span><img src="assets/shots/personal-d1.webp" alt="" width="1200" height="725" loading="lazy" decoding="async"><span class="wall-label">Valeria Ríos<small>Marca personal</small></span></a></div></div></div>
@@ -62,6 +64,59 @@
 
     <section class="ticker" aria-label="Lo que podemos conectar en tu negocio">
       <div class="ticker-track"><ul class="ticker-row"><li>Pagos en línea</li><li>Pedidos por WhatsApp</li><li>Facturación electrónica</li><li>Agenda y citas</li><li>Inventario</li><li>Correos automáticos</li><li>CRM</li><li>Reportes</li><li>Tiendas online</li><li>Paneles internos</li></ul><ul class="ticker-row" aria-hidden="true"><li>Pagos en línea</li><li>Pedidos por WhatsApp</li><li>Facturación electrónica</li><li>Agenda y citas</li><li>Inventario</li><li>Correos automáticos</li><li>CRM</li><li>Reportes</li><li>Tiendas online</li><li>Paneles internos</li></ul></div>
+    </section>
+
+    <section class="diag" id="diagnostico" aria-labelledby="diag-title">
+      <div class="shell">
+        <div class="work-head" data-reveal>
+          <h2 id="diag-title">¿Tu web tiene alguno de estos problemas?</h2>
+          <p>Son los que más encontramos al revisar páginas de negocios. Marca los que veas en la tuya y te decimos qué te está costando y cómo lo resolvemos.</p>
+        </div>
+        <div class="diag-grid">
+          <div class="diag-list" data-diag-list role="group" aria-label="Problemas frecuentes de una página web"></div>
+          <aside class="diag-detail" data-diag-detail aria-live="polite">
+            <h3 data-diag-title></h3>
+            <dl>
+              <div><dt>Lo que te cuesta</dt><dd data-diag-cost></dd></div>
+              <div><dt>Cómo lo resolvemos</dt><dd data-diag-fix></dd></div>
+              <div><dt>Servicio</dt><dd data-diag-service></dd></div>
+            </dl>
+            <p class="diag-summary" data-diag-summary></p>
+            <button class="button button-accent" type="button" data-diag-send data-open-brief data-service="Revisión gratuita de mi web">Pide tu revisión gratuita</button>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="sectors on-dark" id="sectores" aria-labelledby="sectors-title">
+      <div class="shell">
+        <div class="work-head" data-reveal>
+          <h2 id="sectors-title">Así funcionaría en tu negocio.</h2>
+          <p>Elige tu sector y habla con un asistente de WhatsApp de ejemplo: agenda, cotiza o toma un pedido, y mira cómo llega al panel de tu equipo.</p>
+        </div>
+        <div class="sector-tabs" role="tablist" aria-label="Sectores" data-sector-tabs></div>
+        <div class="sector-panel" id="sector-panel" role="tabpanel" tabindex="0">
+          <div class="sector-info">
+            <h3 data-sector-title>Clínicas dentales y médicas</h3>
+            <p class="sector-kicker">Lo que construimos:</p>
+            <ul class="sector-builds" data-sector-builds></ul>
+            <button class="button button-accent" type="button" data-open-brief data-service="Asistente de WhatsApp">Quiero un asistente así</button>
+          </div>
+          <div class="phone" aria-label="Conversación de ejemplo con un asistente de WhatsApp">
+            <div class="phone-top"><span class="phone-avatar" aria-hidden="true"></span><div><strong data-chat-name>Clínica Sonrisa</strong><small>en línea · asistente</small></div><button type="button" class="phone-restart" data-chat-restart aria-label="Reiniciar la conversación">↻</button></div>
+            <div class="chat" data-chat role="log" aria-live="polite"></div>
+            <div class="chat-replies" data-chat-replies></div>
+          </div>
+          <div class="sector-panel-team">
+            <p class="team-label">Lo que ve tu equipo</p>
+            <div class="team-card">
+              <strong data-panel-title>Agenda de la clínica</strong>
+              <ul class="team-rows" data-panel-rows></ul>
+            </div>
+            <p class="team-note">Marcas y datos de ejemplo. No se envían mensajes reales.</p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="work" id="proyectos" aria-labelledby="work-title">
@@ -428,32 +483,55 @@
     <section class="services" id="servicios" aria-labelledby="services-title">
       <div class="shell">
         <div class="work-head" data-reveal>
-          <h2 id="services-title">Tres servicios que se combinan.</h2>
-          <p>Empezamos por entender cómo trabajas hoy y qué te hace perder tiempo. Después elegimos qué se construye primero.</p>
+          <h2 id="services-title">Lo que hacemos por tu negocio.</h2>
+          <p>Cuatro piezas que se combinan según lo que necesitas. Empezamos por la que más tiempo o clientes te está costando.</p>
         </div>
         <div class="service-cols">
           <article class="service-col" data-reveal>
             <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="4" y="7" width="32" height="24" rx="4"/><path d="M4 13h32M14 35h12"/></svg>
-            <h3>Desarrollo web</h3>
-            <p>Sitios y tiendas a medida, rápidos y fáciles de mantener por tu equipo.</p>
-            <ul><li>Diseño propio, no plantillas</li><li>Pensada primero para celular</li><li>Carta, catálogo, reservas o tienda</li></ul>
+            <h3>Página web moderna</h3>
+            <p>Rápida, segura y pensada primero para el celular, con mantenimiento mensual incluido.</p>
+            <ul><li>Diseño propio, no plantillas</li><li>Dominio, HTTPS y correo de tu empresa</li><li>Revisión de botones y formularios cada mes</li></ul>
             <button class="text-link" type="button" data-open-brief data-service="Página web">Consultar por una web</button>
           </article>
           <article class="service-col" data-reveal>
-            <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="10" cy="10" r="5"/><circle cx="30" cy="30" r="5"/><circle cx="30" cy="10" r="5"/><path d="M14 13l12 13M15 10h10"/></svg>
-            <h3>Integraciones</h3>
-            <p>Pagos, mensajería, correo y CRM conversando entre sí, sin copiar datos a mano.</p>
-            <ul><li>Avisos y recordatorios automáticos</li><li>Inventario y comprobantes al día</li><li>Registro de cada paso</li></ul>
-            <button class="text-link" type="button" data-open-brief data-service="Integración de sistemas">Consultar por una integración</button>
+            <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="5" y="8" width="30" height="27" rx="4"/><path d="M5 16h30M13 4v8M27 4v8M12 23h5M12 29h10"/></svg>
+            <h3>Agenda o pedidos en línea</h3>
+            <p>Tus clientes reservan, compran o cotizan solos, y todo llega ordenado a tu WhatsApp.</p>
+            <ul><li>Citas por servicio, sede o especialista</li><li>Pedidos y cotizaciones con su número</li><li>Recordatorios automáticos</li></ul>
+            <button class="text-link" type="button" data-open-brief data-service="Agenda o pedidos en línea">Consultar por agenda o pedidos</button>
           </article>
           <article class="service-col" data-reveal>
-            <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="5" y="5" width="30" height="30" rx="4"/><path d="M12 27v-6M20 27V13M28 27v-9"/></svg>
-            <h3>Plataformas de gestión</h3>
-            <p>Paneles a medida para que tu equipo controle pedidos, citas, inventario y reportes.</p>
-            <ul><li>Roles y permisos por persona</li><li>Reportes claros para decidir</li><li>Crece contigo</li></ul>
-            <button class="text-link" type="button" data-open-brief data-service="Plataforma de gestión">Consultar por una plataforma</button>
+            <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M33 19.5A13 13 0 0 1 14 31l-8 2 2.2-7.6A13 13 0 1 1 33 19.5Z"/><path d="M14 18h12M14 23h8"/></svg>
+            <h3>Asistente de WhatsApp</h3>
+            <p>Responde preguntas frecuentes y toma citas o pedidos las 24 horas. Si hace falta, pasa la conversación a tu equipo.</p>
+            <ul><li>Horarios, precios y ubicación al instante</li><li>Agenda y pedidos desde el chat</li><li>Tu equipo atiende solo lo importante</li></ul>
+            <button class="text-link" type="button" data-open-brief data-service="Asistente de WhatsApp">Consultar por un asistente</button>
+          </article>
+          <article class="service-col" data-reveal>
+            <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="10" cy="10" r="5"/><circle cx="30" cy="30" r="5"/><circle cx="30" cy="10" r="5"/><path d="M14 13l12 13M15 10h10"/></svg>
+            <h3>Integraciones y paneles</h3>
+            <p>Conectamos pagos, facturación, inventario y CRM, y te damos un panel para ver todo en un lugar.</p>
+            <ul><li>Un dato se escribe una sola vez</li><li>Reportes claros para decidir</li><li>Roles y permisos por persona</li></ul>
+            <button class="text-link" type="button" data-open-brief data-service="Integración de sistemas">Consultar por una integración</button>
           </article>
         </div>
+      </div>
+    </section>
+
+    <section class="steps" id="empezar" aria-labelledby="steps-title">
+      <div class="shell">
+        <div class="work-head" data-reveal>
+          <h2 id="steps-title">Cómo empezamos.</h2>
+          <p>Sin compromiso hasta que tengas una propuesta clara, con precio y tiempos.</p>
+        </div>
+        <ol class="step-list">
+          <li data-reveal><span class="step-n">1</span><h3>Revisión gratuita</h3><p>En 20 minutos revisamos tu web y cómo atiendes hoy, y te mostramos qué mejoraríamos.</p></li>
+          <li data-reveal><span class="step-n">2</span><h3>Propuesta clara</h3><p>Te enviamos alcance, precio y tiempos por escrito. Tú decides si seguimos.</p></li>
+          <li data-reveal><span class="step-n">3</span><h3>Construcción</h3><p>Diseñamos la web y conectamos agenda, pedidos y WhatsApp. Ves avances antes de publicar.</p></li>
+          <li data-reveal><span class="step-n">4</span><h3>Mantenimiento mensual</h3><p>Actualizamos, revisamos que todo funcione y te ayudamos con cambios cada mes.</p></li>
+        </ol>
+        <div class="steps-cta"><button class="button button-accent" type="button" data-open-brief data-service="Revisión gratuita de mi web">Pide tu revisión gratuita</button><a class="text-link" data-whatsapp href="https://wa.me/573185314299" target="_blank" rel="noopener noreferrer">O escríbenos por WhatsApp <i aria-hidden="true">↗</i></a></div>
       </div>
     </section>
 
@@ -490,6 +568,11 @@
           <a class="text-link" data-whatsapp href="https://wa.me/573185314299" target="_blank" rel="noopener noreferrer">Escríbenos por WhatsApp <i aria-hidden="true">↗</i></a>
         </div>
         <div class="faq-list">
+          <details><summary>¿La revisión gratuita tiene algún compromiso?<span aria-hidden="true"></span></summary><p>No. En 20 minutos te mostramos qué mejoraríamos en tu web y en tu atención por WhatsApp, y cuánto costaría. Si no te convence, ahí queda.</p></details>
+          <details><summary>¿Trabajan con negocios fuera de Colombia?<span aria-hidden="true"></span></summary><p>Sí. Trabajamos en línea con negocios de Latinoamérica y España: las reuniones son por videollamada y los pagos se acuerdan en la propuesta.</p></details>
+          <details><summary>¿Qué pasa con mi web, mi dominio y mi correo actuales?<span aria-hidden="true"></span></summary><p>Revisamos lo que ya tienes. Si conviene, conservamos tu dominio y tu correo y solo cambiamos la web; si algo no funciona, lo arreglamos o lo migramos sin que pierdas nada.</p></details>
+          <details><summary>¿El asistente de WhatsApp reemplaza a mi equipo?<span aria-hidden="true"></span></summary><p>No. Responde lo repetitivo (horarios, precios, ubicación) y toma citas o pedidos. Cuando una conversación necesita a una persona, se la pasa a tu equipo.</p></details>
+          <details><summary>¿Qué incluye el mantenimiento mensual?<span aria-hidden="true"></span></summary><p>Actualizaciones y copias de seguridad, revisión de botones, formularios y conexión segura, y pequeños cambios de contenido. El detalle exacto queda en tu propuesta.</p></details>
           <details><summary>¿Necesito tener todo definido para empezar?<span aria-hidden="true"></span></summary><p>No. Podemos empezar con lo que tienes y ayudarte a definir qué necesita tu proyecto para dar el primer paso.</p></details>
           <details><summary>¿Cuál es la diferencia entre una web y una plataforma de gestión?<span aria-hidden="true"></span></summary><p>Una web presenta tu negocio a quien te visita. Una plataforma de gestión es el sistema que usa tu equipo por dentro: pedidos, citas, inventario, clientes o reportes. Muchos proyectos necesitan las dos y conectadas.</p></details>
           <details><summary>¿Pueden conectarse con las herramientas que ya uso?<span aria-hidden="true"></span></summary><p>Depende de cada herramienta. Revisamos qué ofrece (conexiones, exportaciones o interfaces de programación) y te decimos qué se puede conectar y cómo antes de acordar el alcance.</p></details>
@@ -501,9 +584,9 @@
 
     <section class="contact on-dark" id="contacto" aria-labelledby="contact-title">
       <div class="shell contact-inner">
-        <h2 id="contact-title">¿Qué debería hacer por ti tu próximo sistema?</h2>
+        <h2 id="contact-title">¿Hablamos 20 minutos sobre tu web?</h2>
         <div class="contact-actions">
-          <button class="button button-accent" type="button" data-open-brief>Hablemos de tu proyecto</button>
+          <button class="button button-accent" type="button" data-open-brief data-service="Revisión gratuita de mi web">Pide tu revisión gratuita</button>
           <a class="text-link" data-whatsapp href="https://wa.me/573185314299" target="_blank" rel="noopener noreferrer">O escríbenos por WhatsApp <i aria-hidden="true">↗</i></a>
         </div>
       </div>
@@ -523,9 +606,9 @@
         <h2>Servicios</h2>
         <ul>
           <li><a href="#servicios">Desarrollo web</a></li>
-          <li><a href="#servicios">Integraciones</a></li>
-          <li><a href="#servicios">Plataformas de gestión</a></li>
-          <li><a href="#proceso">Cómo trabajamos</a></li>
+          <li><a href="#sectores">Asistente de WhatsApp</a></li>
+          <li><a href="#diagnostico">Revisa tu web</a></li>
+          <li><a href="#empezar">Cómo empezamos</a></li>
         </ul>
       </nav>
       <nav class="footer-col" aria-label="Proyectos de ejemplo">
@@ -567,13 +650,19 @@
       <input id="client-name" name="name" autocomplete="name" placeholder="Tu nombre" required maxlength="100">
       <label for="project-type">¿Qué necesitas?</label>
       <select id="project-type" name="service">
+        <option>Revisión gratuita de mi web</option>
         <option>Página web</option>
+        <option>Agenda o pedidos en línea</option>
+        <option>Asistente de WhatsApp</option>
+        <option>Mantenimiento mensual</option>
         <option>Tienda online</option>
         <option>Integración de sistemas</option>
         <option>Plataforma de gestión</option>
         <option>Automatización</option>
         <option>Quiero explorar una idea</option>
       </select>
+      <label for="client-website">Tu web actual <span class="optional">(si tienes)</span></label>
+      <input id="client-website" name="website" autocomplete="url" inputmode="url" placeholder="www.tunegocio.com" maxlength="200">
       <label for="project-description">Cuéntanos un poco de tu proyecto</label>
       <textarea id="project-description" name="description" placeholder="Tengo un negocio y me gustaría…" rows="4" required maxlength="2000"></textarea>
       <fieldset class="contact-method"><legend>¿Por dónde prefieres conversar?</legend><label><input type="radio" name="channel" value="whatsapp" checked> WhatsApp</label><label><input type="radio" name="channel" value="email"> Correo</label></fieldset>

@@ -103,7 +103,8 @@
     const name=String(values.get('name')||'').trim();
     const description=String(values.get('description')||'').trim();
     if(!name||!description) { feedback.textContent='Escribe tu nombre y una breve descripción de tu idea.'; return; }
-    const message='Hola, '+brand+'. Soy '+name+'.\n\nMe interesa: '+values.get('service')+'.\n\nMi idea:\n'+description+'\n\nMe gustaría conocer una propuesta para mi proyecto.';
+    const website=String(values.get('website')||'').trim();
+    const message='Hola, '+brand+'. Soy '+name+'.\n\nMe interesa: '+values.get('service')+'.'+(website?'\nMi web actual: '+website:'')+'\n\nMi idea:\n'+description+'\n\nMe gustaría conocer una propuesta para mi proyecto.';
     const link=document.createElement('a');
     if(values.get('channel')==='email') {
       link.href='mailto:'+email+'?subject='+encodeURIComponent('Nuevo proyecto: '+values.get('service'))+'&body='+encodeURIComponent(message);

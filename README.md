@@ -65,6 +65,15 @@ Las tarjetas de interfaz (agenda, pedido, citas del día) son maquetas HTML con 
 
 La tipografía es Archivo variable (`assets/archivo-var.woff2`), con los ejes de peso y de ancho. Si cambias de fuente, conserva la declaración `font-stretch` del `@font-face`.
 
+## Pensada para la campaña de revisión gratuita
+
+La página responde al correo de prospección: quien llega encuentra la revisión gratuita de 20 minutos, la web con mantenimiento mensual, la agenda o pedidos en línea conectados a WhatsApp y el asistente de WhatsApp 24 h, con las mismas palabras del correo.
+
+- **¿Tu web tiene alguno de estos problemas?** (`#diagnostico`): los nueve problemas más frecuentes (web desactualizada, caída, botones rotos, no se ve en celular, todo a mano por WhatsApp, textos de plantilla, solo Facebook, sin conexión segura, "en construcción"). Al marcarlos se explica qué cuestan y cómo se resuelven, y "Pide tu revisión gratuita" abre el formulario con la lista escrita.
+- **Así funcionaría en tu negocio** (`#sectores`): once sectores (clínicas, veterinarias, ferreterías y distribuidoras, industria, abogados y contadores, colegios y academias, restaurantes, hoteles, talleres, inmobiliarias, transporte) con un asistente de WhatsApp de ejemplo que agenda, cotiza o toma pedidos, y el panel donde el equipo lo ve. Textos y conversaciones en `soluciones.js`; las marcas son ficticias.
+- **Cómo empezamos** (`#empezar`): revisión gratuita, propuesta, construcción y mantenimiento mensual.
+- El formulario pide la web actual (opcional) y la incluye en el mensaje.
+
 ## Estructura de la portada
 
 1. **Portada oscura** con un muro inclinado de capturas reales de las seis webs de ejemplo, que se mueve solo y se detiene al pasar el mouse. Cada captura abre su demo.

@@ -10,6 +10,7 @@
     web: {
       name: 'Tu web, paso a paso',
       steps: [
+        { target: '#diagnostico .diag-grid', click: ['#diagnostico [data-problem="manual"]', '#diagnostico [data-problem="celular"]'], title: 'Primero, revisa tu web', text: 'Marca los problemas que veas en tu página. A la derecha te decimos qué te cuestan y cómo los resolvemos.' },
         { target: '#laboratorio .lab-head', title: 'Un laboratorio para imaginar tu web', text: 'Aquí ves una web de ejemplo que cambia mientras eliges. Te muestro cómo se usa.' },
         { target: '#laboratorio [data-lab-group="sector"]', click: '#laboratorio [data-lab-group="sector"] [data-value="restaurante"]', title: 'Primero, tu tipo de negocio', text: 'Al elegir "Restaurante" cambian los textos, las fotos y los productos de la vista previa.' },
         { target: '#laboratorio [data-lab-group="color"]', click: '#laboratorio [data-lab-group="color"] [data-value="bosque"]', title: 'Tu color de marca', text: 'El color se aplica a botones, precios y detalles. Pruébalo con cualquiera.' },
@@ -25,6 +26,9 @@
     auto: {
       name: 'Automatizaciones, paso a paso',
       steps: [
+        { target: '#sectores .sector-tabs', click: '#sectores [data-sector="veterinaria"]', title: 'Elige tu sector', text: 'Hay ejemplos para clínicas, veterinarias, ferreterías, abogados, colegios, restaurantes, hoteles, talleres y más.' },
+        { target: '#sectores .phone', click: ['#sectores .chat-reply', '#sectores .chat-reply', '#sectores .chat-reply'], title: 'Un asistente que atiende por ti', text: 'Responde preguntas y agenda citas o toma pedidos por WhatsApp, a cualquier hora. Mira cómo lo hace.' },
+        { target: '#sectores .sector-panel-team', title: 'Y tu equipo lo ve en orden', text: 'Cada cita o pedido llega al panel con su número y estado. Nadie tiene que copiar nada a mano.' },
         { target: '#proyectos .catalog-filters', click: '#proyectos [data-sector-filter="cafeteria"]', title: 'Busca tu tipo de negocio', text: 'Al filtrar por "Cafetería" ves su web y la automatización que la hace funcionar.' },
         { target: '#proyectos .case:not([hidden]) .case-facts', title: 'Cada web tiene su sistema', text: 'En Maré, cada pedido crea su ticket, entra a la cola de la barra y avisa cuando está listo.' },
         { target: '.auto-panel', title: 'Tu negocio, conectado', text: 'Tu plataforma une la web, el chat, los pagos, el inventario, el correo y tus clientes. Un dato se escribe una sola vez.' },
@@ -60,8 +64,8 @@
       <h2 id="tour-picker-title">¿Qué quieres ver?</h2>
       <p>Un puntero te guía por la página y toca los botones por ti. Puedes pausarlo cuando quieras.</p>
       <div class="tour-options">
-        <button type="button" data-tour-start="web"><strong>Cómo diseñamos tu web</strong><span>Negocio, color, letra, funciones y vista en celular. 10 pasos.</span></button>
-        <button type="button" data-tour-start="auto"><strong>Cómo funcionan las automatizaciones</strong><span>Proyectos por sector, conexiones, registro en vivo y una demo grabada. 7 pasos.</span></button>
+        <button type="button" data-tour-start="web"><strong>Cómo diseñamos tu web</strong><span>Revisa tu web, elige negocio, color, letra y funciones, y mírala en celular. 11 pasos.</span></button>
+        <button type="button" data-tour-start="auto"><strong>Cómo funcionan las automatizaciones</strong><span>Un asistente de WhatsApp que agenda y toma pedidos, el panel de tu equipo y una demo grabada. 10 pasos.</span></button>
       </div>
     </section>`;
   document.body.append(ui);
@@ -183,7 +187,8 @@
     const clicks = data.click ? [].concat(data.click) : [];
     if (!clicks.length) await moveCursorTo(el, token);
     for (const selector of clicks) {
-      const button = findTarget(selector);
+      let button = findTarget(selector);
+      for (let tries = 0; !button && tries < 30 && token === run; tries++) { await wait(150); button = findTarget(selector); }
       if (!button) continue;
       if (!(await clickWithCursor(button, token))) return;
       layout();
