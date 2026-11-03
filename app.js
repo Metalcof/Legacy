@@ -7,8 +7,23 @@
   document.querySelectorAll('[data-brand]').forEach(el => { el.textContent = brand; });
   document.title = brand + ' — Web, integraciones y plataformas de gestión';
   document.getElementById('year').textContent = new Intl.DateTimeFormat('en', {year:'numeric',timeZone:'America/Bogota'}).format(new Date());
-  document.querySelectorAll('[data-email]').forEach(el => { el.href='mailto:'+email; el.textContent=email; });
+  document.querySelectorAll('[data-email]').forEach(el => { el.href='mailto:'+email; if(!el.children.length) el.textContent=email; });
+  document.querySelectorAll('[data-email-text]').forEach(el => { el.textContent=email; });
   document.querySelectorAll('[data-whatsapp]').forEach(el => { el.href='https://wa.me/'+phone+'?text='+encodeURIComponent('Hola, '+brand+'. Me gustaría hablar sobre un proyecto.'); });
+  // Contactos alternos y números visibles con formato +57 321 262 4537.
+  const phone2 = String(config.phone2 || '').replace(/\D/g, '');
+  const email2 = config.email2 || '';
+  const pretty = n => '+' + n.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})$/, '$1 $2 $3 $4');
+  document.querySelectorAll('[data-phone-text]').forEach(el => { el.textContent = pretty(phone); });
+  document.querySelectorAll('[data-whatsapp-2]').forEach(el => {
+    if (!phone2) { el.closest('[data-alt]')?.remove(); return; }
+    el.href = 'https://wa.me/' + phone2 + '?text=' + encodeURIComponent('Hola, ' + brand + '. Me gustaría hablar sobre un proyecto.');
+  });
+  document.querySelectorAll('[data-phone2-text]').forEach(el => { el.textContent = phone2 ? pretty(phone2) : ''; });
+  document.querySelectorAll('[data-email-2]').forEach(el => {
+    if (!email2) { el.closest('[data-alt]')?.remove(); return; }
+    el.href = 'mailto:' + email2; if (!el.children.length) el.textContent = email2; else el.querySelector('strong') && (el.querySelector('strong').textContent = email2);
+  });
 
   const menu = document.querySelector('.menu-toggle');
   const nav = document.querySelector('.navigation');

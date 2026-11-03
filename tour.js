@@ -33,7 +33,7 @@
         { target: '#proyectos .case:not([hidden]) .case-facts', title: 'Cada web tiene su sistema', text: 'En Maré, cada pedido crea su ticket, entra a la cola de la barra y avisa cuando está listo.' },
         { target: '.auto-panel', title: 'Tu negocio, conectado', text: 'Tu plataforma une la web, el chat, los pagos, el inventario, el correo y tus clientes. Un dato se escribe una sola vez.' },
         { target: '[data-live-log]', title: 'Todo queda registrado', text: 'Cada pedido, pago o aviso aparece aquí en el momento en que pasa, para revisarlo cuando quieras.' },
-        { target: '#automation-catalog .auto-card.is-match', title: 'Pruébala con datos de ejemplo', text: 'Esta es la automatización de la cafetería. Ábrela y crea un pedido para ver cómo se mueve la cola.' },
+        { target: '#automation-catalog .ap-panel', title: 'Pruébala con datos de ejemplo', text: 'Aquí ves qué hace la automatización de la cafetería, paso a paso. Con un clic la abres y la usas como si fuera tuya.' },
         { target: '#en-accion .reel-screen', click: '#en-accion [data-reel-src="assets/video/automatizacion"]', title: 'Mírala funcionando', text: 'Un pedido crea su ticket, entra a la cola y al marcarlo listo se actualizan las cifras.' },
         { target: '#contacto .button', title: 'Hagamos la tuya', text: 'Cuéntanos qué te quita tiempo hoy y te proponemos qué automatizar primero.', after: () => $('#proyectos [data-sector-filter="all"]')?.click() }
       ]

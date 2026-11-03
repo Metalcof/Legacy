@@ -89,14 +89,14 @@ h2{font-size:30pt;margin-bottom:5mm}
 .small{margin-top:4mm;font-size:8.5pt;color:#8a8e98}
 .sectors{display:flex;flex-wrap:wrap;gap:2.5mm;margin-top:5mm}
 .sectors span{padding:2mm 4mm;border-radius:99px;background:#fff;border:1px solid var(--line);font-size:9.5pt;font-weight:600}
-.sub{margin-top:10mm;font-size:15pt;letter-spacing:-.03em;font-stretch:115%;font-weight:780}
+.sub{margin-top:7mm;font-size:15pt;letter-spacing:-.03em;font-stretch:115%;font-weight:780}
 
 /* Cierre */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:4mm;margin-top:8mm}
 .step{padding:5mm;border-radius:4mm;background:#fff;border:1px solid var(--line)}
 .step i{display:grid;place-items:center;width:9mm;height:9mm;border-radius:50%;background:var(--acc);color:#fff;font-style:normal;font-weight:800}
 .step b{display:block;margin-top:3mm;font-size:11pt}.step p{margin-top:1.5mm;font-size:8.8pt;line-height:1.45;color:var(--soft)}
-.closing{margin-top:10mm;padding:10mm;border-radius:7mm;background:var(--night);color:#fff;position:relative;overflow:hidden}
+.closing{margin-top:7mm;padding:8mm 10mm;border-radius:7mm;background:var(--night);color:#fff;position:relative;overflow:hidden}
 .closing::before{content:'';position:absolute;inset:0;background:radial-gradient(60% 80% at 100% 0%,rgba(59,43,245,.55),transparent 70%)}
 .closing>*{position:relative}
 .closing h2{font-size:28pt;color:#fff}
@@ -249,6 +249,8 @@ h2{font-size:30pt;margin-bottom:5mm}
     <div class="contact">
       <a data-wa href="#"><small>WhatsApp</small><b data-phone>+57 318 531 4299</b></a>
       <a data-mail href="#"><small>Correo</small><b data-email>hernan.pipe12@gmail.com</b></a>
+      <a data-wa2 href="#"><small>WhatsApp alterno</small><b data-phone2>+57 321 262 4537</b></a>
+      <a data-mail2 href="#"><small>Correo alterno</small><b data-email2>luistru9@gmail.com</b></a>
     </div>
   </div>
   <p class="sub">Negocios con los que trabajamos</p>
@@ -270,6 +272,17 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-phone]').forEach(el => { el.textContent = pretty; });
     document.querySelectorAll('[data-wa]').forEach(el => { el.href = 'https://wa.me/' + phone + '?text=' + encodeURIComponent('Hola, ' + brand + '. Vi el brochure y me interesa la revisión gratuita.'); });
   }
+  const phone2 = String(c.phone2 || '').replace(/\D/g, '');
+  const email2 = c.email2 || '';
+  const fmt = n => '+' + n.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})$/, '$1 $2 $3 $4');
+  if (phone2) {
+    document.querySelectorAll('[data-phone2]').forEach(el => { el.textContent = fmt(phone2); });
+    document.querySelectorAll('[data-wa2]').forEach(el => { el.href = 'https://wa.me/' + phone2 + '?text=' + encodeURIComponent('Hola, ' + brand + '. Vi el brochure y me interesa la revisión gratuita.'); });
+  } else document.querySelectorAll('[data-wa2]').forEach(el => el.remove());
+  if (email2) {
+    document.querySelectorAll('[data-email2]').forEach(el => { el.textContent = email2; });
+    document.querySelectorAll('[data-mail2]').forEach(el => { el.href = 'mailto:' + email2 + '?subject=' + encodeURIComponent('Revisión gratuita'); });
+  } else document.querySelectorAll('[data-mail2]').forEach(el => el.remove());
   if (email) {
     document.querySelectorAll('[data-email]').forEach(el => { el.textContent = email; });
     document.querySelectorAll('[data-mail]').forEach(el => { el.href = 'mailto:' + email + '?subject=' + encodeURIComponent('Revisión gratuita'); });
