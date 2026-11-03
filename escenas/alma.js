@@ -219,9 +219,9 @@
     <circle id="sc-alma-halo" r="150" fill="url(#sc-alma-g-halo)"/>
     <circle id="sc-alma-ring" r="120" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="3 7" opacity=".9"/>
     <circle id="sc-alma-orb" r="80" fill="url(#sc-alma-g-breath)"/>
-    <text id="sc-alma-tin" y="11" text-anchor="middle" font-size="32" font-style="italic" fill="#fff" style="${SERIF}">inhala</text>
-    <text id="sc-alma-tout" y="11" text-anchor="middle" font-size="32" font-style="italic" fill="#fff" style="${SERIF}">exhala</text>
-    <text id="sc-alma-tend" y="11" text-anchor="middle" font-size="32" font-style="italic" fill="#fff" style="${SERIF}">respira</text>
+    <text id="sc-alma-tin" y="11" text-anchor="middle" font-size="32" fill="#fff" style="${SERIF}">inhala</text>
+    <text id="sc-alma-tout" y="11" text-anchor="middle" font-size="32" fill="#fff" style="${SERIF}">exhala</text>
+    <text id="sc-alma-tend" y="11" text-anchor="middle" font-size="32" fill="#fff" style="${SERIF}">respira</text>
   </g>
   <!-- luz que entra -->
   <path id="sc-alma-beam" d="M462 380H738L860 620H360Z" fill="url(#sc-alma-g-beam)"/>

@@ -84,7 +84,7 @@
   <circle cx="886" cy="42" r="5" fill="${MINT}"/>
   <path d="M318 88v-12h12M882 88v-12h-12M318 472v12h12M882 472v12h-12" stroke="${INK}" stroke-opacity=".35" stroke-width="1.5" fill="none"/>
   <g id="sc-valeria-constr">${guides}${circles}
-    <g id="sc-valeria-phi"><text x="768" y="132" font-size="22" font-style="italic" fill="${CORAL}" style="${SERIF}">φ = 1,618</text>
+    <g id="sc-valeria-phi"><text x="768" y="132" font-size="22" fill="${CORAL}" style="${SERIF}">φ = 1,618</text>
     <path d="M600 448H693" stroke="${CORAL}" stroke-width="1.5"/><path d="M600 442v12M693 442v12" stroke="${CORAL}" stroke-width="1.5"/>
     <text x="646" y="438" text-anchor="middle" font-size="13" fill="${CORAL}" style="${MONO}">93</text></g>
   </g>
@@ -94,20 +94,20 @@
     <path id="sc-valeria-nink" d="${N_PATH}" pathLength="1" stroke-dasharray="1" fill="none" stroke="${INK}" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
     <path id="sc-valeria-nwhite" d="${N_PATH}" pathLength="1" stroke-dasharray="1" fill="none" stroke="#fff" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
     <g transform="translate(62 -84)"><path id="sc-valeria-leaf" d="${LEAF}" fill="${MINT}"/></g>
-    <text id="sc-valeria-word" y="182" text-anchor="middle" font-size="48" font-style="italic" fill="${INK}" style="${SERIF}">Nativa</text>
+    <text id="sc-valeria-word" y="182" text-anchor="middle" font-size="48" fill="${INK}" style="${SERIF}">Nativa</text>
   </g>
   <!-- paleta -->
   <g id="sc-valeria-chips">${chips}</g>
   <!-- tipografía -->
   <g id="sc-valeria-type">
-    <text id="sc-valeria-aa" x="582" y="238" font-size="118" font-style="italic" fill="${VIO}" style="${SERIF}">Aa</text>
+    <text id="sc-valeria-aa" x="582" y="238" font-size="118" fill="${VIO}" style="${SERIF}">Aa</text>
     <g id="sc-valeria-fonts">
-      <text x="752" y="184" font-size="17" font-weight="700" fill="${INK}" style="${SERIF}" font-style="italic">Georgia</text>
+      <text x="752" y="184" font-size="17" font-weight="700" fill="${INK}" style="${SERIF}">Georgia</text>
       <text x="752" y="204" font-size="13" fill="${MUTED}" style="${UI}">títulos</text>
       <text x="752" y="234" font-size="16" font-weight="700" fill="${INK}" style="${UI}">Sans</text>
       <text x="752" y="254" font-size="13" fill="${MUTED}" style="${UI}">textos</text>
     </g>
-    <text id="sc-valeria-head" x="584" y="312" font-size="30" font-style="italic" fill="${INK}" style="${SERIF}">${headline}</text>
+    <text id="sc-valeria-head" x="584" y="312" font-size="30" fill="${INK}" style="${SERIF}">${headline}</text>
     <rect id="sc-valeria-caret" x="584" y="286" width="2.5" height="34" fill="${VIO}"/>
     <text id="sc-valeria-sub" x="585" y="342" font-size="15" fill="${MUTED}" style="${UI}">Cosmética natural, hecha aquí.</text>
   </g>
@@ -120,7 +120,7 @@
   <rect x="-84" y="-70" width="168" height="132" rx="6" fill="#fff1c4"/>
   <rect x="-24" y="-80" width="48" height="18" rx="3" fill="#ffffff" opacity=".6"/>
   <text x="-66" y="-36" font-size="12" font-weight="700" letter-spacing="2" fill="#9a7a1c" style="${UI}">BRIEF</text>
-  <text x="-66" y="-8" font-size="24" font-style="italic" fill="${INK}" style="${SERIF}">Nativa</text>
+  <text x="-66" y="-8" font-size="24" fill="${INK}" style="${SERIF}">Nativa</text>
   <text x="-66" y="16" font-size="13.5" fill="${MUTED}" style="${UI}">cosmética natural</text>
   <text x="-66" y="38" font-size="13.5" fill="${MUTED}" style="${UI}">cálida · honesta</text>
 </g>
@@ -138,7 +138,7 @@
       <rect x="-104" y="-62" width="208" height="124" rx="12" fill="#fff"/>
       <rect x="-104" y="44" width="208" height="18" fill="${MINT}"/><rect x="-104" y="44" width="70" height="18" fill="${CORAL}"/>
       <circle cx="-74" cy="-30" r="16" fill="${VIO}"/><path d="M-80 -24v-12l12 12v-12" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
-      <text x="-50" y="-24" font-size="18" font-style="italic" fill="${INK}" style="${SERIF}">Nativa</text>
+      <text x="-50" y="-24" font-size="18" fill="${INK}" style="${SERIF}">Nativa</text>
       <text x="-84" y="10" font-size="13" font-weight="700" fill="${INK}" style="${UI}">Camila Torres</text>
       <text x="-84" y="28" font-size="11.5" fill="${MUTED}" style="${UI}">hola@nativa.co</text>
     </g>
@@ -153,9 +153,9 @@
     <rect x="-76" y="-160" width="152" height="150" fill="url(#sc-valeria-g-screen)"/>
     <circle cx="44" cy="-40" r="56" fill="${CORAL}" opacity=".9"/>
     <circle cx="70" cy="-104" r="22" fill="${SUN}"/>
-    <text x="-60" y="-112" font-size="13" font-style="italic" fill="#fff" style="${SERIF}">Nativa</text>
-    <text x="-60" y="-66" font-size="21" font-style="italic" fill="#fff" style="${SERIF}">Raíces que</text>
-    <text x="-60" y="-42" font-size="21" font-style="italic" fill="#fff" style="${SERIF}">florecen</text>
+    <text x="-60" y="-112" font-size="13" fill="#fff" style="${SERIF}">Nativa</text>
+    <text x="-60" y="-66" font-size="21" fill="#fff" style="${SERIF}">Raíces que</text>
+    <text x="-60" y="-42" font-size="21" fill="#fff" style="${SERIF}">florecen</text>
     <rect x="-60" y="4" width="120" height="30" rx="15" fill="${INK}"/>
     <text x="0" y="24" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff" style="${UI}">Comprar</text>
     <rect x="-60" y="48" width="56" height="64" rx="10" fill="${MINT}"/><rect x="4" y="48" width="56" height="64" rx="10" fill="${SUN}"/>
@@ -173,7 +173,7 @@
     <circle cx="0" cy="78" r="36" fill="${VIO}"/>
     <path d="M-15 92V64L15 92V64" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
     <g transform="translate(18 58) scale(.32)"><path d="${LEAF}" fill="${MINT}"/></g>
-    <text x="0" y="146" text-anchor="middle" font-size="21" font-style="italic" fill="${INK}" style="${SERIF}">Nativa</text>
+    <text x="0" y="146" text-anchor="middle" font-size="21" fill="${INK}" style="${SERIF}">Nativa</text>
   </g>
 </g>
 
@@ -185,7 +185,7 @@
   <circle cx="-128" cy="0" r="34" fill="${VIO}"/>
   <path id="sc-valeria-pchk" d="M-142 0l10 10 18-20" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1"/>
   <text x="-76" y="-30" font-size="12.5" font-weight="700" letter-spacing="2.4" fill="${VIO}" style="${UI}">PROPUESTA</text>
-  <text x="-77" y="8" font-size="32" font-style="italic" fill="${INK}" style="${SERIF}">Marca Nativa</text>
+  <text x="-77" y="8" font-size="32" fill="${INK}" style="${SERIF}">Marca Nativa</text>
   <rect x="-76" y="22" width="172" height="30" rx="15" fill="#dff5ef"/>
   <circle cx="-60" cy="37" r="5" fill="#2f9c7f"/>
   <text x="-48" y="42" font-size="14" font-weight="700" fill="#1f6f5a" style="${UI}">lista para revisión</text>

@@ -198,7 +198,7 @@ h4{font-size:21px;line-height:1.25;font-weight:700;letter-spacing:-.015em}
 .journey-wireframe-nav strong{font-family:Georgia,serif;font-size:20px}
 .journey-wireframe-hero{display:grid;grid-template-columns:1.1fr .9fr;gap:12px;padding:6px 16px 16px;align-items:center}
 .journey-wireframe-hero h4{font-family:Georgia,serif;font-size:24px;line-height:1.15;font-weight:700;margin-block:4px 8px}
-.journey-wireframe-hero em{font-style:italic;color:var(--journey-accent,#b66a3e)}
+.journey-wireframe-hero em{font-style:normal;font-weight:800;color:var(--journey-accent,#b66a3e)}
 .journey-wireframe-hero p{font-size:14px;line-height:1.5;margin-bottom:10px}
 .journey-wireframe-hero>div>span:first-child{font-size:13px;font-weight:700;color:var(--journey-accent,#b66a3e)}
 .journey-wireframe-hero img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:8px}
@@ -1351,7 +1351,7 @@ html:not(.motion-ready) .wall-tile,.motion-settled .wall-tile{width:auto}
 .stage-tab--clinica strong,.stage-tab--restaurante strong{text-transform:lowercase}
 .stage-tab--tienda strong{text-transform:lowercase;font-weight:850;font-stretch:115%;letter-spacing:-.04em}
 .stage-tab--arquitectura strong{font-weight:300;letter-spacing:.3em}
-.stage-tab--personal strong{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:400;font-size:18px}
+.stage-tab--personal strong{font-weight:780;font-stretch:108%;letter-spacing:-.02em}
 
 .motion-ready .stage{opacity:0}
 .motion-ready.hero-play .stage{animation:stage-in 1.3s var(--ease-out) .45s forwards}
@@ -1778,3 +1778,8 @@ main>section:not(.in-view) *,main>section:not(.in-view)::before,main>section:not
 @media (max-width:960px){.gain-grid{grid-template-columns:1fr 1fr}}
 @media (max-width:600px){.gain-grid{grid-template-columns:1fr}.gains-cta .button{width:100%}}
 .scene-stage>svg{will-change:transform;transform:translateZ(0)}
+
+/* Sin cursivas en ningún lugar del sitio */
+em,i,cite,address,dfn,var{font-style:normal}
+.case-quote{font-family:var(--font);font-weight:780;font-stretch:112%;letter-spacing:-.04em}
+.case-quote em{font-weight:800}

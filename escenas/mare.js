@@ -162,7 +162,7 @@
     <path d="M-24 0L-22-56L-14-62H14L22-56L24 0Z" fill="#c9a074"/>
     <path d="M-22-56L-14-62H14L22-56Z" fill="#b48c62"/>
     <rect x="-16" y="-42" width="32" height="26" rx="3" fill="#fffaf2"/>
-    <text x="0" y="-25" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="11" fill="#a4572c">Maré</text>
+    <text x="0" y="-25" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#a4572c">Maré</text>
   </g>
   <!-- planta colgante -->
   <g transform="translate(1010 148)">
@@ -221,7 +221,7 @@
     <rect x="468" y="196" width="264" height="202" rx="18" fill="url(#sc-mare-cream)"/>
     <rect x="468.5" y="196.5" width="263" height="201" rx="18" fill="none" stroke="#33251c" stroke-opacity=".1"/>
     <rect x="468" y="214" width="264" height="27" fill="url(#sc-mare-terra)"/>
-    <text x="600" y="233" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="16" fill="#fbf1e4">Maré</text>
+    <text x="600" y="233" text-anchor="middle" font-family="Georgia,serif" font-size="16" fill="#fbf1e4">Maré</text>
     <rect x="474" y="184" width="252" height="12" rx="5" fill="url(#sc-mare-steel)"/>
     <g fill="#fbf6ee" stroke="#33251c" stroke-opacity=".14">
       <path d="M498 184l2-15h28l2 15z"/><path d="M538 184l2-15h28l2 15z"/>
