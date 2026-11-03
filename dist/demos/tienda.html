@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="es">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>WAV — encuentra tu frecuencia · Concepto de Nexo Studio</title><meta name="description" content="Concepto de tienda con selector de color y carrito interactivo, diseñado por Nexo Studio."><link rel="stylesheet" href="demos.css"><script src="../config.js" defer></script><script src="demos.js" defer></script>  <script src="motion.js" defer></script>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>WAV — encuentra tu frecuencia · Concepto de Nexo Studio</title><meta name="description" content="Concepto de tienda de auriculares con historia de producto, comparador de acabados y bolsa interactiva, diseñado por Nexo Studio."><link rel="stylesheet" href="demos.css"><link rel="stylesheet" href="tienda-plus.css"><script src="../config.js" defer></script><script src="demos.js" defer></script>  <script src="motion.js" defer></script><script src="tienda-plus.js" defer></script>
 </head>
 <body class="store">
 <div class="demo-bar"><span>Concepto ficticio · fotos IA · <span data-brand>Nexo Studio</span></span><a href="../index.html#proyectos">Volver al estudio ↗</a></div>
@@ -9,14 +9,243 @@
   <header class="site-nav"><a href="#" class="wordmark" aria-label="Wav, inicio">wav<span>.</span></a><nav class="nav-links" aria-label="Principal"><a href="#producto">Wave One</a><a class="desktop-link" href="#sonido">La experiencia</a><button type="button" class="cart-trigger" data-open-cart><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M4 6h12l1 11H3L4 6Z"/><path d="M7 7V5a3 3 0 0 1 6 0v2"/></svg>Mi bolsa <span class="cart-count" data-cart-count>0</span></button></nav></header>
   <button type="button" class="cart-fab" data-open-cart aria-label="Abrir mi bolsa, 0 artículos"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M4 6h12l1 11H3L4 6Z"/><path d="M7 7V5a3 3 0 0 1 6 0v2"/></svg><span class="cart-count" data-cart-count>0</span></button>
   <main>
-    <section class="store-hero"><div><div class="eyebrow">Tu mundo. Tu volumen.</div><h1>Siente cada<br><em>frecuencia.</em></h1><p>Lleva tu música contigo. Wave One reúne líneas suaves, almohadillas envolventes y un ajuste pensado para acompañar tu día.</p><a class="button" href="#producto">Conoce Wave One <span>↗</span></a></div><div class="headphone-art"><img data-product-image src="../assets/headphones-lavanda.webp" width="1200" height="1200" alt="Auriculares Wave One de acabado lavanda, fotografía de producto conceptual generada con IA" decoding="async"><div class="hero-model" aria-hidden="true"><span>W / 01</span> ENCUENTRA TU FRECUENCIA</div></div></section>
-    <div class="store-feature-strip"><span><b>↗</b> Libertad para moverte</span><span><b>◌</b> Comodidad que se siente</span><span><b>≋</b> Conecta con tu música</span><span><b>✳</b> Tu color, tu estilo</span></div>
-    <section class="store-product" id="producto"><div class="product-display"><span class="product-tag">Diseñado para tu día</span><img data-product-image src="../assets/headphones-lavanda.webp" width="1200" height="1200" alt="Auriculares Wave One de acabado lavanda, fotografía de producto conceptual generada con IA" decoding="async"><small>Wave One · tres acabados, una misma forma.</small></div><div class="product-info"><div class="eyebrow">Wave One · auriculares</div><h2>Tu ritmo.<br>Sin interrupciones.</h2><p>Una diadema de líneas limpias, ajustes metálicos y almohadillas negras que abrazan el oído. Elige el acabado que más se parece a ti.</p><div class="price">$ 349.900 <small>COP</small></div><p class="color-label">Color: <strong id="color-name">Lavanda</strong></p><div class="colors" role="group" aria-label="Elegir color"><button type="button" class="color-choice" style="--swatch:#afa0d7" data-color="lavanda" aria-label="Lavanda" aria-pressed="true"></button><button type="button" class="color-choice" style="--swatch:#45454c" data-color="grafito" aria-label="Grafito" aria-pressed="false"></button><button type="button" class="color-choice" style="--swatch:#c9de84" data-color="lima" aria-label="Lima" aria-pressed="false"></button></div><button type="button" class="button add-cart" id="add-cart">Añadir a mi bolsa <span>+</span></button><div class="product-specs"><span>◌ Tres acabados</span><span>◌ Ajuste metálico</span><span>◌ Almohadillas envolventes</span></div></div></section>
-    <section class="wav-lifestyle" id="sonido"><div class="section-head"><div><div class="eyebrow">Hay un mundo ahí afuera</div><h2>Ponle tu propia<br>banda sonora.</h2></div><p>Del trayecto de la mañana a un paseo sin destino. Tu música tiene un lugar en los momentos que son tuyos.</p></div><figure class="wav-life-photo"><img src="../assets/case-wav-lifestyle.webp" srcset="../assets/case-wav-lifestyle-small.webp 800w, ../assets/case-wav-lifestyle.webp 1600w" sizes="(max-width:700px) 92vw, 90vw" width="1600" height="900" alt="Mujer adulta usando auriculares Wave One lavanda en una calle arbolada" loading="lazy" decoding="async" ><figcaption>Wave One / Lavanda / En movimiento</figcaption></figure></section>
-    <section class="wav-detail-section"><div class="wav-detail-copy"><div class="eyebrow">Se siente en los detalles</div><h2>Lo que ves.<br>Lo que llevas contigo.</h2><p>El acabado lavanda se encuentra con el metal y las texturas negras. Un equilibrio entre formas suaves y piezas precisas.</p><dl class="wav-product-facts"><div><dt>Modelo</dt><dd>Wave One</dd></div><div><dt>Acabados</dt><dd>Lavanda · Grafito · Lima</dd></div><div><dt>Diadema</dt><dd>Deslizadores metálicos</dd></div><div><dt>Almohadillas</dt><dd>Envolventes, acabado negro</dd></div></dl><a class="coffee-inline-link" href="#producto">Elegir mi acabado ↗</a></div><figure class="wav-detail-photo"><img src="../assets/case-wav-detail.webp" srcset="../assets/case-wav-detail-small.webp 800w, ../assets/case-wav-detail.webp 1600w" sizes="(max-width:700px) 92vw, 48vw" width="1600" height="900" alt="Detalle de almohadillas, bisagra metálica y carcasa lavanda de Wave One sobre un escritorio oscuro" loading="lazy" decoding="async" ><figcaption>Wave One / Lavanda / Materiales y detalle</figcaption></figure></section>
-    <section class="wav-questions"><h2>Todo un poco<br>más claro.</h2><div><details><summary>¿Qué cambia entre los tres acabados?<span aria-hidden="true">+</span></summary><p>La forma y las piezas son las mismas. Lavanda tiene un tono suave; Grafito es sobrio y oscuro; Lima añade un color vivo. Puedes compararlos en el selector.</p></details><details><summary>¿Cómo funciona el ajuste de la diadema?<span aria-hidden="true">+</span></summary><p>Los deslizadores metálicos permiten ampliar la diadema a ambos lados. Las almohadillas rodean el oído y completan la forma del auricular.</p></details><details><summary>¿Puedo guardar más de un acabado en mi bolsa?<span aria-hidden="true">+</span></summary><p>Sí. Cada color aparece como una línea independiente. Puedes añadir varias unidades, ajustar cantidades o eliminar un acabado. La bolsa se conserva en este navegador.</p></details></div></section>
-    <section class="sector-operation"><div><div class="eyebrow">WAV, también por dentro</div><h2>Del producto<br>a todo organizado.</h2><p>Explora el panel de gestión de la tienda y el recorrido de la información de un pedido.</p></div><a class="button" href="sector-automation.html#tienda">Ver la gestión de WAV <span>↗</span></a></section>
-  </main><footer class="footer"><a class="wordmark" href="#">wav<span>.</span></a><p>Marca, producto y precios ficticios. Fotografías creadas con IA. Bolsa local: no se procesan compras ni pagos. Diseño de <span data-brand>Nexo Studio</span>.</p><a href="../index.html#contacto">Quiero una tienda así ↗</a></footer>
+    <section class="wv-hero" aria-labelledby="wv-hero-title">
+      <p class="wv-hero-word" aria-hidden="true">wave one</p>
+      <div class="wv-hero-copy">
+        <div class="eyebrow">Nuevo · Wave One</div>
+        <h1 id="wv-hero-title">Siente cada<br><em>frecuencia.</em></h1>
+        <p class="wv-hero-lead">Auriculares inalámbricos con cancelación de ruido adaptativa, hasta 40 horas de batería y un ajuste que se olvida que está ahí.</p>
+        <div class="wv-hero-actions">
+          <a class="button" href="#producto">Comprar · $ 349.900 <span aria-hidden="true">↗</span></a>
+          <a class="wv-ghost" href="#silencio">Escuchar la diferencia</a>
+        </div>
+        <div class="wv-hero-finish" role="group" aria-label="Ver Wave One en otro acabado">
+          <button type="button" class="wv-chip" data-color="lavanda" aria-pressed="true" style="--chip:#afa0d7">Lavanda</button>
+          <button type="button" class="wv-chip" data-color="grafito" aria-pressed="false" style="--chip:#6a6a73">Grafito</button>
+          <button type="button" class="wv-chip" data-color="lima" aria-pressed="false" style="--chip:#c9de84">Lima</button>
+        </div>
+      </div>
+      <div class="wv-hero-stage">
+        <div class="wv-hero-orbit" aria-hidden="true"><i></i><i></i><i></i></div>
+        <img class="wv-hero-product" data-product-image src="../assets/headphones-lavanda.webp" width="1200" height="1200" alt="Auriculares Wave One de acabado lavanda, fotografía de producto conceptual generada con IA" decoding="async" fetchpriority="high">
+        <div class="wv-hero-shadow" aria-hidden="true"></div>
+      </div>
+      <dl class="wv-hero-stats">
+        <div><dt>Batería</dt><dd>40 h</dd></div>
+        <div><dt>Cancelación</dt><dd>Adaptativa</dd></div>
+        <div><dt>Peso</dt><dd>250 g</dd></div>
+        <div><dt>Carga rápida</dt><dd>10 min = 5 h</dd></div>
+      </dl>
+    </section>
+
+    <section class="wv-story" id="sonido" aria-label="Cómo está hecho Wave One">
+      <div class="wv-stage" aria-hidden="true">
+        <div class="wv-stage-inner" data-chapter="1">
+          <div class="wv-stage-glow"></div>
+          <div class="wv-fx wv-fx-noise"><svg viewBox="0 0 400 400" fill="none"><circle cx="200" cy="200" r="120"/><circle cx="200" cy="200" r="150"/><circle cx="200" cy="200" r="180"/><path class="wv-fx-calm" d="M20 200 C 80 200, 120 200, 200 200 S 320 200, 380 200"/></svg></div>
+          <div class="wv-fx wv-fx-battery"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" pathLength="100" class="track"/><circle cx="60" cy="60" r="52" pathLength="100" class="fill"/></svg><p><b>40</b><span>horas</span></p></div>
+          <div class="wv-fx wv-fx-comfort"><span style="--x:22%;--y:30%">Diadema acolchada</span><span class="r" style="--x:6%;--y:62%">Espuma con memoria</span><span style="--x:16%;--y:72%">Solo 250 g</span></div>
+          <div class="wv-fx wv-fx-materials"><span class="r" style="--x:6%;--y:16%">Aluminio anodizado</span><span style="--x:8%;--y:48%">Bisagra de acero</span><span class="r" style="--x:5%;--y:80%">Recubrimiento suave al tacto</span></div>
+          <div class="wv-stage-product"><img data-product-image src="../assets/headphones-lavanda.webp" width="1200" height="1200" alt="" decoding="async"></div>
+          <ol class="wv-stage-dots"><li>01</li><li>02</li><li>03</li><li>04</li></ol>
+        </div>
+      </div>
+      <div class="wv-chapters">
+        <article class="wv-chapter" data-step="1">
+          <span class="wv-chapter-num">01 / Silencio</span>
+          <h2>El ruido se queda afuera.</h2>
+          <p>Seis micrófonos escuchan lo que pasa a tu alrededor y generan una onda opuesta que lo anula. El metro, el aire acondicionado o la oficina abierta bajan a un murmullo; tu música queda al frente.</p>
+          <ul class="wv-chapter-facts"><li>Cancelación adaptativa</li><li>Modo ambiente con un toque</li></ul>
+        </article>
+        <article class="wv-chapter" data-step="2">
+          <span class="wv-chapter-num">02 / Batería</span>
+          <h2>Cuarenta horas. Carga una vez a la semana.</h2>
+          <p>Con la cancelación apagada llegas a 40 horas; con ella encendida, a 30. Y si se te olvidó cargarlos, diez minutos por USB‑C te dan cinco horas más.</p>
+          <ul class="wv-chapter-facts"><li>Hasta 40 h de reproducción</li><li>10 min de carga = 5 h</li></ul>
+        </article>
+        <article class="wv-chapter" data-step="3">
+          <span class="wv-chapter-num">03 / Comodidad</span>
+          <h2>Pensados para no quitártelos.</h2>
+          <p>Las almohadillas de espuma con memoria reparten la presión alrededor del oído, no sobre él. La diadema acolchada y los 250 gramos hacen que una jornada completa se sienta como una canción.</p>
+          <ul class="wv-chapter-facts"><li>Almohadillas envolventes</li><li>Diadema ajustable a ambos lados</li></ul>
+        </article>
+        <article class="wv-chapter" data-step="4">
+          <span class="wv-chapter-num">04 / Materiales</span>
+          <h2>Metal donde importa. Suave donde se toca.</h2>
+          <p>Deslizadores de aluminio, bisagras de acero y una carcasa con recubrimiento mate que no guarda huellas. Las almohadillas se cambian sin herramientas cuando llegue el momento.</p>
+          <ul class="wv-chapter-facts"><li>Almohadillas reemplazables</li><li>Se pliega dentro de su estuche</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="wv-anc" id="silencio" aria-labelledby="wv-anc-title">
+      <div class="wv-anc-copy">
+        <div class="eyebrow">Pruébalo aquí</div>
+        <h2 id="wv-anc-title">Cambia de modo.<br>Mira qué llega a tu oído.</h2>
+        <p>Elige un lugar y un modo. La línea gris es el ruido que hay afuera; la de color es lo que escuchas con Wave One puesto.</p>
+        <div class="wv-anc-group">
+          <span class="wv-anc-label" id="wv-place-label">Dónde estás</span>
+          <div class="wv-seg" role="group" aria-labelledby="wv-place-label">
+            <button type="button" data-anc-place="metro" aria-pressed="true">Metro</button>
+            <button type="button" data-anc-place="oficina" aria-pressed="false">Oficina</button>
+            <button type="button" data-anc-place="avion" aria-pressed="false">Avión</button>
+          </div>
+        </div>
+        <div class="wv-anc-group">
+          <span class="wv-anc-label" id="wv-mode-label">Modo de Wave One</span>
+          <div class="wv-seg" role="group" aria-labelledby="wv-mode-label">
+            <button type="button" data-anc-mode="anc" aria-pressed="true">Cancelación</button>
+            <button type="button" data-anc-mode="ambiente" aria-pressed="false">Ambiente</button>
+            <button type="button" data-anc-mode="off" aria-pressed="false">Apagado</button>
+          </div>
+        </div>
+      </div>
+      <figure class="wv-anc-viz" data-mode="anc">
+        <div class="wv-anc-screen">
+          <svg class="wv-anc-svg" viewBox="0 0 600 260" preserveAspectRatio="none" aria-hidden="true">
+            <line x1="0" y1="130" x2="600" y2="130" class="axis"/>
+            <path class="noise" d="M0 130 L600 130"/>
+            <path class="heard" d="M0 130 L600 130"/>
+          </svg>
+          <div class="wv-anc-legend" aria-hidden="true"><span class="is-noise">Ruido exterior</span><span class="is-heard">Lo que escuchas</span></div>
+        </div>
+        <div class="wv-anc-meter">
+          <div class="wv-anc-meter-row"><span>Ruido que llega</span><b id="wv-anc-value">Bajo</b></div>
+          <div class="wv-anc-bar"><i id="wv-anc-bar"></i></div>
+          <p id="wv-anc-text" aria-live="polite">Cancelación activa: el traqueteo del vagón se convierte en un fondo casi imperceptible.</p>
+        </div>
+        <figcaption>Ilustración del efecto, no una medición.</figcaption>
+      </figure>
+    </section>
+
+    <section class="store-product wv-buy" id="producto" aria-labelledby="wv-buy-title">
+      <div class="product-display"><span class="product-tag">Wave One · W/01</span><img data-product-image src="../assets/headphones-lavanda.webp" width="1200" height="1200" alt="Auriculares Wave One de acabado lavanda, fotografía de producto conceptual generada con IA" decoding="async"><small>Tres acabados, una misma forma.</small></div>
+      <div class="product-info">
+        <div class="eyebrow">Wave One · auriculares inalámbricos</div>
+        <h2 id="wv-buy-title">Tu ritmo.<br>Sin interrupciones.</h2>
+        <p>Cancelación de ruido adaptativa, 40 horas de batería y almohadillas que abrazan el oído. Elige el acabado que más se parece a ti.</p>
+        <div class="price">$ 349.900 <small>COP · IVA incluido</small></div>
+        <p class="color-label">Acabado: <strong id="color-name">Lavanda</strong></p>
+        <div class="colors" role="group" aria-label="Elegir color"><button type="button" class="color-choice" style="--swatch:#afa0d7" data-color="lavanda" aria-label="Lavanda" aria-pressed="true"></button><button type="button" class="color-choice" style="--swatch:#45454c" data-color="grafito" aria-label="Grafito" aria-pressed="false"></button><button type="button" class="color-choice" style="--swatch:#c9de84" data-color="lima" aria-label="Lima" aria-pressed="false"></button></div>
+        <button type="button" class="button add-cart" id="add-cart">Añadir a mi bolsa <span>+</span></button>
+        <ul class="wv-perks">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5h11v9h-11zM13.5 9.5h4l3 3v3h-7z"/><circle cx="6.5" cy="17" r="1.8"/><circle cx="17" cy="17" r="1.8"/></svg><span><b>Envío gratis</b> a todo el país · 2 a 5 días hábiles</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4h4"/></svg><span><b>30 días</b> para devolverlos si no son para ti</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4" stroke-linecap="round"/></svg><span><b>1 año de garantía</b> del fabricante</span></li>
+        </ul>
+        <p class="wv-pay">Paga con tarjeta, PSE o transferencia. Demo: no se procesa ningún pago.</p>
+      </div>
+    </section>
+
+    <section class="wv-finishes" id="acabados" aria-labelledby="wv-finishes-title">
+      <div class="wv-head">
+        <div><div class="eyebrow">Compara acabados</div><h2 id="wv-finishes-title">Misma forma.<br>Tres personalidades.</h2></div>
+        <p>Las piezas, el sonido y la batería son idénticos. Cambia el color de la carcasa y de la diadema; el metal y las almohadillas negras son comunes a los tres.</p>
+      </div>
+      <div class="wv-finish-grid">
+        <article class="wv-finish" style="--tile:#afa0d7">
+          <div class="wv-finish-img"><img src="../assets/headphones-lavanda.webp" width="1200" height="1200" alt="Wave One en acabado lavanda" loading="lazy" decoding="async"></div>
+          <h3>Lavanda</h3>
+          <p>Un tono suave y luminoso que contrasta con el metal. El más fotogénico de los tres.</p>
+          <dl><div><dt>Carcasa</dt><dd>Lavanda mate</dd></div><div><dt>Diadema</dt><dd>Lavanda</dd></div><div><dt>Combina con</dt><dd>Tonos claros, denim</dd></div></dl>
+          <button type="button" class="wv-finish-pick" data-color="lavanda" aria-pressed="true">Elegir Lavanda</button>
+        </article>
+        <article class="wv-finish" style="--tile:#6a6a73">
+          <div class="wv-finish-img"><img src="../assets/headphones-grafito.webp" width="1200" height="1200" alt="Wave One en acabado grafito" loading="lazy" decoding="async"></div>
+          <h3>Grafito</h3>
+          <p>Sobrio, oscuro y discreto. Pasa desapercibido en la oficina y en el avión.</p>
+          <dl><div><dt>Carcasa</dt><dd>Grafito mate</dd></div><div><dt>Diadema</dt><dd>Grafito</dd></div><div><dt>Combina con</dt><dd>Negro, gris, todo</dd></div></dl>
+          <button type="button" class="wv-finish-pick" data-color="grafito" aria-pressed="false">Elegir Grafito</button>
+        </article>
+        <article class="wv-finish" style="--tile:#c9de84">
+          <div class="wv-finish-img"><img src="../assets/headphones-lima.webp" width="1200" height="1200" alt="Wave One en acabado lima" loading="lazy" decoding="async"></div>
+          <h3>Lima</h3>
+          <p>Color vivo para quien quiere que se note. Se ve igual de bien de día y de noche.</p>
+          <dl><div><dt>Carcasa</dt><dd>Lima mate</dd></div><div><dt>Diadema</dt><dd>Lima</dd></div><div><dt>Combina con</dt><dd>Negro, blanco, neutros</dd></div></dl>
+          <button type="button" class="wv-finish-pick" data-color="lima" aria-pressed="false">Elegir Lima</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="wav-lifestyle wv-life" aria-labelledby="wv-life-title">
+      <figure class="wav-life-photo"><img src="../assets/case-wav-lifestyle.webp" srcset="../assets/case-wav-lifestyle-small.webp 800w, ../assets/case-wav-lifestyle.webp 1600w" sizes="(max-width:700px) 92vw, 90vw" width="1600" height="900" alt="Mujer adulta usando auriculares Wave One lavanda en una calle arbolada" loading="lazy" decoding="async">
+        <figcaption><span class="eyebrow">Hay un mundo ahí afuera</span><b id="wv-life-title">Ponle tu propia banda sonora.</b><span>Del trayecto de la mañana a un paseo sin destino.</span></figcaption>
+      </figure>
+    </section>
+
+    <section class="wv-specs" id="especificaciones" aria-labelledby="wv-specs-title">
+      <div class="wv-specs-side">
+        <div class="eyebrow">Ficha técnica</div>
+        <h2 id="wv-specs-title">Todo lo que lleva por dentro.</h2>
+        <figure class="wv-specs-photo"><img src="../assets/case-wav-detail-small.webp" srcset="../assets/case-wav-detail-small.webp 800w, ../assets/case-wav-detail.webp 1600w" sizes="(max-width:700px) 92vw, 34vw" width="1600" height="900" alt="Detalle de almohadillas, bisagra metálica y carcasa lavanda de Wave One sobre un escritorio oscuro" loading="lazy" decoding="async"></figure>
+        <p class="wv-note">Especificaciones de un producto conceptual, escritas para mostrar cómo se presentaría una ficha real.</p>
+      </div>
+      <div class="wv-spec-groups">
+        <div class="wv-spec-group"><h3>Sonido</h3><dl>
+          <div><dt>Transductores</dt><dd>Dinámicos de 40 mm</dd></div>
+          <div><dt>Respuesta de frecuencia</dt><dd>20 Hz – 20 kHz</dd></div>
+          <div><dt>Cancelación de ruido</dt><dd>Adaptativa, 6 micrófonos</dd></div>
+          <div><dt>Modos</dt><dd>Cancelación · Ambiente · Apagado</dd></div>
+        </dl></div>
+        <div class="wv-spec-group"><h3>Batería</h3><dl>
+          <div><dt>Autonomía</dt><dd>Hasta 40 h · 30 h con cancelación</dd></div>
+          <div><dt>Carga rápida</dt><dd>10 min = 5 h de música</dd></div>
+          <div><dt>Carga completa</dt><dd>Aprox. 2 h por USB‑C</dd></div>
+        </dl></div>
+        <div class="wv-spec-group"><h3>Conexión</h3><dl>
+          <div><dt>Bluetooth</dt><dd>5.3 · multipunto, 2 dispositivos</dd></div>
+          <div><dt>Códecs</dt><dd>SBC · AAC</dd></div>
+          <div><dt>Con cable</dt><dd>Entrada de audio de 3,5 mm</dd></div>
+          <div><dt>Llamadas</dt><dd>Micrófonos con reducción de viento</dd></div>
+        </dl></div>
+        <div class="wv-spec-group"><h3>Diseño</h3><dl>
+          <div><dt>Peso</dt><dd>250 g</dd></div>
+          <div><dt>Materiales</dt><dd>Aluminio, acero y policarbonato mate</dd></div>
+          <div><dt>Almohadillas</dt><dd>Espuma con memoria, reemplazables</dd></div>
+          <div><dt>Acabados</dt><dd>Lavanda · Grafito · Lima</dd></div>
+        </dl></div>
+      </div>
+    </section>
+
+    <section class="wv-box" aria-labelledby="wv-box-title">
+      <div class="wv-head">
+        <div><div class="eyebrow">En la caja</div><h2 id="wv-box-title">Abres. Te los pones.</h2></div>
+        <p>Viene todo lo necesario, en un empaque de cartón reciclable sin plásticos de un solo uso.</p>
+      </div>
+      <ul class="wv-box-grid">
+        <li><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 36V30a18 18 0 0 1 36 0v6"/><rect x="9" y="34" width="11" height="18" rx="5"/><rect x="44" y="34" width="11" height="18" rx="5"/></svg><b>Wave One</b><span>Auriculares en el acabado que elijas</span></li>
+        <li><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="32" cy="34" rx="24" ry="17"/><path d="M8 34c6 4 14 6 24 6s18-2 24-6"/><path d="M28 18h8"/></svg><b>Estuche rígido</b><span>Con espacio para los cables</span></li>
+        <li><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="10" y="12" width="9" height="14" rx="2"/><rect x="45" y="38" width="9" height="14" rx="2"/><path d="M14.5 26v8c0 8 7 10 17.5 10s17.5-2 17.5-10V38" transform="translate(0 -4)"/></svg><b>Cable USB‑C</b><span>USB‑C a USB‑C, 1 m</span></li>
+        <li><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 10v12M50 42v12"/><circle cx="14" cy="26" r="4"/><circle cx="50" cy="38" r="4"/><path d="M14 30c0 14 36 0 36 4"/></svg><b>Cable de audio</b><span>3,5 mm, 1,2 m</span></li>
+        <li><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="16" y="10" width="32" height="44" rx="3"/><path d="M23 22h18M23 30h18M23 38h11"/></svg><b>Guía rápida</b><span>Y la tarjeta de garantía</span></li>
+      </ul>
+    </section>
+
+    <section class="wv-service" aria-labelledby="wv-service-title">
+      <h2 id="wv-service-title" class="visually-hidden">Envío, devoluciones y garantía</h2>
+      <article><span class="wv-service-k">Envío</span><h3>Gratis a todo el país.</h3><p>Despachamos en 24 horas hábiles. Llega en 2 a 3 días hábiles a ciudades principales y en hasta 5 días al resto del país. Recibes el número de guía por WhatsApp y correo.</p></article>
+      <article><span class="wv-service-k">Devoluciones</span><h3>30 días para decidir.</h3><p>Si no te convencen, escríbenos dentro de los 30 días siguientes a la entrega. Los recogemos sin costo y te devolvemos el dinero cuando lleguen en buen estado, con su caja.</p></article>
+      <article><span class="wv-service-k">Garantía</span><h3>Un año, sin letra pequeña.</h3><p>Cubre defectos de fabricación de la batería, la electrónica y las piezas metálicas. Si algo falla, los revisamos y los reparamos o reemplazamos.</p></article>
+    </section>
+
+    <section class="wav-questions wv-faq" aria-labelledby="wv-faq-title"><h2 id="wv-faq-title">Preguntas<br>frecuentes.</h2><div>
+      <details><summary>¿Qué cambia entre los tres acabados?<span aria-hidden="true">+</span></summary><p>Solo el color de la carcasa y la diadema. El sonido, la batería, los materiales y el precio son iguales en Lavanda, Grafito y Lima.</p></details>
+      <details><summary>¿Funcionan con iPhone y con Android?<span aria-hidden="true">+</span></summary><p>Sí. Se conectan por Bluetooth a cualquier teléfono, tableta o computador, y pueden estar enlazados a dos dispositivos a la vez para pasar del portátil al celular sin volver a emparejar.</p></details>
+      <details><summary>¿Puedo usarlos con cable?<span aria-hidden="true">+</span></summary><p>Sí, con el cable de 3,5 mm incluido. Así funcionan incluso con la batería agotada, por ejemplo con el sistema de entretenimiento de un avión.</p></details>
+      <details><summary>¿Cuánto tarda el envío y cómo lo sigo?<span aria-hidden="true">+</span></summary><p>Despachamos en 24 horas hábiles y te enviamos el número de guía apenas el pedido sale. Recibes un aviso cuando se paga, cuando se empaca, cuando va en camino y cuando se entrega.</p></details>
+      <details><summary>¿Cómo funciona una devolución?<span aria-hidden="true">+</span></summary><p>Escríbenos con tu número de pedido dentro de los 30 días. Te enviamos una guía de recogida sin costo y hacemos el reembolso al mismo medio de pago.</p></details>
+      <details><summary>¿Puedo guardar más de un acabado en mi bolsa?<span aria-hidden="true">+</span></summary><p>Sí. Cada color aparece como una línea independiente. Puedes ajustar cantidades o eliminar un acabado; la bolsa se conserva en este navegador.</p></details>
+    </div></section>
+
+    <section class="sector-operation wv-ops"><div><div class="eyebrow">WAV, también por dentro</div><h2>Del pedido<br>a la puerta, solo.</h2><p>Mira cómo un pedido descuenta inventario, genera la factura, crea la guía y avisa al cliente sin que nadie lo haga a mano.</p></div><a class="button" href="auto-tienda.html">Ver la automatización de WAV <span>↗</span></a></section>
+  </main>
+  <div class="wv-buybar" id="wv-buybar" inert>
+    <span class="wv-buybar-thumb"><img data-product-image src="../assets/headphones-lavanda.webp" width="48" height="48" alt="" decoding="async"></span>
+    <span class="wv-buybar-text"><b>Wave One</b> <span id="wv-buybar-color">Lavanda</span></span>
+    <span class="wv-buybar-price">$ 349.900</span>
+    <a class="wv-buybar-cta" href="#producto">Comprar</a>
+  </div>
+  <footer class="footer"><a class="wordmark" href="#">wav<span>.</span></a><p>Marca, producto y precios ficticios. Fotografías creadas con IA. Bolsa local: no se procesan compras ni pagos. Diseño de <span data-brand>Nexo Studio</span>.</p><a href="../index.html#contacto">Quiero una tienda así ↗</a></footer>
 </div>
 <dialog id="cart-dialog" class="cart-drawer" aria-labelledby="cart-title" data-view="cart">
   <div class="drawer-head"><div class="drawer-title"><h2 id="cart-title">Tu bolsa</h2><span class="drawer-count" id="cart-head-count">0 artículos</span></div><button type="button" class="dialog-close" data-close-dialog aria-label="Cerrar bolsa"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M5.5 5.5l9 9M14.5 5.5l-9 9"/></svg></button></div>

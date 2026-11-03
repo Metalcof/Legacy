@@ -106,13 +106,32 @@ h2{font-size:30pt;margin-bottom:5mm}
 .contact small{display:block;font-size:8.5pt;color:var(--acc2);font-weight:700}
 .contact b{font-size:12.5pt}
 
+
+/* Planes */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:4mm;margin-top:8mm}
+.plan{position:relative;display:flex;flex-direction:column;padding:6mm 5mm;border-radius:5mm;background:#fff;border:1px solid var(--line)}
+.plan.best{background:var(--night);color:#fff;border-color:var(--night);box-shadow:0 12mm 24mm -14mm rgba(59,43,245,.8)}
+.plan .badge{position:absolute;top:-3mm;left:5mm;padding:1mm 3mm;border-radius:99px;background:var(--acc);color:#fff;font-size:8pt;font-weight:800}
+.plan h3{font-size:16pt;letter-spacing:-.03em}
+.plan .tag{margin-top:1mm;font-size:9pt;color:var(--soft)}
+.plan.best .tag,.plan.best .setup,.plan.best li{color:rgba(255,255,255,.8)}
+.plan .price{margin-top:5mm;display:flex;align-items:baseline;gap:1.5mm}
+.plan .price small{font-size:9pt;font-weight:700}
+.plan .price b{font-size:30pt;font-stretch:118%;letter-spacing:-.05em;line-height:1}
+.plan .setup{margin-top:1.5mm;font-size:8.6pt;color:var(--soft);line-height:1.45}
+.plan .yr{margin-top:1.5mm;font-size:8.8pt;font-weight:700;color:#0f8a52}
+.plan.best .yr{color:#9ff0c8}
+.plan ul{margin-top:4mm;padding-top:4mm;border-top:1px solid var(--line);list-style:none;display:grid;gap:1.8mm;font-size:8.8pt;line-height:1.4}
+.plan.best ul{border-top-color:rgba(255,255,255,.15)}
+.plan li{position:relative;padding-left:4.5mm}.plan li::before{content:'';position:absolute;left:0;top:1.3mm;width:2mm;height:2mm;border-radius:50%;background:#1f9d63}
+.note2{margin-top:6mm;font-size:8.6pt;line-height:1.5;color:#8a8e98}
 @media screen and (max-width:820px){
   .page{width:100%;height:auto;min-height:0;margin:0 0 6px;aspect-ratio:auto}
   .pad{padding:9vw 6vw 16vw}
   .devices{position:relative;left:auto;right:auto;bottom:auto;height:70vw;margin-top:8vw}
   .laptop{width:80%}.phone{width:24%}
   .note{left:auto;right:0;top:0}
-  .probs,.gains,.services,.projects,.chatdemo,.contact{grid-template-columns:1fr}
+  .probs,.gains,.services,.projects,.chatdemo,.contact,.plans{grid-template-columns:1fr}
   .steps{grid-template-columns:1fr 1fr}
 }
 @media print{html{background:none}.toolbar{display:none}.page{margin:0;box-shadow:none}}
@@ -204,7 +223,17 @@ h2{font-size:30pt;margin-bottom:5mm}
   <div class="foot"><span data-brand>Nexo Studio</span><span>5</span></div>
 </section>
 
-<!-- 6. Cómo empezamos -->
+<!-- 6. Planes -->
+<section class="page pad">
+  <span class="kicker">Planes y precios</span>
+  <h2>Planes claros, sin sorpresas.</h2>
+  <p class="lead">Precios de referencia en dólares. Después de la revisión gratuita te confirmamos el valor exacto según lo que necesita tu negocio.</p>
+  <div class="plans"><div class="plan"><h3>Esencial</h3><p class="tag">Para estar en internet bien hecho</p><p class="price"><small>USD</small><b>49</b><small>/ mes</small></p><p class="yr">Anual: USD 490 (2 meses gratis)</p><p class="setup">+ USD 290 de diseño e instalación, una sola vez</p><ul><li>Web de hasta 5 secciones</li><li>Pensada para el celular</li><li>Dominio, HTTPS y correo propio</li><li>Botón de WhatsApp y mapa</li><li>Aparece en Google</li><li>Mantenimiento mensual</li></ul></div><div class="plan best"><span class="badge">Más elegido</span><h3>Negocio</h3><p class="tag">Para vender y agendar solo</p><p class="price"><small>USD</small><b>99</b><small>/ mes</small></p><p class="yr">Anual: USD 990 (2 meses gratis)</p><p class="setup">+ USD 590 de diseño e instalación, una sola vez</p><ul><li>Todo lo del plan Esencial</li><li>Agenda o pedidos en línea</li><li>Recordatorios automáticos</li><li>Asistente de WhatsApp (preguntas frecuentes)</li><li>Panel de citas o pedidos</li><li>Hasta 3 cambios al mes</li></ul></div><div class="plan"><h3>Pro</h3><p class="tag">Para operar todo conectado</p><p class="price"><small>USD</small><b>199</b><small>/ mes</small></p><p class="yr">Anual: USD 1.990 (2 meses gratis)</p><p class="setup">+ USD 1.190 de diseño e instalación, una sola vez</p><ul><li>Todo lo del plan Negocio</li><li>Tienda o catálogo con pagos</li><li>Asistente que agenda, cotiza y toma pedidos</li><li>Facturación, inventario y CRM</li><li>Reportes mensuales</li><li>Soporte prioritario</li></ul></div></div>
+  <p class="note2">Valores sin impuestos. El dominio está incluido el primer año. Si usas la API oficial de WhatsApp, Meta cobra aparte las conversaciones según su tarifa. Puedes cambiar de plan cuando quieras; el plan anual se paga por adelantado.</p>
+  <div class="foot"><span data-brand>Nexo Studio</span><span>6</span></div>
+</section>
+
+<!-- 7. Cómo empezamos -->
 <section class="page pad">
   <span class="kicker">Cómo empezamos</span>
   <h2>Sin compromiso hasta que tengas una propuesta clara.</h2>
@@ -225,7 +254,7 @@ h2{font-size:30pt;margin-bottom:5mm}
   <p class="sub">Negocios con los que trabajamos</p>
   <div class="sectors"><span>Clínicas dentales y médicas</span><span>Veterinarias</span><span>Ferreterías y distribuidoras</span><span>Fábricas e industria</span><span>Abogados, notarías y contadores</span><span>Colegios y academias</span><span>Restaurantes y alimentos</span><span>Hoteles y turismo</span><span>Talleres automotrices</span><span>Inmobiliarias y constructoras</span><span>Transporte y logística</span><span>Marcas personales</span></div>
   <p class="small">Atención en línea para Latinoamérica y España. Reuniones por videollamada.</p>
-  <div class="foot"><span data-brand>Nexo Studio</span><span>6</span></div>
+  <div class="foot"><span data-brand>Nexo Studio</span><span>7</span></div>
 </section>
 
 <script>

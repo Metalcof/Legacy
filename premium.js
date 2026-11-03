@@ -26,7 +26,7 @@
   }
 
   /* ---------- 2. Brillo que sigue al mouse e inclinación 3D en tarjetas ---------- */
-  const glowTargets = '.gain, .auto-card, .bento-tile, .stage-tab, .diag-item, .proposal-demo-list a, .lab-controls, .team-card, .case-screen';
+  const glowTargets = '.plan, .gain, .auto-card, .bento-tile, .stage-tab, .diag-item, .proposal-demo-list a, .lab-controls, .team-card, .case-screen';
   const tiltTargets = '.gain, .auto-card, .bento-tile';
   if (fine.matches) {
     document.querySelectorAll(glowTargets).forEach(el => el.classList.add('has-glow'));
@@ -98,4 +98,21 @@
       observer.observe(title);
     });
   }
+})();
+
+// Planes: cambia entre precio mensual y anual.
+(() => {
+  const pricing = document.getElementById('planes');
+  if (!pricing) return;
+  const buttons = [...pricing.querySelectorAll('[data-billing]')];
+  buttons.forEach(button => button.addEventListener('click', () => {
+    const year = button.dataset.billing === 'year';
+    buttons.forEach(b => b.setAttribute('aria-pressed', String(b === button)));
+    pricing.classList.toggle('is-yearly', year);
+    pricing.querySelectorAll('.plan-price strong').forEach(el => {
+      el.classList.remove('is-changing'); void el.offsetWidth; el.classList.add('is-changing');
+      el.textContent = year ? el.dataset.year : el.dataset.month;
+    });
+    pricing.querySelectorAll('.plan-bill').forEach(el => { el.textContent = year ? el.dataset.yearText : el.dataset.monthText; });
+  }));
 })();

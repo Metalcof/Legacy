@@ -1,0 +1,245 @@
+/* Maré — capa propia de la cafetería. Todo va con prefijo body.coffee / .mar- para no tocar otras demos. */
+@font-face { font-family: 'Manrope'; src: url('../assets/manrope.woff2') format('woff2'); font-weight: 200 800; font-display: swap; }
+
+body.coffee {
+  --mar-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --mar-sans: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mar-paper: #fbf7f0;
+  --mar-sand: #ece3d4;
+  --mar-ink: #3a2a21;
+  --mar-muted: #6b574a;
+  --mar-line: #3a2a2121;
+  --mar-radius: 16px;
+  --mar-ease: cubic-bezier(.2, .7, 0, 1);
+  font-family: var(--mar-sans);
+  background: #f6f0e6;
+  color: var(--mar-ink);
+  overflow-x: clip;
+}
+body.coffee em, body.coffee i, body.coffee cite, body.coffee address { font-style: normal; }
+body.coffee [data-menu-kind][hidden] { display: none !important; }
+body.coffee :is(a, button, [tabindex]):focus-visible { outline: 2px solid var(--demo-accent); outline-offset: 4px; border-radius: 6px; }
+
+/* Tipografía */
+body.coffee :is(h1, h2, .wordmark, .menu-label h3, .coffee-menu-line h3, .coffee-strip, .coffee-place-info h3) { font-family: var(--mar-serif); font-optical-sizing: auto; }
+body.coffee h1 { font-weight: 360; letter-spacing: -.045em; }
+body.coffee h1 .mar-accent { font-weight: 560; color: var(--demo-accent); }
+body.coffee :is(.section-head h2, .coffee-craft h2, .coffee-place h2, .mar-origin h2, .mar-day h2, .mar-pickup h2) { font-weight: 380; letter-spacing: -.04em; line-height: 1.04; }
+body.coffee .wordmark { font-weight: 420; letter-spacing: -.05em; }
+body.coffee .mar-dot-mark { color: var(--demo-accent); }
+body.coffee .eyebrow { font-size: 12px; letter-spacing: .16em; font-weight: 700; color: var(--demo-accent); }
+body.coffee .eyebrow::before { width: 18px; height: 1px; border-radius: 0; }
+body.coffee .nav-links { gap: 28px; font-size: 15px; }
+body.coffee .nav-links .desktop-link { position: relative; padding: 12px 0; }
+body.coffee .nav-links .desktop-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: 6px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .35s var(--mar-ease); }
+body.coffee .nav-links .desktop-link:hover::after { transform: scaleX(1); }
+body.coffee .nav-links .nav-cta { min-height: 44px; display: inline-flex; align-items: center; background: var(--demo-action); color: var(--demo-action-text); border-color: var(--demo-action); font-weight: 600; transition: transform .2s var(--mar-ease), background-color .2s; }
+body.coffee .nav-links .nav-cta:hover { transform: translateY(-2px); }
+body.coffee .button { min-height: 52px; gap: 22px; font-weight: 600; box-shadow: 0 10px 24px -14px color-mix(in srgb, var(--demo-action) 80%, transparent); }
+body.coffee .demo-palette button { min-height: 44px; }
+body.coffee .site-nav .wordmark { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* Portada */
+body.coffee .mar-hero { padding-top: 10px; }
+body.coffee .mar-hero > div:first-child { position: relative; z-index: 1; }
+.mar-status { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 26px; padding: 8px 15px 8px 12px; border-radius: 99px; background: var(--mar-paper); border: 1px solid var(--mar-line); font-size: 14px; font-weight: 600; line-height: 1.3; opacity: 1 !important; max-width: 100%; }
+.mar-status-dot { position: relative; width: 9px; height: 9px; flex-shrink: 0; border-radius: 50%; background: #3f8a52; }
+.mar-status-dot::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: inherit; animation: marPulse 2.2s ease-out infinite; }
+.mar-status[data-state="soon"] .mar-status-dot { background: #c98a1d; }
+.mar-status[data-state="closed"] .mar-status-dot { background: #a2938a; }
+.mar-status[data-state="closed"] .mar-status-dot::after { animation: none; }
+@keyframes marPulse { 0% { transform: scale(1); opacity: .55; } 100% { transform: scale(2.8); opacity: 0; } }
+body.coffee .coffee-hero p:not(.mar-status) { max-width: 410px; font-size: 17px; line-height: 1.7; opacity: .82; }
+.mar-hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 26px; }
+.mar-ghost { display: inline-flex; align-items: center; min-height: 48px; font-weight: 600; border-bottom: 1px solid currentColor; }
+.mar-ghost::after { content: '→'; margin-left: 10px; transition: transform .25s var(--mar-ease); }
+.mar-ghost:hover::after { transform: translateX(4px); }
+.mar-hero-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin: 44px 0 0; padding-top: 22px; border-top: 1px solid var(--mar-line); max-width: 470px; }
+.mar-hero-facts dt { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; opacity: .6; margin-bottom: 6px; }
+.mar-hero-facts dd { margin: 0; font-size: 15px; line-height: 1.45; }
+body.coffee .coffee-photo > img { border-radius: 220px 220px var(--mar-radius) var(--mar-radius); }
+body.coffee .coffee-seal { background: var(--mar-paper); font-weight: 600; letter-spacing: .06em; animation: marSpin 28s linear infinite; }
+@keyframes marSpin { from { transform: rotate(14deg); } to { transform: rotate(374deg); } }
+body.coffee .coffee-strip { font-size: 20px; }
+
+/* Carta */
+body.coffee .menu-tabs button { min-height: 44px; padding: 10px 22px; font-weight: 600; transition: background-color .2s, color .2s, border-color .2s; }
+body.coffee .menu-grid { gap: 28px; }
+body.coffee .mar-card { position: relative; border-bottom: 0; padding-bottom: 0; outline-offset: 6px; }
+body.coffee .mar-card .menu-visual { border-radius: var(--mar-radius); margin-bottom: 18px; }
+body.coffee .mar-card .menu-visual img { transition: transform .7s var(--mar-ease); }
+body.coffee .mar-card:is(:hover, :focus-visible, :focus-within) .menu-visual img { transform: scale(1.05); }
+body.coffee .mar-card p { margin: 10px 0 0; font-size: 15px; }
+.mar-notes { position: absolute; inset: auto 12px 12px 12px; padding: 16px 18px; border-radius: 12px; background: color-mix(in srgb, #2b1e17 82%, transparent); color: #fbf3e6; backdrop-filter: blur(8px); transform: translateY(calc(100% + 16px)); opacity: 0; transition: transform .45s var(--mar-ease), opacity .3s; }
+.mar-notes-title { display: block; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; opacity: .75; }
+.mar-notes ul { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; padding: 0; list-style: none; }
+.mar-notes li { padding: 5px 11px; border-radius: 99px; background: #fbf3e61f; border: 1px solid #fbf3e638; font-size: 13px; font-weight: 600; }
+.mar-notes-meta { font-size: 12px; opacity: .8; }
+body.coffee .mar-card:is(:hover, :focus-visible, :focus-within) .mar-notes { transform: none; opacity: 1; }
+@media (hover: none) {
+  .mar-notes { transform: none; opacity: 1; inset: auto 10px 10px 10px; padding: 10px 12px; }
+  .mar-notes-title, .mar-notes-meta { display: none; }
+  .mar-notes ul { margin: 0; }
+}
+.mar-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 0; padding: 0; list-style: none; }
+.mar-tags li { font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 99px; background: var(--mar-sand); color: var(--mar-muted); }
+body.coffee .coffee-menu-lines { margin-top: 44px; gap: 0 56px; }
+body.coffee .coffee-menu-line { padding: 20px 0; align-items: baseline; }
+body.coffee .coffee-menu-line h3 { font-size: 22px; font-weight: 420; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+body.coffee .coffee-menu-line p { font-size: 15px; }
+body.coffee .coffee-menu-line > span { font-variant-numeric: tabular-nums; font-weight: 600; }
+.mar-line-tag { font-family: var(--mar-sans); font-size: 11px; letter-spacing: .1em; font-weight: 700; padding: 3px 8px; border-radius: 99px; border: 1px solid var(--demo-accent); color: var(--demo-accent); }
+
+/* Origen */
+.mar-origin { margin-top: 120px; padding: 70px 64px 64px; border-radius: 28px; background: var(--mar-paper); border: 1px solid var(--mar-line); }
+.mar-origin-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; margin-bottom: 40px; }
+.mar-origin-head h2 { font-size: clamp(38px, 4vw, 58px); margin: 18px 0 0; color: var(--demo-action); }
+.mar-origin-head p { max-width: 400px; margin: 0; font-size: 16px; line-height: 1.75; color: var(--mar-muted); }
+.mar-origin-tabs { display: flex; gap: 8px; padding: 6px; border-radius: 99px; background: var(--mar-sand); width: fit-content; max-width: 100%; margin-bottom: 30px; }
+.mar-origin-tabs button { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 20px; border: 0; border-radius: 99px; background: transparent; color: var(--mar-ink); font-weight: 600; font-size: 15px; transition: background-color .25s, color .25s, box-shadow .25s; }
+.mar-origin-tabs button span { font-size: 11px; opacity: .6; font-variant-numeric: tabular-nums; }
+.mar-origin-tabs button[aria-selected="true"] { background: var(--demo-action); color: var(--demo-action-text); box-shadow: 0 6px 16px -10px #0008; }
+.mar-origin-panel { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; border-radius: var(--mar-radius); }
+.mar-origin-panel.is-swapping .mar-origin-info > * { animation: marSwap .5s var(--mar-ease) both; }
+.mar-origin-panel.is-swapping .mar-origin-info > *:nth-child(2) { animation-delay: .04s; }
+.mar-origin-panel.is-swapping .mar-origin-info > *:nth-child(3) { animation-delay: .08s; }
+.mar-origin-panel.is-swapping .mar-origin-info > *:nth-child(n+4) { animation-delay: .12s; }
+@keyframes marSwap { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.mar-origin-visual svg { border-radius: var(--mar-radius); overflow: hidden; }
+.mar-alt { transform: translateY(var(--alt-y)); transition: transform .9s var(--mar-ease); }
+.mar-origin-place { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin: 14px 4px 0; font-size: 13px; color: var(--mar-muted); font-weight: 600; }
+.mar-origin-info h3 { font-family: var(--mar-serif); font-weight: 420; font-size: 34px; letter-spacing: -.03em; margin: 0 0 12px; color: var(--demo-action); }
+.mar-origin-info > p { margin: 0 0 24px; font-size: 16px; line-height: 1.75; color: var(--mar-muted); }
+.mar-origin-data { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 0 0 22px; padding: 18px 0; border-block: 1px solid var(--mar-line); }
+.mar-origin-data dt { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; opacity: .6; margin-bottom: 6px; }
+.mar-origin-data dd { margin: 0; font-size: 15px; font-weight: 600; line-height: 1.4; }
+.mar-origin-notes { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 24px; padding: 0; list-style: none; }
+.mar-origin-notes li { padding: 7px 14px; border-radius: 99px; background: color-mix(in srgb, var(--demo-accent) 12%, transparent); color: var(--demo-accent); font-weight: 700; font-size: 14px; }
+.mar-meters { display: grid; gap: 12px; }
+.mar-meter { display: grid; grid-template-columns: 70px 1fr 34px; align-items: center; gap: 14px; font-size: 14px; }
+.mar-meter b { font-weight: 600; font-variant-numeric: tabular-nums; text-align: right; color: var(--mar-muted); }
+.mar-meter-track { height: 6px; border-radius: 99px; background: var(--mar-sand); overflow: hidden; }
+.mar-meter-fill { display: block; height: 100%; width: 100%; border-radius: inherit; background: var(--demo-accent); transform: scaleX(var(--v)); transform-origin: left; transition: transform .8s var(--mar-ease); }
+
+/* Cómo lo preparamos */
+body.coffee .mar-craft { margin-top: 120px; align-items: start; }
+body.coffee .mar-craft .classic-photo { border-radius: var(--mar-radius); position: sticky; top: 30px; aspect-ratio: 4 / 4.4; }
+body.coffee .mar-craft .classic-photo > figcaption { border-radius: 10px; font-weight: 600; }
+.mar-timer { position: absolute; top: 18px; right: 18px; width: 78px; height: 78px; border-radius: 50%; background: #f6f0e6ee; display: grid; place-items: center; box-shadow: 0 10px 26px -14px #0007; }
+.mar-timer svg { position: absolute; inset: 7px; width: calc(100% - 14px); height: calc(100% - 14px); transform: rotate(-90deg); }
+.mar-timer circle { fill: none; stroke-width: 3.5; }
+.mar-timer-track { stroke: #3a2a2118; }
+.mar-timer-ring { stroke: var(--demo-accent); stroke-dasharray: 100; stroke-dashoffset: 0; stroke-linecap: round; }
+.mar-timer span { position: relative; font-size: 12px; font-weight: 700; color: var(--mar-ink); }
+.mar-timer b { font-family: var(--mar-serif); font-size: 22px; font-weight: 500; font-variant-numeric: tabular-nums; }
+body.coffee .mar-craft p { font-size: 16px; }
+.mar-steps { list-style: none; margin: 30px 0 0; padding: 0; border-top: 1px solid var(--mar-line); }
+.mar-steps li { display: grid; grid-template-columns: 44px 1fr auto; gap: 18px; align-items: start; padding: 22px 0; border-bottom: 1px solid var(--mar-line); transition: background-color .3s; }
+.mar-step-n { font-size: 12px; font-weight: 700; letter-spacing: .08em; color: var(--demo-accent); padding-top: 6px; }
+.mar-steps h3 { font-family: var(--mar-serif); font-weight: 450; font-size: 22px; letter-spacing: -.02em; margin: 0 0 6px; color: var(--demo-action); }
+body.coffee .mar-steps p { margin: 0; font-size: 15px; line-height: 1.65; }
+.mar-step-k { font-size: 13px; font-weight: 700; padding: 6px 11px; border-radius: 99px; background: var(--mar-paper); border: 1px solid var(--mar-line); white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+/* Un día en Maré */
+.mar-day { margin-top: 120px; }
+.mar-day-head h2 { font-size: clamp(36px, 3.6vw, 52px); margin: 18px 0 36px; color: var(--demo-action); }
+.mar-day-track { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1.3fr; gap: 18px; align-items: end; }
+.mar-day-item { margin: 0; }
+.mar-day-item img { display: block; width: 100%; height: 340px; object-fit: cover; border-radius: var(--mar-radius); transition: transform .6s var(--mar-ease); }
+.mar-day-item:nth-child(2) img, .mar-day-item:nth-child(3) img { height: 270px; }
+.mar-day-item:hover img { transform: translateY(-6px); }
+.mar-day-item figcaption { margin-top: 14px; font-size: 14px; line-height: 1.55; color: var(--mar-muted); }
+.mar-day-item figcaption b { display: block; font-family: var(--mar-serif); font-weight: 450; font-size: 22px; color: var(--demo-action); margin-bottom: 2px; font-variant-numeric: tabular-nums; }
+
+/* Pedido para recoger */
+.mar-pickup { margin-top: 120px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; padding: 64px; border-radius: 28px; background: var(--demo-action); color: #fbf3e6; overflow: hidden; position: relative; }
+.mar-pickup::before { content: ''; position: absolute; width: 520px; height: 520px; right: -140px; top: -160px; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--demo-accent) 55%, transparent), transparent 70%); opacity: .55; pointer-events: none; }
+.mar-pickup > * { position: relative; }
+body.coffee .mar-pickup .eyebrow { color: var(--demo-banner-link); }
+body.coffee .mar-pickup h2 { color: #fbf3e6; font-size: clamp(40px, 4.2vw, 60px); margin: 18px 0; }
+.mar-pickup-copy > p { font-size: 17px; line-height: 1.75; opacity: .85; max-width: 470px; margin: 0; }
+.mar-pickup-steps { list-style: none; margin: 28px 0 34px; padding: 0; display: grid; gap: 12px; }
+.mar-pickup-steps li { display: flex; align-items: center; gap: 14px; font-size: 16px; }
+.mar-pickup-steps b { display: grid; place-items: center; width: 30px; height: 30px; flex-shrink: 0; border-radius: 50%; border: 1px solid #fbf3e655; font-size: 13px; }
+body.coffee .mar-pickup .button { background: #fbf3e6; color: var(--demo-action); border-color: #fbf3e6; }
+.mar-pickup-visual { position: relative; display: flex; flex-direction: column; align-items: center; padding: 10px 0; }
+.mar-ticket { position: relative; width: min(310px, 100%); padding: 24px 22px 30px; background: #fffaf2; color: var(--mar-ink); border-radius: 14px 14px 4px 4px; box-shadow: 0 30px 60px -30px #000a; transform: rotate(-3deg); font-variant-numeric: tabular-nums; }
+.mar-ticket::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 10px; background: radial-gradient(circle at 50% 100%, var(--demo-action) 6px, transparent 6.5px) 4px 0 / 18px 10px repeat-x; }
+.mar-ticket-top { display: flex; justify-content: space-between; font-family: var(--mar-serif); font-size: 22px; padding-bottom: 12px; border-bottom: 1px dashed #3a2a2140; }
+.mar-ticket-top span:last-child { font-family: var(--mar-sans); font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 99px; background: var(--mar-sand); align-self: center; }
+.mar-ticket-name { font-weight: 700; margin: 14px 0 8px; font-size: 15px; }
+.mar-ticket ul { list-style: none; padding: 0; margin: 0; font-size: 14px; }
+.mar-ticket li, .mar-ticket-total { display: flex; justify-content: space-between; gap: 12px; padding: 5px 0; }
+.mar-ticket-total { border-top: 1px dashed #3a2a2140; margin-top: 8px; padding-top: 12px; font-weight: 700; }
+.mar-ticket-state { display: flex; gap: 6px; margin-top: 14px; }
+.mar-ticket-state span { flex: 1; text-align: center; font-size: 11px; font-weight: 700; padding: 6px 0; border-radius: 99px; background: var(--mar-sand); color: var(--mar-muted); }
+.mar-ticket-state .is-done { background: color-mix(in srgb, var(--demo-accent) 16%, #fff); color: var(--demo-accent); }
+.mar-ticket-state .is-now { background: #3f8a52; color: #fff; }
+.mar-bubble { position: relative; align-self: flex-end; margin: -6px 10px 0 0; width: min(290px, 86%); padding: 12px 14px 10px; border-radius: 14px 14px 4px 14px; background: #dcf6c8; color: #1d2b17; font-size: 14px; line-height: 1.5; box-shadow: 0 18px 40px -20px #000b; animation: marFloat 5s ease-in-out infinite; }
+.mar-bubble-from { display: block; font-size: 11px; font-weight: 700; color: #2c7a3d; margin-bottom: 3px; }
+.mar-bubble-time { display: block; text-align: right; font-size: 11px; opacity: .6; margin-top: 4px; }
+@keyframes marFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+/* Visítanos */
+body.coffee .mar-place { margin-top: 120px; border: 0; padding: 0; align-items: start; }
+body.coffee .mar-place .coffee-place-info { border-radius: 22px; background: var(--mar-paper); border: 1px solid var(--mar-line); padding: 18px 18px 34px; }
+body.coffee .mar-place .coffee-place-info > :not(.mar-map) { margin-left: 22px; margin-right: 22px; }
+.mar-map { position: relative; margin-bottom: 28px; border-radius: 14px; overflow: hidden; }
+.mar-pin { position: absolute; left: 63%; top: 38%; transform: translate(-50%, -100%); display: grid; place-items: center; }
+.mar-pin span { padding: 7px 12px; border-radius: 99px 99px 99px 4px; background: var(--demo-action); color: var(--demo-action-text); font-family: var(--mar-serif); font-size: 15px; box-shadow: 0 10px 20px -10px #000a; animation: marBob 3s ease-in-out infinite; }
+@keyframes marBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+body.coffee .coffee-place-info h3 { font-weight: 450; }
+body.coffee .mar-status-small { margin: 0 0 6px; }
+body.coffee .coffee-hours > div { padding: 8px 12px; margin: 6px -12px; border-radius: 10px; transition: background-color .3s; }
+body.coffee .coffee-hours > div.is-today { background: color-mix(in srgb, var(--demo-accent) 10%, transparent); font-weight: 700; }
+body.coffee .coffee-hours > div.is-today dt::after { content: ' · hoy'; color: var(--demo-accent); }
+.mar-amenities { list-style: none; padding: 0; margin: 26px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.mar-amenities li { padding: 8px 14px; border-radius: 99px; border: 1px solid var(--mar-line); font-size: 14px; font-weight: 600; }
+body.coffee .footer { border-color: var(--mar-line); }
+
+@media (max-width: 1000px) {
+  .mar-origin { padding: 48px 36px; }
+  .mar-origin-panel { gap: 32px; }
+  .mar-pickup { padding: 48px 40px; gap: 30px; }
+  .mar-day-track { grid-template-columns: repeat(2, 1fr); }
+  .mar-day-item img, .mar-day-item:nth-child(n) img { height: 260px; }
+}
+@media (max-width: 700px) {
+  body.coffee .nav-links .nav-cta { padding: 10px 16px; font-size: 14px; }
+  body.coffee .coffee-hero p:not(.mar-status) { font-size: 16px; }
+  body.coffee .coffee-photo > img { border-radius: 180px 180px var(--mar-radius) var(--mar-radius); }
+  .mar-hero-facts { grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 32px; }
+  .mar-hero-actions .button { flex: 1 1 100%; justify-content: space-between; }
+  body.coffee .coffee-strip { font-size: 15px; }
+  body.coffee .menu-tabs { flex-wrap: wrap; }
+  body.coffee .coffee-menu-lines { margin-top: 28px; }
+  .mar-origin { margin-top: 80px; padding: 34px 20px 28px; border-radius: 22px; }
+  .mar-origin-head { display: block; margin-bottom: 26px; }
+  .mar-origin-head p { margin-top: 16px; }
+  .mar-origin-tabs { width: 100%; }
+  .mar-origin-tabs button { flex: 1; justify-content: center; padding: 8px 6px; font-size: 14px; }
+  .mar-origin-tabs button span { display: none; }
+  .mar-origin-panel { grid-template-columns: 1fr; gap: 24px; }
+  .mar-origin-info h3 { font-size: 28px; }
+  .mar-origin-data { grid-template-columns: 1fr 1fr; }
+  body.coffee .mar-craft { margin-top: 80px; }
+  body.coffee .mar-craft .classic-photo { position: relative; top: 0; aspect-ratio: 4 / 3.4; }
+  .mar-timer { width: 66px; height: 66px; top: 12px; right: 12px; }
+  .mar-steps li { grid-template-columns: 34px 1fr; }
+  .mar-step-k { grid-column: 2; justify-self: start; }
+  .mar-day { margin-top: 80px; }
+  .mar-day-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 18px; gap: 14px; margin: 0 -18px; padding: 0 18px 8px; scrollbar-width: none; }
+  .mar-day-track::-webkit-scrollbar { display: none; }
+  .mar-day-item { flex: 0 0 78%; scroll-snap-align: start; }
+  .mar-day-item img, .mar-day-item:nth-child(n) img { height: 230px; }
+  .mar-pickup { margin-top: 80px; grid-template-columns: 1fr; padding: 38px 22px 26px; border-radius: 22px; }
+  .mar-pickup .button { width: 100%; justify-content: space-between; }
+  .mar-bubble { margin-right: 0; }
+  body.coffee .mar-place { margin-top: 80px; }
+  body.coffee .mar-place .coffee-place-info { padding: 12px 12px 26px; }
+  body.coffee .mar-place .coffee-place-info > :not(.mar-map) { margin-left: 14px; margin-right: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.coffee *, body.coffee *::before, body.coffee *::after { animation: none !important; transition-duration: .01ms !important; }
+}

@@ -41,6 +41,7 @@
       <a href="#ventajas">Ventajas</a>
       <a href="#sectores">Por sector</a>
       <a href="#proyectos">Proyectos</a>
+      <a href="#planes">Planes</a>
       <a href="#empezar">Cómo empezamos</a>
       <a href="#preguntas">Preguntas</a>
       <button class="button button-accent nav-cta" type="button" data-open-brief data-service="Revisión gratuita de mi web">Revisión gratuita</button>
@@ -661,6 +662,49 @@
       </div>
     </section>
 
+    <section class="pricing" id="planes" aria-labelledby="pricing-title">
+      <div class="shell">
+        <div class="work-head" data-reveal>
+          <h2 id="pricing-title">Planes claros, sin sorpresas.</h2>
+          <p>Precios de referencia en dólares. Después de la revisión gratuita te confirmamos el valor exacto según lo que necesita tu negocio.</p>
+        </div>
+        <div class="billing" role="group" aria-label="Forma de pago">
+          <button type="button" data-billing="month" aria-pressed="true">Mensual</button>
+          <button type="button" data-billing="year" aria-pressed="false">Anual <span>2 meses gratis</span></button>
+        </div>
+        <div class="plans">
+          <article class="plan" data-reveal>
+            <h3>Esencial</h3>
+            <p class="plan-tag">Para estar en internet bien hecho</p>
+            <p class="plan-price"><span class="plan-cur">USD</span><strong data-month="49" data-year="41">49</strong><span class="plan-per">/ mes</span></p>
+            <p class="plan-bill" data-month-text="Facturado mes a mes" data-year-text="USD 490 al año · ahorras USD 98">Facturado mes a mes</p>
+            <p class="plan-setup">+ USD 290 de diseño e instalación, una sola vez</p>
+            <button class="button button-dark plan-cta" type="button" data-open-brief data-service="Plan Esencial">Quiero el plan Esencial</button>
+            <ul class="plan-feats"><li>Web de hasta 5 secciones, diseño propio</li><li>Pensada primero para el celular</li><li>Dominio, conexión segura (HTTPS) y correo de tu empresa</li><li>Botón de WhatsApp y mapa de ubicación</li><li>Aparece en Google con tus horarios</li><li>Mantenimiento mensual y 1 cambio al mes</li></ul>
+          </article>
+          <article class="plan plan--best" data-reveal>
+            <span class="plan-badge">Más elegido</span><h3>Negocio</h3>
+            <p class="plan-tag">Para vender y agendar solo</p>
+            <p class="plan-price"><span class="plan-cur">USD</span><strong data-month="99" data-year="82">99</strong><span class="plan-per">/ mes</span></p>
+            <p class="plan-bill" data-month-text="Facturado mes a mes" data-year-text="USD 990 al año · ahorras USD 198">Facturado mes a mes</p>
+            <p class="plan-setup">+ USD 590 de diseño e instalación, una sola vez</p>
+            <button class="button button-accent plan-cta" type="button" data-open-brief data-service="Plan Negocio">Quiero el plan Negocio</button>
+            <ul class="plan-feats"><li>Todo lo del plan Esencial</li><li>Agenda de citas o pedidos en línea</li><li>Confirmaciones y recordatorios automáticos</li><li>Asistente de WhatsApp con preguntas frecuentes</li><li>Panel para ver citas o pedidos del día</li><li>Hasta 3 cambios al mes</li></ul>
+          </article>
+          <article class="plan" data-reveal>
+            <h3>Pro</h3>
+            <p class="plan-tag">Para operar todo conectado</p>
+            <p class="plan-price"><span class="plan-cur">USD</span><strong data-month="199" data-year="166">199</strong><span class="plan-per">/ mes</span></p>
+            <p class="plan-bill" data-month-text="Facturado mes a mes" data-year-text="USD 1.990 al año · ahorras USD 398">Facturado mes a mes</p>
+            <p class="plan-setup">+ USD 1.190 de diseño e instalación, una sola vez</p>
+            <button class="button button-dark plan-cta" type="button" data-open-brief data-service="Plan Pro">Quiero el plan Pro</button>
+            <ul class="plan-feats"><li>Todo lo del plan Negocio</li><li>Tienda o catálogo con pagos en línea</li><li>Asistente de WhatsApp que agenda, cotiza y toma pedidos</li><li>Conexión con facturación, inventario y CRM</li><li>Reportes mensuales de ventas y clientes</li><li>Soporte prioritario y cambios ilimitados razonables</li></ul>
+          </article>
+        </div>
+        <p class="pricing-note">Valores sin impuestos. El dominio está incluido el primer año. Si usas la API oficial de WhatsApp, Meta cobra aparte las conversaciones según su tarifa. Puedes cambiar de plan cuando quieras; el plan anual se paga por adelantado.</p>
+      </div>
+    </section>
+
     <section class="steps" id="empezar" aria-labelledby="steps-title">
       <div class="shell">
         <div class="work-head" data-reveal>
@@ -793,6 +837,9 @@
       <label for="project-type">¿Qué necesitas?</label>
       <select id="project-type" name="service">
         <option>Revisión gratuita de mi web</option>
+        <option>Plan Esencial</option>
+        <option>Plan Negocio</option>
+        <option>Plan Pro</option>
         <option>Página web</option>
         <option>Agenda o pedidos en línea</option>
         <option>Asistente de WhatsApp</option>

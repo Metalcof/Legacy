@@ -1783,3 +1783,38 @@ main>section:not(.in-view) *,main>section:not(.in-view)::before,main>section:not
 em,i,cite,address,dfn,var{font-style:normal}
 .case-quote{font-family:var(--font);font-weight:780;font-stretch:112%;letter-spacing:-.04em}
 .case-quote em{font-weight:800}
+
+/* ---------- Planes y precios ---------- */
+.pricing{padding-block:clamp(72px,9vw,128px);background:var(--noche);color:#fff;position:relative;overflow:hidden}
+.pricing::before{content:'';position:absolute;inset:0;background:radial-gradient(50% 45% at 50% 0%,rgba(59,43,245,.4),transparent 70%);pointer-events:none}
+.pricing .shell{position:relative}
+.pricing .work-head p{color:rgba(255,255,255,.7)}
+.billing{display:inline-flex;padding:5px;border-radius:99px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);margin-bottom:32px}
+.billing button{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:8px 20px;border-radius:99px;font-weight:700;font-size:15px;color:rgba(255,255,255,.75);transition:background-color .25s,color .25s}
+.billing button[aria-pressed="true"]{background:#fff;color:var(--noche)}
+.billing span{padding:2px 8px;border-radius:99px;background:#3ddc97;color:#0b2a1c;font-size:12px}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
+.plan{position:relative;display:flex;flex-direction:column;padding:30px 28px;border-radius:26px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12)}
+.plan--best{background:linear-gradient(180deg,rgba(59,43,245,.28),rgba(59,43,245,.08) 60%,rgba(255,255,255,.03));border-color:rgba(165,157,255,.6);box-shadow:0 40px 90px -40px rgba(59,43,245,.8)}
+.plan-badge{position:absolute;top:-13px;left:28px;padding:4px 12px;border-radius:99px;background:var(--acento);color:#fff;font-size:12.5px;font-weight:800;box-shadow:0 8px 20px -6px rgba(59,43,245,.8)}
+.plan h3{font-size:26px;font-stretch:115%;letter-spacing:-.035em;font-weight:800}
+.plan-tag{margin-top:4px;color:rgba(255,255,255,.65);font-size:15.5px}
+.plan-price{display:flex;align-items:baseline;gap:6px;margin-top:24px}
+.plan-cur{font-size:15px;font-weight:700;color:rgba(255,255,255,.65)}
+.plan-price strong{font-size:clamp(52px,5vw,68px);line-height:1;font-weight:800;font-stretch:118%;letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.plan-price strong.is-changing{animation:price-flip .45s var(--ease-out)}
+@keyframes price-flip{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.plan-per{font-size:16px;color:rgba(255,255,255,.65)}
+.plan-bill{min-height:1.5em;margin-top:6px;font-size:14px;color:#9ff0c8;font-weight:600}
+.pricing:not(.is-yearly) .plan-bill{color:rgba(255,255,255,.55);font-weight:500}
+.plan-setup{margin-top:4px;font-size:14px;color:rgba(255,255,255,.55)}
+.plan-cta{width:100%;margin-top:22px}
+.plan .button-dark{background:#fff;color:var(--noche)}
+.plan .button-dark:hover{background:var(--acento-suave)}
+.plan-feats{display:grid;gap:11px;margin-top:24px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12)}
+.plan-feats li{position:relative;padding-left:28px;font-size:15.5px;line-height:1.45;color:rgba(255,255,255,.88)}
+.plan-feats li::before{content:'';position:absolute;left:0;top:.18em;width:18px;height:18px;border-radius:50%;background:rgba(61,220,151,.18)}
+.plan-feats li::after{content:'';position:absolute;left:6px;top:calc(.18em + 4px);width:4px;height:8px;border-right:2px solid #3ddc97;border-bottom:2px solid #3ddc97;transform:rotate(45deg)}
+.plan-feats li:first-child{font-weight:700}
+.pricing-note{margin-top:26px;max-width:62em;font-size:14px;color:rgba(255,255,255,.55);line-height:1.55}
+@media (max-width:960px){.plans{grid-template-columns:1fr;max-width:520px}.plan--best{order:-1}}

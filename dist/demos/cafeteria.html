@@ -4,48 +4,169 @@
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Maré — café con calma · Concepto de Nexo Studio</title>
   <meta name="description" content="Un concepto de diseño para una cafetería de especialidad, creado por Nexo Studio.">
-  <link rel="stylesheet" href="demos.css"><script src="../config.js" defer></script><script src="demos.js" defer></script>
-  <script src="motion.js" defer></script>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..600&amp;display=swap">
+  <link rel="stylesheet" href="demos.css"><link rel="stylesheet" href="cafeteria-plus.css">
+  <script src="../config.js" defer></script><script src="demos.js" defer></script>
+  <script src="motion.js" defer></script><script src="cafeteria-plus.js" defer></script>
 </head>
 <body class="coffee">
   <div class="demo-bar"><span>Concepto ficticio · fotos IA · <span data-brand>Nexo Studio</span></span><a href="../index.html#proyectos">Volver al estudio ↗</a></div>
   <div class="wrap">
 <div class="demo-palette" role="group" aria-label="Elegir paleta de este ejemplo"><span>Prueba otra paleta</span><button type="button" data-demo-theme="original" aria-pressed="true">Original</button><button type="button" data-demo-theme="green" aria-pressed="false">Verde</button><button type="button" data-demo-theme="cyan" aria-pressed="false">Cian</button><button type="button" data-demo-theme="violet" aria-pressed="false">Violeta</button></div>
-    <header class="site-nav"><a class="wordmark" href="#" aria-label="Maré, inicio">maré<span style="color:#b55a2c">.</span></a><nav class="nav-links" aria-label="Principal"><a class="desktop-link" href="#carta">Nuestro café</a><a class="desktop-link" href="#lugar">El lugar</a><a class="nav-cta" href="#carta">Ver la carta ↗</a></nav></header>
+    <header class="site-nav"><a class="wordmark" href="#" aria-label="Maré, inicio">maré<span class="mar-dot-mark">.</span></a><nav class="nav-links" aria-label="Principal"><a class="desktop-link" href="#carta">La carta</a><a class="desktop-link" href="#origen">Origen</a><a class="desktop-link" href="#preparacion">La barra</a><a class="desktop-link" href="#lugar">Visítanos</a><a class="nav-cta" href="auto-cafeteria.html">Pedir para recoger ↗</a></nav></header>
     <main>
-      <section class="coffee-hero">
-        <div><div class="eyebrow">Café, sin prisa.</div><h1>Un buen café.<br>Un <em>mejor</em><br>momento.</h1><p>Para los que disfrutan lo simple: una taza bien hecha, algo recién horneado y un ratito para quedarse.</p><a class="button" href="#carta">Encuentra tu favorito <span>↗</span></a></div>
+      <section class="coffee-hero mar-hero">
+        <div>
+          <p class="mar-status" data-open-status data-state="open"><span class="mar-status-dot" aria-hidden="true"></span><span data-open-text>Lunes a viernes de 08:00 a 19:00</span></p>
+          <div class="eyebrow">Café de especialidad · Barrio del Jardín</div>
+          <h1>Un buen café.<br>Un <em class="mar-accent">mejor</em><br>momento.</h1>
+          <p>Tostamos cada martes, horneamos dos veces al día y preparamos cada taza sin apuro. Ven a quedarte o pide antes y recoge sin fila.</p>
+          <div class="mar-hero-actions"><a class="button" href="#carta">Ver la carta <span>↗</span></a><a class="mar-ghost" href="auto-cafeteria.html">Pedir para recoger</a></div>
+          <dl class="mar-hero-facts">
+            <div><dt>Hoy en el filtro</dt><dd>Nariño · frambuesa y miel</dd></div>
+            <div><dt>Croissants</dt><dd>Salen a las 08:00 y a las 13:00</dd></div>
+          </dl>
+        </div>
         <div class="coffee-art coffee-photo">
           <div class="coffee-seal">HECHO<br>CON CALMA<br>✳</div>
-          <img src="../assets/cafe-editorial.webp" width="1672" height="941" alt="Escena cálida de una cafetería de especialidad, fotografía conceptual generada con IA" fetchpriority="high" decoding="async">
+          <img src="../assets/cafe-editorial.webp" srcset="../assets/cafe-editorial-small.webp 800w, ../assets/cafe-editorial.webp 1672w" sizes="(max-width:700px) 92vw, 46vw" width="1672" height="941" alt="Escena cálida de una cafetería de especialidad, fotografía conceptual generada con IA" fetchpriority="high" decoding="async">
           <span class="coffee-caption">Pequeños rituales, grandes días.</span>
         </div>
       </section>
       <div class="coffee-strip" aria-label="Nuestra inspiración"><span>Café de especialidad <b>✳</b></span><span>Horneado con cariño <b>✳</b></span><span>Disfrutar lo cotidiano <b>✳</b></span></div>
+
       <section class="coffee-menu" id="carta">
-        <div class="section-head"><div><div class="eyebrow">La carta</div><h2>Tu próxima pausa<br>empieza aquí.</h2></div><p>Espresso recién molido, leche sedosa y mantequilla de verdad. Nuestros favoritos, preparados a su propio ritmo.</p></div>
+        <div class="section-head"><div><div class="eyebrow">La carta</div><h2>Tu próxima pausa<br>empieza aquí.</h2></div><p>Espresso recién molido, leche sedosa y mantequilla de verdad. Pasa el cursor por una bebida para ver sus notas de cata.</p></div>
         <div class="menu-tabs" role="group" aria-label="Filtrar la carta"><button type="button" data-menu-filter="all" aria-pressed="true">Todo</button><button type="button" data-menu-filter="coffee" aria-pressed="false">Bebidas</button><button type="button" data-menu-filter="bakery" aria-pressed="false">Horneados</button></div>
         <div class="menu-grid">
-          <article class="menu-item" data-menu-kind="coffee"><div class="menu-visual menu-latte"><img src="../assets/case-cafe-flatwhite.webp" srcset="../assets/case-cafe-flatwhite-small.webp 800w, ../assets/case-cafe-flatwhite.webp 1600w" sizes="(max-width:700px) 92vw, 48vw" width="1600" height="900" alt="Flat white con arte latte en una taza de cerámica sobre una mesa de piedra" loading="lazy" decoding="async" ></div><div class="menu-label"><h3>Flat white</h3><span>$ 12.000</span></div><p>Doble espresso con leche microespumada. Intenso, dulce y suave al mismo tiempo.</p></article>
-          <article class="menu-item" data-menu-kind="bakery"><div class="menu-visual menu-croissant"><img src="../assets/case-cafe-croissant.webp" srcset="../assets/case-cafe-croissant-small.webp 800w, ../assets/case-cafe-croissant.webp 1600w" sizes="(max-width:700px) 92vw, 48vw" width="1600" height="900" alt="Croissant de mantequilla con capas doradas sobre un plato de cerámica" loading="lazy" decoding="async" ></div><div class="menu-label"><h3>Croissant de mantequilla</h3><span>$ 9.000</span></div><p>Horneado hasta que sus capas se vuelven crujientes. Mejor todavía cuando está tibio.</p></article>
-          <article class="menu-item" data-menu-kind="coffee"><div class="menu-visual menu-iced"><img src="../assets/case-cafe-iced.webp" srcset="../assets/case-cafe-iced-small.webp 800w, ../assets/case-cafe-iced.webp 1600w" sizes="(max-width:700px) 92vw, 48vw" width="1600" height="900" alt="Iced latte con espresso, leche y hielo en un vaso de cristal" loading="lazy" decoding="async" ></div><div class="menu-label"><h3>Iced latte</h3><span>$ 14.000</span></div><p>Espresso sobre hielo y leche fría. Fresco, cremoso y con todo el carácter del café.</p></article>
+          <article class="menu-item mar-card" data-menu-kind="coffee" tabindex="0" aria-labelledby="dish-flat"><div class="menu-visual menu-latte"><img src="../assets/case-cafe-flatwhite.webp" srcset="../assets/case-cafe-flatwhite-small.webp 800w, ../assets/case-cafe-flatwhite.webp 1600w" sizes="(max-width:700px) 92vw, 32vw" width="1600" height="900" alt="Flat white con arte latte en una taza de cerámica sobre una mesa de piedra" loading="lazy" decoding="async"><div class="mar-notes"><span class="mar-notes-title">Notas de cata</span><ul><li>Caramelo</li><li>Cacao</li><li>Leche dulce</li></ul><span class="mar-notes-meta">Espresso de Huila · 160 ml</span></div></div><div class="menu-label"><h3 id="dish-flat">Flat white</h3><span>$ 12.000</span></div><p>Doble espresso con leche microespumada. Intenso, dulce y suave al mismo tiempo.</p><ul class="mar-tags" aria-label="Detalles"><li>Caliente</li><li>Con avena +$ 2.000</li></ul></article>
+          <article class="menu-item mar-card" data-menu-kind="bakery" tabindex="0" aria-labelledby="dish-croissant"><div class="menu-visual menu-croissant"><img src="../assets/case-cafe-croissant.webp" srcset="../assets/case-cafe-croissant-small.webp 800w, ../assets/case-cafe-croissant.webp 1600w" sizes="(max-width:700px) 92vw, 32vw" width="1600" height="900" alt="Croissant de mantequilla con capas doradas sobre un plato de cerámica" loading="lazy" decoding="async"><div class="mar-notes"><span class="mar-notes-title">Cómo sale del horno</span><ul><li>Mantequilla</li><li>Capas crujientes</li><li>Miga tibia</li></ul><span class="mar-notes-meta">Dos horneadas: 08:00 y 13:00</span></div></div><div class="menu-label"><h3 id="dish-croissant">Croissant de mantequilla</h3><span>$ 9.000</span></div><p>Laminado durante tres días y horneado aquí mismo. Mejor todavía cuando está tibio.</p><ul class="mar-tags" aria-label="Detalles"><li>Horneado en casa</li><li>Contiene gluten y lácteos</li></ul></article>
+          <article class="menu-item mar-card" data-menu-kind="coffee" tabindex="0" aria-labelledby="dish-iced"><div class="menu-visual menu-iced"><img src="../assets/case-cafe-iced.webp" srcset="../assets/case-cafe-iced-small.webp 800w, ../assets/case-cafe-iced.webp 1600w" sizes="(max-width:700px) 92vw, 32vw" width="1600" height="900" alt="Iced latte con espresso, leche y hielo en un vaso de cristal" loading="lazy" decoding="async"><div class="mar-notes"><span class="mar-notes-title">Notas de cata</span><ul><li>Chocolate</li><li>Ciruela</li><li>Cremoso</li></ul><span class="mar-notes-meta">Espresso de la Sierra · 300 ml</span></div></div><div class="menu-label"><h3 id="dish-iced">Iced latte</h3><span>$ 14.000</span></div><p>Espresso sobre hielo y leche fría. Fresco, cremoso y con todo el carácter del café.</p><ul class="mar-tags" aria-label="Detalles"><li>Frío</li><li>Con avena +$ 2.000</li></ul></article>
         </div>
         <div class="coffee-menu-lines" aria-label="Más de nuestra carta">
-          <article class="coffee-menu-line" data-menu-kind="coffee"><div><h3>Espresso</h3><p>Una extracción corta, con cuerpo y notas dulces.</p></div><span>$ 7.000</span></article>
-          <article class="coffee-menu-line" data-menu-kind="coffee"><div><h3>Americano</h3><p>Espresso y agua caliente para una taza más larga.</p></div><span>$ 8.000</span></article>
-          <article class="coffee-menu-line" data-menu-kind="coffee"><div><h3>Filtro del día</h3><p>Un origen que cambia. Pregúntanos qué estamos preparando.</p></div><span>$ 11.000</span></article>
-          <article class="coffee-menu-line" data-menu-kind="coffee"><div><h3>Chocolate de la casa</h3><p>Cacao, leche y un punto justo de dulzor.</p></div><span>$ 13.000</span></article>
+          <article class="coffee-menu-line" data-menu-kind="coffee"><div><h3>Espresso</h3><p>Una extracción corta, con cuerpo y notas a panela y mandarina.</p></div><span>$ 7.000</span></article>
           <article class="coffee-menu-line" data-menu-kind="bakery"><div><h3>Pan de banano</h3><p>Miga suave con nueces y el dulzor natural de la fruta.</p></div><span>$ 10.000</span></article>
+          <article class="coffee-menu-line" data-menu-kind="coffee"><div><h3>Americano</h3><p>Espresso y agua caliente para una taza más larga.</p></div><span>$ 8.000</span></article>
           <article class="coffee-menu-line" data-menu-kind="bakery"><div><h3>Tostada de masa madre</h3><p>Pan tostado, mantequilla y mermelada de temporada.</p></div><span>$ 15.000</span></article>
+          <article class="coffee-menu-line" data-menu-kind="coffee"><div><h3>Filtro del día <small class="mar-line-tag">V60</small></h3><p>Un origen que cambia. Hoy: Nariño, con notas a frambuesa y miel.</p></div><span>$ 11.000</span></article>
+          <article class="coffee-menu-line" data-menu-kind="bakery"><div><h3>Galleta de avena y panela</h3><p>Borde crujiente, centro suave. Ideal con un espresso.</p></div><span>$ 6.000</span></article>
+          <article class="coffee-menu-line" data-menu-kind="coffee"><div><h3>Cold brew</h3><p>Dieciocho horas en frío. Sin amargor, con final a chocolate.</p></div><span>$ 12.000</span></article>
+          <article class="coffee-menu-line" data-menu-kind="bakery"><div><h3>Pan de queso</h3><p>Recién salido, con queso costeño y almidón de yuca.</p></div><span>$ 7.000</span></article>
+          <article class="coffee-menu-line" data-menu-kind="coffee"><div><h3>Chocolate de la casa</h3><p>Cacao de Tumaco, leche y un punto justo de dulzor.</p></div><span>$ 13.000</span></article>
         </div>
-        <p class="coffee-menu-note">Precios en COP. Puedes pedir leche de avena por $ 2.000 adicionales.</p>
+        <p class="coffee-menu-note">Precios en COP. Leche de avena por $ 2.000 adicionales. Si tienes alguna alergia, avísanos en la barra.</p>
       </section>
-      <section class="coffee-craft" id="historia">
-        <figure class="classic-photo"><img src="../assets/case-cafe-barista.webp" srcset="../assets/case-cafe-barista-small.webp 800w, ../assets/case-cafe-barista.webp 1600w" sizes="(max-width:700px) 92vw, 48vw" width="1600" height="900" alt="Barista adulta preparando espresso detrás de la barra de una cafetería cálida" loading="lazy" decoding="async" ><figcaption>El cuidado está en los pequeños detalles.</figcaption></figure>
-        <div><div class="eyebrow">De la barra a tu taza</div><h2>Un buen ritual<br>empieza antes<br>del primer sorbo.</h2><p>Probamos el café, ajustamos la molienda y cuidamos cada extracción. Hay días para un espresso corto y otros para quedarse junto a una taza de filtro.</p><p>Nuestra barra está abierta a la curiosidad. Si quieres conocer el origen, comparar sabores o encontrar tu bebida, te acompañamos.</p><a href="#carta" class="coffee-inline-link">Volver a la carta ↗</a></div>
+
+      <section class="mar-origin" id="origen" aria-labelledby="origin-title">
+        <div class="mar-origin-head">
+          <div><div class="eyebrow">Nuestro origen</div><h2 id="origin-title">Tres fincas.<br>Un mismo cuidado.</h2></div>
+          <p>Compramos a fincas pequeñas que conocemos por su nombre y tostamos cada martes en lotes de 12 kg, para que el café llegue a la barra en su mejor semana.</p>
+        </div>
+        <div class="mar-origin-body">
+          <div class="mar-origin-tabs" role="tablist" aria-label="Elegir origen">
+            <button type="button" role="tab" id="origin-tab-huila" aria-controls="origin-panel" aria-selected="true" data-origin="huila"><span>01</span>Huila</button>
+            <button type="button" role="tab" id="origin-tab-narino" aria-controls="origin-panel" aria-selected="false" tabindex="-1" data-origin="narino"><span>02</span>Nariño</button>
+            <button type="button" role="tab" id="origin-tab-sierra" aria-controls="origin-panel" aria-selected="false" tabindex="-1" data-origin="sierra"><span>03</span>Sierra Nevada</button>
+          </div>
+          <div class="mar-origin-panel" id="origin-panel" role="tabpanel" aria-labelledby="origin-tab-huila" tabindex="0">
+            <div class="mar-origin-visual">
+              <svg viewBox="0 0 520 300" role="img" aria-labelledby="origin-svg-title"><title id="origin-svg-title">Perfil de montaña con la altura de la finca</title>
+                <defs><linearGradient id="mar-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3e3c8"/><stop offset="1" stop-color="#f6f0e6"/></linearGradient></defs>
+                <rect width="520" height="300" fill="url(#mar-sky)"/>
+                <circle cx="415" cy="78" r="34" fill="#e9b962" opacity=".75"/>
+                <path d="M0 300 L0 200 L70 150 L130 180 L210 95 L270 140 L330 70 L410 150 L470 120 L520 160 L520 300Z" fill="#d9c3a3"/>
+                <path d="M0 300 L0 235 L90 190 L170 225 L250 160 L340 210 L430 175 L520 215 L520 300Z" fill="#b98f62" opacity=".85"/>
+                <path d="M0 300 L0 262 L120 236 L230 268 L350 240 L460 262 L520 250 L520 300Z" fill="#7d5a3e"/>
+                <g class="mar-alt" data-origin-marker style="--alt-y: 0px">
+                  <line x1="30" x2="490" y1="130" y2="130" stroke="var(--demo-accent)" stroke-width="1.5" stroke-dasharray="5 6"/>
+                  <circle cx="330" cy="130" r="7" fill="var(--demo-accent)"/><circle cx="330" cy="130" r="14" fill="none" stroke="var(--demo-accent)" opacity=".4"/>
+                  <rect x="30" y="102" width="112" height="22" rx="11" fill="#fffaf1"/><text x="86" y="117.5" text-anchor="middle" font-size="12" fill="#3a2a21" font-family="Manrope, Arial, sans-serif" data-origin-field="altitude">1.750 m s. n. m.</text>
+                </g>
+              </svg>
+              <p class="mar-origin-place"><span data-origin-field="place">Pitalito, Huila</span><span data-origin-field="producer">Familia Cerquera</span></p>
+            </div>
+            <div class="mar-origin-info">
+              <h3 data-origin-field="farm">Finca La Esperanza</h3>
+              <p data-origin-field="story">Una finca de cuatro hectáreas entre guamos y plátano. La cosecha se recoge a mano, grano por grano, cuando la cereza está bien roja.</p>
+              <dl class="mar-origin-data">
+                <div><dt>Altura</dt><dd data-origin-field="altitude">1.750 m s. n. m.</dd></div><div><dt>Variedad</dt><dd data-origin-field="variety">Caturra y Castillo</dd></div>
+                <div><dt>Proceso</dt><dd data-origin-field="process">Lavado</dd></div>
+                <div><dt>En la barra</dt><dd data-origin-field="use">Espresso de la casa</dd></div>
+              </dl>
+              <ul class="mar-origin-notes" data-origin-notes aria-label="Notas de cata"><li>Panela</li><li>Mandarina</li><li>Cacao</li></ul>
+              <div class="mar-meters" aria-label="Perfil en taza, de 1 a 5">
+                <div class="mar-meter"><span>Acidez</span><span class="mar-meter-track"><span class="mar-meter-fill" data-meter="acidity" style="--v: .6"></span></span><b data-meter-value="acidity">3/5</b></div>
+                <div class="mar-meter"><span>Dulzor</span><span class="mar-meter-track"><span class="mar-meter-fill" data-meter="sweetness" style="--v: .8"></span></span><b data-meter-value="sweetness">4/5</b></div>
+                <div class="mar-meter"><span>Cuerpo</span><span class="mar-meter-track"><span class="mar-meter-fill" data-meter="body" style="--v: .8"></span></span><b data-meter-value="body">4/5</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
-      <section class="coffee-place" id="lugar"><div><div class="eyebrow">Nos vemos en Maré</div><h2>Una mesa.<br>Un café.<br>Tiempo para ti.</h2><p>Hay luz de mañana, mesas para conversar y un rincón para leer. Ven solo, con alguien o con ganas de dejar el teléfono a un lado.</p></div><div class="coffee-place-info"><h3>El lugar</h3><p>Pasaje Olivo 12<br>Barrio del Jardín</p><h3>Cuándo pasar</h3><dl class="coffee-hours"><div><dt>Lunes a viernes</dt><dd>08:00 — 19:00</dd></div><div><dt>Sábados y domingos</dt><dd>09:00 — 18:00</dd></div></dl><p class="coffee-small-note">La barra y los horneados acompañan todo el día. Para una pausa larga, las mañanas suelen ser el mejor momento.</p></div></section>
-      <section class="sector-operation"><div><div class="eyebrow">Maré, detrás de la barra</div><h2>Una buena taza.<br>Un negocio organizado.</h2><p>Explora la gestión diaria de la cafetería y sigue el recorrido de la información.</p></div><a class="button" href="sector-automation.html#cafeteria">Ver la gestión de Maré <span>↗</span></a></section>
-    </main><footer class="footer"><a class="wordmark" href="#">maré.</a><p>Negocio, carta, precios, dirección y horarios ficticios. Fotografías creadas con IA. No se reciben pedidos. Diseño de <span data-brand>Nexo Studio</span>.</p><a href="../index.html#contacto">Quiero una web así ↗</a></footer>
+
+      <section class="coffee-craft mar-craft" id="preparacion">
+        <figure class="classic-photo"><img src="../assets/case-cafe-barista.webp" srcset="../assets/case-cafe-barista-small.webp 800w, ../assets/case-cafe-barista.webp 1600w" sizes="(max-width:700px) 92vw, 48vw" width="1600" height="900" alt="Barista adulta preparando espresso detrás de la barra de una cafetería cálida" loading="lazy" decoding="async">
+          <div class="mar-timer" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" class="mar-timer-track"/><circle cx="32" cy="32" r="28" class="mar-timer-ring" pathLength="100"/></svg><span><b data-shot-timer>28</b> s</span></div>
+          <figcaption>Cada extracción, entre 27 y 30 segundos.</figcaption></figure>
+        <div><div class="eyebrow">Cómo lo preparamos</div><h2>Un buen ritual<br>empieza antes<br>del primer sorbo.</h2><p>Nada de esto se ve desde la mesa, pero se nota en la taza. Esta es la receta que seguimos con cada espresso.</p>
+          <ol class="mar-steps">
+            <li><span class="mar-step-n">01</span><div><h3>Molemos al momento</h3><p>Ajustamos la molienda al abrir y otra vez a mediodía, cuando cambia la humedad.</p></div><span class="mar-step-k">Ajuste diario</span></li>
+            <li><span class="mar-step-n">02</span><div><h3>Pesamos cada dosis</h3><p>18 g de café para 36 g en la taza. La balanza nunca sale de la barra.</p></div><span class="mar-step-k">1 : 2</span></li>
+            <li><span class="mar-step-n">03</span><div><h3>Extraemos con tiempo</h3><p>Entre 27 y 30 segundos a 93 °C. Si se sale de ahí, lo repetimos.</p></div><span class="mar-step-k">93 °C</span></li>
+            <li><span class="mar-step-n">04</span><div><h3>Texturizamos la leche</h3><p>Hasta 60 °C: el punto en que se siente dulce y todavía no quema.</p></div><span class="mar-step-k">60 °C</span></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="mar-day" aria-labelledby="day-title">
+        <div class="mar-day-head"><div class="eyebrow">Un día en Maré</div><h2 id="day-title">Lo que pasa entre<br>la apertura y el cierre.</h2></div>
+        <div class="mar-day-track">
+          <figure class="mar-day-item"><img src="../assets/cafe-editorial-small.webp" width="800" height="450" alt="Salón de Maré con luz de mañana, mesas de madera y plantas" loading="lazy" decoding="async"><figcaption><b>08:00</b>Abrimos la barra y sale la primera horneada.</figcaption></figure>
+          <figure class="mar-day-item"><img src="../assets/auto-cafeteria-small.webp" width="800" height="450" alt="Barista organizando tazas de cerámica en la barra" loading="lazy" decoding="async"><figcaption><b>10:30</b>La hora de los pedidos para llevar a la oficina.</figcaption></figure>
+          <figure class="mar-day-item"><img src="../assets/coffee-menu-small.webp" width="800" height="450" alt="Flat white, croissant e iced latte sobre una mesa de piedra" loading="lazy" decoding="async"><figcaption><b>13:00</b>Segunda horneada. El croissant vuelve a estar tibio.</figcaption></figure>
+          <figure class="mar-day-item"><img src="../assets/case-cafe-iced-small.webp" width="800" height="450" alt="Iced latte con hielo en un vaso de cristal" loading="lazy" decoding="async"><figcaption><b>16:00</b>Tarde de bebidas frías y filtro de origen.</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="mar-pickup" aria-labelledby="pickup-title">
+        <div class="mar-pickup-copy">
+          <div class="eyebrow">Pedidos para recoger</div>
+          <h2 id="pickup-title">Pide antes.<br>Recoge sin fila.</h2>
+          <p>Eliges en la carta, dices a qué hora pasas y la barra lo prepara en su turno. Cuando está listo, te llega un mensaje. Nadie tiene que preguntar “¿ya está el mío?”.</p>
+          <ol class="mar-pickup-steps">
+            <li><b>1</b>Eliges tu café y algo de la vitrina.</li>
+            <li><b>2</b>La barra recibe tu ticket en orden.</li>
+            <li><b>3</b>Te avisamos por WhatsApp cuando está listo.</li>
+          </ol>
+          <a class="button" href="auto-cafeteria.html">Ver cómo funciona <span>↗</span></a>
+        </div>
+        <div class="mar-pickup-visual" aria-hidden="true">
+          <div class="mar-ticket">
+            <div class="mar-ticket-top"><span>maré.</span><span>M-104</span></div>
+            <p class="mar-ticket-name">Valentina</p>
+            <ul><li><span>2 × Flat white</span><span>$ 24.000</span></li><li><span>1 × Croissant</span><span>$ 9.000</span></li></ul>
+            <div class="mar-ticket-total"><span>Recoge 10:55</span><span>$ 33.000</span></div>
+            <div class="mar-ticket-state"><span class="is-done">Recibido</span><span class="is-done">Preparando</span><span class="is-now">Listo</span></div>
+          </div>
+          <div class="mar-bubble"><span class="mar-bubble-from">Maré · WhatsApp</span>¡Hola, Valentina! Tu pedido M-104 está listo. Te esperamos en la barra.<span class="mar-bubble-time">10:53 ✓✓</span></div>
+        </div>
+      </section>
+
+      <section class="coffee-place mar-place" id="lugar">
+        <div><div class="eyebrow">Nos vemos en Maré</div><h2>Una mesa.<br>Un café.<br>Tiempo para ti.</h2><p>Hay luz de mañana, mesas para conversar y un rincón para leer. Ven solo, con alguien o con ganas de dejar el teléfono a un lado.</p>
+          <ul class="mar-amenities"><li>Wifi sin contraseña larga</li><li>Enchufes en la barra larga</li><li>Mascotas en la terraza</li></ul>
+        </div>
+        <div class="coffee-place-info">
+          <div class="mar-map" aria-hidden="true"><svg viewBox="0 0 400 170"><rect width="400" height="170" fill="#e2d6c3"/><path d="M0 60 H400 M0 128 H400 M92 0 V170 M250 0 V170 M330 0 L400 70" stroke="#f6f0e6" stroke-width="14"/><path d="M0 60 H400 M0 128 H400 M92 0 V170 M250 0 V170" stroke="#d3c4ad" stroke-width="1" stroke-dasharray="4 6"/><rect x="110" y="76" width="122" height="36" rx="5" fill="#cdbf9f"/><circle cx="160" cy="30" r="13" fill="#b8c49c"/><circle cx="182" cy="24" r="9" fill="#b8c49c"/><circle cx="300" cy="100" r="11" fill="#b8c49c"/><text x="120" y="98" font-size="11" fill="#6d5a47" font-family="Manrope, Arial, sans-serif">Parque del Jardín</text></svg><span class="mar-pin"><span>maré.</span></span></div>
+          <h3>El lugar</h3><p>Pasaje Olivo 12<br>Barrio del Jardín</p>
+          <h3>Cuándo pasar</h3>
+          <p class="mar-status mar-status-small" data-open-status data-state="open"><span class="mar-status-dot" aria-hidden="true"></span><span data-open-text>Consulta el horario</span></p>
+          <dl class="coffee-hours"><div data-hours-days="1,2,3,4,5"><dt>Lunes a viernes</dt><dd>08:00 — 19:00</dd></div><div data-hours-days="6,0"><dt>Sábados y domingos</dt><dd>09:00 — 18:00</dd></div></dl>
+          <p class="coffee-small-note">La barra y los horneados acompañan todo el día. Para una pausa larga, las mañanas entre semana son el mejor momento.</p>
+        </div>
+      </section>
+    </main><footer class="footer"><a class="wordmark" href="#">maré.</a><p>Negocio, fincas, carta, precios, dirección y horarios ficticios. Fotografías creadas con IA. No se reciben pedidos. Diseño de <span data-brand>Nexo Studio</span>.</p><a href="../index.html#contacto">Quiero una web así ↗</a></footer>
   </div>
 </body></html>
