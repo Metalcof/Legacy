@@ -53,7 +53,7 @@
   // Precarga la siguiente web para que el cambio sea limpio.
   const preload = i => {
     const p = projects[i % projects.length];
-    [`assets/shots/${p.key}-full.webp`, `assets/shots/${p.key}-mfull.webp`].forEach(src => { const img = new Image(); img.decoding = 'async'; img.src = src; });
+    [`assets/shots/${p.key}-full.webp`, `assets/shots/${p.key}-mfull.webp`].forEach(src => { const img = new Image(); img.decoding = 'async'; img.src = src; img.decode?.().catch(() => {}); });
   };
 
   function layer(view, src, alt) {
@@ -69,7 +69,8 @@
       old.forEach(el => { el.classList.add('is-out'); setTimeout(() => el.remove(), 700); });
       scroll(view, img);
     };
-    if (img.complete) requestAnimationFrame(reveal); else img.addEventListener('load', reveal, { once: true });
+    // Se decodifica fuera del hilo principal antes de mostrarla: así el cambio no da tirones.
+    (img.decode ? img.decode() : Promise.resolve()).then(() => requestAnimationFrame(reveal), () => requestAnimationFrame(reveal));
   }
 
   // La página baja despacio, como si alguien la estuviera recorriendo.

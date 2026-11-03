@@ -12,6 +12,15 @@
   window.NexoEscenas = window.NexoEscenas || {};
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const still = () => reduced.matches || document.body.classList.contains('motion-paused');
+  // Rendimiento: una sola escena se reproduce a la vez y todas esperan mientras la persona hace scroll.
+  const players = new Set();
+  let scrolling = false;
+  let scrollTimer;
+  addEventListener('scroll', () => {
+    scrolling = true;
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => { scrolling = false; }, 160);
+  }, { passive: true });
 
   function build(host) {
     const key = host.dataset.scene;
@@ -87,6 +96,8 @@
       if (!playing) return;
       frame = requestAnimationFrame(now => {
         const dt = Math.min(64, now - (tick.last || now));
+        // Durante el scroll el tiempo de la escena se detiene; y nunca se dibuja a más de 60 cuadros por segundo.
+        if (scrolling || dt < 15) { if (scrolling) tick.last = now; loop(); return; }
         tick.last = now;
         seek(progress + dt / def.duration);
         if (progress >= 1) { playing = false; updateButton(); return; }
@@ -96,9 +107,12 @@
     function start() {
       if (still()) { seek(1); playing = false; updateButton(); return; }
       if (progress >= 1) seek(0);
+      players.forEach(other => { if (other !== control) other.pause(); });
       playing = true; tick.last = performance.now(); updateButton(); loop();
     }
     function pause() { playing = false; cancelAnimationFrame(frame); updateButton(); }
+    const control = { pause };
+    players.add(control);
 
     play.addEventListener('click', () => { if (playing) pause(); else start(); });
     range.addEventListener('input', () => { pause(); seek(Number(range.value) / 1000); });

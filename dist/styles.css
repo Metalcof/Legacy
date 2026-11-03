@@ -1728,3 +1728,53 @@ html:not(.motion-ready) .wall-tile,.motion-settled .wall-tile{width:auto}
 .bv-phone{width:14%}
 .bv-phone span{height:118px}
 .bv-web b{height:14px}
+
+/* =====================================================================
+   Rendimiento: todo lo que se mueve va por la GPU y nada corre fuera de pantalla.
+   ===================================================================== */
+/* Grano: textura fija en el fondo, sin mezcla de capas (la mezcla costaba cuadros) */
+.intro::after,.sectors::after,.auto::after,.reel::after,.contact::after,.case--wav::after,.case--lumbre::after,.case--aura::after,.case--valeria::after{mix-blend-mode:normal;opacity:.035}
+/* Sin desenfoques costosos */
+.header{-webkit-backdrop-filter:none;backdrop-filter:none}
+.stage::before{filter:none;opacity:.55;background:radial-gradient(closest-side,var(--stage-accent),transparent)}
+.stage-note,.stage-badge,.preview-badge,.wall-label{-webkit-backdrop-filter:none;backdrop-filter:none}
+.stage-note{background:#fff}
+/* Capas propias para lo que se anima */
+.ticker-track,.stage-page,.case-product,.phone-device,.laptop{will-change:transform}
+.case-product{filter:drop-shadow(0 30px 30px rgba(0,0,0,.6))}
+/* Las secciones lejanas no se dibujan hasta acercarse */
+/* (content-visibility probado y descartado: daba tirones al hacer scroll rápido) */
+/* Animaciones en bucle solo cuando su sección está a la vista (premium.js marca .in-view) */
+main>section:not(.in-view) *,main>section:not(.in-view)::before,main>section:not(.in-view)::after{animation-play-state:paused!important}
+/* La dirección de correo se escribe con recorte, no cambiando el ancho */
+.motion-ready .bv-typed{width:auto;animation:bv-type-clip 5s steps(18) infinite,bv-caret .8s step-end infinite}
+@keyframes bv-type-clip{0%{clip-path:inset(0 100% 0 0)}50%,90%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0 100% 0 0)}}
+/* Brillos de fondo del bento: opacidad en vez de cambiar el degradado */
+.motion-ready .bv-web span{animation:bv-glow 3.2s ease-in-out infinite}
+@keyframes bv-glow{50%{opacity:.6}}
+
+/* WAV: el audífono acompaña, no tapa la pantalla */
+.case-product{width:30%;max-width:250px;left:-5%;bottom:-36px}
+@media (max-width:960px){.case-product{width:26%;left:-2%;bottom:-22px}}
+.scene-stage,.stage-view,.diag-browser,.phone,.lab-frame{contain:paint}
+.case-scene{contain:layout paint}
+
+/* ---------- Lo que gana tu negocio ---------- */
+.gains{padding-block:clamp(72px,9vw,128px);background:linear-gradient(180deg,var(--hoja),#f0efff 60%,var(--hoja))}
+.gain-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.gain{position:relative;padding:28px 26px 26px;border-radius:24px;background:#fff;border:1px solid #e6e4f7;box-shadow:0 1px 2px rgba(15,17,21,.04),0 40px 70px -50px rgba(28,20,120,.45);overflow:hidden}
+.gain{background:radial-gradient(160px circle at 100% 0%,rgba(59,43,245,.1),transparent 70%),#fff}
+.gain.has-glow{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .35s var(--ease-out)}
+.gain-icon{position:relative;display:grid;place-items:center;width:64px;height:64px;border-radius:20px;background:linear-gradient(145deg,#5a4bff,#2a1bd9);box-shadow:0 18px 30px -12px rgba(59,43,245,.7),inset 0 1px 0 rgba(255,255,255,.35),inset 0 -6px 12px rgba(0,0,0,.2);transform:perspective(400px) rotateX(12deg) rotateY(-12deg);transition:transform .5s var(--ease-out)}
+.gain:hover .gain-icon{transform:perspective(400px) rotateX(0) rotateY(0) translateY(-4px)}
+.gain-icon svg{width:34px;height:34px;fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.gain h3{margin-top:22px;font-size:clamp(21px,1.9vw,26px);font-stretch:112%;letter-spacing:-.03em;font-weight:780}
+.gain p{margin-top:8px;color:var(--suave);font-size:16.5px;text-wrap:pretty}
+.g-24 .gain-icon{background:linear-gradient(145deg,#1fbf75,#0f8a52);box-shadow:0 18px 30px -12px rgba(31,191,117,.6),inset 0 1px 0 rgba(255,255,255,.35),inset 0 -6px 12px rgba(0,0,0,.2)}
+.g-trust .gain-icon{background:linear-gradient(145deg,#ff9a5c,#e2553f);box-shadow:0 18px 30px -12px rgba(226,85,63,.6),inset 0 1px 0 rgba(255,255,255,.35),inset 0 -6px 12px rgba(0,0,0,.2)}
+.g-direct .gain-icon{background:linear-gradient(145deg,#ffcf4d,#f0a500);box-shadow:0 18px 30px -12px rgba(240,165,0,.6),inset 0 1px 0 rgba(255,255,255,.35),inset 0 -6px 12px rgba(0,0,0,.2)}
+.g-data .gain-icon{background:linear-gradient(145deg,#33c6e8,#1281b8);box-shadow:0 18px 30px -12px rgba(18,129,184,.6),inset 0 1px 0 rgba(255,255,255,.35),inset 0 -6px 12px rgba(0,0,0,.2)}
+.gains-cta{display:flex;flex-wrap:wrap;align-items:center;gap:16px 26px;margin-top:36px}
+@media (max-width:960px){.gain-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.gain-grid{grid-template-columns:1fr}.gains-cta .button{width:100%}}
+.scene-stage>svg{will-change:transform;transform:translateZ(0)}

@@ -16,7 +16,7 @@ const originalAssets = new Set([
   'auto-cafeteria.png', 'auto-arquitectura.png', 'auto-tienda.png', 'auto-clinica.png', 'auto-restaurante.png', 'auto-personal.png',
 ]);
 await mkdir(output, { recursive: true });
-for (const name of ['index.html', 'styles.css', 'app.js', 'effects.js', 'project-journey.js', 'lab.js', 'motion.js', 'tour.js', 'soluciones.js', 'stage.js', 'escenas', 'premium.js', 'config.js', 'assets', 'demos']) {
+for (const name of ['index.html', 'styles.css', 'app.js', 'effects.js', 'project-journey.js', 'lab.js', 'motion.js', 'tour.js', 'soluciones.js', 'stage.js', 'escenas', 'premium.js', 'brochure.html', 'config.js', 'assets', 'demos']) {
   await cp(path.join(root, name), path.join(output, name), { recursive: true, filter: source => !originalAssets.has(path.basename(source)) });
 }
 for (const name of originalAssets) await rm(path.join(output, 'assets', name), { force: true });

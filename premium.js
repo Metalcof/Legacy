@@ -26,8 +26,8 @@
   }
 
   /* ---------- 2. Brillo que sigue al mouse e inclinación 3D en tarjetas ---------- */
-  const glowTargets = '.auto-card, .bento-tile, .stage-tab, .diag-item, .proposal-demo-list a, .lab-controls, .team-card, .case-screen';
-  const tiltTargets = '.auto-card, .bento-tile';
+  const glowTargets = '.gain, .auto-card, .bento-tile, .stage-tab, .diag-item, .proposal-demo-list a, .lab-controls, .team-card, .case-screen';
+  const tiltTargets = '.gain, .auto-card, .bento-tile';
   if (fine.matches) {
     document.querySelectorAll(glowTargets).forEach(el => el.classList.add('has-glow'));
     document.addEventListener('pointermove', event => {
@@ -64,6 +64,13 @@
     });
 
   }
+
+  /* ---------- Las animaciones en bucle solo corren en la sección visible ---------- */
+  if ('IntersectionObserver' in window) {
+    const sections = document.querySelectorAll('main > section');
+    const seen = new IntersectionObserver(entries => entries.forEach(entry => entry.target.classList.toggle('in-view', entry.isIntersecting)), { rootMargin: '120px 0px' });
+    sections.forEach(section => seen.observe(section));
+  } else document.querySelectorAll('main > section').forEach(section => section.classList.add('in-view'));
 
   /* ---------- 4. Títulos que suben desde una máscara, palabra por palabra ---------- */
   if (!still() && 'IntersectionObserver' in window) {
