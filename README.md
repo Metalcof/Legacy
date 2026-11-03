@@ -74,6 +74,21 @@ La página responde al correo de prospección: quien llega encuentra la revisió
 - **Cómo empezamos** (`#empezar`): revisión gratuita, propuesta, construcción y mantenimiento mensual.
 - El formulario pide la web actual (opcional) y la incluye en el mensaje.
 
+## Propuestas personalizadas para la campaña
+
+`scripts/generar-propuestas.py` crea una página por empresa del Excel de prospectos ("Una idea para {Empresa}"): lo que el correo ya les dice, el servicio propuesto, el asistente de WhatsApp de su sector, ejemplos parecidos y el botón para agendar la revisión gratuita por WhatsApp con un mensaje preparado.
+
+```powershell
+python -m pip install openpyxl
+python scripts/generar-propuestas.py "C:uta\Prospectos_empresas_hispanas.xlsx"
+```
+
+- Crea `propuestas/<empresa>-<código>.html` y `propuestas/enlaces.csv` (Empresa → enlace) para combinar con el correo. El enlace completo es `https://tudominio/propuestas/...`.
+- Solo usa Empresa, País, Sector, "Observación para el correo" y "Servicio a ofrecer". Nunca correos, teléfonos, decisores ni el detalle técnico del problema. Para España usa un texto general.
+- El código del enlace no se puede adivinar y es estable: depende de `propuestas/.clave`. No borres ese archivo después de enviar correos, o los enlaces cambiarán.
+- Las páginas piden no aparecer en buscadores, y `propuestas/index.html` evita que se liste la carpeta.
+- `propuestas/`, los Excel y los CSV están en `.gitignore`: no se suben a GitHub. El paquete de cPanel sí incluye `propuestas/` si existe.
+
 ## Estructura de la portada
 
 1. **Portada oscura** con un muro inclinado de capturas reales de las seis webs de ejemplo, que se mueve solo y se detiene al pasar el mouse. Cada captura abre su demo.

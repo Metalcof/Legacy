@@ -145,7 +145,8 @@
   const panelTitle = root.querySelector('[data-panel-title]');
   const panelRows = root.querySelector('[data-panel-rows]');
   const restart = root.querySelector('[data-chat-restart]');
-  let sector = sectors[0];
+  // Una propuesta personalizada puede abrir directamente su sector con data-initial.
+  let sector = sectors.find(item => item.key === root.dataset.initial) || sectors[0];
   let run = 0;
 
   sectors.forEach((item, index) => {
@@ -155,8 +156,8 @@
     tab.id = `sector-tab-${item.key}`;
     tab.dataset.sector = item.key;
     tab.setAttribute('aria-controls', 'sector-panel');
-    tab.setAttribute('aria-selected', String(index === 0));
-    tab.tabIndex = index === 0 ? 0 : -1;
+    tab.setAttribute('aria-selected', String(item === sector));
+    tab.tabIndex = item === sector ? 0 : -1;
     tabs.append(tab);
   });
 

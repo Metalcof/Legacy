@@ -25,6 +25,10 @@ foreach ($name in $sourceNames) {
 if (Test-Path -LiteralPath (Join-Path $workspaceRoot '.htaccess') -PathType Leaf) {
     $sourceNames += '.htaccess'
 }
+# Las propuestas personalizadas no van a GitHub, pero sí al alojamiento si se generaron.
+if (Test-Path -LiteralPath (Join-Path $workspaceRoot 'propuestas') -PathType Container) {
+    $sourceNames += 'propuestas'
+}
 
 if (Test-Path -LiteralPath $runtimeRoot) {
     $runtimeItem = Get-Item -LiteralPath $runtimeRoot -Force
