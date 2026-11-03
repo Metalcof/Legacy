@@ -1,19 +1,377 @@
 <!doctype html>
 <html lang="es">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="ALMA — un espacio para escucharte: una experiencia con identidad, creada por Nexo Studio."><title>ALMA — un espacio para escucharte · Proyecto de Nexo Studio</title><link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="extra.css"><script src="../config.js" defer></script><script src="extra.js" defer></script>  <script src="motion.js" defer></script>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ALMA, centro de bienestar: fisioterapia, psicología, nutrición y masaje terapéutico con tiempo para escucharte. Proyecto conceptual creado por Nexo Studio.">
+<meta name="theme-color" content="#f2f3ec">
+<title>ALMA — centro de bienestar · Proyecto de Nexo Studio</title>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&amp;display=swap">
+<link rel="stylesheet" href="extra.css">
+<link rel="stylesheet" href="clinica-plus.css">
+<script src="../config.js" defer></script>
+<script src="extra.js" defer></script>
+<script src="clinica-plus.js" defer></script>
+<script src="motion.js" defer></script>
 </head>
 <body class="clinic">
 <a class="skip-link" href="#contenido">Ir al contenido</a>
-<div class="demo-notice"><span>Proyecto conceptual · Marca y personas ficticias · Fotografías IA</span><a href="../index.html#proyectos">Volver a <span data-brand>Nexo Studio</span> ↗</a></div>
+<div class="demo-notice"><span>Proyecto conceptual · Marca, personas, precios y dirección ficticios · Fotografías IA</span><a href="../index.html#proyectos">Volver a <span data-brand>Nexo Studio</span> ↗</a></div>
 <div class="shell">
-<header class="site-header"><a class="wordmark serif" href="#" aria-label="alma., inicio">alma.</a><nav aria-label="Navegación principal"><a href="#enfoque">El enfoque</a><a href="#equipo">El espacio</a><a class="small-button" href="#agenda">Elige tu horario ↗</a></nav></header>
+<header class="site-header">
+  <a class="wordmark serif" href="#" aria-label="alma., inicio">alma.</a>
+  <nav aria-label="Navegación principal">
+    <a href="#enfoque">Servicios</a>
+    <a href="#equipo">Equipo</a>
+    <a class="nav-optional" href="#primera-visita">Primera visita</a>
+    <a class="nav-optional" href="#espacios">El espacio</a>
+    <a class="nav-optional" href="#preguntas">Preguntas</a>
+    <a class="small-button" href="#agenda">Reservar <span aria-hidden="true">↗</span></a>
+  </nav>
+</header>
 <main id="contenido">
-<section class="hero"><div><span class="eyebrow">BIENESTAR CON TIEMPO Y CERCANÍA</span><h1 class="serif-title">Un lugar<br>para parar.<br>Y escucharte.</h1><p>Hay conversaciones que merecen su propio espacio. En ALMA cuidamos el entorno, el tiempo y la forma de recibirte para que puedas llegar con calma.</p><a class="button" href="#agenda">Encuentra tu espacio <span aria-hidden="true">↗</span></a></div><figure class="hero-photo"><img src="../assets/wellness-editorial.webp" srcset="../assets/wellness-editorial-small.webp 800w, ../assets/wellness-editorial.webp 1600w" sizes="(max-width:800px) 90vw,45vw" width="1600" height="900" alt="Interior luminoso de ALMA, con madera natural y un jardín abierto, fotografía creada con IA" fetchpriority="high" decoding="async"><figcaption>Luz natural, materiales cálidos y espacio para conversar.</figcaption></figure></section>
+<section class="hero">
+  <div class="hero-copy">
+    <span class="eyebrow">Centro de bienestar · Chapinero Alto</span>
+    <h1 class="serif-title">Un lugar<br>para parar.<br><span class="hero-accent">Y escucharte.</span></h1>
+    <p>Fisioterapia, psicología, nutrición y masaje terapéutico en una casa con jardín. Citas puntuales, sesiones sin prisa y un equipo que recuerda tu historia.</p>
+    <div class="hero-actions">
+      <a class="button" href="#agenda">Reservar mi primera visita <span aria-hidden="true">↗</span></a>
+      <a class="hero-link" href="#enfoque">Ver servicios y precios</a>
+    </div>
+    <ul class="hero-facts" aria-label="Lo esencial">
+      <li><strong>Lun a sáb</strong><span>7:00 a 19:00</span></li>
+      <li><strong>45 min</strong><span>primera visita</span></li>
+      <li><strong>24 h antes</strong><span>recordatorio por WhatsApp</span></li>
+    </ul>
+  </div>
+  <figure class="hero-photo">
+    <img src="../assets/wellness-editorial.webp" srcset="../assets/wellness-editorial-small.webp 800w, ../assets/wellness-editorial.webp 1600w" sizes="(max-width:800px) 90vw,45vw" width="1600" height="900" alt="Sala de ALMA con madera natural, sillones claros y un jardín abierto, fotografía creada con IA" fetchpriority="high" decoding="async">
+    <figcaption class="hero-slot" aria-live="polite">
+      <span class="hero-slot-dot" aria-hidden="true"></span>
+      <span><small>Próximo espacio libre · ejemplo</small><strong id="alma-next-slot">Esta semana hay horarios disponibles</strong></span>
+    </figcaption>
+  </figure>
+</section>
+
 <div class="theme-toolbar"><p>Elige el color que acompaña esta experiencia.</p><div class="theme-options" role="group" aria-label="Color de este diseño"><button type="button" class="theme-button" data-theme="original" aria-pressed="true"><span class="theme-dot" aria-hidden="true"></span>Original</button><button type="button" class="theme-button" data-theme="green" aria-pressed="false"><span class="theme-dot theme-green" aria-hidden="true"></span>Verde</button><button type="button" class="theme-button" data-theme="cyan" aria-pressed="false"><span class="theme-dot theme-cyan" aria-hidden="true"></span>Cian</button><button type="button" class="theme-button" data-theme="violet" aria-pressed="false"><span class="theme-dot theme-violet" aria-hidden="true"></span>Violeta</button></div></div>
-<section class="section" id="enfoque"><div class="section-heading"><div><span class="eyebrow">EMPEZAR POR LO QUE NECESITAS</span><h2 class="serif-title">Cada visita<br>tiene su propio ritmo.</h2></div><p>Elige el motivo que mejor describe lo que buscas. Desde el primer contacto, tendrás la información necesaria para organizar tu visita.</p></div><div class="service-cards" id="servicios"><article class="service-card"><span>01 / PARA CONOCERNOS</span><h3>Primera visita</h3><p>Una conversación inicial para conocer qué buscas, responder tus dudas sobre el espacio y acordar cómo continuar.</p><button type="button" class="text-button" data-clinic-service="Primera visita">Elegir un horario <span aria-hidden="true">↗</span></button></article><article class="service-card"><span>02 / UN ESPACIO PROPIO</span><h3>Consulta de bienestar</h3><p>Tiempo para conversar con calma sobre tus inquietudes cotidianas y ordenar las preguntas que quieres abordar.</p><button type="button" class="text-button" data-clinic-service="Consulta de bienestar">Elegir un horario <span aria-hidden="true">↗</span></button></article><article class="service-card"><span>03 / PARA CONTINUAR</span><h3>Sesión de seguimiento</h3><p>Retomamos lo conversado y revisamos contigo el siguiente paso, con la misma atención al tiempo y a los detalles.</p><button type="button" class="text-button" data-clinic-service="Sesión de seguimiento">Elegir un horario <span aria-hidden="true">↗</span></button></article></div></section>
-<section class="clinic-story section"><figure class="clinic-story-photo"><img src="../assets/case-clinic-consultation.webp" srcset="../assets/case-clinic-consultation-small.webp 800w, ../assets/case-clinic-consultation.webp 1600w" sizes="(max-width:800px) 90vw, 45vw" width="1600" height="900" alt="Dos adultos ficticios conversan en una sala serena de consulta, fotografía creada con IA" loading="lazy" decoding="async"></figure><div class="clinic-story-copy"><span class="eyebrow">LA CONVERSACIÓN VA PRIMERO</span><h2 class="serif-title">Trae tus preguntas.<br>Aquí hay tiempo.</h2><p>Una primera visita también sirve para conocernos. Puedes contarnos qué esperas del espacio y preguntar cómo se organiza cada encuentro.</p><ul><li>Información clara antes de elegir tu horario.</li><li>Un lugar tranquilo para hablar con cercanía.</li><li>Una agenda sencilla, a tu ritmo.</li></ul><a class="text-button" href="#agenda">Ver horarios disponibles <span aria-hidden="true">↗</span></a></div></section>
-<section class="clinic-team section" id="equipo"><div class="section-heading"><div><span class="eyebrow">PERSONAS PRIMERO</span><h2 class="serif-title">La atención empieza<br>en la forma de recibirte.</h2></div><p>Una recepción cercana, espacios abiertos y pequeños detalles que ayudan a que cada visita tenga un comienzo sencillo.</p></div><figure class="clinic-team-photo"><img src="../assets/case-clinic-team.webp" srcset="../assets/case-clinic-team-small.webp 800w, ../assets/case-clinic-team.webp 1600w" sizes="90vw" width="1600" height="900" alt="Dos adultos ficticios reciben a las personas en una recepción luminosa de ALMA, fotografía creada con IA" loading="lazy" decoding="async"><figcaption>Un equipo cercano. Un espacio pensado para conversar.</figcaption></figure></section>
-<section class="section appointment-section" id="agenda"><div class="appointment-copy"><span class="eyebrow">ELIGE UN MOMENTO PARA TI</span><h2 class="serif-title">Tu próximo espacio<br>empieza aquí.</h2><p>Selecciona el motivo de tu visita, el día y el horario. La confirmación reunirá los detalles para que puedas revisarlos con calma.</p><span class="example-badge">Agenda demostrativa · No crea citas reales</span><div id="clinic-result" class="result-card" hidden><span class="eyebrow">CONFIRMACIÓN LOCAL</span><h3>Tu visita tiene un espacio.</h3><p id="clinic-confirmation"></p><dl id="clinic-details"></dl><button type="button" class="button secondary" id="clinic-cancel">Cancelar esta cita de ejemplo</button></div></div><form class="form-card" id="clinic-form"><div class="form-grid"><div class="field full"><label for="clinic-name">Tu nombre</label><input id="clinic-name" name="name" value="Camila" required maxlength="80" autocomplete="off"><small>Para probar esta agenda, usa un nombre ficticio.</small></div><div class="field"><label for="clinic-service">Motivo de la visita</label><select id="clinic-service" name="service"><option>Primera visita</option><option>Consulta de bienestar</option><option>Sesión de seguimiento</option></select></div><div class="field"><label for="clinic-date">Elige el día</label><input id="clinic-date" name="date" type="date" required></div></div><fieldset><legend>Horarios disponibles</legend><div class="time-options" id="clinic-times"></div><p class="availability-legend">Cada espacio dura 30 minutos. Los horarios ocupados se desactivan.</p></fieldset><button class="button" type="submit">Preparar mi visita <span aria-hidden="true">↗</span></button><p class="form-note">La confirmación se guarda solo en esta página. No se envían mensajes ni se prestan servicios de salud desde este proyecto conceptual.</p><p class="status" id="clinic-status" role="status" aria-live="polite"></p></form></section>
-<section class="closing sector-automation-callout"><div><span class="eyebrow">UNA EXPERIENCIA CONECTADA</span><h2>Del primer contacto<br>a una agenda organizada.</h2><p>Explora cómo una consulta, una reserva y su seguimiento pueden encontrar un mismo lugar.</p></div><a class="button" href="sector-automation.html#clinica">Ver agenda y seguimiento<span aria-hidden="true">↗</span></a></section></main>
-<footer class="footer"><p>Identidad, fotografía y experiencia digital reunidas en un proyecto propio de <span data-brand>Nexo Studio</span>.</p><a href="../index.html#contacto">Hablemos de tu proyecto ↗</a></footer>
-</div></body></html>
+
+<section class="section" id="enfoque">
+  <div class="section-heading">
+    <div><span class="eyebrow">Servicios</span><h2 class="serif-title">Cada visita<br>tiene su propio ritmo.</h2></div>
+    <p>Duración y valor claros desde el principio. Si no sabes por dónde empezar, la primera visita de valoración sirve para orientarte.</p>
+  </div>
+  <div class="service-cards alma-services" id="servicios">
+    <article class="service-card is-featured">
+      <div class="service-top"><span>Para empezar</span><span class="service-tag">Recomendada</span></div>
+      <h3>Primera visita de valoración</h3>
+      <p>Conversamos sobre lo que te trae, revisamos tu historia y acordamos contigo un plan posible. Sales con un siguiente paso claro.</p>
+      <dl class="service-meta"><div><dt>Duración</dt><dd>45 min</dd></div><div><dt>Valor</dt><dd>$90.000</dd></div></dl>
+      <button type="button" class="text-button" data-clinic-service="Primera visita de valoración">Elegir horario <span aria-hidden="true">↗</span></button>
+    </article>
+    <article class="service-card">
+      <div class="service-top"><span>Movimiento</span></div>
+      <h3>Fisioterapia</h3>
+      <p>Dolor de espalda, cuello o rodilla, postura y recuperación después de una lesión, con ejercicios que puedes seguir en casa.</p>
+      <dl class="service-meta"><div><dt>Duración</dt><dd>50 min</dd></div><div><dt>Valor</dt><dd>$120.000</dd></div></dl>
+      <button type="button" class="text-button" data-clinic-service="Fisioterapia">Elegir horario <span aria-hidden="true">↗</span></button>
+    </article>
+    <article class="service-card">
+      <div class="service-top"><span>Bienestar emocional</span></div>
+      <h3>Psicología</h3>
+      <p>Un espacio confidencial para hablar de estrés, ansiedad, duelos o momentos de cambio, a tu ritmo y sin juicios.</p>
+      <dl class="service-meta"><div><dt>Duración</dt><dd>50 min</dd></div><div><dt>Valor</dt><dd>$150.000</dd></div></dl>
+      <button type="button" class="text-button" data-clinic-service="Psicología">Elegir horario <span aria-hidden="true">↗</span></button>
+    </article>
+    <article class="service-card">
+      <div class="service-top"><span>Alimentación</span></div>
+      <h3>Nutrición</h3>
+      <p>Hábitos de alimentación posibles para tu rutina real. Sin dietas extremas ni listas de prohibiciones.</p>
+      <dl class="service-meta"><div><dt>Duración</dt><dd>40 min</dd></div><div><dt>Valor</dt><dd>$110.000</dd></div></dl>
+      <button type="button" class="text-button" data-clinic-service="Nutrición">Elegir horario <span aria-hidden="true">↗</span></button>
+    </article>
+    <article class="service-card">
+      <div class="service-top"><span>Descanso</span></div>
+      <h3>Masaje terapéutico</h3>
+      <p>Para soltar la tensión acumulada en espalda y hombros. Sala tibia, luz baja y una hora completa para ti.</p>
+      <dl class="service-meta"><div><dt>Duración</dt><dd>60 min</dd></div><div><dt>Valor</dt><dd>$140.000</dd></div></dl>
+      <button type="button" class="text-button" data-clinic-service="Masaje terapéutico">Elegir horario <span aria-hidden="true">↗</span></button>
+    </article>
+    <article class="service-card">
+      <div class="service-top"><span>Para continuar</span></div>
+      <h3>Sesión de seguimiento</h3>
+      <p>Revisamos cómo te has sentido desde la última visita y ajustamos el plan. Solo para quienes ya vinieron antes.</p>
+      <dl class="service-meta"><div><dt>Duración</dt><dd>30 min</dd></div><div><dt>Valor</dt><dd>$80.000</dd></div></dl>
+      <button type="button" class="text-button" data-clinic-service="Sesión de seguimiento">Elegir horario <span aria-hidden="true">↗</span></button>
+    </article>
+  </div>
+  <p class="fine-print">Precios ilustrativos en pesos colombianos para este proyecto conceptual.</p>
+</section>
+
+<section class="section alma-team" id="equipo">
+  <div class="section-heading">
+    <div><span class="eyebrow">El equipo</span><h2 class="serif-title">Personas que<br>se toman su tiempo.</h2></div>
+    <p>Cada especialista tiene sus propios días de atención. Elige con quién quieres hablar o deja que te asignemos el primer espacio libre.</p>
+  </div>
+  <ul class="team-grid" role="list">
+    <li class="team-card" style="--tint:#cfe0d3">
+      <div class="team-head"><span class="avatar" aria-hidden="true">MO</span><span class="fict-tag">Perfil ficticio</span></div>
+      <h3>Mariana Ortiz</h3><p class="team-role">Fisioterapia</p>
+      <p>Dolor de espalda, postura y recuperación después de una lesión.</p>
+      <p class="team-days"><span>Lun a vie</span> · mañanas</p>
+      <button type="button" class="text-button" data-clinic-service="Fisioterapia" data-alma-specialist="Mariana Ortiz">Ver sus horarios <span aria-hidden="true">↗</span></button>
+    </li>
+    <li class="team-card" style="--tint:#d8e4dc">
+      <div class="team-head"><span class="avatar" aria-hidden="true">DV</span><span class="fict-tag">Perfil ficticio</span></div>
+      <h3>Daniel Vélez</h3><p class="team-role">Fisioterapia</p>
+      <p>Movilidad, ejercicio guiado y regreso al deporte sin apuros.</p>
+      <p class="team-days"><span>Lun a jue</span> · tardes y sábados</p>
+      <button type="button" class="text-button" data-clinic-service="Fisioterapia" data-alma-specialist="Daniel Vélez">Ver sus horarios <span aria-hidden="true">↗</span></button>
+    </li>
+    <li class="team-card" style="--tint:#e6dccd">
+      <div class="team-head"><span class="avatar" aria-hidden="true">JR</span><span class="fict-tag">Perfil ficticio</span></div>
+      <h3>Julián Restrepo</h3><p class="team-role">Psicología</p>
+      <p>Estrés, ansiedad y momentos de cambio, con conversaciones sin prisa.</p>
+      <p class="team-days"><span>Lun, mar, jue y vie</span></p>
+      <button type="button" class="text-button" data-clinic-service="Psicología" data-alma-specialist="Julián Restrepo">Ver sus horarios <span aria-hidden="true">↗</span></button>
+    </li>
+    <li class="team-card" style="--tint:#e3e6cf">
+      <div class="team-head"><span class="avatar" aria-hidden="true">LC</span><span class="fict-tag">Perfil ficticio</span></div>
+      <h3>Laura Cifuentes</h3><p class="team-role">Nutrición</p>
+      <p>Hábitos posibles para la vida real, sin dietas extremas.</p>
+      <p class="team-days"><span>Mar a jue</span> · sábado en la mañana</p>
+      <button type="button" class="text-button" data-clinic-service="Nutrición" data-alma-specialist="Laura Cifuentes">Ver sus horarios <span aria-hidden="true">↗</span></button>
+    </li>
+    <li class="team-card" style="--tint:#ead9cb">
+      <div class="team-head"><span class="avatar" aria-hidden="true">AM</span><span class="fict-tag">Perfil ficticio</span></div>
+      <h3>Andrés Mejía</h3><p class="team-role">Masaje terapéutico</p>
+      <p>Tensión muscular, descanso profundo y pausas que sí se sienten.</p>
+      <p class="team-days"><span>Mié a sáb</span></p>
+      <button type="button" class="text-button" data-clinic-service="Masaje terapéutico" data-alma-specialist="Andrés Mejía">Ver sus horarios <span aria-hidden="true">↗</span></button>
+    </li>
+    <li class="team-card team-card-reception">
+      <div class="team-head"><span class="avatar avatar-leaf" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14Z"/><path d="M5 19 13 11"/></svg></span></div>
+      <h3>Recepción</h3><p class="team-role">Sara y Tomás</p>
+      <p>Te reciben, organizan tu agenda y te escriben el día antes para confirmar. Si algo cambia, mueven tu cita contigo.</p>
+      <a class="text-button" href="auto-clinica.html">Así funciona la agenda <span aria-hidden="true">↗</span></a>
+    </li>
+  </ul>
+</section>
+
+<section class="section first-visit" id="primera-visita">
+  <div class="first-visit-intro">
+    <span class="eyebrow">Tu primera visita</span>
+    <h2 class="serif-title">Llegar por primera vez<br>debería ser sencillo.</h2>
+    <p>Sin formularios eternos ni salas frías. Esto es lo que pasa desde que eliges tu horario hasta que sales con un plan.</p>
+    <aside class="bring-card" aria-labelledby="bring-title">
+      <h3 id="bring-title">Qué traer</h3>
+      <ul>
+        <li>Tu documento de identidad.</li>
+        <li>Exámenes o informes recientes, si los tienes.</li>
+        <li>Ropa cómoda si vienes a fisioterapia o masaje.</li>
+        <li>Tus preguntas, anotadas si te ayuda.</li>
+      </ul>
+    </aside>
+  </div>
+  <ol class="visit-steps">
+    <li><span class="step-num">01</span><div><h3>Reservas en dos minutos</h3><p>Eliges el servicio, la persona y el horario que te sirve. Recibes la confirmación al instante por WhatsApp.</p></div></li>
+    <li><span class="step-num">02</span><div><h3>Te recordamos el día antes</h3><p>24 horas antes te escribimos. Confirmas con un toque o cambias la hora sin tener que llamar.</p></div></li>
+    <li><span class="step-num">03</span><div><h3>Llegas con diez minutos de margen</h3><p>Un té en la sala del jardín y una conversación de 45 minutos para entender qué necesitas.</p></div></li>
+    <li><span class="step-num">04</span><div><h3>Sales con un plan</h3><p>Acordamos los siguientes pasos y te sugerimos la próxima cita. Al día siguiente te escribimos para saber cómo sigues.</p></div></li>
+  </ol>
+</section>
+
+<section class="section spaces" id="espacios">
+  <div class="section-heading">
+    <div><span class="eyebrow">El espacio</span><h2 class="serif-title">Una casa con jardín,<br>no un pasillo de espera.</h2></div>
+    <p>Luz natural, madera, plantas y consultorios con puerta cerrada. Pensado para que bajes el ritmo desde que entras.</p>
+  </div>
+  <div class="spaces-grid">
+    <figure class="space space-wide"><img src="../assets/case-clinic-team.webp" srcset="../assets/case-clinic-team-small.webp 800w, ../assets/case-clinic-team.webp 1600w" sizes="(max-width:800px) 90vw, 62vw" width="1600" height="900" alt="Recepción de ALMA con mostrador de piedra, madera y jardín al fondo, con dos personas ficticias, fotografía creada con IA" loading="lazy" decoding="async"><figcaption>Recepción y sala de espera</figcaption></figure>
+    <figure class="space"><img src="../assets/case-clinic-consultation-small.webp" width="800" height="450" alt="Consultorio luminoso con escritorio de madera y vista al jardín, con dos personas ficticias, fotografía creada con IA" loading="lazy" decoding="async"><figcaption>Consultorio de psicología</figcaption></figure>
+    <figure class="space"><img src="../assets/auto-clinica-small.webp" width="800" height="450" alt="Mostrador de recepción con plantas y luz cálida, con una persona ficticia revisando la agenda, fotografía creada con IA" loading="lazy" decoding="async"><figcaption>El mostrador, donde vive tu agenda</figcaption></figure>
+    <div class="space space-note">
+      <h3>Pequeñas cosas que ayudan</h3>
+      <ul>
+        <li>Acceso sin escalones y baño adaptado.</li>
+        <li>Té y agua de cortesía.</li>
+        <li>Parqueadero para bicicletas.</li>
+        <li>Consultorios con aislamiento acústico.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section appointment-section alma-booking" id="agenda">
+  <div class="appointment-copy">
+    <span class="eyebrow">Reserva tu espacio</span>
+    <h2 class="serif-title">Tu próximo espacio<br>empieza aquí.</h2>
+    <p>Elige el servicio, el día y la hora. Verás el resumen antes de confirmar.</p>
+    <span class="example-badge">Agenda demostrativa · No crea citas reales</span>
+    <div class="booking-summary" id="clinic-placeholder" aria-live="polite">
+      <span class="eyebrow">Tu visita</span>
+      <dl class="summary-list">
+        <div><dt>Servicio</dt><dd id="sum-service">—</dd></div>
+        <div><dt>Con</dt><dd id="sum-specialist">—</dd></div>
+        <div><dt>Día</dt><dd id="sum-day">—</dd></div>
+        <div><dt>Hora</dt><dd id="sum-time">Elige un horario</dd></div>
+        <div><dt>Duración</dt><dd id="sum-duration">—</dd></div>
+      </dl>
+      <div class="summary-total"><span>Valor de la sesión</span><strong id="sum-price">—</strong></div>
+      <p class="summary-note">Puedes cambiar o cancelar sin costo hasta 24 horas antes.</p>
+    </div>
+    <div id="clinic-result" class="result-card" hidden>
+      <div class="result-head"><span class="result-check" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span class="eyebrow">Confirmación de ejemplo</span></div>
+      <h3>Tu visita tiene un espacio.</h3>
+      <p id="clinic-confirmation"></p>
+      <dl id="clinic-details"></dl>
+      <p class="result-next">En una agenda real, te llegaría la confirmación por WhatsApp y un recordatorio 24 horas antes. <a href="auto-clinica.html">Ver cómo funciona ↗</a></p>
+      <button type="button" class="button secondary" id="clinic-cancel">Cancelar esta cita de ejemplo</button>
+    </div>
+  </div>
+  <form class="form-card booking-form" id="clinic-form">
+    <div class="booking-step">
+      <p class="step-label"><span>1</span>¿Qué necesitas?</p>
+      <div class="form-grid">
+        <div class="field">
+          <label for="clinic-service">Servicio</label>
+          <select id="clinic-service" name="service">
+            <option>Primera visita de valoración</option>
+            <option>Fisioterapia</option>
+            <option>Psicología</option>
+            <option>Nutrición</option>
+            <option>Masaje terapéutico</option>
+            <option>Sesión de seguimiento</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="clinic-specialist">Con quién</label>
+          <select id="clinic-specialist" name="specialist"></select>
+        </div>
+      </div>
+    </div>
+    <div class="booking-step">
+      <p class="step-label"><span>2</span>¿Qué día?</p>
+      <div class="day-chips" id="clinic-days" role="group" aria-label="Próximos días con atención"></div>
+      <div class="field date-field">
+        <label for="clinic-date">U otra fecha</label>
+        <input id="clinic-date" name="date" type="date" required>
+      </div>
+    </div>
+    <fieldset class="booking-step">
+      <legend class="step-label"><span>3</span>¿A qué hora?</legend>
+      <div class="time-options" id="clinic-times"></div>
+      <p class="availability-legend">Horarios en hora de Colombia. Los espacios ocupados aparecen desactivados.</p>
+    </fieldset>
+    <div class="booking-step">
+      <p class="step-label"><span>4</span>Tus datos</p>
+      <div class="field full">
+        <label for="clinic-name">Tu nombre</label>
+        <input id="clinic-name" name="name" value="Camila" required maxlength="80" autocomplete="off">
+        <small>Para probar esta agenda, usa un nombre ficticio.</small>
+      </div>
+      <div class="visit-type" role="radiogroup" aria-label="Tipo de visita">
+        <label><input type="radio" name="visit-type" value="Primera vez" checked><span>Es mi primera vez</span></label>
+        <label><input type="radio" name="visit-type" value="Ya vine antes"><span>Ya vine antes</span></label>
+      </div>
+    </div>
+    <button class="button" type="submit">Confirmar mi visita <span aria-hidden="true">↗</span></button>
+    <p class="form-note">La confirmación se guarda solo en esta página. No se envían mensajes ni se prestan servicios de salud desde este proyecto conceptual.</p>
+    <p class="status" id="clinic-status" role="status" aria-live="polite"></p>
+  </form>
+</section>
+
+<section class="section payments" id="pagos">
+  <div class="section-heading">
+    <div><span class="eyebrow">Pagos y cobertura</span><h2 class="serif-title">Claro desde<br>el principio.</h2></div>
+    <p>Sin letra pequeña. Si tienes dudas sobre tu caso, la recepción te orienta antes de reservar.</p>
+  </div>
+  <div class="pay-grid">
+    <article><h3>Atención particular</h3><p>Pagas el valor de cada sesión el día de tu visita. También ofrecemos planes de varias sesiones para fisioterapia y masaje.</p></article>
+    <article><h3>Medicina prepagada y reembolsos</h3><p>Te entregamos factura electrónica con los datos que tu aseguradora suele pedir. Si tu plan cubre reembolsos, puedes tramitarlo con ella directamente.</p></article>
+    <article><h3>Medios de pago</h3><p>Tarjeta débito o crédito, transferencia bancaria y billeteras digitales. Efectivo en recepción.</p></article>
+    <article><h3>Cambios y cancelaciones</h3><p>Sin costo hasta 24 horas antes. Así podemos ofrecer tu espacio a alguien de la lista de espera.</p></article>
+  </div>
+</section>
+
+<section class="section faq" id="preguntas">
+  <div class="faq-intro">
+    <span class="eyebrow">Preguntas frecuentes</span>
+    <h2 class="serif-title">Lo que suelen<br>preguntarnos.</h2>
+    <p>¿No encuentras tu respuesta? Escríbele a la recepción; responde de lunes a sábado.</p>
+  </div>
+  <div class="faq-list">
+    <details><summary>¿Necesito una orden médica para reservar?</summary><p>No. Puedes reservar directamente. Si tienes exámenes o una orden reciente, tráelos a tu primera visita: nos ayudan a entender tu contexto.</p></details>
+    <details><summary>¿Cuánto dura la primera visita?</summary><p>45 minutos. Es una conversación para conocerte, revisar lo que te trae y acordar contigo cómo seguir.</p></details>
+    <details><summary>¿Puedo cambiar o cancelar mi cita?</summary><p>Sí, sin costo hasta 24 horas antes. El día anterior te llega un recordatorio con botones para confirmar o cancelar.</p></details>
+    <details><summary>¿Atienden con medicina prepagada?</summary><p>La atención es particular. Te entregamos factura electrónica para que solicites el reembolso si tu plan lo permite; consulta las condiciones con tu aseguradora.</p></details>
+    <details><summary>¿Puedo elegir con quién me atiendo?</summary><p>Sí. Al reservar eliges a la persona del equipo. Si prefieres el primer horario libre, también puedes dejarlo abierto.</p></details>
+    <details><summary>¿Qué pasa si no encuentro horario?</summary><p>Te anotamos en la lista de espera. Si alguien cancela, te ofrecemos ese espacio por WhatsApp antes que a nadie más.</p></details>
+  </div>
+</section>
+
+<section class="section location" id="ubicacion">
+  <div class="location-copy">
+    <span class="eyebrow">Cómo llegar</span>
+    <h2 class="serif-title">Una casa tranquila<br>en Chapinero Alto.</h2>
+    <address>Carrera 4 # 69-21, Bogotá<br><span>Dirección ficticia para este proyecto</span></address>
+    <table class="hours">
+      <caption>Horario de atención</caption>
+      <tbody>
+        <tr data-days="1,2,3,4,5"><th scope="row">Lunes a viernes</th><td>7:00 – 19:00</td></tr>
+        <tr data-days="6"><th scope="row">Sábado</th><td>8:00 – 13:00</td></tr>
+        <tr data-days="0"><th scope="row">Domingo y festivos</th><td>Cerrado</td></tr>
+      </tbody>
+    </table>
+    <p class="location-note">A dos cuadras de la ciclorruta de la Séptima. Hay parqueadero público en la esquina.</p>
+  </div>
+  <figure class="map-card" aria-label="Mapa ilustrativo de la ubicación">
+    <svg viewBox="0 0 560 380" role="img" aria-labelledby="map-title" focusable="false">
+      <title id="map-title">Mapa ilustrativo: ALMA cerca de la carrera Séptima y la calle 69</title>
+      <rect width="560" height="380" fill="var(--map-bg)"/>
+      <path d="M0 300 C120 270 200 330 320 290 S500 250 560 270 V380 H0Z" fill="var(--map-park)"/>
+      <circle cx="455" cy="95" r="58" fill="var(--map-park)"/>
+      <g stroke="var(--map-road)" stroke-linecap="round" fill="none">
+        <path d="M-10 120 H570" stroke-width="16"/>
+        <path d="M-10 215 H570" stroke-width="10"/>
+        <path d="M150 -10 V390" stroke-width="10"/>
+        <path d="M300 -10 V390" stroke-width="22"/>
+        <path d="M430 -10 L380 390" stroke-width="10"/>
+      </g>
+      <path d="M300 -10 V390" stroke="var(--map-bike)" stroke-width="2" stroke-dasharray="6 8" fill="none"/>
+      <g font-family="Manrope, Arial, sans-serif" font-size="12" fill="var(--map-label)" font-weight="600" letter-spacing=".06em">
+        <text x="310" y="40">CARRERA 7</text>
+        <text x="18" y="110">CALLE 69</text>
+        <text x="18" y="205">CALLE 67</text>
+        <text x="420" y="100">PARQUE</text>
+      </g>
+      <g transform="translate(225 168)">
+        <circle class="map-pulse" r="34" fill="var(--accent)" opacity=".16"/>
+        <circle r="16" fill="var(--accent)"/>
+        <circle r="5" fill="var(--map-bg)"/>
+      </g>
+      <g transform="translate(250 140)">
+        <rect width="86" height="30" rx="15" fill="var(--map-pill)"/>
+        <text x="43" y="20" text-anchor="middle" font-family="Instrument Serif, Georgia, serif" font-size="18" fill="var(--map-pill-ink)">alma.</text>
+      </g>
+    </svg>
+    <figcaption>Mapa ilustrativo, no a escala.</figcaption>
+  </figure>
+</section>
+
+<section class="closing sector-automation-callout">
+  <div>
+    <span class="eyebrow">Detrás de la agenda</span>
+    <h2>Recordatorios, lista de espera<br>y seguimiento, en automático.</h2>
+    <p>Mira cómo una reserva se confirma, se recuerda 24 horas antes y, si se cancela, se ofrece sola a otra persona de la lista de espera.</p>
+  </div>
+  <a class="button" href="auto-clinica.html">Ver la automatización de ALMA <span aria-hidden="true">↗</span></a>
+</section>
+</main>
+<footer class="footer"><p>ALMA es una marca ficticia. Identidad, fotografía y experiencia digital reunidas en un proyecto propio de <span data-brand>Nexo Studio</span>.</p><a href="../index.html#contacto">Hablemos de tu proyecto ↗</a></footer>
+</div>
+</body>
+</html>

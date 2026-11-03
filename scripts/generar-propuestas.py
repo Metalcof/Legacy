@@ -48,17 +48,17 @@ SECTOR_NAMES = {
 }
 # Demos del sitio que más se parecen a cada sector.
 DEMOS = {
-    'salud': [('demos/clinica.html', 'ALMA, web de un centro de bienestar con agenda'), ('demos/sector-automation.html#clinica', 'Agenda que ocupa y libera cupos')],
-    'veterinaria': [('demos/clinica.html', 'ALMA, web con servicios y agenda de citas'), ('demos/sector-automation.html#clinica', 'Agenda con confirmaciones automáticas')],
-    'distribucion': [('demos/tienda.html', 'WAV, tienda con catálogo y carrito'), ('demos/sector-automation.html#tienda', 'Pedidos que descuentan inventario')],
-    'industria': [('demos/arquitectura.html', 'AURA, web corporativa con fichas de proyectos'), ('demos/sector-automation.html#arquitectura', 'Solicitudes que se vuelven un brief ordenado')],
-    'legal': [('demos/portfolio.html', 'Web profesional con casos y servicios'), ('demos/sector-automation.html#personal', 'Solicitudes que se vuelven propuestas')],
-    'educacion': [('demos/portfolio.html', 'Web con programas y servicios'), ('demos/sector-automation.html#personal', 'Inscripciones con seguimiento por etapas')],
-    'restaurante': [('demos/restaurante.html', 'LUMBRE, carta con fotos y pedidos'), ('demos/sector-automation.html#restaurante', 'Reservas con mesa asignada')],
-    'hotel': [('demos/cafeteria.html', 'Maré, web con fotos y experiencias'), ('demos/sector-automation.html#restaurante', 'Reservas que se ordenan solas')],
-    'taller': [('demos/clinica.html', 'Web con servicios y agenda de citas'), ('demos/sector-automation.html#clinica', 'Citas con horario y confirmación')],
-    'inmobiliaria': [('demos/arquitectura.html', 'AURA, galería de proyectos con fichas'), ('demos/sector-automation.html#arquitectura', 'Solicitudes con seguimiento')],
-    'logistica': [('demos/arquitectura.html', 'Web corporativa con servicios'), ('demos/sector-automation.html#tienda', 'Pedidos con comprobante y estado')],
+    'salud': [('demos/clinica.html', 'ALMA, web de un centro de bienestar con agenda'), ('demos/auto-clinica.html', 'Agenda que ocupa y libera cupos')],
+    'veterinaria': [('demos/clinica.html', 'ALMA, web con servicios y agenda de citas'), ('demos/auto-clinica.html', 'Agenda con confirmaciones automáticas')],
+    'distribucion': [('demos/tienda.html', 'WAV, tienda con catálogo y carrito'), ('demos/auto-tienda.html', 'Pedidos que descuentan inventario')],
+    'industria': [('demos/arquitectura.html', 'AURA, web corporativa con fichas de proyectos'), ('demos/auto-arquitectura.html', 'Solicitudes que se vuelven un brief ordenado')],
+    'legal': [('demos/portfolio.html', 'Web profesional con casos y servicios'), ('demos/auto-personal.html', 'Solicitudes que se vuelven propuestas')],
+    'educacion': [('demos/portfolio.html', 'Web con programas y servicios'), ('demos/auto-personal.html', 'Inscripciones con seguimiento por etapas')],
+    'restaurante': [('demos/restaurante.html', 'LUMBRE, carta con fotos y pedidos'), ('demos/auto-restaurante.html', 'Reservas con mesa asignada')],
+    'hotel': [('demos/cafeteria.html', 'Maré, web con fotos y experiencias'), ('demos/auto-restaurante.html', 'Reservas que se ordenan solas')],
+    'taller': [('demos/clinica.html', 'Web con servicios y agenda de citas'), ('demos/auto-clinica.html', 'Citas con horario y confirmación')],
+    'inmobiliaria': [('demos/arquitectura.html', 'AURA, galería de proyectos con fichas'), ('demos/auto-arquitectura.html', 'Solicitudes con seguimiento')],
+    'logistica': [('demos/arquitectura.html', 'Web corporativa con servicios'), ('demos/auto-tienda.html', 'Pedidos con comprobante y estado')],
 }
 
 

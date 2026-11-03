@@ -32,4 +32,8 @@
   targets.forEach(el => observer.observe(el));
   // Si algo queda fuera del observador (por ejemplo, al imprimir), se muestra igual.
   window.addEventListener('beforeprint', () => targets.forEach(el => el.classList.add('dm-in')));
+  // Lo que está pegado al final de la página nunca cruza el margen del observador: al llegar abajo se muestra todo.
+  window.addEventListener('scroll', () => {
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) targets.forEach(el => el.classList.add('dm-in'));
+  }, { passive: true });
 })();

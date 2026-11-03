@@ -125,16 +125,18 @@ Las seis demos son conceptos navegables con fotografía realista, contacto conec
 | LUMBRE | `demos/restaurante.html` | Una fotografía por plato, filtros y pedido con cantidades. |
 | Valeria Ríos | `demos/portfolio.html` | Casos propios de cosmética, hotelería y talleres creativos. |
 
-`demos/sector-automation.html` reúne seis proyectos interactivos, cada uno con fotografías y reglas específicas del negocio:
+Cada negocio tiene su propia página de automatización, con su marca y su flujo. `demos/sector-automation.html` quedó como índice de las seis y redirige los enlaces antiguos (`#clinica`, etc.) a la página nueva.
 
-| Categoría | Enlace al proyecto | Qué permite probar |
+| Categoría | Página | Qué permite probar |
 | --- | --- | --- |
-| Cafetería | `demos/sector-automation.html#cafeteria` | Pedido para recoger, ticket, cola de preparación y estado listo. |
-| Arquitectura | `demos/sector-automation.html#arquitectura` | Solicitud, brief, checklist y fases de revisión. |
-| Tienda online | `demos/sector-automation.html#tienda` | Pedido por acabado, total, inventario y reversión. |
-| Clínica | `demos/sector-automation.html#clinica` | Horario disponible, reserva y cancelación que libera el cupo. |
-| Restaurante | `demos/sector-automation.html#restaurante` | Capacidad de mesas, asignación, reserva y liberación. |
-| Marca personal | `demos/sector-automation.html#personal` | Brief, alcance, propuesta y seguimiento por fases. |
+| Cafetería | `demos/auto-cafeteria.html` | Pedido para recoger, ticket, cola de la barra (Recibido / Preparando / Listo) y aviso por WhatsApp. |
+| Arquitectura | `demos/auto-arquitectura.html` | Solicitud guiada, brief con lo que falta, embudo de proyectos y visita a obra. |
+| Tienda online | `demos/auto-tienda.html` | Pedido, pago, inventario por acabado con alerta, factura, guía y seguimiento. |
+| Clínica | `demos/auto-clinica.html` | Calendario por especialista, recordatorio 24 h antes, cancelación y lista de espera. |
+| Restaurante | `demos/auto-restaurante.html` | Plano del salón, asignación de mesa, lista de espera e inasistencias. |
+| Marca personal | `demos/auto-personal.html` | Brief, calificación, llamada, propuesta con precio, firma y tablero del proyecto. |
+
+Cada web de ejemplo tiene sus propios estilos y scripts adicionales (`demos/<página>-plus.css` y `-plus.js`), cargados después de los compartidos.
 
 Los módulos tienen formularios, resultados y registros locales. El selector de sector de la portada muestra el sitio web y el proceso relacionados. Los botones de navegación y los enlaces de cada web abren el módulo correspondiente.
 

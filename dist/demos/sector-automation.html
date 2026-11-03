@@ -1,52 +1,61 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Un negocio que fluye · Conceptos de Nexo Studio</title>
-  <meta name="description" content="Seis proyectos interactivos de automatización para cafeterías, arquitectura, tiendas, bienestar, restaurantes y marcas personales.">
-  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="sector-automation.css">
-  <script src="../config.js" defer></script>
-  <script src="sector-automation.js" defer></script>
-  <script src="motion.js" defer></script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Automatizaciones de ejemplo · Nexo Studio</title>
+<meta name="description" content="Seis automatizaciones de ejemplo, una por negocio: cafetería, arquitectura, tienda, clínica, restaurante y marca personal.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<script>
+  // Los enlaces antiguos (sector-automation.html#clinica) llevan directo a la página nueva de cada negocio.
+  (function () {
+    var map = { cafeteria: 'auto-cafeteria.html', arquitectura: 'auto-arquitectura.html', tienda: 'auto-tienda.html', clinica: 'auto-clinica.html', restaurante: 'auto-restaurante.html', personal: 'auto-personal.html' };
+    var key = location.hash.replace('#', '');
+    if (map[key]) location.replace(map[key]);
+  })();
+</script>
+<script src="../config.js" defer></script>
+<style>
+@font-face{font-family:Archivo;src:url('../assets/archivo-var.woff2') format('woff2');font-weight:100 900;font-stretch:62% 125%}
+*{box-sizing:border-box;margin:0}
+body{font-family:Archivo,system-ui,sans-serif;background:#0c0d12;color:#fff;min-height:100vh}
+.bar{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px max(20px,calc((100% - 1180px)/2));font-size:14px;color:rgba(255,255,255,.7);border-bottom:1px solid rgba(255,255,255,.1)}
+.bar a{color:#fff;font-weight:700}
+main{width:min(1180px,calc(100% - 40px));margin:0 auto;padding:clamp(48px,7vw,96px) 0}
+h1{font-size:clamp(36px,5vw,64px);font-stretch:118%;letter-spacing:-.05em;line-height:1}
+.lead{margin-top:16px;max-width:40em;font-size:18px;line-height:1.6;color:rgba(255,255,255,.72)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:40px}
+.card{display:flex;flex-direction:column;gap:10px;padding:12px 12px 22px;border-radius:22px;background:#15171e;border:1px solid rgba(255,255,255,.1);color:#fff;text-decoration:none;transition:transform .35s cubic-bezier(.2,.7,0,1),border-color .3s}
+.card:hover,.card:focus-visible{transform:translateY(-6px);border-color:var(--c)}
+.card img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;border-radius:12px;background:#fff}
+.card span,.card strong,.card p{padding-inline:8px}
+.card span{font-size:13.5px;font-weight:700;color:var(--c)}
+.card strong{font-size:21px;letter-spacing:-.02em}
+.card p{font-size:15px;line-height:1.5;color:rgba(255,255,255,.7)}
+.note{margin-top:28px;font-size:14px;color:rgba(255,255,255,.5)}
+@media (max-width:900px){.grid{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.grid{grid-template-columns:1fr}}
+</style>
 </head>
-<body data-palette="original">
-  <a class="skip-link" href="#workspace">Ir al proyecto</a>
-  <header class="studio-header">
-    <a class="back-link" href="../index.html#proyectos">← <span data-brand>Nexo Studio</span></a>
-    <p>Ideas que trabajan contigo.</p>
-    <a class="contact-link" href="../index.html#contacto">Hablemos de tu negocio ↗</a>
-  </header>
-  <div class="concept-strip"><span class="status-dot" aria-hidden="true"></span> Proyectos conceptuales · Datos ficticios · Prueba local sin envíos ni pagos</div>
-  <div class="workspace" id="workspace">
-    <aside class="sidebar">
-      <div class="sidebar-heading"><span class="eyebrow">SEIS NEGOCIOS, SEIS IDEAS</span><h1>Menos pendientes.<br>Más tiempo.</h1><p>Entra a un negocio y prueba su operación.</p></div>
-      <nav class="sector-tabs" role="tablist" aria-label="Elegir proyecto de automatización">
-        <button id="tab-cafeteria" role="tab" aria-controls="cafeteria" aria-selected="true" tabindex="0" data-sector-tab="cafeteria"><span class="tab-number">01</span><span><strong>Maré</strong><small>Cafetería · pedidos para recoger</small></span><span class="tab-arrow" aria-hidden="true">↗</span></button>
-        <button id="tab-arquitectura" role="tab" aria-controls="arquitectura" aria-selected="false" tabindex="-1" data-sector-tab="arquitectura"><span class="tab-number">02</span><span><strong>AURA</strong><small>Arquitectura · proyectos en orden</small></span><span class="tab-arrow" aria-hidden="true">↗</span></button>
-        <button id="tab-tienda" role="tab" aria-controls="tienda" aria-selected="false" tabindex="-1" data-sector-tab="tienda"><span class="tab-number">03</span><span><strong>WAV</strong><small>Tienda · pedidos y existencias</small></span><span class="tab-arrow" aria-hidden="true">↗</span></button>
-        <button id="tab-clinica" role="tab" aria-controls="clinica" aria-selected="false" tabindex="-1" data-sector-tab="clinica"><span class="tab-number">04</span><span><strong>ALMA</strong><small>Bienestar · agenda con espacio</small></span><span class="tab-arrow" aria-hidden="true">↗</span></button>
-        <button id="tab-restaurante" role="tab" aria-controls="restaurante" aria-selected="false" tabindex="-1" data-sector-tab="restaurante"><span class="tab-number">05</span><span><strong>LUMBRE</strong><small>Restaurante · mesas preparadas</small></span><span class="tab-arrow" aria-hidden="true">↗</span></button>
-        <button id="tab-personal" role="tab" aria-controls="personal" aria-selected="false" tabindex="-1" data-sector-tab="personal"><span class="tab-number">06</span><span><strong>Valeria Ríos</strong><small>Marca personal · de idea a propuesta</small></span><span class="tab-arrow" aria-hidden="true">↗</span></button>
-      </nav>
-      <div class="sidebar-tools">
-        <fieldset class="palette-picker"><legend>Elige una paleta</legend><div class="palette-options"><button type="button" data-palette="original" aria-pressed="true">Original</button><button type="button" data-palette="verde" aria-pressed="false">Verde</button><button type="button" data-palette="cian" aria-pressed="false">Cian</button><button type="button" data-palette="violeta" aria-pressed="false">Violeta</button></div></fieldset>
-        <button type="button" class="reset-global" data-action="reset-all">Reiniciar los seis proyectos</button>
-        <p class="storage-note">Los cambios se guardan solo en este navegador. Puedes volver al ejemplo inicial cuando quieras.</p>
-      </div>
-    </aside>
-    <main class="project-area" id="sector-panels">
-      <section class="sector-panel" id="cafeteria" role="tabpanel" aria-labelledby="tab-cafeteria" tabindex="-1"><p>Preparando la operación de Maré…</p></section>
-      <section class="sector-panel" id="arquitectura" role="tabpanel" aria-labelledby="tab-arquitectura" tabindex="-1" hidden></section>
-      <section class="sector-panel" id="tienda" role="tabpanel" aria-labelledby="tab-tienda" tabindex="-1" hidden></section>
-      <section class="sector-panel" id="clinica" role="tabpanel" aria-labelledby="tab-clinica" tabindex="-1" hidden></section>
-      <section class="sector-panel" id="restaurante" role="tabpanel" aria-labelledby="tab-restaurante" tabindex="-1" hidden></section>
-      <section class="sector-panel" id="personal" role="tabpanel" aria-labelledby="tab-personal" tabindex="-1" hidden></section>
-    </main>
+<body>
+<div class="bar"><span>Datos de ejemplo · <span data-brand>Nexo Studio</span></span><a href="../index.html#automatizaciones">Volver al estudio ↗</a></div>
+<main>
+  <h1>Seis negocios, seis automatizaciones.</h1>
+  <p class="lead">Cada negocio trabaja distinto, así que cada automatización es distinta. Elige una y pruébala como si fuera tuya.</p>
+  <div class="grid">
+    <a class="card" style="--c:#e0a370" href="auto-cafeteria.html"><img src="../assets/shots/auto-cafeteria.webp" alt="" loading="lazy"><span>Cafetería · Maré</span><strong>Pedidos que llegan listos a la barra</strong><p>Pedido para recoger, ticket, cola de la barra y aviso de "tu pedido está listo".</p></a>
+    <a class="card" style="--c:#b7d39f" href="auto-arquitectura.html"><img src="../assets/shots/auto-arquitectura.webp" alt="" loading="lazy"><span>Arquitectura · AURA</span><strong>De la consulta al proyecto en orden</strong><p>Solicitud guiada, brief automático, embudo de proyectos y visita a obra agendada.</p></a>
+    <a class="card" style="--c:#c6ee6a" href="auto-tienda.html"><img src="../assets/shots/auto-tienda.webp" alt="" loading="lazy"><span>Tienda online · WAV</span><strong>Cada venta mueve todo solo</strong><p>Pago, inventario por color, factura, guía de envío y avisos al cliente.</p></a>
+    <a class="card" style="--c:#7fd1a1" href="auto-clinica.html"><img src="../assets/shots/auto-clinica.webp" alt="" loading="lazy"><span>Clínica · ALMA</span><strong>Agenda sin huecos ni olvidos</strong><p>Citas por especialista, recordatorio 24 h antes y lista de espera automática.</p></a>
+    <a class="card" style="--c:#ffad5c" href="auto-restaurante.html"><img src="../assets/shots/auto-restaurante.webp" alt="" loading="lazy"><span>Restaurante · LUMBRE</span><strong>La mesa correcta para cada reserva</strong><p>Plano del salón, asignación de mesa, lista de espera y liberación por inasistencia.</p></a>
+    <a class="card" style="--c:#ffd36b" href="auto-personal.html"><img src="../assets/shots/auto-personal.webp" alt="" loading="lazy"><span>Marca personal · Valeria Ríos</span><strong>Del interés a la propuesta firmada</strong><p>Brief, calificación, llamada, propuesta con precio, firma y tablero del proyecto.</p></a>
   </div>
-  <footer class="studio-footer"><p>Un concepto de <span data-brand>Nexo Studio</span>. Fotografías generadas con IA.</p><a href="../index.html#contacto">Quiero algo así para mi empresa ↗</a></footer>
-  <div class="sr-only" id="global-feedback" role="status" aria-live="polite"></div>
-  <noscript><p class="noscript">Activa JavaScript para probar estos proyectos. <a href="../index.html#contacto">Puedes contactar con el estudio aquí.</a></p></noscript>
+  <p class="note">Marcas ficticias y datos de ejemplo: no se envían mensajes, no se cobran pedidos ni se hacen reservas reales.</p>
+</main>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var c = window.SITE_CONFIG || {}; var b = (c.name || 'Nexo Studio').trim();
+  document.querySelectorAll('[data-brand]').forEach(function (el) { el.textContent = b; });
+});
+</script>
 </body>
 </html>

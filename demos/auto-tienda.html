@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WAV ops — pedidos que se gestionan solos · Concepto de Nexo Studio</title>
+  <meta name="description" content="Automatización de tienda online para WAV: pago, inventario por acabado, factura, guía de envío y avisos al cliente en un solo flujo. Concepto interactivo de Nexo Studio.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="auto-tienda.css">
+  <script src="../config.js" defer></script>
+  <script src="auto-tienda.js" defer></script>
+  <script src="motion.js" defer></script>
+</head>
+<body class="ops">
+  <a class="skip" href="#en-vivo">Ir a la demo en vivo</a>
+  <div class="ops-strip"><span class="ops-dot" aria-hidden="true"></span>Datos de ejemplo: no se cobra ni se envía nada real<span class="ops-strip-extra"> · Concepto de <span data-brand>Nexo Studio</span></span></div>
+  <header class="ops-top">
+    <a class="ops-back" href="../index.html#proyectos"><span aria-hidden="true">←</span> <span data-brand>Nexo Studio</span></a>
+    <a class="ops-mark" href="tienda.html" aria-label="Ir a la tienda WAV">wav<span>.</span><small>ops</small></a>
+    <a class="ops-store" href="tienda.html">Ver la tienda <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main>
+    <section class="ops-hero" aria-labelledby="ops-title">
+      <div class="ops-hero-copy">
+        <p class="ops-kicker">Automatización para tienda online</p>
+        <h1 id="ops-title">Vendes una vez.<br><span>Lo demás pasa solo.</span></h1>
+        <p class="ops-lead">Hoy cada venta de Wave One son seis tareas a mano: revisar el pago, descontar el inventario en una hoja, hacer la factura, pedir la guía, avisarle al cliente… y contestar <q>¿dónde va mi pedido?</q> por WhatsApp.</p>
+        <p class="ops-lead ops-lead-strong">Con este flujo, el pedido dispara todo lo demás en segundos y tu equipo solo empaca.</p>
+        <div class="ops-hero-actions">
+          <button type="button" class="ops-btn ops-btn-primary" data-autoplay>Ver el flujo completo <span aria-hidden="true">▶</span></button>
+          <a class="ops-btn ops-btn-ghost" href="#en-vivo">Probar con mi pedido</a>
+        </div>
+      </div>
+      <figure class="ops-hero-visual">
+        <img src="../assets/auto-tienda-small.webp" srcset="../assets/auto-tienda-small.webp 800w, ../assets/auto-tienda.webp 1600w" sizes="(max-width: 900px) 92vw, 46vw" width="800" height="450" alt="Persona empacando auriculares Wave One en una caja de cartón sobre una mesa de despacho" decoding="async" fetchpriority="high">
+        <div class="ops-float ops-float-pay" aria-hidden="true"><b>Pago confirmado</b><span>WAV-1043 · $ 699.800</span></div>
+        <div class="ops-float ops-float-stock" aria-hidden="true"><i></i><b>Lima · quedan 4</b><span>Reposición sugerida: 16 u.</span></div>
+        <div class="ops-float ops-float-chat" aria-hidden="true"><span>WhatsApp · ahora</span>Tu pedido va en camino. Guía WV 4821 9930 CO</div>
+        <figcaption>Foto conceptual generada con IA</figcaption>
+      </figure>
+    </section>
+
+    <section class="ops-live" id="en-vivo" aria-labelledby="live-title">
+      <div class="ops-live-head">
+        <div>
+          <p class="ops-kicker">Demo en vivo</p>
+          <h2 id="live-title">Un pedido entra. Mira todo lo que se mueve.</h2>
+        </div>
+        <div class="ops-live-tools">
+          <button type="button" class="ops-btn ops-btn-primary ops-btn-sm" data-autoplay>Ver el flujo completo <span aria-hidden="true">▶</span></button>
+          <button type="button" class="ops-btn ops-btn-ghost ops-btn-sm" id="ops-reset">Reiniciar demo</button>
+        </div>
+      </div>
+
+      <ol class="ops-rail" id="ops-rail" aria-label="Etapas del flujo">
+        <li data-node="pedido"><span class="ops-node"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14l-1.2 12H6.2L5 7Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg></span><b>Pedido</b><small>Llega de la tienda</small></li>
+        <li data-node="pago"><span class="ops-node"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h4"/></svg></span><b>Pago</b><small>Se confirma solo</small></li>
+        <li data-node="inventario"><span class="ops-node"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg></span><b>Inventario</b><small>Descuenta el acabado</small></li>
+        <li data-node="factura"><span class="ops-node"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l3 3v15H6z"/><path d="M9 10h6M9 14h6M9 18h3"/></svg></span><b>Factura</b><small>Electrónica, al instante</small></li>
+        <li data-node="guia"><span class="ops-node"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg></span><b>Guía</b><small>Etiqueta y rastreo</small></li>
+        <li data-node="avisos"><span class="ops-node"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg></span><b>Avisos</b><small>WhatsApp y correo</small></li>
+        <li data-node="metricas"><span class="ops-node"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><b>Métricas</b><small>Panel al día</small></li>
+      </ol>
+
+      <div class="ops-board">
+        <div class="ops-side">
+          <form class="ops-card ops-order" id="ops-form" novalidate>
+            <div class="ops-card-head"><h3>Nuevo pedido</h3><span class="ops-tag">Desde la tienda</span></div>
+            <fieldset class="ops-field">
+              <legend>Cliente de ejemplo</legend>
+              <div class="ops-people" id="ops-people"></div>
+            </fieldset>
+            <div class="ops-row2">
+              <label class="ops-field"><span>Nombre</span><input id="ops-name" name="name" type="text" maxlength="40" autocomplete="off" required></label>
+              <label class="ops-field"><span>Ciudad</span><select id="ops-city" name="city"></select></label>
+            </div>
+            <fieldset class="ops-field">
+              <legend>Acabado</legend>
+              <div class="ops-finishes" id="ops-finishes"></div>
+            </fieldset>
+            <div class="ops-row2">
+              <div class="ops-field"><span id="qty-label">Cantidad</span>
+                <div class="ops-stepper" role="group" aria-labelledby="qty-label"><button type="button" data-qty="-1" aria-label="Quitar una unidad">−</button><output id="ops-qty" aria-live="polite">1</output><button type="button" data-qty="1" aria-label="Añadir una unidad">+</button></div>
+              </div>
+              <fieldset class="ops-field">
+                <legend>Pago</legend>
+                <div class="ops-pay" id="ops-pay"></div>
+              </fieldset>
+            </div>
+            <div class="ops-total"><span>Total del pedido</span><strong id="ops-total">$ 349.900</strong></div>
+            <p class="ops-form-msg" id="ops-form-msg" role="alert"></p>
+            <button type="submit" class="ops-btn ops-btn-primary ops-submit" id="ops-submit">Recibir pedido <span aria-hidden="true">→</span></button>
+          </form>
+
+          <section class="ops-card ops-log" aria-labelledby="log-title">
+            <div class="ops-card-head"><h3 id="log-title">Registro automático</h3><span class="ops-live-dot">En vivo</span></div>
+            <ol class="ops-log-list" id="ops-log"></ol>
+          </section>
+        </div>
+
+        <div class="ops-main">
+          <div class="ops-views" role="group" aria-label="Elegir vista">
+            <button type="button" data-view="team" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Lo que ve tu equipo</button>
+            <button type="button" data-view="client" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg>Lo que ve tu cliente</button>
+          </div>
+
+          <div class="ops-view" id="view-team" data-panel="team">
+            <div class="ops-kpis" id="ops-kpis"></div>
+            <div class="ops-grid2">
+              <section class="ops-card" aria-labelledby="stock-title">
+                <div class="ops-card-head"><h3 id="stock-title">Inventario por acabado</h3><span class="ops-muted">Alerta bajo <b id="ops-threshold">5</b> u.</span></div>
+                <div class="ops-stock" id="ops-stock"></div>
+                <div class="ops-restock" id="ops-restock" hidden></div>
+              </section>
+              <section class="ops-card" aria-labelledby="chart-title">
+                <div class="ops-card-head"><h3 id="chart-title">Unidades vendidas hoy</h3><span class="ops-muted">por acabado</span></div>
+                <div class="ops-chart" id="ops-chart"></div>
+              </section>
+            </div>
+            <section class="ops-card" aria-labelledby="orders-title">
+              <div class="ops-card-head"><h3 id="orders-title">Pedidos de hoy</h3><span class="ops-muted" id="ops-pending"></span></div>
+              <div class="ops-orders" id="ops-orders"></div>
+            </section>
+            <section class="ops-docs" aria-label="Documentos del pedido seleccionado">
+              <article class="ops-doc ops-invoice" id="ops-invoice"></article>
+              <article class="ops-doc ops-label" id="ops-label"></article>
+            </section>
+          </div>
+
+          <div class="ops-view" id="view-client" data-panel="client" hidden>
+            <div class="ops-client">
+              <div class="ops-phone" aria-label="Página de seguimiento en el celular del cliente">
+                <div class="ops-phone-notch" aria-hidden="true"></div>
+                <div class="ops-phone-screen" id="ops-track"></div>
+              </div>
+              <div class="ops-client-side">
+                <section class="ops-card ops-chat" aria-labelledby="chat-title">
+                  <div class="ops-card-head"><h3 id="chat-title">WhatsApp del cliente</h3><span class="ops-muted">Mensajes automáticos</span></div>
+                  <div class="ops-chat-list" id="ops-chat"></div>
+                </section>
+                <section class="ops-card" aria-labelledby="mail-title">
+                  <div class="ops-card-head"><h3 id="mail-title">Su bandeja de correo</h3></div>
+                  <ul class="ops-mail" id="ops-mail"></ul>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ops-steps" aria-labelledby="steps-title">
+      <div class="ops-steps-head">
+        <p class="ops-kicker">Qué cambia en el día a día</p>
+        <h2 id="steps-title">Seis tareas que dejan de ser tuyas.</h2>
+      </div>
+      <ol class="ops-step-grid">
+        <li><span>01</span><h3>Pago</h3><p class="was">Antes: entrar a la pasarela y comparar montos.</p><p>Ahora: el pago aprobado crea el pedido y nada avanza si no se confirma.</p></li>
+        <li><span>02</span><h3>Inventario</h3><p class="was">Antes: restar en una hoja de cálculo, si alguien se acuerda.</p><p>Ahora: cada acabado se descuenta al instante y la tienda no vende lo que no hay.</p></li>
+        <li><span>03</span><h3>Reposición</h3><p class="was">Antes: notar que se acabó el Lima cuando un cliente reclama.</p><p>Ahora: aviso de stock bajo con una cantidad sugerida para pedir al proveedor.</p></li>
+        <li><span>04</span><h3>Factura</h3><p class="was">Antes: copiar datos del pedido al programa de facturación.</p><p>Ahora: la factura electrónica se genera con los datos del pedido y se envía por correo.</p></li>
+        <li><span>05</span><h3>Envío</h3><p class="was">Antes: pedir la guía por teléfono y pegarla a mano.</p><p>Ahora: la etiqueta con número de rastreo queda lista para imprimir al empacar.</p></li>
+        <li><span>06</span><h3>Avisos</h3><p class="was">Antes: responder “¿dónde va mi pedido?” uno por uno.</p><p>Ahora: el cliente recibe un mensaje en cada etapa, de pagado a entregado.</p></li>
+      </ol>
+    </section>
+
+    <section class="ops-cta" aria-labelledby="cta-title">
+      <div>
+        <h2 id="cta-title">¿Tu tienda necesita que esto pase sola?</h2>
+        <p>Conectamos tu tienda, tu facturación y tu transportadora en un flujo como este, a la medida de lo que vendes.</p>
+      </div>
+      <div class="ops-cta-actions">
+        <a class="ops-btn ops-btn-primary" href="../index.html#contacto">Hablemos de tu tienda <span aria-hidden="true">↗</span></a>
+        <a class="ops-btn ops-btn-ghost" href="tienda.html">Ver la tienda WAV</a>
+        <a class="ops-btn ops-btn-ghost" href="../index.html#proyectos">Otros proyectos</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="ops-footer">
+    <a class="ops-mark" href="tienda.html" aria-label="Ir a la tienda WAV">wav<span>.</span></a>
+    <p>Marca, clientes, pedidos y documentos ficticios. No se cobra, factura ni envía nada real. Concepto de <span data-brand>Nexo Studio</span>.</p>
+  </footer>
+  <p class="sr-only" id="ops-announce" aria-live="polite"></p>
+  <noscript><p class="ops-noscript">Activa JavaScript para probar esta demo.</p></noscript>
+</body>
+</html>
