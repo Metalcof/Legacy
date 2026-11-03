@@ -68,7 +68,7 @@
 
   const state = { sector: 'cafeteria', color: 'ambar', type: 'clasica', shape: 'suave', layout: 'dividida', mode: 'claro' };
   const features = new Set(['whatsapp']);
-  let cart = 0;
+  const cartItems = new Map();
   let swapTimer;
 
   const groups = [...lab.querySelectorAll('[data-lab-group]')];
@@ -104,6 +104,7 @@
     ['color', 'type', 'shape', 'layout', 'mode'].forEach(key => { site.dataset[key] = state[key]; });
     if (sectorChanged) {
       site.dataset.sector = state.sector;
+      if (cartItems.size) { cartItems.clear(); renderCart(); closeCart(); }
       if (animateSector && !reduced.matches && !document.body.classList.contains('motion-paused')) {
         clearTimeout(swapTimer);
         site.classList.add('is-swapping');
@@ -133,6 +134,7 @@
       add.tabIndex = on ? 0 : -1;
       if (on) add.removeAttribute('aria-hidden'); else add.setAttribute('aria-hidden', 'true');
     });
+    cartOpen.tabIndex = features.has('cart') ? 0 : -1;
     status.textContent = describe();
   }
 
@@ -146,20 +148,86 @@
   toggles.forEach(button => button.addEventListener('click', () => {
     const key = button.dataset.feature;
     if (features.has(key)) features.delete(key); else features.add(key);
-    if (key === 'cart' && !features.has('cart')) { cart = 0; cartCount.textContent = '0'; }
+    if (key === 'cart' && !features.has('cart')) { cartItems.clear(); renderCart(); closeCart(); }
     applyFeatures();
   }));
 
-  // Dentro de la vista previa: el carrito de ejemplo suma productos.
+  /* ---------- Carrito de ejemplo dentro de la vista previa ---------- */
+  const minicart = lab.querySelector('[data-lab-minicart]');
+  const cartOpen = lab.querySelector('[data-lab-cart-open]');
+  const cartList = lab.querySelector('[data-lab-cart-list]');
+  const cartEmpty = lab.querySelector('[data-lab-cart-empty]');
+  const cartTotal = lab.querySelector('[data-lab-cart-total]');
+  const payButton = lab.querySelector('[data-lab-cart-pay]');
+  const toNumber = text => /\$/.test(text) ? Number(text.replace(/\D/g, '')) : 0;
+  const money = value => '$ ' + value.toLocaleString('es-CO');
+
+  function renderCart() {
+    const count = [...cartItems.values()].reduce((sum, item) => sum + item.qty, 0);
+    cartCount.textContent = String(count);
+    cartList.replaceChildren(...[...cartItems.entries()].map(([key, item]) => {
+      const li = document.createElement('li');
+      li.dataset.key = key;
+      const img = Object.assign(document.createElement('img'), { src: item.img, alt: '', width: 56, height: 56 });
+      const info = document.createElement('div');
+      info.append(Object.assign(document.createElement('strong'), { textContent: item.title }), Object.assign(document.createElement('small'), { textContent: item.price }));
+      const qty = document.createElement('div');
+      qty.className = 'ls-qty';
+      const minus = Object.assign(document.createElement('button'), { type: 'button', textContent: '−', className: 'ls-qty-btn' });
+      minus.dataset.cartAct = 'minus'; minus.setAttribute('aria-label', `Quitar una unidad de ${item.title}`);
+      const plus = Object.assign(document.createElement('button'), { type: 'button', textContent: '+', className: 'ls-qty-btn' });
+      plus.dataset.cartAct = 'plus'; plus.setAttribute('aria-label', `Agregar una unidad de ${item.title}`);
+      qty.append(minus, Object.assign(document.createElement('span'), { textContent: String(item.qty) }), plus);
+      const remove = Object.assign(document.createElement('button'), { type: 'button', className: 'ls-remove' });
+      remove.dataset.cartAct = 'remove'; remove.setAttribute('aria-label', `Eliminar ${item.title} del carrito`);
+      remove.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12h10l1-12M9 7V4h6v3"/></svg>';
+      li.append(img, info, qty, remove);
+      return li;
+    }));
+    cartEmpty.hidden = cartItems.size > 0;
+    payButton.disabled = cartItems.size === 0;
+    const total = [...cartItems.values()].reduce((sum, item) => sum + toNumber(item.price) * item.qty, 0);
+    cartTotal.textContent = cartItems.size && !total ? 'A cotizar' : money(total);
+  }
+  function openCart() { minicart.hidden = false; requestAnimationFrame(() => minicart.classList.add('is-open')); cartOpen.setAttribute('aria-expanded', 'true'); }
+  function closeCart() { minicart.classList.remove('is-open'); cartOpen.setAttribute('aria-expanded', 'false'); setTimeout(() => { if (!minicart.classList.contains('is-open')) minicart.hidden = true; }, reduced.matches ? 0 : 260); }
+
   cardsBox.addEventListener('click', event => {
     const add = event.target instanceof Element && event.target.closest('.ls-add');
     if (!add || !features.has('cart')) return;
-    cart += 1;
-    cartCount.textContent = String(cart);
+    const card = add.closest('.ls-card');
+    const key = `${state.sector}-${[...cardsBox.children].indexOf(card)}`;
+    const item = cartItems.get(key) || { title: card.querySelector('strong').textContent, price: card.querySelector('small').textContent, img: card.querySelector('img').src, qty: 0 };
+    item.qty = Math.min(99, item.qty + 1);
+    cartItems.set(key, item);
+    renderCart();
     const badge = cartCount.parentElement;
     badge.classList.remove('bump'); void badge.offsetWidth; badge.classList.add('bump');
     add.classList.remove('added'); void add.offsetWidth; add.classList.add('added');
+    openCart();
+    cartList.querySelector(`[data-key="${key}"]`)?.classList.add('is-new');
   });
+  cartOpen.addEventListener('click', () => { if (minicart.classList.contains('is-open')) closeCart(); else openCart(); });
+  lab.querySelector('[data-lab-cart-close]').addEventListener('click', closeCart);
+  cartList.addEventListener('click', event => {
+    const button = event.target instanceof Element && event.target.closest('[data-cart-act]');
+    if (!button) return;
+    const li = button.closest('li');
+    const item = cartItems.get(li.dataset.key);
+    const act = button.dataset.cartAct;
+    if (act === 'plus') { item.qty = Math.min(99, item.qty + 1); renderCart(); return; }
+    if (act === 'minus' && item.qty > 1) { item.qty -= 1; renderCart(); return; }
+    // Eliminar: la fila sale con animación y luego se quita.
+    li.classList.add('is-leaving');
+    setTimeout(() => { cartItems.delete(li.dataset.key); renderCart(); }, reduced.matches ? 0 : 280);
+  });
+  payButton.addEventListener('click', () => {
+    minicart.classList.add('is-paid');
+    cartList.replaceChildren(Object.assign(document.createElement('li'), { className: 'ls-paid', textContent: 'Pedido de ejemplo listo. En tu web, aquí se conecta el pago en línea.' }));
+    payButton.disabled = true;
+    setTimeout(() => { cartItems.clear(); minicart.classList.remove('is-paid'); renderCart(); closeCart(); }, 2600);
+  });
+  renderCart();
 
   lab.querySelectorAll('[data-device]').forEach(button => button.addEventListener('click', () => {
     frame.dataset.device = button.dataset.device;

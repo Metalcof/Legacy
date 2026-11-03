@@ -20,30 +20,78 @@
     { key: 'construccion', title: 'Dice "en construcción" desde hace tiempo', cost: 'Un aviso permanente hace pensar que el negocio no está activo.', fix: 'Publicamos primero lo esencial y sumamos el resto por etapas.', service: 'Página web moderna con mantenimiento' }
   ];
 
+  // Cuánto baja la "salud" de la web cada problema (orientativo, para la demostración).
+  const weights = { caida: 45, 'sin-web': 35, seguridad: 20, construccion: 18, botones: 16, celular: 15, manual: 12, desactualizada: 12, plantilla: 10 };
+  const icons = {
+    desactualizada: '<path d="M12 7v5l3 2"/><circle cx="12" cy="12" r="8"/>',
+    caida: '<path d="M4 4l16 16M9.5 5.5A8 8 0 0 1 20 12M4 12a8 8 0 0 0 11 7.4"/>',
+    botones: '<rect x="4" y="8" width="16" height="8" rx="4"/><path d="M15 3l-2 4M9 21l2-4"/>',
+    celular: '<rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/>',
+    manual: '<path d="M20 11.5a8 8 0 0 1-11.6 7.1L4 20l1.4-4.2A8 8 0 1 1 20 11.5Z"/>',
+    plantilla: '<path d="M5 6h14M5 11h9M5 16h12"/>',
+    'sin-web': '<circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4c2.5 2.5 2.5 13.5 0 16M12 4c-2.5 2.5-2.5 13.5 0 16"/>',
+    seguridad: '<rect x="6" y="10" width="12" height="9" rx="2"/><path d="M9 10V7a3 3 0 0 1 6 0"/>',
+    construccion: '<path d="M3 20h18M6 20l6-14 6 14M8 15h8"/>'
+  };
+
   const diag = document.getElementById('diagnostico');
   if (diag) {
     const list = diag.querySelector('[data-diag-list]');
     const detail = diag.querySelector('[data-diag-detail]');
     const summary = diag.querySelector('[data-diag-summary]');
     const send = diag.querySelector('[data-diag-send]');
+    const browser = diag.querySelector('[data-diag-browser]');
+    const score = diag.querySelector('[data-diag-score]');
+    const points = diag.querySelector('[data-diag-points]');
+    const viewButtons = [...diag.querySelectorAll('[data-diag-view]')];
     const picked = new Set();
     let current = problems[4];
+    let shown = 100;
+    let counter;
 
     problems.forEach(problem => {
       const button = el('button', 'diag-item');
       button.type = 'button';
       button.dataset.problem = problem.key;
       button.setAttribute('aria-pressed', 'false');
-      button.append(el('i', 'diag-check'), el('span', null, problem.title));
+      const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      icon.setAttribute('viewBox', '0 0 24 24'); icon.setAttribute('aria-hidden', 'true'); icon.classList.add('diag-icon');
+      icon.innerHTML = icons[problem.key];
+      button.append(icon, el('span', null, problem.title), el('i', 'diag-check'));
       button.querySelector('i').setAttribute('aria-hidden', 'true');
       list.append(button);
     });
 
-    function render() {
+    function animateScore(target) {
+      clearInterval(counter);
+      score.dataset.level = target >= 80 ? 'ok' : target >= 50 ? 'warn' : 'bad';
+      score.style.setProperty('--score', target);
+      if (still()) { shown = target; points.textContent = String(target); return; }
+      counter = setInterval(() => {
+        shown += Math.sign(target - shown) * Math.max(1, Math.round(Math.abs(target - shown) / 6));
+        points.textContent = String(shown);
+        if (shown === target) clearInterval(counter);
+      }, 30);
+    }
+
+    function setView(view) {
+      browser.dataset.view = view;
+      viewButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.diagView === view)));
+      const fixed = view === 'nexo';
+      animateScore(fixed ? 98 : Math.max(8, 100 - [...picked].reduce((sum, key) => sum + weights[key], 0)));
+    }
+
+    function render(focusKey) {
       list.querySelectorAll('[data-problem]').forEach(button => {
         button.setAttribute('aria-pressed', String(picked.has(button.dataset.problem)));
         button.classList.toggle('is-current', button.dataset.problem === current.key);
       });
+      problems.forEach(problem => browser.classList.toggle(`has-${problem.key}`, picked.has(problem.key)));
+      // Resalta en la ventana el defecto que se acaba de marcar.
+      browser.querySelectorAll('.is-flash').forEach(node => node.classList.remove('is-flash'));
+      if (focusKey && picked.has(focusKey)) {
+        browser.querySelectorAll(`[data-def="${focusKey}"]`).forEach(node => { void node.offsetWidth; node.classList.add('is-flash'); });
+      }
       detail.classList.remove('is-changing'); void detail.offsetWidth; detail.classList.add('is-changing');
       detail.querySelector('[data-diag-title]').textContent = current.title;
       detail.querySelector('[data-diag-cost]').textContent = current.cost;
@@ -52,7 +100,8 @@
       const services = [...new Set(problems.filter(p => picked.has(p.key)).map(p => p.service))];
       summary.textContent = picked.size
         ? `Marcaste ${picked.size} ${picked.size === 1 ? 'problema' : 'problemas'}. Te proponemos: ${services.join('; ')}.`
-        : 'Marca los que veas en tu web y te decimos por dónde empezar.';
+        : 'Marca los problemas que veas y mira cómo se ve tu web para tus clientes.';
+      setView(browser.dataset.view === 'nexo' && picked.size ? 'hoy' : browser.dataset.view);
     }
 
     list.addEventListener('click', event => {
@@ -61,8 +110,10 @@
       const key = button.dataset.problem;
       if (picked.has(key)) picked.delete(key); else picked.add(key);
       current = problems.find(p => p.key === key);
-      render();
+      browser.dataset.view = 'hoy';
+      render(key);
     });
+    viewButtons.forEach(button => button.addEventListener('click', () => setView(button.dataset.diagView)));
 
     send?.addEventListener('click', () => {
       const field = document.getElementById('project-description');
