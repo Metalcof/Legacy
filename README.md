@@ -60,6 +60,14 @@ Las tarjetas de interfaz (agenda, pedido, citas del día) son maquetas HTML con 
 
 La tipografía es Archivo variable (`assets/archivo-var.woff2`), con los ejes de peso y de ancho. Si cambias de fuente, conserva la declaración `font-stretch` del `@font-face`.
 
+## Laboratorio, videos y movimiento
+
+**Laboratorio "Arma una web"** (`#laboratorio`, código en `lab.js`). El visitante elige negocio, color, letra, forma, distribución, modo claro u oscuro y funciones (WhatsApp, reservas, carrito, reseñas), y una web de ejemplo cambia en vivo. Puede verla como computador o celular, pedir una combinación al azar y, con "Quiero esta web", abrir el formulario con su elección ya escrita. Los textos y fotos de cada negocio están en el objeto `sectors` de `lab.js`; los colores en las reglas `.lab-site[data-color=…]` de `styles.css`.
+
+**Demos grabadas** (`#en-accion`). Cuatro videos reales de las demos en uso, en `assets/video/` (`.webm` y su imagen `.jpg`). Cada capítulo apunta a un nombre base con `data-reel-src`; para cambiar un video, reemplaza los dos archivos con el mismo nombre. Se reproducen sin sonido, solo cuando la sección está a la vista, y pasan solos al siguiente capítulo.
+
+**Movimiento** (`motion.js` y el bloque final de `styles.css`): entrada de la portada, notificaciones que cambian, barras que se actualizan, revelado de fotos y tarjetas al hacer scroll, cifras que cuentan, profundidad en las tarjetas, registro en vivo del diagrama y transiciones en filtros, colores y pasos. Si el sistema pide reducir movimiento, o si alguien usa el botón de pausa del diagrama, todo queda quieto y completo.
+
 ## Demos y automatizaciones
 
 Las seis demos son conceptos navegables con fotografía realista, contacto conectado a `config.js` y selector de tema:

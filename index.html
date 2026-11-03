@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#fafaf8">
   <meta name="description" content="Desarrollamos sitios web, integraciones entre tus herramientas y plataformas de gestión a medida, para negocios que atienden todos los días y para empresas con sistemas propios.">
   <title>Nexo Studio — Web, integraciones y plataformas de gestión</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -13,6 +13,8 @@
   <script src="app.js" defer></script>
   <script src="effects.js" defer></script>
   <script src="project-journey.js" defer></script>
+  <script src="lab.js" defer></script>
+  <script src="motion.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#contenido">Ir al contenido</a>
@@ -24,6 +26,7 @@
     </a>
     <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navigation"><span></span><span></span></button>
     <nav id="navigation" class="navigation" aria-label="Navegación principal">
+      <a href="#laboratorio">Pruébalo</a>
       <a href="#servicios">Servicios</a>
       <a href="#proyectos">Proyectos</a>
       <a href="#proceso">Cómo trabajamos</a>
@@ -54,6 +57,7 @@
           <figure class="photo-frame photo-hero">
             <img src="assets/auto-clinica-small.webp" srcset="assets/auto-clinica-small.webp 800w, assets/auto-clinica.webp 1600w" sizes="(max-width:960px) 92vw, 50vw" width="1600" height="900" alt="Recepción de una clínica luminosa, con una persona anotando en la agenda; fotografía realista creada con IA" fetchpriority="high" decoding="async">
           </figure>
+          <svg class="hero-link" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M34 66 C 48 64, 46 34, 66 26"/></svg>
           <div class="ui-card ui-card-chart">
             <div class="ui-card-head"><strong>Citas de la semana</strong><span class="ui-chip ui-chip-ok">Ejemplo</span></div>
             <div class="mini-bars" role="img" aria-label="Gráfica de ejemplo: citas de lunes a viernes">
@@ -61,7 +65,7 @@
             </div>
             <p class="ui-card-foot">Cupos libres actualizados al reservar o cancelar.</p>
           </div>
-          <div class="ui-card ui-card-alert">
+          <div class="ui-card ui-card-alert" data-hero-alert aria-live="off">
             <span class="ui-icon" aria-hidden="true"></span>
             <div>
               <div class="ui-card-head"><strong>Cita confirmada</strong><time>10:02</time></div>
@@ -72,12 +76,142 @@
       </div>
     </section>
 
+    <section class="ticker" aria-label="Lo que podemos conectar en tu negocio">
+      <div class="ticker-track"><ul class="ticker-row"><li>Pagos en línea</li><li>Pedidos por WhatsApp</li><li>Facturación electrónica</li><li>Agenda y citas</li><li>Inventario</li><li>Correos automáticos</li><li>CRM</li><li>Reportes</li><li>Tiendas online</li><li>Paneles internos</li></ul><ul class="ticker-row" aria-hidden="true"><li>Pagos en línea</li><li>Pedidos por WhatsApp</li><li>Facturación electrónica</li><li>Agenda y citas</li><li>Inventario</li><li>Correos automáticos</li><li>CRM</li><li>Reportes</li><li>Tiendas online</li><li>Paneles internos</li></ul></div>
+    </section>
+
+    <section class="lab" id="laboratorio" aria-labelledby="lab-title">
+      <div class="shell">
+        <div class="lab-head" data-reveal>
+          <h2 id="lab-title">Arma una web en treinta segundos.</h2>
+          <p>Elige el negocio, el color, la letra y las funciones. La vista previa cambia mientras decides, igual que en una reunión de diseño con nosotros.</p>
+        </div>
+        <div class="lab-grid">
+          <div class="lab-controls" role="group" aria-label="Opciones de la web de ejemplo">
+            <fieldset class="lab-field">
+              <legend>Negocio</legend>
+              <div class="lab-options" data-lab-group="sector">
+                <button type="button" data-value="cafeteria" aria-pressed="true">Cafetería</button>
+                <button type="button" data-value="clinica" aria-pressed="false">Clínica</button>
+                <button type="button" data-value="tienda" aria-pressed="false">Tienda</button>
+                <button type="button" data-value="restaurante" aria-pressed="false">Restaurante</button>
+                <button type="button" data-value="arquitectura" aria-pressed="false">Arquitectura</button>
+                <button type="button" data-value="personal" aria-pressed="false">Marca personal</button>
+              </div>
+            </fieldset>
+            <fieldset class="lab-field">
+              <legend>Color de marca</legend>
+              <div class="lab-swatches" data-lab-group="color">
+                <button type="button" data-value="ambar" aria-pressed="true" style="--sw:#c9733d"><span class="visually-hidden">Ámbar</span></button>
+                <button type="button" data-value="bosque" aria-pressed="false" style="--sw:#3f6b4f"><span class="visually-hidden">Bosque</span></button>
+                <button type="button" data-value="oceano" aria-pressed="false" style="--sw:#2557a7"><span class="visually-hidden">Océano</span></button>
+                <button type="button" data-value="ciruela" aria-pressed="false" style="--sw:#7b3b74"><span class="visually-hidden">Ciruela</span></button>
+                <button type="button" data-value="coral" aria-pressed="false" style="--sw:#e2553f"><span class="visually-hidden">Coral</span></button>
+                <button type="button" data-value="grafito" aria-pressed="false" style="--sw:#2b2f36"><span class="visually-hidden">Grafito</span></button>
+              </div>
+            </fieldset>
+            <div class="lab-pair">
+              <fieldset class="lab-field">
+                <legend>Letra</legend>
+                <div class="lab-options" data-lab-group="type">
+                  <button type="button" data-value="moderna" aria-pressed="false">Moderna</button>
+                  <button type="button" data-value="clasica" aria-pressed="true">Clásica</button>
+                  <button type="button" data-value="compacta" aria-pressed="false">Compacta</button>
+                </div>
+              </fieldset>
+              <fieldset class="lab-field">
+                <legend>Forma</legend>
+                <div class="lab-options" data-lab-group="shape">
+                  <button type="button" data-value="suave" aria-pressed="true">Suave</button>
+                  <button type="button" data-value="recta" aria-pressed="false">Recta</button>
+                  <button type="button" data-value="pildora" aria-pressed="false">Redonda</button>
+                </div>
+              </fieldset>
+            </div>
+            <div class="lab-pair">
+              <fieldset class="lab-field">
+                <legend>Distribución</legend>
+                <div class="lab-options" data-lab-group="layout">
+                  <button type="button" data-value="dividida" aria-pressed="true">Dividida</button>
+                  <button type="button" data-value="centrada" aria-pressed="false">Centrada</button>
+                  <button type="button" data-value="portada" aria-pressed="false">Foto completa</button>
+                </div>
+              </fieldset>
+              <fieldset class="lab-field">
+                <legend>Modo</legend>
+                <div class="lab-options" data-lab-group="mode">
+                  <button type="button" data-value="claro" aria-pressed="true">Claro</button>
+                  <button type="button" data-value="oscuro" aria-pressed="false">Oscuro</button>
+                </div>
+              </fieldset>
+            </div>
+            <fieldset class="lab-field">
+              <legend>Funciones</legend>
+              <div class="lab-toggles" data-lab-toggles>
+                <button type="button" data-feature="whatsapp" aria-pressed="true"><i aria-hidden="true"></i>Botón de WhatsApp</button>
+                <button type="button" data-feature="booking" aria-pressed="false"><i aria-hidden="true"></i>Reservas</button>
+                <button type="button" data-feature="cart" aria-pressed="false"><i aria-hidden="true"></i>Carrito</button>
+                <button type="button" data-feature="reviews" aria-pressed="false"><i aria-hidden="true"></i>Reseñas</button>
+              </div>
+            </fieldset>
+            <div class="lab-actions">
+              <button type="button" class="button button-line" data-lab-shuffle><span class="lab-dice" aria-hidden="true"></span>Sorpréndeme</button>
+              <button type="button" class="button button-accent" data-lab-send data-open-brief data-service="Página web">Quiero esta web</button>
+            </div>
+          </div>
+
+          <div class="lab-stage">
+            <div class="lab-stage-bar">
+              <div class="lab-device" role="group" aria-label="Tamaño de la vista previa">
+                <button type="button" data-device="desktop" aria-pressed="true">Computador</button>
+                <button type="button" data-device="mobile" aria-pressed="false">Celular</button>
+              </div>
+              <p class="lab-status" data-lab-status role="status" aria-live="polite">Cafetería, color ámbar, letra clásica.</p>
+            </div>
+            <div class="lab-frame" data-lab-frame data-device="desktop">
+              <div class="lab-browser"><span aria-hidden="true"><i></i><i></i><i></i></span><span class="lab-url" data-lab-url>mare.co</span></div>
+              <div class="lab-site" data-lab-site data-sector="cafeteria" data-color="ambar" data-type="clasica" data-shape="suave" data-layout="dividida" data-mode="claro" aria-label="Vista previa de la web de ejemplo">
+                <div class="ls-nav">
+                  <strong class="ls-logo" data-lab-text="brand">maré.</strong>
+                  <span class="ls-links" data-lab-links><span>Carta</span><span>El lugar</span><span>Visítanos</span></span>
+                  <span class="ls-cart" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16l-1.4 12H5.4L4 7Z"/><path d="M8.5 7V6a3.5 3.5 0 0 1 7 0v1"/></svg><b data-lab-cart-count>0</b></span>
+                </div>
+                <div class="ls-hero">
+                  <div class="ls-copy">
+                    <span class="ls-kicker" data-lab-text="kicker">Café de especialidad</span>
+                    <h3 class="ls-title" data-lab-text="title">Un buen café, sin prisa.</h3>
+                    <p class="ls-text" data-lab-text="text">Granos de origen, pan del día y un jardín para quedarse.</p>
+                    <span class="ls-button" data-lab-text="cta">Ver la carta</span>
+                    <div class="ls-reviews" aria-hidden="true"><span>★★★★★</span><small data-lab-text="review">4,9 · 312 reseñas</small></div>
+                  </div>
+                  <div class="ls-photo"><img data-lab-hero src="assets/cafe-editorial-small.webp" alt="" width="800" height="450" decoding="async"></div>
+                </div>
+                <div class="ls-cards" data-lab-cards>
+                  <div class="ls-card"><img src="assets/case-cafe-flatwhite-small.webp" alt="" width="800" height="450" loading="lazy" decoding="async"><strong>Flat white</strong><small>$ 7.000</small><button type="button" class="ls-add" tabindex="-1" aria-hidden="true">+</button></div>
+                  <div class="ls-card"><img src="assets/case-cafe-croissant-small.webp" alt="" width="800" height="450" loading="lazy" decoding="async"><strong>Croissant</strong><small>$ 7.500</small><button type="button" class="ls-add" tabindex="-1" aria-hidden="true">+</button></div>
+                  <div class="ls-card"><img src="assets/case-cafe-iced-small.webp" alt="" width="800" height="450" loading="lazy" decoding="async"><strong>Cold brew</strong><small>$ 9.000</small><button type="button" class="ls-add" tabindex="-1" aria-hidden="true">+</button></div>
+                </div>
+                <div class="ls-booking" aria-hidden="true">
+                  <strong data-lab-text="bookingTitle">Reserva una mesa</strong>
+                  <div class="ls-slots"><span>9:00</span><span class="is-picked">10:30</span><span>12:00</span><span>16:00</span></div>
+                  <span class="ls-booking-cta">Confirmar</span>
+                </div>
+                <div class="ls-foot"><strong data-lab-text="brand">maré.</strong><small>Diseño de ejemplo</small></div>
+                <span class="ls-whatsapp" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M27 15.6A11 11 0 0 1 10.7 25.2L4 27l1.8-6.4A11 11 0 1 1 27 15.6Z"/></svg></span>
+              </div>
+            </div>
+            <p class="lab-note">Vista previa de ejemplo con marcas ficticias. En tu proyecto, cada detalle se diseña a la medida de tu negocio.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section services" id="servicios" aria-labelledby="services-title">
       <div class="shell services-grid">
         <figure class="photo-frame photo-tall">
           <img src="assets/creative-conversation-small.webp" srcset="assets/creative-conversation-small.webp 800w, assets/creative-conversation.webp 1600w" sizes="(max-width:960px) 92vw, 40vw" width="1600" height="900" alt="Dos personas revisan un proyecto en un portátil sobre una mesa de trabajo; fotografía realista creada con IA" loading="lazy" decoding="async">
         </figure>
-        <div class="services-copy">
+        <div class="services-copy" data-reveal>
           <h2 id="services-title">Tres piezas que se combinan para que tu negocio opere.</h2>
           <p class="section-lead">Empezamos por entender cómo trabajas hoy y qué te hace perder tiempo. Después elegimos qué se construye primero.</p>
           <div class="service-list">
@@ -103,7 +237,7 @@
 
     <section class="section feature" aria-labelledby="feature-web">
       <div class="shell feature-grid">
-        <div class="feature-copy">
+        <div class="feature-copy" data-reveal>
           <h2 id="feature-web">Una web que también recibe pedidos y citas.</h2>
           <p class="feature-tagline">Tu sitio deja de ser solo un folleto.</p>
           <ul class="check-list">
@@ -117,7 +251,7 @@
           <figure class="photo-frame">
             <img src="assets/auto-cafeteria-small.webp" srcset="assets/auto-cafeteria-small.webp 800w, assets/auto-cafeteria.webp 1600w" sizes="(max-width:960px) 92vw, 50vw" width="1600" height="900" alt="Barista preparando bebidas en una cafetería de especialidad; fotografía realista creada con IA" loading="lazy" decoding="async">
           </figure>
-          <div class="ui-card ui-card-ticket">
+          <div class="ui-card ui-card-ticket" data-depth="0.08">
             <div class="ui-card-head"><strong>Pedido 1043</strong><span class="ui-chip ui-chip-warn">En barra</span></div>
             <ul class="ticket-lines"><li><span>2 × Flat white</span><span>$ 14.000</span></li><li><span>1 × Croissant</span><span>$ 7.500</span></li></ul>
             <p class="ui-card-foot">Recoger a las 10:15. Datos de ejemplo.</p>
@@ -128,7 +262,7 @@
 
     <section class="section feature feature-reverse feature-soft" aria-labelledby="feature-int">
       <div class="shell feature-grid">
-        <div class="feature-copy">
+        <div class="feature-copy" data-reveal>
           <h2 id="feature-int">Tus herramientas, hablando entre sí.</h2>
           <p class="feature-tagline">Un dato se escribe una sola vez.</p>
           <ul class="check-list">
@@ -160,7 +294,7 @@
               <text class="tx" x="335" y="256">stock</text><text class="tx" x="85" y="252">correo</text><text class="tx" x="38" y="156">crm</text>
               <text class="tx2" x="220" y="146">Tu</text><text class="tx2" x="220" y="163">plataforma</text>
             </svg>
-            <ul class="panel-log" aria-label="Flujo de ejemplo">
+            <ul class="panel-log" aria-label="Flujo de ejemplo" data-live-log>
               <li><time>10:42:07</time><b>web</b><span>pedido 1043 recibido</span></li>
               <li><time>10:42:07</time><b>stock</b><span>disponibilidad descontada</span></li>
               <li><time>10:42:08</time><b>pagos</b><span>cobro confirmado</span></li>
@@ -172,7 +306,7 @@
 
     <section class="section feature" aria-labelledby="feature-pl">
       <div class="shell feature-grid">
-        <div class="feature-copy">
+        <div class="feature-copy" data-reveal>
           <h2 id="feature-pl">Un panel donde tu equipo ve todo.</h2>
           <p class="feature-tagline">Menos hojas sueltas, más control.</p>
           <ul class="check-list">
@@ -186,7 +320,7 @@
           <figure class="photo-frame">
             <img src="assets/case-clinic-team-small.webp" srcset="assets/case-clinic-team-small.webp 800w, assets/case-clinic-team.webp 1600w" sizes="(max-width:960px) 92vw, 50vw" width="1600" height="900" alt="Equipo de una clínica en la recepción, una persona de pie con una tableta; fotografía realista creada con IA" loading="lazy" decoding="async">
           </figure>
-          <div class="ui-card ui-card-table">
+          <div class="ui-card ui-card-table" data-depth="0.07">
             <div class="ui-card-head"><strong>Citas de hoy</strong><span class="ui-chip">Ejemplo</span></div>
             <table>
               <tbody>
@@ -203,7 +337,7 @@
     <section class="paths" aria-labelledby="paths-title">
       <h2 id="paths-title" class="visually-hidden">Dos formas de empezar</h2>
       <div class="path path-ops">
-        <div class="path-inner">
+        <div class="path-inner" data-reveal>
           <h3>Atiendes a diario y quieres ordenar tu operación.</h3>
           <ul>
             <li>Una web que muestre con claridad lo que ofreces.</li>
@@ -214,7 +348,7 @@
         </div>
       </div>
       <div class="path path-sys on-dark">
-        <div class="path-inner">
+        <div class="path-inner" data-reveal>
           <h3>Ya tienes sistemas y necesitas que trabajen juntos.</h3>
           <ul>
             <li>Conectar tu CRM, tu tienda y tu facturación.</li>
@@ -231,17 +365,42 @@
       <div class="shell">
         <h2 id="stats-title" class="visually-hidden">Los proyectos de ejemplo en cifras</h2>
         <div class="stats-grid">
-          <div><strong>6</strong><span>sectores, cada uno con su web y su automatización</span></div>
-          <div><strong>12</strong><span>proyectos de ejemplo que puedes recorrer ahora</span></div>
-          <div><strong>3</strong><span>servicios que se combinan: web, integraciones y plataformas</span></div>
+          <div data-reveal><strong data-count="6">6</strong><span>sectores, cada uno con su web y su automatización</span></div>
+          <div data-reveal><strong data-count="12">12</strong><span>proyectos de ejemplo que puedes recorrer ahora</span></div>
+          <div data-reveal><strong data-count="3">3</strong><span>servicios que se combinan: web, integraciones y plataformas</span></div>
         </div>
         <p class="stats-note">Son proyectos conceptuales con datos de muestra, creados para mostrar cómo trabajamos.</p>
       </div>
     </section>
 
+    <section class="reel on-dark" id="en-accion" aria-labelledby="reel-title">
+      <div class="shell reel-grid">
+        <div class="reel-copy" data-reveal>
+          <h2 id="reel-title">Mira las demos funcionando.</h2>
+          <p>Grabaciones reales de los proyectos de ejemplo: alguien elige, pide, reserva y el sistema responde. Toca un capítulo para verlo.</p>
+          <ol class="reel-chapters" data-reel-chapters>
+            <li><button type="button" data-reel-src="assets/video/cafeteria" aria-pressed="true"><strong>Cafetería</strong><span>Carta con filtros por categoría</span><i aria-hidden="true"></i></button></li>
+            <li><button type="button" data-reel-src="assets/video/tienda" aria-pressed="false"><strong>Tienda online</strong><span>Tres acabados y un carrito que los recuerda</span><i aria-hidden="true"></i></button></li>
+            <li><button type="button" data-reel-src="assets/video/clinica" aria-pressed="false"><strong>Clínica</strong><span>Agenda que ocupa y libera cupos</span><i aria-hidden="true"></i></button></li>
+            <li><button type="button" data-reel-src="assets/video/automatizacion" aria-pressed="false"><strong>Automatización</strong><span>Un pedido que crea su ticket y avanza en la cola</span><i aria-hidden="true"></i></button></li>
+          </ol>
+        </div>
+        <div class="reel-screen" data-reveal>
+          <div class="reel-browser"><span aria-hidden="true"><i></i><i></i><i></i></span><span data-reel-label>Demo grabada: Cafetería</span></div>
+          <div class="reel-video">
+            <video data-reel-video muted playsinline preload="metadata" poster="assets/video/cafeteria.jpg" aria-label="Video de la demo de cafetería en uso">
+              <source src="assets/video/cafeteria.webm" type="video/webm">
+            </video>
+            <button type="button" class="reel-play" data-reel-play aria-label="Pausar video"><span class="reel-icon-pause" aria-hidden="true"></span><span class="reel-icon-play" aria-hidden="true"></span></button>
+          </div>
+          <div class="reel-progress" aria-hidden="true"><span data-reel-progress></span></div>
+        </div>
+      </div>
+    </section>
+
     <section class="section sector-catalog" id="proyectos" aria-labelledby="projects-title">
       <div class="shell">
-        <div class="section-head">
+        <div class="section-head" data-reveal>
           <h2 id="projects-title">Proyectos de ejemplo, listos para explorar.</h2>
           <p>Cada sector tiene una web y una automatización que puedes recorrer. Son conceptos con datos de muestra: así puedes ver cómo funcionaría algo parecido para tu negocio.</p>
         </div>
@@ -426,7 +585,7 @@
 
     <section id="proceso" class="section journey-section" aria-labelledby="journey-heading" data-journey-step="0" data-journey-palette="amber">
       <div class="shell journey-shell">
-        <div class="section-head">
+        <div class="section-head" data-reveal>
           <h2 id="journey-heading">Cómo trabajamos, de la idea a producción.</h2>
           <p>Recorre un proyecto de ejemplo de principio a fin: una idea, una conversación, una propuesta y algo que puedes probar.</p>
         </div>
@@ -451,7 +610,7 @@
 
     <section class="section faq" id="preguntas" aria-labelledby="faq-title">
       <div class="shell faq-grid">
-        <div class="faq-intro">
+        <div class="faq-intro" data-reveal>
           <h2 id="faq-title">Lo que quizá te estás preguntando.</h2>
           <p>Si tu pregunta no está aquí, conversemos.</p>
           <a class="text-link" data-whatsapp href="https://wa.me/573185314299" target="_blank" rel="noopener noreferrer">Escríbenos por WhatsApp <i aria-hidden="true">↗</i></a>
@@ -515,6 +674,7 @@
         </ul>
       </div>
     </div>
+    <div class="shell footer-wordmark" aria-hidden="true"><span data-brand>Nexo Studio</span></div>
     <div class="shell footer-bottom">
       <small>© <span id="year">2026</span> <span data-brand>Nexo Studio</span></small>
       <small>Los proyectos y marcas de ejemplo son conceptuales y sus fotografías se crearon con IA.</small>
