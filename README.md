@@ -80,7 +80,7 @@ La página responde al correo de prospección: quien llega encuentra la revisió
 
 ```powershell
 python -m pip install openpyxl
-python scripts/generar-propuestas.py "C:uta\Prospectos_empresas_hispanas.xlsx"
+python scripts/generar-propuestas.py "C:\carpeta\Prospectos_empresas_hispanas.xlsx"
 ```
 
 - Crea `propuestas/<empresa>-<código>.html` y `propuestas/enlaces.csv` (Empresa → enlace) para combinar con el correo. El enlace completo es `https://tudominio/propuestas/...`.
