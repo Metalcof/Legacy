@@ -65,6 +65,17 @@ Las tarjetas de interfaz (agenda, pedido, citas del día) son maquetas HTML con 
 
 La tipografía es Archivo variable (`assets/archivo-var.woff2`), con los ejes de peso y de ancho. Si cambias de fuente, conserva la declaración `font-stretch` del `@font-face`.
 
+## Estructura de la portada
+
+1. **Portada oscura** con un muro inclinado de capturas reales de las seis webs de ejemplo, que se mueve solo y se detiene al pasar el mouse. Cada captura abre su demo.
+2. **Franja de capacidades** en movimiento.
+3. **Proyectos** como casos de estudio: cada negocio con su web en computador y celular, qué hace la web, qué hace la automatización y enlaces a ambas. El filtro por sector muestra un solo negocio y destaca su automatización.
+4. **Laboratorio** "Arma una web".
+5. **Automatizaciones**: diagrama en vivo y seis paneles reales de las automatizaciones.
+6. **Demos grabadas**, **servicios**, **proceso**, **preguntas** y **contacto**.
+
+Las capturas están en `assets/shots/` (WebP). Si cambias una demo, vuelve a capturarla con el mismo nombre: `<sector>-d1.webp` (computador), `<sector>-m1.webp` (celular) y `auto-<sector>.webp` (automatización).
+
 ## Laboratorio, videos y movimiento
 
 **Laboratorio "Arma una web"** (`#laboratorio`, código en `lab.js`). El visitante elige negocio, color, letra, forma, distribución, modo claro u oscuro y funciones (WhatsApp, reservas, carrito, reseñas), y una web de ejemplo cambia en vivo. Puede verla como computador o celular, pedir una combinación al azar y, con "Quiero esta web", abrir el formulario con su elección ya escrita. Los textos y fotos de cada negocio están en el objeto `sectors` de `lab.js`; los colores en las reglas `.lab-site[data-color=…]` de `styles.css`.

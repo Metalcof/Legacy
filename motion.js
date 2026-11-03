@@ -80,9 +80,8 @@
   /* ---------- Revelado al hacer scroll ---------- */
   const revealTargets = [
     ...document.querySelectorAll('[data-reveal]'),
-    ...document.querySelectorAll('main .photo-frame:not(.photo-hero)'),
-    ...document.querySelectorAll('main .feature-visual .ui-card, .hero-panel, .product-case, .catalog-conclusion, .cta-band-inner, .contact-inner'),
-    ...document.querySelectorAll('.business-case, .sector-automation-case, .faq-list details')
+    ...document.querySelectorAll('.case-visual, .case-copy, .hero-panel, .work-end, .contact-inner'),
+    ...document.querySelectorAll('.auto-card, .faq-list details')
   ];
   const groupIndex = new Map();
   revealTargets.forEach(el => {
@@ -198,11 +197,12 @@
   onMotionChange(startLog);
 
   /* ---------- Filtro de proyectos: las tarjetas entran ---------- */
-  const catalog = document.querySelector('.sector-catalog');
+  const catalog = document.getElementById('proyectos');
   catalog?.querySelectorAll('[data-sector-filter], [data-reset-catalog]').forEach(button => button.addEventListener('click', () => {
     if (!canMove()) return;
     let index = 0;
-    catalog.querySelectorAll('[data-sector-case]:not([hidden]), [data-catalog-product]:not([hidden]) .product-case').forEach(item => {
+    catalog.querySelectorAll('[data-sector-case]:not([hidden])').forEach(item => {
+      item.querySelectorAll('.reveal').forEach(el => el.classList.add('is-in'));
       item.classList.add('is-in');
       item.classList.remove('filter-in'); void item.offsetWidth;
       item.style.setProperty('--fd', `${index++ * 70}ms`);
@@ -215,7 +215,7 @@
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     Object.entries(caseVideos).forEach(([id, name]) => {
       const item = document.getElementById(id);
-      const photo = item?.querySelector('.business-photo');
+      const photo = item?.querySelector('.case-shot');
       if (!photo) return;
       photo.classList.add('has-preview');
       const badge = document.createElement('span');

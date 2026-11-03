@@ -19,18 +19,19 @@
         { target: '#laboratorio [data-lab-toggles]', click: ['#laboratorio [data-feature="cart"]', '#laboratorio .ls-card:nth-child(1) .ls-add'], ensureOff: '#laboratorio [data-feature="cart"]', title: 'Funciones que trabajan por ti', text: 'Activé el carrito y añadí un plato: mira cómo sube el contador. También hay reservas, WhatsApp y reseñas.' },
         { target: '#laboratorio .lab-device', click: '#laboratorio [data-device="mobile"]', title: 'Así se ve en el celular', text: 'Toda web que hacemos se adapta al celular, donde llega la mayoría de tus clientes.' },
         { target: '#laboratorio [data-lab-send]', title: '¿Te gustó? Envíanos tu combinación', text: 'Este botón abre el formulario con todo lo que elegiste ya escrito. Tú solo agregas tu idea.' },
-        { target: '#website-catalog .business-case', title: 'Seis webs completas para recorrer', text: 'Cada proyecto de ejemplo se abre y se puede navegar como una web real.' }
+        { target: '#proyectos .case-visual', title: 'Seis webs completas para recorrer', text: 'Cada proyecto de ejemplo se abre y se navega como una web real, en computador o en celular.' }
       ]
     },
     auto: {
       name: 'Automatizaciones, paso a paso',
       steps: [
-        { target: '.feature-reverse .hero-panel', title: 'Tu negocio, conectado', text: 'Tu plataforma une la web, el chat, los pagos, el inventario, el correo y tus clientes. Un dato se escribe una sola vez.' },
+        { target: '#proyectos .catalog-filters', click: '#proyectos [data-sector-filter="cafeteria"]', title: 'Busca tu tipo de negocio', text: 'Al filtrar por "Cafetería" ves su web y la automatización que la hace funcionar.' },
+        { target: '#proyectos .case:not([hidden]) .case-facts', title: 'Cada web tiene su sistema', text: 'En Maré, cada pedido crea su ticket, entra a la cola de la barra y avisa cuando está listo.' },
+        { target: '.auto-panel', title: 'Tu negocio, conectado', text: 'Tu plataforma une la web, el chat, los pagos, el inventario, el correo y tus clientes. Un dato se escribe una sola vez.' },
         { target: '[data-live-log]', title: 'Todo queda registrado', text: 'Cada pedido, pago o aviso aparece aquí en el momento en que pasa, para revisarlo cuando quieras.' },
-        { target: '.catalog-filters', click: '.catalog-filters [data-sector-filter="cafeteria"]', title: 'Busca tu sector', text: 'Filtra por tu tipo de negocio para ver la web y la automatización que le corresponden.' },
-        { target: '#automation-catalog .sector-automation-case:not([hidden])', title: 'Pruébala con datos de ejemplo', text: 'En una cafetería, el pedido llega con su ticket y entra solo a la cola de la barra. Puedes abrirla y probarla.' },
+        { target: '#automation-catalog .auto-card.is-match', title: 'Pruébala con datos de ejemplo', text: 'Esta es la automatización de la cafetería. Ábrela y crea un pedido para ver cómo se mueve la cola.' },
         { target: '#en-accion .reel-screen', click: '#en-accion [data-reel-src="assets/video/automatizacion"]', title: 'Mírala funcionando', text: 'Un pedido crea su ticket, entra a la cola y al marcarlo listo se actualizan las cifras.' },
-        { target: '.cta-band .button', title: 'Hagamos la tuya', text: 'Cuéntanos qué te quita tiempo hoy y te proponemos qué automatizar primero.', after: () => $('.catalog-filters [data-sector-filter="all"]')?.click() }
+        { target: '#contacto .button', title: 'Hagamos la tuya', text: 'Cuéntanos qué te quita tiempo hoy y te proponemos qué automatizar primero.', after: () => $('#proyectos [data-sector-filter="all"]')?.click() }
       ]
     }
   };
@@ -60,7 +61,7 @@
       <p>Un puntero te guía por la página y toca los botones por ti. Puedes pausarlo cuando quieras.</p>
       <div class="tour-options">
         <button type="button" data-tour-start="web"><strong>Cómo diseñamos tu web</strong><span>Negocio, color, letra, funciones y vista en celular. 10 pasos.</span></button>
-        <button type="button" data-tour-start="auto"><strong>Cómo funcionan las automatizaciones</strong><span>Conexiones, registro en vivo, filtros y una demo grabada. 6 pasos.</span></button>
+        <button type="button" data-tour-start="auto"><strong>Cómo funcionan las automatizaciones</strong><span>Proyectos por sector, conexiones, registro en vivo y una demo grabada. 7 pasos.</span></button>
       </div>
     </section>`;
   document.body.append(ui);
@@ -254,6 +255,12 @@
     else if (tour && event.key === 'ArrowRight') next();
     else if (tour && event.key === 'ArrowLeft') prev();
   });
+  // El botón flotante se esconde mientras se ve la portada, que ya tiene su propio botón.
+  const floatButton = document.querySelector('.tour-float');
+  const hero = document.getElementById('inicio');
+  if (floatButton && hero && 'IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => floatButton.classList.toggle('is-hidden', entry.isIntersecting), { threshold: .08 }).observe(hero);
+  }
   window.addEventListener('resize', layout);
   window.addEventListener('scroll', () => { if (target) requestAnimationFrame(layout); }, { passive: true });
 })();
