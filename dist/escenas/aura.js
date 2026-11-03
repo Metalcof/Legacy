@@ -1,676 +1,406 @@
 'use strict';
-// Escena AURA: una casa tropical moderna construida en isométrico, de terreno vacío a habitable.
+// Escena AURA: la casa real (foto) recorre un flujo de visualización arquitectónica en 3D:
+// plano sobre el terreno → cimientos → estructura en líneas → volumen en arcilla → materiales → luz de atardecer.
 // Todo se calcula desde el progreso p (0..1): se puede adelantar, retroceder y pausar.
 (() => {
-  const NS = 'http://www.w3.org/2000/svg';
+  window.NexoEscenas = window.NexoEscenas || {};
+  const SCRIPT = (document.currentScript && document.currentScript.src) || location.href;
+  const BASE = new URL('../', SCRIPT);
+  const asset = name => new URL('assets/' + name, BASE).href;
+  const HOUSE = asset('architecture-editorial.webp');
+  const INSIDE = asset('interior-editorial.webp');
+
   const clamp = (v, a = 0, b = 1) => (v < a ? a : v > b ? b : v);
   const seg = (p, a, b) => clamp((p - a) / (b - a));
   const lerp = (a, b, t) => a + (b - a) * t;
-  const easeOut = t => 1 - Math.pow(1 - t, 3);
-  const easeInOut = t => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
-  const easeBack = (t, s = 1.7) => (t <= 0 ? 0 : t >= 1 ? 1 : 1 + (s + 1) * Math.pow(t - 1, 3) + s * Math.pow(t - 1, 2));
-  const rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
-  const mix = (a, b, t) => {
-    const A = rgb(a), B = rgb(b);
-    return '#' + A.map((v, i) => Math.round(lerp(v, B[i], clamp(t))).toString(16).padStart(2, '0')).join('');
-  };
-  // Interpola entre fotogramas clave [[p, valor], …] con curva suave.
+  const eOut = t => 1 - Math.pow(1 - t, 3);
+  const eInOut = t => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  const eBack = t => (t <= 0 ? 0 : t >= 1 ? 1 : 1 + 2.4 * Math.pow(t - 1, 3) + 1.4 * Math.pow(t - 1, 2));
+  // Fotogramas clave [[p, valor], …] con curva suave entre cada par.
   const keys = (p, list) => {
     if (p <= list[0][0]) return list[0][1];
     for (let i = 1; i < list.length; i++) {
-      if (p <= list[i][0]) return lerp(list[i - 1][1], list[i][1], easeInOut(seg(p, list[i - 1][0], list[i][0])));
+      if (p <= list[i][0]) return lerp(list[i - 1][1], list[i][1], eInOut(seg(p, list[i - 1][0], list[i][0])));
     }
     return list[list.length - 1][1];
   };
-
-  // Proyección isométrica: (x, y, z) del terreno → pantalla.
-  const S = 18, CX = Math.cos(Math.PI / 6) * S, HY = S / 2, OX = 538, OY = 132;
-  const P = (x, y, z = 0) => [OX + (x - y) * CX, OY + (x + y) * HY - z * S];
-  const fmt = list => list.map(q => q[0].toFixed(1) + ',' + q[1].toFixed(1)).join(' ');
-  const quad = (...c) => fmt(c.map(v => P(v[0], v[1], v[2])));
-  const faceY = (y, x0, x1, z0, z1) => quad([x0, y, z0], [x1, y, z0], [x1, y, z1], [x0, y, z1]);
-  const faceX = (x, y0, y1, z0, z1) => quad([x, y0, z0], [x, y1, z0], [x, y1, z1], [x, y0, z1]);
-  const flat = (x0, x1, y0, y1, z) => quad([x0, y0, z], [x1, y0, z], [x1, y1, z], [x0, y1, z]);
-  const line = (a, b) => { const A = P(...a), B = P(...b); return `M${A[0].toFixed(1)},${A[1].toFixed(1)}L${B[0].toFixed(1)},${B[1].toFixed(1)}`; };
-
-  // Luz desde la izquierda: techo claro, cara +y (izquierda) media, cara +x (derecha) en sombra.
-  const shade = base => ({ top: mix(base, '#ffffff', 0.22), left: base, right: mix(base, '#26302b', 0.26) });
-  const SUN = [0.34, -0.5]; // desplazamiento de la sombra por unidad de altura
-
-  function hull(points) {
-    const p = points.slice().sort((a, b) => a[0] - b[0] || a[1] - b[1]);
-    const cross = (o, a, b) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
-    const lo = [], up = [];
-    for (const q of p) { while (lo.length > 1 && cross(lo[lo.length - 2], lo[lo.length - 1], q) <= 0) lo.pop(); lo.push(q); }
-    for (let i = p.length - 1; i >= 0; i--) { const q = p[i]; while (up.length > 1 && cross(up[up.length - 2], up[up.length - 1], q) <= 0) up.pop(); up.push(q); }
-    up.pop(); lo.pop();
-    return lo.concat(up);
-  }
-  const shadowOf = (x0, x1, y0, y1, z0, z1) => {
-    const out = [];
-    for (const x of [x0, x1]) for (const y of [y0, y1]) for (const z of [z0, z1]) out.push(P(x + z * SUN[0], y + z * SUN[1], 0));
-    return fmt(hull(out));
-  };
+  // Unidad del mundo 3D: 1 = 1 % del ancho de la foto (la foto cubre siempre el escenario).
+  const u = n => `calc(var(--f) * ${n.toFixed(3)})`;
+  // Coordenadas de la foto (1600 × 900 px) → mundo, con la foto centrada en el origen.
+  const wx = x => (x / 1600 - 0.5) * 100;
+  const wy = y => (y / 900 - 0.5) * 56.25;
 
   const STYLE = `
-    .sc-aura-svg{font-family:var(--cfont,system-ui,sans-serif)}
-    .sc-aura-t{font-weight:300;text-transform:uppercase;letter-spacing:.24em;fill:#1d2320}
-    .sc-aura-bp{fill:none;stroke:#3c5a48;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
-    .sc-aura-shimmer{animation:sc-aura-wave 3.6s linear infinite}
-    @keyframes sc-aura-wave{from{transform:translate(0,0)}to{transform:translate(-31.2px,-18px)}}
-    body.motion-paused .sc-aura-shimmer{animation:none}
-    @media (prefers-reduced-motion:reduce){.sc-aura-shimmer{animation:none}}
-  `;
+.sc-aura-root{position:absolute;inset:0;overflow:hidden;border-radius:inherit;container-type:size;background:#0a1620;color:#eaf4ff;font-family:var(--font,'Segoe UI',system-ui,sans-serif);font-style:normal;user-select:none;-webkit-user-select:none}
+.sc-aura-root *{box-sizing:border-box;font-style:normal}
+.sc-aura-sky,.sc-aura-dusk-sky,.sc-aura-vig,.sc-aura-grain{position:absolute;inset:0;pointer-events:none}
+.sc-aura-sky{background:radial-gradient(120% 90% at 50% 38%,#173247 0%,#0d1d2a 52%,#060d13 100%)}
+.sc-aura-sky::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(150,200,240,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(150,200,240,.06) 1px,transparent 1px);background-size:calc(var(--f,1px)*4) calc(var(--f,1px)*4);background-position:center;mask-image:radial-gradient(70% 70% at 50% 45%,#000,transparent)}
+.sc-aura-dusk-sky{opacity:0;background:#140d10}
+.sc-aura-dusk-sky img{position:absolute;inset:-8%;width:116%;height:116%;object-fit:cover;filter:blur(26px) brightness(.5) saturate(1.3) sepia(.3) hue-rotate(-10deg)}
+.sc-aura-dusk-sky::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(30,20,50,.55),transparent 40%,rgba(10,6,6,.7) 85%)}
+.sc-aura-cam{position:absolute;inset:0;--F:max(100cqw,177.78cqh);--f:calc(var(--F) / 100);perspective:calc(var(--F) * 1.25);perspective-origin:50% 46%}
+.sc-aura-world{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d}
+.sc-aura-world>*{position:absolute}
+/* Terreno: hoja de plano tendida en el suelo */
+.sc-aura-floor{left:calc(var(--f)*-75);top:calc(var(--f)*28.125);width:calc(var(--f)*150);height:calc(var(--f)*110);transform-origin:50% 0;transform:rotateX(90deg)}
+.sc-aura-floor>*{position:absolute;inset:0;width:100%;height:100%}
+.sc-aura-paper{background-color:#0e2436;background-image:linear-gradient(rgba(140,200,255,.16) 1px,transparent 1px),linear-gradient(90deg,rgba(140,200,255,.16) 1px,transparent 1px),linear-gradient(rgba(140,200,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(140,200,255,.07) 1px,transparent 1px);background-size:calc(var(--f)*10) calc(var(--f)*10),calc(var(--f)*10) calc(var(--f)*10),calc(var(--f)*2) calc(var(--f)*2),calc(var(--f)*2) calc(var(--f)*2);mask-image:radial-gradient(75% 85% at 50% 18%,#000 55%,transparent 100%)}
+.sc-aura-gloss{background:radial-gradient(70% 60% at 50% 0%,rgba(255,170,110,.18),transparent 70%),linear-gradient(180deg,rgba(14,10,10,.55),rgba(8,6,6,.92) 60%);opacity:0}
+.sc-aura-plan{overflow:visible}
+.sc-aura-ln{fill:none;stroke:#a9dcff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.sc-aura-ln.sc-aura-b{stroke-width:5;stroke:#e6f5ff}
+.sc-aura-ln.sc-aura-t{stroke:#6fb4e6;stroke-width:2;opacity:.7}
+.sc-aura-tx{text-anchor:start;fill:#cfeaff;font:600 19px/1 var(--font,system-ui,sans-serif);letter-spacing:.12em;text-transform:uppercase}
+.sc-aura-tx.sc-aura-s{font-size:15px;fill:#8cc4ea}
+.sc-aura-ft{fill:#e6f5ff;stroke:#0e2436;stroke-width:3}
+.sc-aura-shadow{left:calc(var(--f)*-52);top:calc(var(--f)*26);width:calc(var(--f)*104);height:calc(var(--f)*14);transform-origin:50% 0;transform:translateY(calc(var(--f)*2.1)) rotateX(90deg);background:radial-gradient(50% 50% at 50% 30%,rgba(0,0,0,.75),transparent 72%);opacity:0}
+/* Reflejo en el piso brillante (plano espejo bajo la base) */
+.sc-aura-refl{left:calc(var(--f)*-50);top:calc(var(--f)*28.125);width:calc(var(--f)*100);height:calc(var(--f)*56.25);opacity:0;mask-image:linear-gradient(180deg,rgba(0,0,0,.85),transparent 55%);-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.85),transparent 55%)}
+.sc-aura-refl img{width:100%;height:100%;display:block;transform:scaleY(-1);filter:brightness(.62) contrast(1.12) saturate(1.3) sepia(.22) hue-rotate(-8deg) blur(1.5px)}
+/* Fachada: la foto y sus copias procesadas, en un solo plano plano */
+.sc-aura-elev{left:calc(var(--f)*-50);top:calc(var(--f)*-28.125);width:calc(var(--f)*100);height:calc(var(--f)*56.25);transform-origin:50% 100%;overflow:hidden;isolation:isolate;background:#0f2638}
+.sc-aura-rim{box-shadow:inset 0 0 0 1px rgba(150,210,255,.5);pointer-events:none}
+.sc-aura-elev>*{position:absolute;inset:0;width:100%;height:100%;display:block}
+.sc-aura-elev img{object-fit:fill}
+.sc-aura-sheet{background-color:#0f2a3e;background-image:linear-gradient(rgba(140,200,255,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(140,200,255,.13) 1px,transparent 1px);background-size:calc(var(--f)*2.5) calc(var(--f)*2.5)}
+.sc-aura-lines{clip-path:inset(100% 0 0 0)}
+.sc-aura-lines.sc-aura-fallback{background:url("${HOUSE}") center/100% 100%;filter:grayscale(1) contrast(4) invert(1) brightness(.7);mix-blend-mode:screen}
+.sc-aura-dlines.sc-aura-fallback{background:url("${HOUSE}") center/100% 100%;filter:grayscale(1) contrast(3);mix-blend-mode:multiply}
+.sc-aura-scan{top:0!important;height:2px!important;background:linear-gradient(90deg,transparent,#bfe8ff 15%,#fff 50%,#bfe8ff 85%,transparent);box-shadow:0 0 14px 4px rgba(120,200,255,.55);opacity:0}
+.sc-aura-clay{filter:grayscale(1) contrast(.74) brightness(1.24) sepia(.06)}
+.sc-aura-sweep{background:linear-gradient(100deg,transparent 40%,rgba(255,255,255,.55) 49%,rgba(255,255,255,.8) 50%,transparent 60%);mix-blend-mode:soft-light;opacity:0}
+.sc-aura-c1{mask-image:radial-gradient(ellipse 30% 19% at 64% 13%,#000 55%,transparent 100%),radial-gradient(ellipse 22% 13% at 84% 27%,#000 50%,transparent 100%),radial-gradient(ellipse 7% 26% at 34% 52%,#000 55%,transparent 100%),radial-gradient(ellipse 30% 8% at 62% 44%,#000 50%,transparent 100%)}
+.sc-aura-c2{mask-image:radial-gradient(ellipse 14% 11% at 60% 59%,#000 45%,transparent 100%),radial-gradient(ellipse 9% 12% at 59% 30%,#000 40%,transparent 100%),radial-gradient(ellipse 14% 6% at 52% 66%,#000 45%,transparent 100%)}
+.sc-aura-c3{mask-image:radial-gradient(ellipse 15% 17% at 57% 25%,#000 55%,transparent 100%),radial-gradient(ellipse 26% 16% at 80% 50%,#000 55%,transparent 100%),radial-gradient(ellipse 10% 11% at 47% 58%,#000 45%,transparent 100%)}
+.sc-aura-c1,.sc-aura-c2,.sc-aura-c3{-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.sc-aura-c1,.sc-aura-c2,.sc-aura-c3,.sc-aura-c4,.sc-aura-dusk,.sc-aura-tint,.sc-aura-glows,.sc-aura-axes{opacity:0}
+.sc-aura-dusk{filter:brightness(.62) contrast(1.14) saturate(1.3) sepia(.22) hue-rotate(-8deg)}
+.sc-aura-tint{background:linear-gradient(180deg,rgba(40,24,80,.55) 0%,rgba(120,60,90,.18) 30%,transparent 55%),radial-gradient(60% 50% at 18% 18%,rgba(255,150,80,.45),transparent 70%);mix-blend-mode:soft-light}
+.sc-aura-glows{mix-blend-mode:screen}
+.sc-aura-glows i{position:absolute;border-radius:50%;background:radial-gradient(closest-side,rgba(255,206,140,.95),rgba(255,160,80,.5) 45%,rgba(255,130,60,0));opacity:0}
+.sc-aura-axes{overflow:visible}
+.sc-aura-ax{stroke:#ffb36b;stroke-width:1.6;stroke-dasharray:10 7;fill:none;opacity:.85}
+.sc-aura-lv{stroke:#7fd0ff;stroke-width:1.6;fill:none}
+.sc-aura-axes circle{fill:#0f2a3e;stroke:#ffb36b;stroke-width:2}
+.sc-aura-axes text{font:700 22px/1 var(--font,system-ui,sans-serif);fill:#ffd2a6;text-anchor:middle;letter-spacing:.04em}
+.sc-aura-axes .sc-aura-lt{fill:#bfe6ff;text-anchor:start;font-size:21px;letter-spacing:.1em}
+.sc-aura-lvl{opacity:0}
+/* Etiquetas de realidad aumentada */
+.sc-aura-tag{left:0;top:0;width:0;height:0;opacity:0}
+.sc-aura-tag b{position:absolute;left:-5px;top:-5px;width:10px;height:10px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.28),0 0 14px rgba(160,220,255,.9)}
+.sc-aura-tag i{position:absolute;left:0;bottom:0;width:1px;height:clamp(16px,4.4cqh,40px);background:linear-gradient(0deg,rgba(255,255,255,.9),rgba(255,255,255,.2))}
+.sc-aura-tag span{position:absolute;left:-12px;bottom:clamp(16px,4.4cqh,40px);display:block;white-space:nowrap;padding:.5em .85em .55em;border-radius:10px;background:rgba(10,18,24,.78);border:1px solid rgba(255,255,255,.2);box-shadow:0 10px 30px rgba(0,0,0,.35);font-size:clamp(10px,1.12cqw,14px);line-height:1.25}
+.sc-aura-tag.sc-aura-left span{left:auto;right:-12px}
+.sc-aura-tag.sc-aura-down i{bottom:auto;top:0;background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(255,255,255,.2))}
+.sc-aura-tag.sc-aura-down span{bottom:auto;top:clamp(16px,4.4cqh,40px)}
+.sc-aura-tag strong{display:block;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.86em;color:#fff}
+.sc-aura-tag em{display:block;font-style:normal;color:rgba(225,238,248,.8);margin-top:.2em}
+/* Ventana al interior */
+.sc-aura-ipos{left:0;top:0;width:0;height:0;transform-style:preserve-3d;transform:translate3d(calc(var(--f)*21),calc(var(--f)*1.5),calc(var(--f)*24)) rotateY(-24deg)}
+.sc-aura-inset{position:absolute;left:0;top:0;width:calc(var(--f)*30);height:calc(var(--f)*16.875);opacity:0;border-radius:calc(var(--f)*.8);box-shadow:0 30px 60px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.35);overflow:hidden;background:#222}
+.sc-aura-inset img{width:100%;height:100%;object-fit:cover;display:block}
+.sc-aura-inset::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,.28),transparent 35%),linear-gradient(0deg,rgba(0,0,0,.55),transparent 45%)}
+.sc-aura-inset span{position:absolute;left:.9em;bottom:.75em;z-index:1;font-size:clamp(10px,1.1cqw,14px);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff}
+/* Interfaz superior */
+.sc-aura-hud{position:absolute;left:clamp(12px,2.2cqw,28px);right:clamp(12px,2.2cqw,28px);top:clamp(10px,2.6cqh,24px);display:flex;justify-content:space-between;align-items:flex-start;gap:12px;pointer-events:none;font-size:clamp(10px,1.05cqw,13px);letter-spacing:.16em;text-transform:uppercase;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.sc-aura-hud small{display:block;font-size:.82em;font-weight:600;color:rgba(220,236,250,.7)}
+.sc-aura-hud strong{display:block;margin-top:.3em;font-weight:700;font-size:1.12em;color:#fff}
+.sc-aura-meter{text-align:right}
+.sc-aura-meter strong{font-variant-numeric:tabular-nums;font-size:clamp(16px,2.4cqw,30px);letter-spacing:.02em;font-weight:300}
+.sc-aura-bar{width:clamp(70px,12cqw,160px);height:2px;margin:.55em 0 0 auto;background:rgba(255,255,255,.22);overflow:hidden}
+.sc-aura-bar i{display:block;height:100%;background:#fff;transform-origin:0 50%;transform:scaleX(0)}
+.sc-aura-vig{background:radial-gradient(120% 95% at 50% 45%,transparent 55%,rgba(0,0,0,.55) 100%)}
+.sc-aura-grain{opacity:.09;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+@container (max-aspect-ratio: 3/2){
+  .sc-aura-tag em,.sc-aura-hud small{display:none}
+  .sc-aura-tag span{padding:.45em .7em}
+  .sc-aura-ipos{transform:translate3d(calc(var(--f)*2),calc(var(--f)*6),calc(var(--f)*32)) rotateY(-12deg)}
+  .sc-aura-inset{width:calc(var(--f)*28);height:calc(var(--f)*15.75)}
+}`;
 
-  const DEFS = `
-    <linearGradient id="sc-aura-sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#dfe3de"/><stop offset=".62" stop-color="#e9e6df"/><stop offset="1" stop-color="#efebe3"/>
-    </linearGradient>
-    <radialGradient id="sc-aura-sun"><stop offset="0" stop-color="#fff6df" stop-opacity=".95"/><stop offset=".35" stop-color="#fff6df" stop-opacity=".35"/><stop offset="1" stop-color="#fff6df" stop-opacity="0"/></radialGradient>
-    <radialGradient id="sc-aura-floor"><stop offset="0" stop-color="#2a302b" stop-opacity=".28"/><stop offset="1" stop-color="#2a302b" stop-opacity="0"/></radialGradient>
-    <linearGradient id="sc-aura-soilL" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a48d6e"/><stop offset="1" stop-color="#7a664e"/></linearGradient>
-    <linearGradient id="sc-aura-soilR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#85715a"/><stop offset="1" stop-color="#5b4c3c"/></linearGradient>
-    <linearGradient id="sc-aura-glassL" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#5e7f7f"/><stop offset=".38" stop-color="#93b2ad"/><stop offset=".47" stop-color="#e3eee8"/><stop offset=".55" stop-color="#8eada8"/><stop offset="1" stop-color="#4f6d6e"/>
-    </linearGradient>
-    <linearGradient id="sc-aura-glassR" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#45615f"/><stop offset=".4" stop-color="#6f8f8b"/><stop offset=".5" stop-color="#b7cdc6"/><stop offset=".6" stop-color="#6a8985"/><stop offset="1" stop-color="#3b5453"/>
-    </linearGradient>
-    <linearGradient id="sc-aura-warm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe6b3"/><stop offset="1" stop-color="#f1a85e"/></linearGradient>
-    <radialGradient id="sc-aura-spill"><stop offset="0" stop-color="#ffc47a" stop-opacity=".55"/><stop offset="1" stop-color="#ffc47a" stop-opacity="0"/></radialGradient>
-    <radialGradient id="sc-aura-poolglow"><stop offset="0" stop-color="#9ff2ea" stop-opacity=".75"/><stop offset="1" stop-color="#5fd0c8" stop-opacity="0"/></radialGradient>
-    <linearGradient id="sc-aura-water" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5fb4b3"/><stop offset=".5" stop-color="#8fd2cb"/><stop offset="1" stop-color="#4e9ea3"/></linearGradient>
-    <linearGradient id="sc-aura-dusk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c2840" stop-opacity=".5"/><stop offset=".5" stop-color="#2c3448" stop-opacity=".26"/><stop offset="1" stop-color="#3a2c2c" stop-opacity=".2"/></linearGradient>
-    <linearGradient id="sc-aura-trunk" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9c8064"/><stop offset="1" stop-color="#6c5541"/></linearGradient>
-    <clipPath id="sc-aura-clipTop"><polygon points="${flat(0, 24, 0, 16, 0)}"/></clipPath>
-    <clipPath id="sc-aura-clipPool"><polygon points="${flat(15.8, 21.6, 9.6, 12.6, 0.25)}"/></clipPath>
-    <clipPath id="sc-aura-clipPit"><polygon id="sc-aura-pitRim" points="0,0"/></clipPath>
-  `;
+  // Planta arquitectónica sobre el terreno (viewBox 1500 × 1100; la fachada ocupa x 250–1250 en el borde superior).
+  const X = px => 250 + px * 0.625;
+  const PLAN = (() => {
+    const L = (d, cls = '') => `<path class="sc-aura-ln${cls ? ' sc-aura-' + cls : ''}" pathLength="1" d="${d}"/>`;
+    const R = (x0, y0, x1, y1, cls) => L(`M${x0} ${y0}H${x1}V${y1}H${x0}Z`, cls);
+    const h0 = X(470), h1 = X(1600), u0 = X(650), u1 = X(1440);
+    const groups = [
+      // 0 · lindero y curvas de nivel del terreno
+      [R(70, 30, 1430, 1020, 't'),
+        L('M70 610C320 560 560 640 820 600S1240 560 1430 640', 't'),
+        L('M70 780C360 730 600 820 900 770S1260 740 1430 820', 't'),
+        L('M70 930C380 900 700 960 1000 920S1300 900 1430 960', 't')],
+      // 1 · huella de la casa
+      [R(h0, 40, h1, 330, 'b'), R(u0, 50, u1, 250)],
+      // 2 · muros interiores y puertas
+      [L(`M${X(820)} 40V200M${X(820)} 250V330M${X(1120)} 40V160M${X(1120)} 220V330M${h0} 190H${X(700)}M${X(1210)} 330V250`),
+        L(`M${X(820)} 200A50 50 0 0 1 ${X(820) + 50} 250M${X(1120)} 160A60 60 0 0 0 ${X(1120) - 60} 220`)],
+      // 3 · terraza, escalones y piscina
+      [R(X(420), 330, X(1000), 380), L(`M${X(1000)} 342H${X(1150)}M${X(1000)} 356H${X(1150)}M${X(1000)} 370H${X(1150)}M${X(1150)} 330V384`),
+        R(X(160), 360, X(830), 480), R(X(180), 372, X(810), 468, 't')],
+      // 4 · cotas
+      [L(`M${h0} 560H${h1}M${h0} 545V575M${h1} 545V575M${h0} 330V575M${h1} 330V575`, 't'),
+        L(`M${X(1600) + 40} 40V330M${X(1600) + 25} 40H${X(1600) + 55}M${X(1600) + 25} 330H${X(1600) + 55}`, 't'),
+        L(`M${X(160)} 520H${X(830)}M${X(160)} 506V534M${X(830)} 506V534`, 't')]
+    ];
+    const foot = [470, 650, 820, 1120, 1210, 1600].flatMap(px => [[X(px), 40], [X(px), 330]]).concat([[X(1000), 190], [X(650), 190]]);
+    const footings = foot.map(([x, y], i) => `<rect class="sc-aura-ft" data-i="${i}" x="${x - 13}" y="${y - 13}" width="26" height="26" opacity="0"/>`).join('');
+    return `<svg class="sc-aura-plan" viewBox="0 0 1500 1100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+${groups.map((g, i) => `<g data-g="${i}">${g.join('')}</g>`).join('')}
+<g class="sc-aura-ttext" opacity="0">
+  <text class="sc-aura-tx" x="120" y="90">Lote 1.240 m²</text>
+  <text class="sc-aura-tx sc-aura-s" x="1180" y="650">Terreno +0,50</text>
+  <text class="sc-aura-tx sc-aura-s" x="1180" y="820">Terreno +0,00</text>
+  <g transform="translate(160 780)"><circle r="34" fill="none" stroke="#a9dcff" stroke-width="2"/><path d="M0 -30L12 14L0 6L-12 14Z" fill="#e6f5ff"/><text class="sc-aura-tx" y="-44" text-anchor="middle">N</text></g>
+</g>
+<g class="sc-aura-ptext" opacity="0">
+  <text class="sc-aura-tx" x="${(h0 + h1) / 2}" y="548" text-anchor="middle">22,60 m</text>
+  <text class="sc-aura-tx" x="${X(1600) + 62}" y="195">9,30 m</text>
+  <text class="sc-aura-tx sc-aura-s" x="${(X(160) + X(830)) / 2}" y="508" text-anchor="middle">Piscina 13,40 m</text>
+  <text class="sc-aura-tx" x="${X(980)}" y="140" text-anchor="middle">Sala · comedor</text>
+  <text class="sc-aura-tx sc-aura-s" x="${X(560)}" y="270" text-anchor="middle">Estudio</text>
+  <text class="sc-aura-tx sc-aura-s" x="120" y="1000">AURA · Planta baja · Esc. 1:100</text>
+</g>
+${footings}
+</svg>`;
+  })();
+
+  // Ejes estructurales y niveles sobre la fachada (viewBox = la foto, 1600 × 900).
+  const AXES = (() => {
+    const cols = [[470, 'A'], [650, 'B'], [1120, 'C'], [1215, 'D'], [1520, 'E']];
+    const lv = [[632, 'N ±0,00'], [420, 'N +3,40'], [92, 'N +6,80']];
+    return `<svg class="sc-aura-axes" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+${cols.map(([x, l]) => `<path class="sc-aura-ax" d="M${x} 70V900"/><circle cx="${x}" cy="46" r="20"/><text x="${x}" y="54">${l}</text>`).join('')}
+${lv.map(([y, l], i) => `<g class="sc-aura-lvl" data-l="${i}"><path class="sc-aura-lv" d="M250 ${y}H1600"/><path d="M262 ${y}l-12 -16h24z" fill="#7fd0ff"/><text class="sc-aura-lt" x="282" y="${y - 12}">${l}</text></g>`).join('')}
+</svg>`;
+  })();
+
+  // Etiquetas: [x, y (px de la foto), z, lado, aparece, se va, título, detalle]
+  const TAGS = [
+    [905, 652, 5, '', 0.215, 0.315, 'Cimentación', 'Losa de concreto armado'],
+    [1010, 335, 6, 'sc-aura-left', 0.37, 0.47, 'Estructura', 'Pórticos y losas · luces de 8,40 m'],
+    [760, 400, 7, '', 0.53, 0.615, 'Volumen', 'Voladizo de 4,20 m'],
+    [1290, 120, 6, 'sc-aura-left sc-aura-down', 0.635, 0.785, 'Concreto aparente', 'Encofrado de tablilla'],
+    [930, 540, 8, '', 0.675, 0.785, 'Madera de teca', 'Cielos y muebles'],
+    [1360, 410, 7, 'sc-aura-left', 0.705, 0.785, 'Vidrio templado', 'Ventanales de piso a techo'],
+    [330, 760, 6, '', 0.74, 0.8, 'Paisaje nativo', 'Jardín tropical']
+  ];
+  // Brillos de las ventanas al atardecer: [x, y, ancho, alto] en px de la foto.
+  const GLOWS = [[905, 255, 380, 230], [1050, 300, 170, 150], [960, 520, 420, 170], [1065, 515, 90, 70], [1400, 470, 380, 300], [1460, 505, 90, 90], [760, 560, 200, 130]];
+  const PHASES = ['Plano y terreno', 'Cimientos', 'Estructura', 'Volumen', 'Materiales', 'Luz y paisaje'];
+  const AT = [0, 0.15, 0.3, 0.46, 0.62, 0.78];
+
+  // Dibujo lineal: diferencia de desenfoques (XDoG) de la foto, calculada una sola vez al montar.
+  // La arquitectura conserva el trazo completo; el follaje y el entorno quedan como un boceto tenue.
+  const HOUSE_SHAPE = [[440, 300], [650, 300], [650, 200], [1110, 0], [1450, 0], [1450, 150], [1600, 130], [1600, 650], [1160, 780], [150, 790], [150, 640], [440, 640]];
+  function drawLines(img, light, dark) {
+    const w = 1280, h = 720, n = w * h;
+    const c = document.createElement('canvas'); c.width = w; c.height = h;
+    const ctx = c.getContext('2d', { willReadFrequently: true });
+    ctx.drawImage(img, 0, 0, w, h);
+    const s = ctx.getImageData(0, 0, w, h).data;
+    const g = new Float32Array(n), green = new Float32Array(n);
+    for (let i = 0, j = 0; i < n; i++, j += 4) {
+      g[i] = 0.299 * s[j] + 0.587 * s[j + 1] + 0.114 * s[j + 2];
+      green[i] = s[j + 1] - Math.max(s[j], s[j + 2]);
+    }
+    const box = (src, r) => {
+      const t = new Float32Array(n), o = new Float32Array(n), d = 2 * r + 1;
+      const at = (x, y) => src[Math.min(h - 1, Math.max(0, y)) * w + Math.min(w - 1, Math.max(0, x))];
+      for (let y = 0; y < h; y++) {
+        let acc = 0;
+        for (let x = -r; x <= r; x++) acc += at(x, y);
+        for (let x = 0; x < w; x++) { t[y * w + x] = acc / d; acc += at(x + r + 1, y) - at(x - r, y); }
+      }
+      const tt = (x, y) => t[Math.min(h - 1, Math.max(0, y)) * w + x];
+      for (let x = 0; x < w; x++) {
+        let acc = 0;
+        for (let y = -r; y <= r; y++) acc += tt(x, y);
+        for (let y = 0; y < h; y++) { o[y * w + x] = acc / d; acc += tt(x, y + r + 1) - tt(x, y - r); }
+      }
+      return o;
+    };
+    const b1 = box(box(g, 1), 1), b2 = box(box(g, 3), 3), foliage = box(box(green, 3), 3);
+    const raw = new Float32Array(n);
+    for (let i = 0; i < n; i++) raw[i] = Math.max(0, (b2[i] - b1[i] - 2.2) * 28);
+    const density = box(box(raw, 7), 7);
+    // Máscara suave de la casa.
+    const mk = document.createElement('canvas'); mk.width = w; mk.height = h;
+    const mx = mk.getContext('2d', { willReadFrequently: true });
+    mx.filter = 'blur(18px)'; mx.fillStyle = '#fff'; mx.scale(w / 1600, h / 900);
+    mx.beginPath(); HOUSE_SHAPE.forEach(([x, y], i) => (i ? mx.lineTo(x, y) : mx.moveTo(x, y))); mx.fill();
+    const M = mx.getImageData(0, 0, w, h).data;
+    const outL = ctx.createImageData(w, h), outD = ctx.createImageData(w, h), L = outL.data, D = outD.data;
+    for (let i = 0; i < n; i++) {
+      let a = raw[i];
+      if (foliage[i] > 8) a *= 0.16;
+      a *= 0.16 + 0.84 * M[i * 4 + 3] / 255;
+      a *= Math.min(1, 52 / Math.max(1, density[i]));
+      a = a > 255 ? 255 : a;
+      const j = i * 4;
+      L[j] = 226; L[j + 1] = 242; L[j + 2] = 255; L[j + 3] = a;
+      D[j] = 34; D[j + 1] = 44; D[j + 2] = 50; D[j + 3] = a * 0.9;
+    }
+    for (const [cv, data] of [[light, outL], [dark, outD]]) {
+      cv.width = w; cv.height = h;
+      cv.getContext('2d').putImageData(data, 0, 0);
+    }
+  }
 
   function mount(stage) {
-    const svg = document.createElementNS(NS, 'svg');
-    svg.setAttribute('viewBox', '0 0 1200 560');
-    svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
-    svg.setAttribute('width', '100%');
-    svg.setAttribute('height', '100%');
-    svg.setAttribute('class', 'sc-aura-svg');
-    svg.setAttribute('aria-hidden', 'true');
-    svg.innerHTML = `<style>${STYLE}</style><defs>${DEFS}</defs>`;
-    stage.appendChild(svg);
+    const tagHtml = TAGS.map(([, , , side, , , title, sub]) => `<div class="sc-aura-tag ${side}"><i></i><b></b><span><strong>${title}</strong><em>${sub}</em></span></div>`).join('');
+    const glowHtml = GLOWS.map(([x, y, w, h]) => `<i style="left:${((x - w / 2) / 16).toFixed(2)}%;top:${((y - h / 2) / 9).toFixed(2)}%;width:${(w / 16).toFixed(2)}%;height:${(h / 9).toFixed(2)}%"></i>`).join('');
+    const img = cls => `<img class="${cls}" src="${HOUSE}" alt="" decoding="async" draggable="false">`;
+    stage.innerHTML = `<div class="sc-aura-root" aria-hidden="true"><style>${STYLE}</style>
+  <div class="sc-aura-sky"></div><div class="sc-aura-dusk-sky"><img src="${HOUSE}" alt="" decoding="async" draggable="false"></div>
+  <div class="sc-aura-cam"><div class="sc-aura-world">
+    <div class="sc-aura-refl"><img src="${HOUSE}" alt="" decoding="async" draggable="false"></div>
+    <div class="sc-aura-floor"><div class="sc-aura-paper"></div><div class="sc-aura-gloss"></div>${PLAN}</div>
+    <div class="sc-aura-shadow"></div>
+    <div class="sc-aura-elev">
+      <div class="sc-aura-sheet"></div>
+      <canvas class="sc-aura-lines"></canvas>
+      ${img('sc-aura-clay')}
+      <canvas class="sc-aura-dlines"></canvas>
+      <div class="sc-aura-sweep"></div>
+      ${img('sc-aura-c1')}${img('sc-aura-c2')}${img('sc-aura-c3')}${img('sc-aura-c4')}
+      ${img('sc-aura-dusk')}<div class="sc-aura-tint"></div>
+      <div class="sc-aura-glows">${glowHtml}</div>
+      ${AXES}
+      <div class="sc-aura-scan"></div>
+      <div class="sc-aura-rim"></div>
+    </div>
+    ${tagHtml}
+    <div class="sc-aura-ipos"><div class="sc-aura-inset"><img src="${INSIDE}" alt="" decoding="async" draggable="false"><span>Y por dentro</span></div></div>
+  </div></div>
+  <div class="sc-aura-vig"></div><div class="sc-aura-grain"></div>
+  <div class="sc-aura-hud"><div><small>AURA · Render en vivo</small><strong class="sc-aura-phase">Plano y terreno</strong></div>
+    <div class="sc-aura-meter"><small>Avance de obra</small><strong class="sc-aura-pct">0 %</strong><div class="sc-aura-bar"><i></i></div></div></div>
+</div>`;
+    const root = stage.querySelector('.sc-aura-root');
+    const q = s => root.querySelector('.sc-aura-' + s);
+    const el = {};
+    ['world', 'floor', 'paper', 'gloss', 'plan', 'ptext', 'ttext', 'shadow', 'refl', 'elev', 'sheet', 'lines', 'dlines', 'clay', 'sweep', 'c1', 'c2', 'c3', 'c4',
+      'dusk', 'tint', 'glows', 'axes', 'scan', 'rim', 'inset', 'phase', 'pct', 'dusk-sky'].forEach(k => { el[k] = q(k); });
+    el.bar = root.querySelector('.sc-aura-bar i');
+    const groups = [...root.querySelectorAll('.sc-aura-plan [data-g]')].map(g => [...g.querySelectorAll('path')]);
+    const footings = [...root.querySelectorAll('.sc-aura-ft')];
+    const levels = [...root.querySelectorAll('.sc-aura-lvl')];
+    const axCols = [...root.querySelectorAll('.sc-aura-ax')];
+    const glows = [...el.glows.children];
+    const tags = [...root.querySelectorAll('.sc-aura-tag')];
+    groups.flat().forEach(path => { path.style.strokeDasharray = '1 1'; });
+    axCols.forEach(a => a.setAttribute('pathLength', '1'));
 
-    const mk = (tag, attrs, parent) => {
-      const el = document.createElementNS(NS, tag);
-      for (const k in attrs) el.setAttribute(k, attrs[k]);
-      (parent || svg).appendChild(el);
-      return el;
-    };
-    const set = (el, attrs) => { for (const k in attrs) el.setAttribute(k, attrs[k]); };
-    const show = (el, on) => (on ? el.removeAttribute('display') : el.setAttribute('display', 'none'));
-
-    function box(parent, base) {
-      const c = typeof base === 'string' ? shade(base) : base;
-      const g = mk('g', {}, parent);
-      const f = ['left', 'right', 'top'].map(k => mk('polygon', { fill: c[k], stroke: c[k], 'stroke-width': 0.6, 'stroke-linejoin': 'round' }, g));
-      return {
-        g,
-        set(x0, x1, y0, y1, z0, z1, op = 1) {
-          const on = x1 - x0 > 0.01 && y1 - y0 > 0.01 && z1 - z0 > 0.004 && op > 0.002;
-          show(g, on);
-          if (!on) return;
-          f[0].setAttribute('points', faceY(y1, x0, x1, z0, z1));
-          f[1].setAttribute('points', faceX(x1, y0, y1, z0, z1));
-          f[2].setAttribute('points', flat(x0, x1, y0, y1, z1));
-          g.setAttribute('opacity', op.toFixed(3));
-        }
-      };
-    }
-    const grow = (el, bx, by, s) => el.setAttribute('transform', `matrix(${s.toFixed(4)},0,0,${s.toFixed(4)},${(bx * (1 - s)).toFixed(2)},${(by * (1 - s)).toFixed(2)})`);
-
-    // ---------- Fondo ----------
-    const skyStops = svg.querySelectorAll('#sc-aura-sky stop');
-    const sunStops = svg.querySelectorAll('#sc-aura-sun stop');
-    mk('rect', { width: 1200, height: 560, fill: 'url(#sc-aura-sky)' });
-    const sunGlow = mk('circle', { r: 150, fill: 'url(#sc-aura-sun)' });
-    const sunCore = mk('circle', { r: 22, fill: '#fff9ee' });
-    const clouds = [
-      mk('path', { d: 'M0,0c8-14 30-16 40-6c8-10 30-8 32 8c12 0 18 10 8 14h-86c-12-2-10-14 6-16z', fill: '#ffffff', opacity: 0.7 }),
-      mk('path', { d: 'M0,0c6-10 22-12 30-4c6-8 24-6 24 6c9 0 14 8 6 11h-64c-9-2-8-11 4-13z', fill: '#ffffff', opacity: 0.6 })
-    ];
-
-    const world = mk('g', {});
-    mk('ellipse', { cx: 600, cy: 540, rx: 360, ry: 26, fill: 'url(#sc-aura-floor)' }, world);
-
-    // ---------- Terreno (maqueta) ----------
-    const T0 = -1.5;
-    mk('polygon', { points: faceY(16, 0, 24, T0, 0), fill: 'url(#sc-aura-soilL)' }, world);
-    mk('polygon', { points: faceX(24, 0, 16, T0, 0), fill: 'url(#sc-aura-soilR)' }, world);
-    const bandL = mk('polygon', { points: faceY(16, 0, 24, -0.32, 0) }, world);
-    const bandR = mk('polygon', { points: faceX(24, 0, 16, -0.32, 0) }, world);
-    mk('path', { d: line([0, 16, -0.85], [24, 16, -0.85]) + line([24, 16, -0.85], [24, 0, -0.85]), stroke: '#000', 'stroke-opacity': 0.08, 'stroke-width': 1, fill: 'none' }, world);
-    const ground = mk('polygon', { points: flat(0, 24, 0, 16, 0) }, world);
-    let gridD = '';
-    for (let x = 2; x < 24; x += 2) gridD += line([x, 0, 0], [x, 16, 0]);
-    for (let y = 2; y < 16; y += 2) gridD += line([0, y, 0], [24, y, 0]);
-    const grid = mk('path', { d: gridD, stroke: '#ffffff', 'stroke-width': 1, fill: 'none' }, world);
-    // estacas de replanteo
-    const stakes = mk('g', {}, world);
-    for (const [x, y] of [[2.5, 2], [16, 2], [2.5, 10], [16, 10]]) {
-      const a = P(x, y, 0), b = P(x, y, 0.9);
-      mk('line', { x1: a[0], y1: a[1], x2: b[0], y2: b[1], stroke: '#8a6a45', 'stroke-width': 2.2, 'stroke-linecap': 'round' }, stakes);
-      mk('circle', { cx: b[0], cy: b[1], r: 2.6, fill: '#c0573a' }, stakes);
-    }
-
-    // ---------- Plano dibujado en el suelo ----------
-    const bp = mk('g', {}, world);
-    const bpPaths = [
-      flat(4.5, 13, 3, 9, 0.01),
-      flat(2.5, 16, 2, 10, 0.01),
-      flat(15.8, 21.6, 9.6, 12.6, 0.01),
-      line([2.5, 11.2, 0], [16, 11.2, 0]) + line([2.5, 10.8, 0], [2.5, 11.6, 0]) + line([16, 10.8, 0], [16, 11.6, 0]),
-      line([17.2, 2, 0], [17.2, 10, 0]) + line([16.8, 2, 0], [17.6, 2, 0]) + line([16.8, 10, 0], [17.6, 10, 0]),
-      line([8.75, 3, 0], [8.75, 9, 0]) + line([4.5, 6, 0], [13, 6, 0])
-    ].map((d, i) => {
-      const isPoly = d[0] !== 'M';
-      const el = isPoly
-        ? mk('polygon', { points: d, class: 'sc-aura-bp', pathLength: 1, 'stroke-dasharray': '1 1' }, bp)
-        : mk('path', { d, class: 'sc-aura-bp', pathLength: 1, 'stroke-dasharray': '1 1' }, bp);
-      if (i === 1) el.setAttribute('stroke-opacity', '.55');
-      if (i === 5) el.setAttribute('stroke-opacity', '.35');
-      return el;
-    });
-    const groundText = (txt, x, y, along, size, weight = 400) => {
-      const [tx, ty] = P(x, y, 0);
-      const m = along === 'x' ? `matrix(.866,.5,-.866,.5,${tx},${ty})` : `matrix(.866,-.5,.866,.5,${tx},${ty})`;
-      return mk('text', { transform: m, 'text-anchor': 'middle', 'font-size': size, 'font-weight': weight, 'letter-spacing': '.08em', fill: '#2f4a3a' }, bp).appendChild(document.createTextNode(txt)).parentNode;
-    };
-    const bpLabels = [
-      groundText('180 m²', 8.75, 6.15, 'x', 30, 500),
-      groundText('13,5 m', 9.25, 12.1, 'x', 19),
-      groundText('8,0 m', 18.1, 6, 'y', 19)
-    ];
-
-    // ---------- Excavación y vaciado ----------
-    const pitWrap = mk('g', { 'clip-path': 'url(#sc-aura-clipPit)' }, world);
-    const pitRim = svg.querySelector('#sc-aura-pitRim');
-    const pitFloor = mk('polygon', { fill: '#5e4e3d' }, pitWrap);
-    const pitBack = mk('polygon', { fill: '#7b6650' }, pitWrap);
-    const pitSide = mk('polygon', { fill: '#6c5946' }, pitWrap);
-    const pour = mk('polygon', { fill: '#b9b6ae' }, pitWrap);
-
-    // ---------- Terraza de madera y piscina ----------
-    const deck = box(world, { top: '#c79a6b', left: '#a77a52', right: '#8a6343' });
-    const planks = mk('path', { stroke: '#8e6845', 'stroke-opacity': 0.35, 'stroke-width': 1, fill: 'none' }, world);
-    const pool = mk('g', { 'clip-path': 'url(#sc-aura-clipPool)' }, world);
-    mk('polygon', { points: flat(15.8, 21.6, 9.6, 12.6, -0.9), fill: '#5f8e93' }, pool);
-    mk('polygon', { points: faceY(9.6, 15.8, 21.6, -0.9, 0.25), fill: '#d9e6e1' }, pool);
-    mk('polygon', { points: faceX(15.8, 9.6, 12.6, -0.9, 0.25), fill: '#b6cbc6' }, pool);
-    const water = mk('polygon', { fill: 'url(#sc-aura-water)', opacity: 0.92 }, pool);
-    const shimmerWrap = mk('g', {}, pool);
-    let shD = '';
-    for (let i = -6; i < 16; i++) {
-      const a = P(14 + i * 0.9, 9.4, 0), b = P(14 + i * 0.9 + 2.2, 13, 0);
-      shD += `M${a[0].toFixed(1)},${a[1].toFixed(1)}Q${((a[0] + b[0]) / 2 + 6).toFixed(1)},${((a[1] + b[1]) / 2).toFixed(1)} ${b[0].toFixed(1)},${b[1].toFixed(1)}`;
-    }
-    mk('path', { d: shD, class: 'sc-aura-shimmer', stroke: '#ffffff', 'stroke-opacity': 0.35, 'stroke-width': 1.2, fill: 'none' }, shimmerWrap);
-    const coping = mk('polygon', { points: flat(15.8, 21.6, 9.6, 12.6, 0.26), fill: 'none', stroke: '#efe9df', 'stroke-width': 3 }, world);
-
-    // Camino de piedras
-    const stones = [[5.2, 10.6], [4.8, 12.2], [5.4, 13.8]].map(() => box(world, '#d9d4ca'));
-
-    // ---------- Sombras ----------
-    const shadows = mk('g', { 'clip-path': 'url(#sc-aura-clipTop)', fill: '#26302a' }, world);
-    const shAO = mk('polygon', {}, shadows);
-    const shF = mk('polygon', {}, shadows);
-    const shG = mk('polygon', {}, shadows);
-    const shU = mk('polygon', {}, shadows);
-    const shCrane = mk('polygon', {}, shadows);
-    const shCols = [], shUp = [];
-    for (let i = 0; i < 6; i++) shCols.push(mk('polygon', {}, shadows));
-    for (let i = 0; i < 6; i++) shUp.push(mk('polygon', {}, shadows));
-    const treeSpots = [];
-
-    // ---------- Vegetación (definiciones) ----------
-    function palm(parent, x, y, h, lean, flip) {
-      const [bx, by] = P(x, y, 0);
-      const g = mk('g', {}, parent);
-      const tx = bx + lean * S, ty = by - h * S;
-      const midx = bx + lean * S * 0.25;
-      mk('path', { d: `M${bx - 4},${by} Q${midx - 3},${by - h * S * 0.55} ${tx - 1.6},${ty} L${tx + 1.6},${ty} Q${midx + 3.4},${by - h * S * 0.55} ${bx + 4},${by} Z`, fill: 'url(#sc-aura-trunk)' }, g);
-      const fr = [[-170, 1, 0.4, 0], [-138, 0.9, 0.18, 0], [-108, 0.72, 0.04, 0], [-72, 0.72, 0.04, 0], [-42, 0.92, 0.2, 0], [-10, 1, 0.42, 1], [28, 0.78, 0.5, 1], [152, 0.78, 0.5, 1]];
-      const L = 2.7 * S;
-      for (const [a0, l, dr, front] of fr) {
-        const a = ((flip ? 180 - a0 : a0) * Math.PI) / 180;
-        const len = L * l;
-        const tipx = tx + Math.cos(a) * len, tipy = ty + Math.sin(a) * len + dr * L;
-        const cx0 = tx + Math.cos(a) * len * 0.5, cy0 = ty + Math.sin(a) * len * 0.5 - L * 0.22;
-        const nx = -Math.sin(a), ny = Math.cos(a), w = 7 * l;
-        mk('path', {
-          d: `M${tx.toFixed(1)},${ty.toFixed(1)}Q${(cx0 + nx * w).toFixed(1)},${(cy0 + ny * w).toFixed(1)} ${tipx.toFixed(1)},${tipy.toFixed(1)}Q${(cx0 - nx * w * 0.6).toFixed(1)},${(cy0 - ny * w * 0.6).toFixed(1)} ${tx.toFixed(1)},${ty.toFixed(1)}Z`,
-          fill: front ? '#5f8d5a' : '#3f6a47'
-        }, g);
-      }
-      mk('circle', { cx: tx - 2, cy: ty + 3, r: 2.6, fill: '#6b5a2e' }, g);
-      mk('circle', { cx: tx + 2.4, cy: ty + 4, r: 2.4, fill: '#7d6a36' }, g);
-      treeSpots.push({ x, y, r: 1.3, h, el: mk('ellipse', {}, shadows) });
-      return { g, bx, by };
-    }
-    function tree(parent, x, y, h, r) {
-      const [bx, by] = P(x, y, 0);
-      const g = mk('g', {}, parent);
-      mk('rect', { x: bx - 2.5, y: by - h * S * 0.55, width: 5, height: h * S * 0.55, rx: 2, fill: '#6f5743' }, g);
-      mk('circle', { cx: bx, cy: by - h * S * 0.72, r: r * S, fill: '#46704a' }, g);
-      mk('circle', { cx: bx + r * S * 0.35, cy: by - h * S * 0.62, r: r * S * 0.7, fill: '#3b6141' }, g);
-      mk('circle', { cx: bx - r * S * 0.3, cy: by - h * S * 0.82, r: r * S * 0.55, fill: '#6c9764' }, g);
-      treeSpots.push({ x, y, r: r * 0.9, h, el: mk('ellipse', {}, shadows) });
-      return { g, bx, by };
-    }
-    function bush(parent, x, y, r) {
-      const [bx, by] = P(x, y, 0);
-      const g = mk('g', {}, parent);
-      mk('circle', { cx: bx - r * 8, cy: by - r * 7, r: r * 9, fill: '#4c7750' }, g);
-      mk('circle', { cx: bx + r * 7, cy: by - r * 6, r: r * 8, fill: '#3f6845' }, g);
-      mk('circle', { cx: bx - r * 2, cy: by - r * 11, r: r * 7.5, fill: '#6a9561' }, g);
-      return { g, bx, by };
-    }
-
-    const backPlants = [palm(world, 0.7, 5.6, 6.2, -0.5, false)];
-
-    // ---------- Casa ----------
-    const CONC = '#cbc7bf';
-    const slabF = box(world, '#d6d2ca');
-    const wallsG = box(world, { top: '#dedbd3', left: '#c9c5bc', right: '#9d9a92' });
-    const gGlass = mk('g', {}, world);
-    const gPanesY = [[6.4, 8.35], [9.15, 10.95], [11.15, 12.65]].map(r => ({ r, el: mk('polygon', { fill: 'url(#sc-aura-glassL)' }, gGlass) }));
-    const gPanesX = [[3.35, 5.65], [6.35, 8.65]].map(r => ({ r, el: mk('polygon', { fill: 'url(#sc-aura-glassR)' }, gGlass) }));
-    const door = mk('polygon', { fill: '#9b6a42' }, world);
-
-    const colsG = [[4.5, 3], [13, 3], [4.5, 9], [8.75, 9], [13, 6], [13, 9]]
-      .sort((a, b) => a[0] + a[1] - (b[0] + b[1]))
-      .map(([x, y]) => ({ x, y, b: box(world, CONC) }));
-    const beamsF = [
-      { a: 'x', at: 3, from: 2.5, to: 16 },
-      { a: 'y', at: 2.7, from: 3.2, to: 8.8 }, { a: 'y', at: 4.5, from: 3.2, to: 8.8 }, { a: 'y', at: 13, from: 3.2, to: 8.8 }, { a: 'y', at: 15.8, from: 3.2, to: 8.8 },
-      { a: 'x', at: 9, from: 2.5, to: 16 }
-    ].map(o => ({ ...o, b: box(world, '#bfbbb2') }));
-    const colsU = [[2.7, 3], [9.4, 3], [15.8, 3], [2.7, 9], [9.4, 9], [15.8, 9]]
-      .sort((a, b) => a[0] + a[1] - (b[0] + b[1]))
-      .map(([x, y]) => ({ x, y, b: box(world, CONC) }));
-    const beamsR = [
-      { a: 'x', at: 3, from: 2.5, to: 16 },
-      { a: 'y', at: 2.7, from: 3.2, to: 8.8 }, { a: 'y', at: 15.8, from: 3.2, to: 8.8 },
-      { a: 'x', at: 9, from: 2.5, to: 16 }
-    ].map(o => ({ ...o, b: box(world, '#bfbbb2') }));
-
-    const slabU = box(world, { top: '#e2dfd8', left: '#d3cfc6', right: '#a9a59d' });
-    const wallsU = box(world, { top: '#eeebe5', left: '#e6e2da', right: '#b9b5ac' });
-    const uDeco = mk('g', {}, world);
-    const backing = mk('polygon', { fill: '#6b5442' }, uDeco);
-    const slats = mk('path', { stroke: '#b98353', 'stroke-width': 3.4, 'stroke-linecap': 'butt', fill: 'none' }, uDeco);
-    const slatShade = mk('path', { stroke: '#7d5536', 'stroke-width': 1.2, fill: 'none', transform: 'translate(2.4 0)' }, uDeco);
-    const uPanesY = [[10.65, 13.1], [13.3, 15.85]].map(r => ({ r, el: mk('polygon', { fill: 'url(#sc-aura-glassL)' }, uDeco) }));
-    const uPanesX = [[2.15, 4.05], [4.25, 6.0], [6.2, 7.95], [8.15, 9.85]].map(r => ({ r, el: mk('polygon', { fill: 'url(#sc-aura-glassR)' }, uDeco) }));
-    const roof = box(world, { top: '#f6f2ea', left: '#ded9cf', right: '#b3ada2' });
-    const planter = box(world, { top: '#7f9a6a', left: '#d6d2c9', right: '#aca89f' });
-    const roofPlants = mk('g', {}, world);
-    const rp = [[3.6, 3.4], [3.9, 5.2], [3.5, 7.1], [4.0, 8.7]].map(([x, y]) => {
-      const [bx, by] = P(x, y, 7.0);
-      const g = mk('g', {}, roofPlants);
-      mk('circle', { cx: bx, cy: by - 5, r: 7, fill: '#4f7b51' }, g);
-      mk('circle', { cx: bx - 3, cy: by - 8, r: 4.5, fill: '#6f9a66' }, g);
-      return { g, bx, by };
+    // Dibujo lineal calculado una vez; si el navegador no deja leer la imagen, se usa un filtro aproximado.
+    const source = new Image();
+    source.decoding = 'async';
+    source.src = HOUSE;
+    source.decode().then(() => drawLines(source, el.lines, el.dlines)).catch(() => {
+      el.lines.classList.add('sc-aura-fallback'); el.dlines.classList.add('sc-aura-fallback');
     });
 
-    // ---------- Cotas de nivel ----------
-    const levels = mk('g', {}, world);
-    const levelEls = [[0.4, '±0,00'], [3.6, '+3,60'], [6.75, '+6,75']].map(([z, txt]) => {
-      const g = mk('g', {}, levels);
-      const a = P(2.5, 10, z);
-      const lx = 286;
-      mk('path', { d: `M${a[0] - 8},${a[1]}H${lx + 64}`, stroke: '#3c5a48', 'stroke-width': 1, 'stroke-dasharray': '3 4', fill: 'none' }, g);
-      mk('path', { d: `M${lx + 64},${a[1]} l-6,-9 h12z`, fill: '#3c5a48' }, g);
-      const t = mk('text', { x: lx, y: a[1] - 6, 'font-size': 18, class: 'sc-aura-t', fill: '#2f4a3a' }, g);
-      t.textContent = txt;
-      return g;
-    });
-
-    // ---------- Grúa torre ----------
-    const crane = mk('g', {}, world);
-    const craneBase = box(crane, '#a9a59c');
-    const craneMast = mk('path', { stroke: '#c49a3c', 'stroke-width': 1.5, fill: 'none', 'stroke-linejoin': 'round' }, crane);
-    const craneJib = mk('path', { stroke: '#c49a3c', 'stroke-width': 1.5, fill: 'none', 'stroke-linejoin': 'round' }, crane);
-    const cranePend = mk('path', { stroke: '#8b6d2a', 'stroke-width': 1, fill: 'none' }, crane);
-    const craneCab = box(crane, '#d2aa48');
-    const craneWeight = box(crane, '#8f8b84');
-    const craneCable = mk('path', { stroke: '#2b2b2b', 'stroke-width': 1, fill: 'none' }, crane);
-    const craneLoad = box(crane, { top: '#d9b98f', left: '#b98f5e', right: '#957047' });
-    const hook = mk('circle', { r: 2.4, fill: '#2b2b2b' }, crane);
-    const MAST = [21.6, 1.4];
-
-    // ---------- Vegetación frontal ----------
-    const frontPlants = [
-      palm(world, 22.7, 2.1, 6.2, 0.5, true),
-      tree(world, 23.1, 7.2, 3.1, 1.3),
-      palm(world, 1.7, 13.4, 6.6, -0.4, false),
-      tree(world, 8.4, 14.4, 3.0, 1.55),
-      bush(world, 12.8, 15.1, 1),
-      bush(world, 0.9, 7.8, 0.9),
-      bush(world, 23.2, 13.8, 1.1)
-    ];
-    const plants = [...backPlants, ...frontPlants];
-
-    // ---------- Atardecer y luces ----------
-    const dusk = mk('rect', { x: -200, y: -100, width: 1600, height: 760, fill: 'url(#sc-aura-dusk)' }, world);
-    const glow = mk('g', {}, world);
-    const spillA = mk('ellipse', { fill: 'url(#sc-aura-spill)' }, glow);
-    const spillB = mk('ellipse', { fill: 'url(#sc-aura-spill)' }, glow);
-    const poolGlow = mk('polygon', { fill: 'url(#sc-aura-poolglow)', 'clip-path': 'url(#sc-aura-clipPool)' }, glow);
-    const glowPanes = [
-      ...gPanesY.map(o => ({ el: mk('polygon', { fill: 'url(#sc-aura-warm)' }, glow), pts: faceY(9, o.r[0], o.r[1], 0.5, 2.5) })),
-      ...uPanesY.map(o => ({ el: mk('polygon', { fill: 'url(#sc-aura-warm)' }, glow), pts: faceY(10, o.r[0], o.r[1], 4.15, 6.15) })),
-      ...uPanesX.map(o => ({ el: mk('polygon', { fill: 'url(#sc-aura-warm)' }, glow), pts: faceX(16, o.r[0], o.r[1], 4.15, 6.15) }))
-    ];
-    glowPanes.forEach(o => o.el.setAttribute('points', o.pts));
-    const lamps = [[6.5, 11.4], [6.6, 14.2], [14.4, 13.9], [22.2, 9]].map(([x, y]) => {
-      const [bx, by] = P(x, y, 0);
-      const g = mk('g', {}, glow);
-      mk('ellipse', { cx: bx, cy: by, rx: 16, ry: 8, fill: 'url(#sc-aura-spill)' }, g);
-      mk('rect', { x: bx - 1.5, y: by - 9, width: 3, height: 9, fill: '#3b3a36' }, g);
-      mk('circle', { cx: bx, cy: by - 10, r: 2.6, fill: '#ffe2a6' }, g);
-      return g;
-    });
-
-    // Cartela de plano (abajo a la derecha)
-    const sheet = mk('g', { transform: 'translate(958 512)' });
-    mk('text', { x: 0, y: 0, 'text-anchor': 'end', 'font-size': 18, class: 'sc-aura-t' }, sheet).textContent = 'Casa Aura';
-    mk('text', { x: 0, y: 22, 'text-anchor': 'end', 'font-size': 13, class: 'sc-aura-t', fill: '#58605a', opacity: 0.85 }, sheet).textContent = '180 m² · 2 niveles';
-    mk('line', { x1: -150, x2: 0, y1: -26, y2: -26, stroke: '#1d2320', 'stroke-opacity': 0.35 }, sheet);
-    const sheetTexts = sheet.querySelectorAll('text');
-
-    const SKY_DAY = ['#dfe3de', '#e9e6df', '#efebe3'], SKY_DUSK = ['#55647b', '#c99f92', '#f3cfa2'];
+    const op = (node, v) => { node.style.opacity = clamp(v).toFixed(3); };
+    let lastPhase = -1, lastPct = -1;
 
     function render(p) {
-      // Cámara: arranca un poco más cerca y se abre con la obra.
-      const cam = easeInOut(seg(p, 0, 0.7));
-      const sc = lerp(1.05, 1, cam), dx = lerp(-12, 0, cam);
-      world.setAttribute('transform', `translate(${(600 + dx).toFixed(2)} 320) scale(${sc.toFixed(4)}) translate(-600 -320)`);
+      // ---------- Cámara: grúa desde arriba → órbita → encuadre heroico ----------
+      const rx = keys(p, [[0, -64], [0.15, -52], [0.3, -26], [0.46, -9], [0.62, -5], [0.78, -4], [1, -5]]);
+      const ry = keys(p, [[0, 20], [0.15, 8], [0.3, -16], [0.46, -11], [0.62, 9], [0.78, 3], [1, -9]]);
+      const dist = keys(p, [[0, 62], [0.15, 50], [0.3, 40], [0.46, 20], [0.62, 12], [0.78, 9], [0.9, 16], [1, 19]]);
+      const pz = keys(p, [[0, 34], [0.15, 26], [0.3, 6], [0.46, 0], [1, 0]]);
+      const py = keys(p, [[0, 26], [0.15, 18], [0.3, 0], [0.46, -1], [0.78, 0], [1, 4]]);
+      const px = keys(p, [[0, 0], [0.46, 0], [0.62, 3], [0.78, 0], [0.9, 4], [1, 6]]);
+      el.world.style.transform = `translate3d(0,0,${u(-dist)}) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translate3d(${u(-px)},${u(-py)},${u(-pz)})`;
 
-      // Cielo y sol
-      const eD = easeInOut(seg(p, 0.78, 0.98));
-      skyStops.forEach((s, i) => s.setAttribute('stop-color', mix(SKY_DAY[i], SKY_DUSK[i], eD)));
-      const sunT = easeInOut(p);
-      const sx = lerp(372, 300, sunT), sy = lerp(84, 262, sunT);
-      set(sunGlow, { cx: sx, cy: sy, r: lerp(150, 190, eD) });
-      sunStops.forEach(s => s.setAttribute('stop-color', mix('#fff6df', '#ffc47e', eD)));
-      set(sunCore, { cx: sx, cy: sy, fill: mix('#fffaf0', '#ffd394', eD), r: lerp(22, 26, eD) });
-      clouds[0].setAttribute('transform', `translate(${lerp(760, 820, p).toFixed(1)} 84)`);
-      clouds[1].setAttribute('transform', `translate(${lerp(420, 470, p).toFixed(1)} 150) scale(.9)`);
-      clouds.forEach(c => c.setAttribute('fill', mix('#ffffff', '#f6c7b1', eD)));
-      sheetTexts.forEach(t => t.setAttribute('fill', mix('#1d2320', '#2a2522', eD)));
+      // ---------- 1 · Plano sobre el terreno ----------
+      const drawAt = [[-0.09, 0.03], [0.03, 0.09], [0.06, 0.12], [0.075, 0.135], [0.09, 0.15]];
+      groups.forEach((paths, gi) => paths.forEach((path, k) => {
+        const t = eOut(seg(p, drawAt[gi][0] + k * 0.006, drawAt[gi][1] + k * 0.006));
+        path.style.strokeDashoffset = (1 - t).toFixed(4);
+      }));
+      op(el.ptext, seg(p, 0.1, 0.15));
+      el.ttext.setAttribute('opacity', (0.55 + 0.45 * seg(p, 0, 0.04)).toFixed(3));
+      footings.forEach((f, i) => f.setAttribute('opacity', eOut(seg(p, 0.155 + i * 0.004, 0.18 + i * 0.004)).toFixed(3)));
+      const planFade = 1 - 0.7 * seg(p, 0.46, 0.6) - 0.22 * seg(p, 0.78, 0.88);
+      op(el.plan, planFade);
+      op(el.paper, 1 - 0.55 * seg(p, 0.5, 0.66) - 0.45 * seg(p, 0.78, 0.9));
+      op(el.gloss, seg(p, 0.6, 0.72) * 0.6 + seg(p, 0.78, 0.9) * 0.4);
 
-      // Terreno: tierra nivelada → césped
-      const eL = easeInOut(seg(p, 0.8, 0.9));
-      ground.setAttribute('fill', mix('#d8cfbd', '#a7b78d', eL));
-      bandL.setAttribute('fill', mix('#c0ad8f', '#8a9f70', eL));
-      bandR.setAttribute('fill', mix('#a08d73', '#6c8058', eL));
-      grid.setAttribute('stroke-opacity', (0.55 * (1 - seg(p, 0.8, 0.86)) * (1 - 0.45 * seg(p, 0.2, 0.3))).toFixed(3));
-      stakes.setAttribute('opacity', (1 - seg(p, 0.15, 0.19)).toFixed(3));
-      show(stakes, p < 0.19);
+      // ---------- 2 · La fachada se levanta del terreno y se dibuja de abajo arriba ----------
+      const rise = eInOut(seg(p, 0.15, 0.3));
+      el.elev.style.transform = `rotateX(${lerp(90, 0, rise).toFixed(2)}deg)`;
+      op(el.elev, seg(p, 0.15, 0.19));
+      op(el.shadow, seg(p, 0.46, 0.6) * 0.8);
+      const reveal = lerp(0, 0.34, eOut(seg(p, 0.19, 0.3))) + lerp(0, 0.66, eInOut(seg(p, 0.31, 0.44)));
+      const top = (1 - reveal) * 100;
+      el.lines.style.clipPath = `inset(${top.toFixed(2)}% 0 0 0)`;
+      el.scan.style.transform = `translateY(${u(top * 0.5625)})`;
+      op(el.scan, (reveal > 0.002 && reveal < 0.998 ? 1 : 0) * (1 - seg(p, 0.44, 0.46)));
+      op(el.axes, seg(p, 0.2, 0.25) * (1 - seg(p, 0.5, 0.57)));
+      axCols.forEach((a, i) => { a.style.strokeDashoffset = (1 - eOut(seg(p, 0.2 + i * 0.008, 0.27 + i * 0.008))).toFixed(3); a.style.strokeDasharray = '1 1'; });
+      levels.forEach((l, i) => l.setAttribute('opacity', eOut(seg(p, [0.23, 0.36, 0.42][i], [0.26, 0.39, 0.45][i])).toFixed(3)));
+      op(el.sheet, 1);
 
-      // 1. Plano
-      const bpFade = 1 - seg(p, 0.4, 0.52);
-      bp.setAttribute('opacity', bpFade.toFixed(3));
-      show(bp, bpFade > 0.001);
-      bpPaths.forEach((el, i) => el.setAttribute('stroke-dashoffset', (1 - easeOut(seg(p, 0.015 + i * 0.013, 0.07 + i * 0.013))).toFixed(4)));
-      bpLabels.forEach((el, i) => el.setAttribute('opacity', easeOut(seg(p, 0.07 + i * 0.012, 0.11 + i * 0.012)).toFixed(3)));
+      // ---------- 3 · Volumen: arcilla que barre sobre las líneas ----------
+      const wipe = eInOut(seg(p, 0.47, 0.58));
+      const a = lerp(-25, 125, wipe), b = a - 22;
+      const clip = `polygon(-5% -5%, ${a.toFixed(2)}% -5%, ${b.toFixed(2)}% 105%, -5% 105%)`;
+      el.clay.style.clipPath = clip;
+      el.dlines.style.clipPath = clip;
+      op(el.clay, wipe > 0 ? 1 : 0);
+      op(el.dlines, (wipe > 0 ? 0.75 : 0) * (1 - seg(p, 0.66, 0.76)));
+      el.sweep.style.transform = `translateX(${lerp(-70, 90, wipe).toFixed(2)}%)`;
+      op(el.sweep, wipe > 0 && wipe < 1 ? 1 : 0);
+      op(el.lines, 1 - seg(p, 0.58, 0.6));
 
-      // 2. Cimientos: excavación → vaciado → losa
-      const eX = easeOut(seg(p, 0.15, 0.205));
-      const ePour = easeInOut(seg(p, 0.205, 0.245));
-      const eSlab = easeOut(seg(p, 0.245, 0.285));
-      const pitOn = eX > 0 && p < 0.3;
-      show(pitWrap, pitOn);
-      if (pitOn) {
-        const cx0 = 9, cy0 = 6, hw = lerp(0.6, 5.3, eX), hd = lerp(0.4, 3.8, eX), depth = -0.85 * eX;
-        const x0 = cx0 - hw, x1 = cx0 + hw, y0 = cy0 - hd, y1 = cy0 + hd;
-        pitRim.setAttribute('points', flat(x0, x1, y0, y1, 0));
-        pitFloor.setAttribute('points', flat(x0, x1, y0, y1, depth));
-        pitBack.setAttribute('points', faceY(y0, x0, x1, depth, 0));
-        pitSide.setAttribute('points', faceX(x0, y0, y1, depth, 0));
-        const zp = lerp(depth, 0, ePour);
-        pour.setAttribute('points', flat(x0, x1, y0, y1, zp));
-        show(pour, ePour > 0);
-        pitWrap.setAttribute('opacity', (1 - seg(p, 0.27, 0.3)).toFixed(3));
-      }
-      slabF.set(3.9, 14.1, 2.6, 9.4, 0, 0.4 * eSlab);
+      // ---------- 4 · Materiales por zonas ----------
+      op(el.c1, eOut(seg(p, 0.625, 0.67)));
+      op(el.c2, eOut(seg(p, 0.665, 0.71)));
+      op(el.c3, eOut(seg(p, 0.695, 0.74)));
+      op(el.c4, eInOut(seg(p, 0.73, 0.79)));
 
-      // Grúa: se arma, trabaja y se retira
-      const up = easeOut(seg(p, 0.15, 0.22)), down = easeInOut(seg(p, 0.79, 0.845));
-      const mz = 10 * up - 1.4 * down;
-      const craneOn = mz > 0.05 && down < 1;
-      show(crane, craneOn);
-      if (craneOn) {
-        crane.setAttribute('opacity', (1 - down).toFixed(3));
-        const [mx, my] = MAST, w = 0.32;
-        craneBase.set(mx - 0.7, mx + 0.7, my - 0.7, my + 0.7, 0, 0.35);
-        let d = line([mx - w, my + w, 0.35], [mx - w, my + w, mz]) + line([mx + w, my + w, 0.35], [mx + w, my + w, mz]) + line([mx + w, my - w, 0.35], [mx + w, my - w, mz]);
-        for (let z = 0.35, k = 0; z < mz - 0.05; z += 0.7, k++) {
-          const z2 = Math.min(mz, z + 0.7);
-          d += line([k % 2 ? mx + w : mx - w, my + w, z], [k % 2 ? mx - w : mx + w, my + w, z2]);
-          d += line([mx + w, k % 2 ? my + w : my - w, z], [mx + w, k % 2 ? my - w : my + w, z2]);
-        }
-        craneMast.setAttribute('d', d);
-        const jibOn = seg(p, 0.2, 0.23);
-        const th = (keys(p, [[0.2, 190], [0.27, 166], [0.36, 158], [0.42, 148], [0.5, 166], [0.58, 152], [0.66, 128], [0.73, 112], [0.8, 150], [0.86, 190]]) * Math.PI) / 180;
-        const ux = Math.cos(th), uy = Math.sin(th);
-        const L = 12.5 * jibOn, Lc = 4 * jibOn;
-        const tip = [mx + ux * L, my + uy * L], back = [mx - ux * Lc, my - uy * Lc];
-        let j = line([back[0], back[1], mz], [tip[0], tip[1], mz]) + line([back[0], back[1], mz + 0.55], [tip[0], tip[1], mz + 0.55]);
-        const n = Math.max(1, Math.round((L + Lc) / 0.8));
-        for (let k = 0; k < n; k++) {
-          const t0 = -Lc + ((L + Lc) * k) / n, t1 = -Lc + ((L + Lc) * (k + 1)) / n;
-          j += line([mx + ux * t0, my + uy * t0, k % 2 ? mz + 0.55 : mz], [mx + ux * t1, my + uy * t1, k % 2 ? mz : mz + 0.55]);
-        }
-        craneJib.setAttribute('d', jibOn > 0 ? j : '');
-        const apex = [mx, my, mz + 2.4];
-        cranePend.setAttribute('d', jibOn > 0 ? line([mx, my, mz + 0.55], apex) + line(apex, [mx + ux * L * 0.62, my + uy * L * 0.62, mz + 0.55]) + line(apex, [back[0], back[1], mz + 0.55]) : '');
-        craneCab.set(mx - 0.25 + 0.55, mx + 0.35 + 0.55, my - 0.3, my + 0.3, mz - 0.6, mz, up);
-        craneWeight.set(back[0] - 0.4, back[0] + 0.4, back[1] - 0.4, back[1] + 0.4, mz - 0.6, mz + 0.3, jibOn);
-        const td = keys(p, [[0.2, 9], [0.28, 10.5], [0.36, 11.5], [0.44, 9], [0.52, 11.8], [0.6, 10], [0.68, 8.6], [0.74, 6.2], [0.8, 9]]) * jibOn;
-        const hz = Math.min(keys(p, [[0.2, mz - 1], [0.26, 9.3], [0.32, 7.7], [0.36, 9.3], [0.44, 7.8], [0.49, 9.3], [0.56, 7.8], [0.6, 9.3], [0.7, 7.6], [0.76, 9.3]]) - 1.4 * down, mz - 0.5);
-        const tx = mx + ux * td, ty = my + uy * td;
-        craneCable.setAttribute('d', jibOn > 0 ? line([tx, ty, mz], [tx, ty, hz]) : '');
-        const hk = P(tx, ty, hz);
-        set(hook, { cx: hk[0], cy: hk[1], opacity: jibOn });
-        const carry = (p > 0.24 && p < 0.33) || (p > 0.39 && p < 0.455) || (p > 0.53 && p < 0.575) || (p > 0.64 && p < 0.71);
-        craneLoad.set(tx - 0.6, tx + 0.6, ty - 0.35, ty + 0.35, hz - 0.65, hz - 0.15, carry && jibOn > 0 ? 1 : 0);
-        shCrane.setAttribute('points', shadowOf(mx - w, mx + w, my - w, my + w, 0, mz));
-      }
-      show(shCrane, craneOn);
+      // ---------- 5 · Luz de atardecer, paisaje y piso brillante ----------
+      const dusk = eInOut(seg(p, 0.79, 0.89));
+      op(el.dusk, dusk); op(el.tint, dusk); op(el['dusk-sky'], dusk);
+      op(el.glows, 1);
+      glows.forEach((g, i) => op(g, eOut(seg(p, 0.84 + i * 0.008, 0.9 + i * 0.008))));
+      op(el.refl, eInOut(seg(p, 0.8, 0.92)) * 0.75);
+      op(el.rim, 1 - seg(p, 0.6, 0.7));
+      const ins = eOut(seg(p, 0.9, 0.98));
+      el.inset.style.transform = `translate3d(${u(lerp(14, 0, ins))},${u(lerp(5, 0, ins))},${u(lerp(-14, 0, ins))}) rotateY(${lerp(-16, 0, ins).toFixed(2)}deg) scale(${lerp(0.85, 1, ins).toFixed(3)})`;
+      op(el.inset, ins);
 
-      // 3. Estructura
-      colsG.forEach((c, i) => {
-        const e = easeOut(seg(p, 0.3 + i * 0.011, 0.355 + i * 0.011));
-        const z1 = lerp(0.4, 3.6, e);
-        c.b.set(c.x - 0.26, c.x + 0.26, c.y - 0.26, c.y + 0.26, 0.4, e > 0 ? z1 : 0.4);
-        show(shCols[i], e > 0);
-        if (e > 0) shCols[i].setAttribute('points', shadowOf(c.x - 0.26, c.x + 0.26, c.y - 0.26, c.y + 0.26, 0, z1));
-      });
-      const beamSet = (list, z0, t0, gap) => list.forEach((o, i) => {
-        const e = easeOut(seg(p, t0 + i * gap, t0 + 0.05 + i * gap));
-        const mid = (o.from + o.to) / 2, a = lerp(mid, o.from, e), b = lerp(mid, o.to, e);
-        if (o.a === 'x') o.b.set(a, b, o.at - 0.2, o.at + 0.2, z0, z0 + 0.4, e > 0 ? 1 : 0);
-        else o.b.set(o.at - 0.2, o.at + 0.2, a, b, z0, z0 + 0.4, e > 0 ? 1 : 0);
-      });
-      beamSet(beamsF, 3.6, 0.36, 0.009);
-      colsU.forEach((c, i) => {
-        const e = easeOut(seg(p, 0.405 + i * 0.008, 0.44 + i * 0.008));
-        c.b.set(c.x - 0.22, c.x + 0.22, c.y - 0.22, c.y + 0.22, 4, e > 0 ? lerp(4, 6.4, e) : 4);
-        show(shUp[i], e > 0);
-        if (e > 0) shUp[i].setAttribute('points', shadowOf(c.x - 0.22, c.x + 0.22, c.y - 0.22, c.y + 0.22, 4, lerp(4, 6.4, e)));
-      });
-      beamSet(beamsR, 6.4, 0.43, 0.007);
-      const eLv = seg(p, 0.33, 0.37) * (1 - seg(p, 0.6, 0.64));
-      levels.setAttribute('opacity', eLv.toFixed(3));
-      show(levels, eLv > 0.001);
-      levelEls.forEach((g, i) => g.setAttribute('opacity', seg(p, 0.33 + i * 0.05, 0.37 + i * 0.05).toFixed(3)));
-
-      // 4. Muros y losas
-      const eS = easeOut(seg(p, 0.46, 0.51));
-      const ux0 = lerp(4.5, 2.5, eS), ux1 = lerp(13, 16, eS), uy0 = lerp(3, 2, eS), uy1 = lerp(9, 10, eS);
-      slabU.set(ux0, ux1, uy0, uy1, 3.6, 4.0, eS > 0 ? Math.min(1, eS * 4) : 0);
-      const eG = easeOut(seg(p, 0.49, 0.55));
-      const gz = lerp(0.4, 3.6, eG);
-      wallsG.set(4.5, 13, 3, 9, 0.4, eG > 0 ? gz : 0.4);
-      const eU = easeOut(seg(p, 0.53, 0.59));
-      const uz = lerp(4, 6.4, eU);
-      wallsU.set(2.5, 16, 2, 10, 4, eU > 0 ? uz : 4);
-      const eR = seg(p, 0.585, 0.625);
-      const rz = lerp(1.6, 0, easeBack(eR, 1.2));
-      roof.set(2.3, 16.2, 1.8, 10.2, 6.4 + rz, 6.75 + rz, eR > 0 ? Math.min(1, eR * 3) : 0);
-      const fz0 = 0.4;
-      // sombras de volúmenes
-      show(shF, eSlab > 0);
-      if (eSlab > 0) shF.setAttribute('points', shadowOf(3.9, 14.1, 2.6, 9.4, 0, 0.4 * eSlab));
-      show(shG, eG > 0);
-      if (eG > 0) shG.setAttribute('points', shadowOf(4.5, 13, 3, 9, fz0, gz));
-      const uTop = eR > 0 ? 6.75 : eU > 0 ? uz : 4;
-      show(shU, eS > 0);
-      if (eS > 0) shU.setAttribute('points', shadowOf(ux0, ux1, uy0, uy1, 3.6, uTop));
-      show(shAO, eS > 0);
-      if (eS > 0) set(shAO, { points: flat(ux0, ux1, uy0, uy1, 0), opacity: (0.35 * eS).toFixed(3) });
-
-      // 5. Ventanales y madera
-      gPanesY.forEach((o, i) => {
-        const e = easeOut(seg(p, 0.62 + i * 0.014, 0.665 + i * 0.014));
-        const off = (1 - e) * -1.4;
-        show(o.el, e > 0);
-        if (e > 0) set(o.el, { points: faceY(9, o.r[0] + off, o.r[1] + off, 0.45, 3.55), opacity: e.toFixed(3) });
-      });
-      gPanesX.forEach((o, i) => {
-        const e = easeOut(seg(p, 0.63 + i * 0.014, 0.675 + i * 0.014));
-        show(o.el, e > 0);
-        if (e > 0) set(o.el, { points: faceX(13, o.r[0] - (1 - e) * 1.4, o.r[1] - (1 - e) * 1.4, 0.45, 3.55), opacity: e.toFixed(3) });
-      });
-      const eDoor = easeOut(seg(p, 0.69, 0.73));
-      show(door, eDoor > 0);
-      if (eDoor > 0) door.setAttribute('points', faceY(9, 5.0, 5.95, 0.4, lerp(0.4, 2.7, eDoor)));
-      const eBk = easeOut(seg(p, 0.64, 0.68));
-      show(uDeco, eU >= 1);
-      show(backing, eBk > 0);
-      if (eBk > 0) set(backing, { points: faceY(10, 2.5, lerp(2.5, 10.4, eBk), 4.05, 6.35) });
-      let sd = '', ssd = '';
-      for (let k = 0, x = 2.75; x < 10.3; x += 0.36, k++) {
-        const e = easeOut(seg(p, 0.66 + k * 0.0028, 0.69 + k * 0.0028));
-        if (e <= 0) continue;
-        const z1 = lerp(4.05, 6.35, e);
-        sd += line([x, 10.02, 4.05], [x, 10.02, z1]);
-        ssd += line([x, 10.02, 4.05], [x, 10.02, z1]);
-      }
-      slats.setAttribute('d', sd);
-      slatShade.setAttribute('d', ssd);
-      uPanesY.forEach((o, i) => {
-        const e = easeOut(seg(p, 0.645 + i * 0.014, 0.69 + i * 0.014));
-        const off = (1 - e) * 1.6;
-        show(o.el, e > 0);
-        if (e > 0) set(o.el, { points: faceY(10, o.r[0] + off, o.r[1] + off, 4.15, 6.25), opacity: e.toFixed(3) });
-      });
-      uPanesX.forEach((o, i) => {
-        const e = easeOut(seg(p, 0.655 + i * 0.012, 0.7 + i * 0.012));
-        const off = (1 - e) * -1.5;
-        show(o.el, e > 0);
-        if (e > 0) set(o.el, { points: faceX(16, o.r[0] + off, o.r[1] + off, 4.15, 6.25), opacity: e.toFixed(3) });
-      });
-      const eDeck = easeInOut(seg(p, 0.7, 0.77));
-      const dx1 = lerp(14, 22.5, eDeck);
-      deck.set(14, dx1, 3.4, 13.4, 0, 0.25, eDeck > 0 ? 1 : 0);
-      let pd = '';
-      if (eDeck > 0) for (let y = 3.9; y < 13.4; y += 0.5) pd += line([14, y, 0.25], [dx1, y, 0.25]);
-      planks.setAttribute('d', pd);
-      const ePool = seg(p, 0.75, 0.78);
-      pool.setAttribute('opacity', ePool.toFixed(3));
-      coping.setAttribute('opacity', ePool.toFixed(3));
-      show(pool, ePool > 0);
-      show(coping, ePool > 0);
-
-      // 6. Luz y paisaje
-      const eW = easeInOut(seg(p, 0.82, 0.9));
-      const zw = lerp(-0.9, 0.14, eW);
-      water.setAttribute('points', flat(15.8, 21.6, 9.6, 12.6, zw));
-      show(water, eW > 0);
-      shimmerWrap.setAttribute('transform', `translate(0 ${((0 - zw) * S).toFixed(1)})`);
-      shimmerWrap.setAttribute('opacity', (eW * 0.9).toFixed(3));
-      stones.forEach((b, i) => {
-        const e = easeBack(seg(p, 0.82 + i * 0.012, 0.86 + i * 0.012));
-        const [x, y] = [[5.2, 10.6], [4.8, 12.2], [5.4, 13.8]][i];
-        b.set(x - 0.65 * e, x + 0.65 * e, y - 0.45 * e, y + 0.45 * e, 0, 0.08, e > 0 ? 1 : 0);
-      });
-      plants.forEach((pl, i) => {
-        const order = [0, 3, 1, 4, 2, 5, 6, 7][i] ?? i;
-        const e = seg(p, 0.835 + order * 0.016, 0.9 + order * 0.016);
-        const s = easeBack(e, 1.9);
-        show(pl.g, e > 0);
-        if (e > 0) grow(pl.g, pl.bx, pl.by, Math.max(0.001, s));
-      });
-      treeSpots.forEach((t, i) => {
-        const order = [0, 3, 1, 4, 2][i] ?? i;
-        const e = easeOut(seg(p, 0.835 + order * 0.016, 0.9 + order * 0.016));
-        show(t.el, e > 0);
-        if (e > 0) {
-          const [cx, cy] = P(t.x + t.h * SUN[0] * 0.12, t.y + t.h * SUN[1] * 0.12, 0);
-          set(t.el, { cx, cy, rx: 1.22 * t.r * S * e * 0.85, ry: 0.71 * t.r * S * e * 0.6 });
-        }
-      });
-      const ePl = easeBack(seg(p, 0.86, 0.91));
-      planter.set(3.1, 4.6, 2.6, 9.4, 6.75, lerp(6.75, 7.0, ePl), ePl > 0 ? 1 : 0);
-      rp.forEach((o, i) => {
-        const e = easeBack(seg(p, 0.88 + i * 0.01, 0.93 + i * 0.01), 2);
-        show(o.g, e > 0);
-        if (e > 0) grow(o.g, o.bx, o.by, Math.max(0.001, e));
+      // ---------- Etiquetas AR ----------
+      TAGS.forEach(([x, y, z, , t0, t1], i) => {
+        const inn = eBack(seg(p, t0, t0 + 0.025)), out = seg(p, t1, t1 + 0.02);
+        const v = Math.min(seg(p, t0, t0 + 0.02), 1 - out);
+        tags[i].style.transform = `translate3d(${u(wx(x))},${u(wy(y) - out * 2)},${u(z)}) scale(${(0.75 + 0.25 * inn).toFixed(3)})`;
+        op(tags[i], v);
       });
 
-      // Atardecer y luces encendidas: la luz cálida baña techos y caras al sol
-      const warmFace = (bx, idx, base, amt) => { const c = mix(base, '#ffd9b0', eD * amt); const el = bx.g.children[idx]; el.setAttribute('fill', c); el.setAttribute('stroke', c); };
-      warmFace(roof, 2, '#f6f2ea', 0.75);
-      warmFace(roof, 0, '#ded9cf', 0.5);
-      warmFace(wallsU, 0, '#e6e2da', 0.45);
-      warmFace(slabU, 0, '#d3cfc6', 0.4);
-      warmFace(wallsG, 0, '#c9c5bc', 0.3);
-      dusk.setAttribute('opacity', (eD * 0.85).toFixed(3));
-      show(dusk, eD > 0);
-      shadows.setAttribute('opacity', lerp(0.2, 0.13, eD).toFixed(3));
-      const eOn = seg(p, 0.88, 0.95);
-      glowPanes.forEach((o, i) => {
-        const e = easeOut(seg(p, 0.885 + i * 0.008, 0.92 + i * 0.008));
-        o.el.setAttribute('opacity', (e * 0.94).toFixed(3));
-        show(o.el, e > 0);
-      });
-      const [ax, ay] = P(8.8, 10.6, 0), [bx, by] = P(15, 6.5, 0);
-      set(spillA, { cx: ax, cy: ay, rx: 120, ry: 34, opacity: (easeOut(eOn) * 0.9).toFixed(3) });
-      set(spillB, { cx: bx, cy: by, rx: 70, ry: 30, opacity: (easeOut(eOn) * 0.75).toFixed(3) });
-      const ePg = easeOut(seg(p, 0.91, 0.97));
-      set(poolGlow, { points: flat(15.8, 21.6, 9.6, 12.6, zw), opacity: ePg.toFixed(3) });
-      water.setAttribute('fill', 'url(#sc-aura-water)');
-      lamps.forEach((g, i) => {
-        const e = easeOut(seg(p, 0.92 + i * 0.012, 0.95 + i * 0.012));
-        g.setAttribute('opacity', e.toFixed(3));
-        show(g, e > 0);
-      });
-      show(glow, eOn > 0 || ePg > 0);
+      // ---------- Interfaz ----------
+      let phase = 0;
+      AT.forEach((at, i) => { if (p >= at - 0.0001) phase = i; });
+      if (phase !== lastPhase) { el.phase.textContent = `0${phase + 1} · ${PHASES[phase]}`; lastPhase = phase; }
+      const pct = Math.round(clamp(p / 0.97) * 100);
+      if (pct !== lastPct) { el.pct.textContent = pct === 100 ? 'Habitable' : `${pct} %`; lastPct = pct; }
+      el.bar.style.transform = `scaleX(${clamp(p / 0.97).toFixed(4)})`;
     }
 
     return { render };
   }
 
-  window.NexoEscenas = window.NexoEscenas || {};
   window.NexoEscenas.aura = {
     title: 'Una casa AURA, de cero a habitable',
-    duration: 18000,
+    duration: 22000,
     steps: [
       { label: 'Plano y terreno', at: 0 },
       { label: 'Cimientos', at: 0.15 },
       { label: 'Estructura', at: 0.3 },
-      { label: 'Muros y losas', at: 0.46 },
-      { label: 'Ventanales y madera', at: 0.62 },
+      { label: 'Volumen', at: 0.46 },
+      { label: 'Materiales', at: 0.62 },
       { label: 'Luz y paisaje', at: 0.78 }
     ],
     mount
