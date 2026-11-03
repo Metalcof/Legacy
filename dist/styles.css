@@ -1576,3 +1576,155 @@ html:not(.motion-ready) .wall-tile,.motion-settled .wall-tile{width:auto}
 .case--valeria{--cbg:#4b2fc4;--cink:#ffffff;--cmuted:rgba(255,255,255,.8);--cacc:#ffd36b;--con:#2a1a6b;--cline:rgba(255,255,255,.22);background:linear-gradient(150deg,#6a4ae0,#3d24a8)}
 .case--valeria .case-quote em{color:#ffd36b}
 .case--aura .case-bar,.case--valeria .case-bar{background:#f1f1ed}
+
+/* =====================================================================
+   Detalles premium (premium.js): giro 3D, brillo, magnetismo, cursor,
+   títulos con máscara, grano y servicios en cuadrícula bento.
+   ===================================================================== */
+
+/* 1. El portátil se endereza con el scroll */
+.stage-devices{transform:perspective(1700px) rotateX(calc(var(--tilt,0) * 24deg)) scale(calc(1 - var(--tilt,0) * .07)) translateY(calc(var(--tilt,0) * -20px));transform-origin:50% 100%;will-change:transform}
+
+/* 2. Brillo que sigue al mouse */
+.has-glow{position:relative;--glow:rgba(59,43,245,.14);--glow-edge:rgba(59,43,245,.55)}
+.on-dark .has-glow,.auto .has-glow,.sectors .has-glow,.stage .has-glow,.case--wav .has-glow,.case--lumbre .has-glow,.case--aura .has-glow,.case--valeria .has-glow{--glow:rgba(255,255,255,.12);--glow-edge:rgba(190,180,255,.7)}
+.has-glow::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;opacity:0;transition:opacity .35s;
+  background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),var(--glow),transparent 65%);
+  box-shadow:inset 0 0 0 1px transparent}
+.has-glow:hover::after{opacity:1}
+.has-glow::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:3;padding:1px;opacity:0;transition:opacity .35s;
+  background:radial-gradient(180px circle at var(--mx,50%) var(--my,50%),var(--glow-edge),transparent 70%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+.has-glow:hover::before{opacity:1}
+.diag-item.has-glow::before,.diag-item.has-glow::after{z-index:0}
+.auto-card.has-glow,.bento-tile.has-glow{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .35s var(--ease-out),border-color .3s,box-shadow .3s}
+.auto-card.has-glow:hover{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(-6px)}
+
+/* 3. Botones magnéticos y cursor propio */
+.is-magnetic{translate:var(--px,0px) var(--py,0px)}
+.button.is-magnetic{transition:background-color .15s,color .15s,border-color .15s,box-shadow .2s,scale .15s var(--ease-out),translate .35s var(--ease-out)}
+.whatsapp-float.is-magnetic{transition:background-color .15s,scale .2s var(--ease-out),translate .35s var(--ease-out)}
+.scene-play.is-magnetic,.tour-launch-btn.is-magnetic{transition:scale .15s var(--ease-out),filter .2s,background-color .2s,translate .35s var(--ease-out)}
+.cursor{position:fixed;left:0;top:0;z-index:95;width:0;height:0;pointer-events:none;opacity:0;transition:opacity .25s}
+.has-cursor .cursor{opacity:1}
+.cursor::before{content:'';position:absolute;left:-17px;top:-17px;width:34px;height:34px;border-radius:50%;border:1.5px solid #7c6cff;background:rgba(124,108,255,0);transition:transform .3s var(--ease-out),background-color .3s,border-color .3s}
+.cursor.is-link::before{transform:scale(1.45);background:rgba(124,108,255,.14)}
+.cursor.is-down::before{transform:scale(.8)}
+.cursor.is-view::before{transform:scale(2.6);background:#3b2bf5;border-color:#3b2bf5;box-shadow:0 10px 30px -8px rgba(59,43,245,.7)}
+.cursor-label{position:absolute;left:0;top:0;translate:-50% -50%;color:#fff;font-size:13px;font-weight:800;letter-spacing:.01em;opacity:0;transition:opacity .2s}
+.cursor.is-view .cursor-label{opacity:1}
+
+/* 4. Títulos con máscara */
+.mask-word{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.1em;margin-bottom:-.1em}
+.mask-word>span{display:inline-block;transform:translateY(108%);transition:transform 1s var(--ease-out) calc(var(--w) * 55ms)}
+.mask-title.is-revealed .mask-word>span,.motion-settled .mask-word>span{transform:none}
+
+/* 5. Grano fino en los fondos oscuros */
+.auto,.reel,.contact{position:relative}
+.intro::after,.sectors::after,.auto::after,.reel::after,.contact::after,.case--wav::after,.case--lumbre::after,.case--aura::after,.case--valeria::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.07;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.auto>.shell,.reel>.shell,.contact>.shell,.sectors>.shell{position:relative;z-index:1}
+
+/* 6. Servicios en cuadrícula bento */
+.bento{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:auto auto auto;gap:16px}
+.bento-tile{display:flex;flex-direction:column;justify-content:space-between;gap:18px;min-height:280px;padding:22px;border-radius:24px;background:#fff;border:1px solid var(--linea);overflow:hidden;box-shadow:0 1px 2px rgba(15,17,21,.04),0 30px 60px -45px rgba(28,20,120,.4)}
+.bento-web{grid-column:span 2;grid-row:span 2;background:radial-gradient(80% 70% at 70% 0%,#eceaff,#fff 70%)}
+.bento-copy h3{font-size:clamp(20px,1.8vw,26px);font-stretch:112%;letter-spacing:-.03em;font-weight:780}
+.bento-web .bento-copy h3{font-size:clamp(26px,2.6vw,38px)}
+.bento-copy p{margin-top:6px;color:var(--suave);font-size:16px;text-wrap:pretty;max-width:36em}
+.bento-copy .text-link{margin-top:12px;display:inline-block;font-size:15.5px}
+.bento-visual{position:relative;flex:1;min-height:120px}
+
+/* Web que se acomoda a cada pantalla */
+.bv-web{display:flex;align-items:flex-end;justify-content:center;gap:4%;min-height:280px;padding-top:12px}
+.bv-web>div{position:relative;display:grid;align-content:start;gap:7px;padding:22px 12px 12px;border-radius:12px;background:#fff;border:1px solid #e2e1f2;box-shadow:0 24px 50px -24px rgba(28,20,120,.35)}
+.bv-web>div>i{position:absolute;left:10px;top:9px;width:28px;height:6px;border-radius:3px;background:#e4e2f5}
+.bv-web b{display:block;height:12px;width:70%;border-radius:4px;background:var(--tinta)}
+.bv-web b+b{width:45%;height:8px;background:#c9c6e8}
+.bv-web span{display:block;border-radius:8px;background:linear-gradient(135deg,#d9d4ff,#efedff)}
+.bv-desk{width:52%;grid-template-columns:repeat(3,1fr)}
+.bv-desk b{grid-column:1/-1}
+.bv-desk span{height:70px}
+.bv-tab{width:26%}
+.bv-tab span{height:44px}
+.bv-phone{width:13%;border-radius:16px!important;padding-top:20px!important}
+.bv-phone span{height:60px}
+.motion-ready .bv-web>div{animation:bv-float 6s ease-in-out infinite}
+.motion-ready .bv-tab{animation-delay:-2s!important}
+.motion-ready .bv-phone{animation-delay:-4s!important}
+.motion-ready .bv-web span{animation:bv-shimmer 3.2s ease-in-out infinite}
+@keyframes bv-float{50%{transform:translateY(-8px)}}
+@keyframes bv-shimmer{50%{background:linear-gradient(135deg,#bdb4ff,#e6e3ff)}}
+
+/* Agenda que se llena */
+.bv-cal{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;align-content:center}
+.bv-cal b{grid-column:1/-1;font-size:13.5px;color:var(--suave)}
+.bv-cal span{padding:9px 0;border-radius:10px;border:1px solid var(--linea);text-align:center;font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;background:#fff}
+.motion-ready .bv-cal span{animation:bv-book 6s ease-in-out infinite}
+.bv-cal span:nth-of-type(2){animation-delay:.8s!important}
+.bv-cal span:nth-of-type(4){animation-delay:1.6s!important}
+.bv-cal span:nth-of-type(6){animation-delay:2.4s!important}
+.bv-cal span:nth-of-type(odd){animation:none!important}
+@keyframes bv-book{0%,12%{background:#fff;color:var(--tinta);border-color:var(--linea)}20%,80%{background:var(--acento);color:#fff;border-color:var(--acento)}90%,100%{background:#fff;color:var(--tinta)}}
+
+/* Conversación que se escribe sola */
+.bv-chat{display:flex;flex-direction:column;justify-content:center;gap:7px;padding:12px;border-radius:16px;background:#efe7dc}
+.bv-chat span{max-width:85%;padding:7px 11px;border-radius:12px;font-size:13.5px;line-height:1.35;box-shadow:0 1px 1px rgba(0,0,0,.06)}
+.bv-chat .in{align-self:flex-start;background:#fff;border-top-left-radius:3px}
+.bv-chat .out{align-self:flex-end;background:#d9fdd3;border-top-right-radius:3px}
+.motion-ready .bv-chat span{animation:bv-msg 8s ease-out infinite both}
+.bv-chat span:nth-child(2){animation-delay:1.2s!important}
+.bv-chat span:nth-child(3){animation-delay:2.4s!important}
+.bv-chat span:nth-child(4){animation-delay:3.4s!important}
+@keyframes bv-msg{0%{opacity:0;transform:translateY(8px) scale(.96)}6%,85%{opacity:1;transform:none}95%,100%{opacity:0}}
+
+/* Lista de revisión */
+.bv-check{display:grid;align-content:center;gap:9px}
+.bv-check span{position:relative;padding-left:32px;font-size:15px;font-weight:600}
+.bv-check span::before{content:'';position:absolute;left:0;top:-1px;width:22px;height:22px;border-radius:50%;background:#1f9d63}
+.bv-check span::after{content:'';position:absolute;left:7px;top:4px;width:6px;height:10px;border-right:2.5px solid #fff;border-bottom:2.5px solid #fff;transform:rotate(45deg)}
+.motion-ready .bv-check span::before,.motion-ready .bv-check span::after{animation:bv-tick 6s ease-in-out infinite}
+.bv-check span:nth-child(2)::before,.bv-check span:nth-child(2)::after{animation-delay:.6s!important}
+.bv-check span:nth-child(3)::before,.bv-check span:nth-child(3)::after{animation-delay:1.2s!important}
+.bv-check span:nth-child(4)::before,.bv-check span:nth-child(4)::after{animation-delay:1.8s!important}
+@keyframes bv-tick{0%,8%{opacity:0;scale:.4}16%,90%{opacity:1;scale:1}100%{opacity:0}}
+
+/* Conexiones */
+.bv-sync{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:center}
+.bv-sync span{padding:8px 10px;border-radius:10px;background:var(--niebla);font-size:13.5px;font-weight:700;text-align:center}
+.bv-sync b{grid-column:1/-1;padding:10px;border-radius:12px;background:var(--tinta);color:#fff;text-align:center;font-size:14px}
+.bv-sync i{display:none}
+.motion-ready .bv-sync span{animation:bv-pulse 3s ease-in-out infinite}
+.bv-sync span:nth-child(2){animation-delay:.4s!important}
+.bv-sync span:nth-child(3){animation-delay:.8s!important}
+.bv-sync span:nth-child(4){animation-delay:1.2s!important}
+@keyframes bv-pulse{50%{background:var(--acento-suave);color:var(--acento-texto);box-shadow:0 0 0 3px rgba(59,43,245,.12)}}
+
+/* Dominio */
+.bv-domain{display:flex;align-items:center;justify-content:center;gap:10px}
+.bv-domain .bv-lock{width:26px;height:26px;border-radius:7px;background:#1f9d63;position:relative;flex-shrink:0}
+.bv-domain .bv-lock::before{content:'';position:absolute;left:8px;top:5px;width:10px;height:8px;border:2.2px solid #fff;border-bottom:0;border-radius:5px 5px 0 0}
+.bv-domain .bv-lock::after{content:'';position:absolute;left:6px;top:12px;width:14px;height:9px;border-radius:2px;background:#fff}
+.bv-typed{padding:10px 14px;border-radius:12px;background:var(--niebla);font-weight:700;font-size:clamp(15px,1.4vw,18px);white-space:nowrap;overflow:hidden;border-right:2px solid var(--acento)}
+.motion-ready .bv-typed{animation:bv-type 5s steps(18) infinite,bv-caret .8s step-end infinite;width:0}
+@keyframes bv-type{0%{width:0}50%,90%{width:calc(18ch + 30px)}100%{width:0}}
+@keyframes bv-caret{50%{border-right-color:transparent}}
+
+@media (max-width:960px){
+  .bento{grid-template-columns:1fr 1fr}
+  .bento-web{grid-column:1/-1;grid-row:auto}
+}
+@media (max-width:640px){
+  .bento{grid-template-columns:1fr}
+  .bv-web{min-height:200px}
+  .bento-tile{min-height:0}
+}
+.stage-devices{transform:perspective(1700px) rotateX(calc(var(--tilt,0) * 12deg)) scale(calc(1 - var(--tilt,0) * .05))}
+.bv-web{align-items:center;min-height:340px;background-image:radial-gradient(rgba(59,43,245,.12) 1px,transparent 1.2px);background-size:18px 18px;border-radius:18px}
+.bv-desk{width:56%}
+.bv-desk span{height:120px}
+.bv-tab{width:27%}
+.bv-tab span{height:84px}
+.bv-phone{width:14%}
+.bv-phone span{height:118px}
+.bv-web b{height:14px}

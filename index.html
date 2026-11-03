@@ -8,7 +8,7 @@
   <title>Nexo Studio — Webs, agenda en línea y asistentes de WhatsApp</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=20261103b">
+  <link rel="stylesheet" href="styles.css?v=20261103c">
   <script src="config.js" defer></script>
   <script src="app.js" defer></script>
   <script src="effects.js" defer></script>
@@ -25,6 +25,7 @@
   <script src="escenas/valeria.js" defer></script>
   <script src="escenas/escenas.js" defer></script>
   <script src="tour.js" defer></script>
+  <script src="premium.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#contenido">Ir al contenido</a>
@@ -580,34 +581,38 @@
           <h2 id="services-title">Lo que hacemos por tu negocio.</h2>
           <p>Cuatro piezas que se combinan según lo que necesitas. Empezamos por la que más tiempo o clientes te está costando.</p>
         </div>
-        <div class="service-cols">
-          <article class="service-col" data-reveal>
-            <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="4" y="7" width="32" height="24" rx="4"/><path d="M4 13h32M14 35h12"/></svg>
-            <h3>Página web moderna</h3>
-            <p>Rápida, segura y pensada primero para el celular, con mantenimiento mensual incluido.</p>
-            <ul><li>Diseño propio, no plantillas</li><li>Dominio, HTTPS y correo de tu empresa</li><li>Revisión de botones y formularios cada mes</li></ul>
-            <button class="text-link" type="button" data-open-brief data-service="Página web">Consultar por una web</button>
+        <div class="bento">
+          <article class="bento-tile bento-web" data-reveal>
+            <div class="bento-visual bv-web" aria-hidden="true">
+              <div class="bv-desk"><i></i><b></b><b></b><span></span><span></span><span></span></div>
+              <div class="bv-tab"><i></i><b></b><span></span><span></span></div>
+              <div class="bv-phone"><i></i><b></b><span></span></div>
+            </div>
+            <div class="bento-copy">
+              <h3>Página web moderna</h3>
+              <p>Rápida, segura y pensada primero para el celular. La misma web se acomoda a cada pantalla, con mantenimiento mensual incluido.</p>
+              <button class="text-link" type="button" data-open-brief data-service="Página web">Consultar por una web</button>
+            </div>
           </article>
-          <article class="service-col" data-reveal>
-            <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="5" y="8" width="30" height="27" rx="4"/><path d="M5 16h30M13 4v8M27 4v8M12 23h5M12 29h10"/></svg>
-            <h3>Agenda o pedidos en línea</h3>
-            <p>Tus clientes reservan, compran o cotizan solos, y todo llega ordenado a tu WhatsApp.</p>
-            <ul><li>Citas por servicio, sede o especialista</li><li>Pedidos y cotizaciones con su número</li><li>Recordatorios automáticos</li></ul>
-            <button class="text-link" type="button" data-open-brief data-service="Agenda o pedidos en línea">Consultar por agenda o pedidos</button>
+          <article class="bento-tile bento-agenda" data-reveal>
+            <div class="bento-visual bv-cal" aria-hidden="true"><b>Jueves</b><span>9:00</span><span>10:30</span><span>11:15</span><span>2:00</span><span>3:30</span><span>4:00</span></div>
+            <div class="bento-copy"><h3>Agenda o pedidos en línea</h3><p>Tus clientes reservan o piden solos, y todo llega ordenado a tu WhatsApp.</p><button class="text-link" type="button" data-open-brief data-service="Agenda o pedidos en línea">Consultar</button></div>
           </article>
-          <article class="service-col" data-reveal>
-            <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M33 19.5A13 13 0 0 1 14 31l-8 2 2.2-7.6A13 13 0 1 1 33 19.5Z"/><path d="M14 18h12M14 23h8"/></svg>
-            <h3>Asistente de WhatsApp</h3>
-            <p>Responde preguntas frecuentes y toma citas o pedidos las 24 horas. Si hace falta, pasa la conversación a tu equipo.</p>
-            <ul><li>Horarios, precios y ubicación al instante</li><li>Agenda y pedidos desde el chat</li><li>Tu equipo atiende solo lo importante</li></ul>
-            <button class="text-link" type="button" data-open-brief data-service="Asistente de WhatsApp">Consultar por un asistente</button>
+          <article class="bento-tile bento-chat" data-reveal>
+            <div class="bento-visual bv-chat" aria-hidden="true"><span class="in">¿Tienen cita mañana?</span><span class="out">Sí: 10:30 o 4:00. ¿Cuál prefieres?</span><span class="in">10:30</span><span class="out">Listo, te espero ✓</span></div>
+            <div class="bento-copy"><h3>Asistente de WhatsApp 24 h</h3><p>Responde lo repetitivo y agenda por ti, de día o de noche.</p><button class="text-link" type="button" data-open-brief data-service="Asistente de WhatsApp">Consultar</button></div>
           </article>
-          <article class="service-col" data-reveal>
-            <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="10" cy="10" r="5"/><circle cx="30" cy="30" r="5"/><circle cx="30" cy="10" r="5"/><path d="M14 13l12 13M15 10h10"/></svg>
-            <h3>Integraciones y paneles</h3>
-            <p>Conectamos pagos, facturación, inventario y CRM, y te damos un panel para ver todo en un lugar.</p>
-            <ul><li>Un dato se escribe una sola vez</li><li>Reportes claros para decidir</li><li>Roles y permisos por persona</li></ul>
-            <button class="text-link" type="button" data-open-brief data-service="Integración de sistemas">Consultar por una integración</button>
+          <article class="bento-tile bento-care" data-reveal>
+            <div class="bento-visual bv-check" aria-hidden="true"><span>Copia de seguridad</span><span>Botones y formularios</span><span>Conexión segura</span><span>Cambios del mes</span></div>
+            <div class="bento-copy"><h3>Mantenimiento mensual</h3><p>Revisamos que todo funcione, cada mes.</p></div>
+          </article>
+          <article class="bento-tile bento-sync" data-reveal>
+            <div class="bento-visual bv-sync" aria-hidden="true"><span>Web</span><span>Pagos</span><span>Inventario</span><span>CRM</span><i></i><i></i><i></i><b>Tu panel</b></div>
+            <div class="bento-copy"><h3>Integraciones y paneles</h3><p>Pagos, facturación, inventario y clientes en un solo lugar.</p><button class="text-link" type="button" data-open-brief data-service="Integración de sistemas">Consultar</button></div>
+          </article>
+          <article class="bento-tile bento-domain" data-reveal>
+            <div class="bento-visual bv-domain" aria-hidden="true"><span class="bv-lock"></span><span class="bv-typed">hola@tunegocio.com</span></div>
+            <div class="bento-copy"><h3>Tu dominio y tu correo</h3><p>Una dirección propia que inspira confianza.</p></div>
           </article>
         </div>
       </div>
