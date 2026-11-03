@@ -210,6 +210,39 @@
     });
   }));
 
+  /* ---------- Proyectos: al pasar el mouse, la foto se convierte en la demo grabada ---------- */
+  const caseVideos = { 'caso-cafe': 'cafeteria', 'caso-tienda': 'tienda', 'caso-clinica': 'clinica' };
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    Object.entries(caseVideos).forEach(([id, name]) => {
+      const item = document.getElementById(id);
+      const photo = item?.querySelector('.business-photo');
+      if (!photo) return;
+      photo.classList.add('has-preview');
+      const badge = document.createElement('span');
+      badge.className = 'preview-badge';
+      badge.setAttribute('aria-hidden', 'true');
+      badge.textContent = 'Ver en movimiento';
+      photo.append(badge);
+      let clip;
+      item.addEventListener('pointerenter', () => {
+        if (!canMove()) return;
+        if (!clip) {
+          clip = document.createElement('video');
+          Object.assign(clip, { muted: true, loop: true, playsInline: true, preload: 'auto', src: `assets/video/${name}.webm` });
+          clip.setAttribute('aria-hidden', 'true');
+          clip.className = 'case-video';
+          photo.append(clip);
+        }
+        const p = clip.play(); if (p) p.catch(() => {});
+        photo.classList.add('is-playing');
+      });
+      item.addEventListener('pointerleave', () => {
+        photo.classList.remove('is-playing');
+        clip?.pause();
+      });
+    });
+  }
+
   /* ---------- Producto: cambio de color con transición ---------- */
   const productImage = document.querySelector('[data-preview-product-image]');
   document.querySelectorAll('[data-preview-color]').forEach(button => button.addEventListener('click', () => {

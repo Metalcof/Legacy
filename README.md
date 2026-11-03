@@ -1,6 +1,6 @@
 # Tu estudio digital
 
-Página estática en español para una agencia de desarrollo web, integraciones y plataformas de gestión. Diseño claro con un acento amarillo y bloques oscuros, fotografías realistas generadas con IA y texto principal de 18 px. Se adapta a celular e incluye seis proyectos web ampliados y seis automatizaciones relacionadas con esos negocios, un recorrido interactivo de un proyecto y contacto por WhatsApp o correo. Las categorías filtran un proyecto web y una automatización por sector. Cada demo conserva su propio selector de paleta.
+Página estática en español para una agencia de desarrollo web, integraciones y plataformas de gestión. Diseño claro con acento azul ultramar, titulares expandidos y bloques oscuros, fotografías realistas generadas con IA y texto principal de 18 px. Se adapta a celular e incluye seis proyectos web ampliados y seis automatizaciones relacionadas con esos negocios, un laboratorio para armar una web en vivo, demos grabadas en video, un recorrido guiado con puntero, un recorrido interactivo de un proyecto y contacto por WhatsApp o correo. Las categorías filtran un proyecto web y una automatización por sector. Cada demo conserva su propio selector de paleta.
 
 ## Cambiar el nombre y el contacto
 
@@ -44,17 +44,22 @@ Para actualizar la web, vuelve a generar el ZIP después de editar los archivos 
 
 ## Sistema visual de la portada
 
-La portada sigue el modelo de las páginas de producto de software: lienzo blanco, un único acento amarillo, fotografías de personas trabajando con tarjetas de interfaz de ejemplo flotando encima, bloques que alternan imagen y texto, cifras, preguntas frecuentes y un pie completo. Los colores y la tipografía están en variables al inicio de `styles.css`:
+La portada sigue el modelo de las páginas de producto de software: lienzo porcelana, acento azul ultramar para marca y acciones, amarillo solo como señal de datos en vivo, titulares en Archivo expandida, fotografías de personas trabajando con tarjetas de interfaz de ejemplo flotando encima, bloques que alternan imagen y texto, cifras, preguntas frecuentes y un pie completo. Los colores y la tipografía están en variables al inicio de `styles.css`:
 
 | Variable | Valor | Uso |
 | --- | --- | --- |
-| `--tinta` | `#15171a` | Texto, panel del diagrama, contacto y pie |
-| `--amarillo` | `#ffc62b` | Botones principales, marcas y datos destacados |
-| `--amarillo-suave` | `#fff1c4` | Fondos de etiquetas y de "dos caminos" |
-| `--niebla` | `#f4f5f3` | Secciones de apoyo |
-| `--suave` | `#50565c` | Texto secundario |
+| `--hoja` | `#fafaf8` | Fondo de la página |
+| `--tinta` | `#0f1115` | Texto, panel del diagrama, contacto y pie |
+| `--acento` | `#3b2bf5` | Botones principales, enlaces, marca y elementos activos |
+| `--acento-hover` | `#2a1bd9` | Botones al pasar el mouse |
+| `--acento-suave` | `#ecebff` | Fondos de etiquetas y de "dos caminos" |
+| `--acento-texto` | `#2a1fb8` | Texto sobre `--acento-suave` |
+| `--acento-claro` | `#a59dff` | El acento sobre fondos oscuros |
+| `--amarillo` | `#ffc62b` | Señal: diagrama, progreso y datos en vivo |
+| `--niebla` | `#f1f1ed` | Secciones de apoyo |
+| `--suave` | `#555a63` | Texto secundario |
 
-Para cambiar el acento, modifica `--amarillo` y `--amarillo-suave`. Si eliges un color más oscuro, comprueba que el texto `--tinta` sobre los botones mantiene un contraste de al menos 4,5 : 1 (con el amarillo actual es de 11,4 : 1).
+Para cambiar el acento, modifica las variables `--acento…`. Los botones usan texto blanco sobre `--acento`: si eliges otro color, comprueba que el contraste sea de al menos 4,5 : 1 (con el ultramar actual es de unos 8 : 1).
 
 Las tarjetas de interfaz (agenda, pedido, citas del día) son maquetas HTML con datos de ejemplo, marcadas como tales. No se conectan a ningún sistema. Si cambias una foto, revisa que la tarjeta no tape lo importante.
 
@@ -65,6 +70,10 @@ La tipografía es Archivo variable (`assets/archivo-var.woff2`), con los ejes de
 **Laboratorio "Arma una web"** (`#laboratorio`, código en `lab.js`). El visitante elige negocio, color, letra, forma, distribución, modo claro u oscuro y funciones (WhatsApp, reservas, carrito, reseñas), y una web de ejemplo cambia en vivo. Puede verla como computador o celular, pedir una combinación al azar y, con "Quiero esta web", abrir el formulario con su elección ya escrita. Los textos y fotos de cada negocio están en el objeto `sectors` de `lab.js`; los colores en las reglas `.lab-site[data-color=…]` de `styles.css`.
 
 **Demos grabadas** (`#en-accion`). Cuatro videos reales de las demos en uso, en `assets/video/` (`.webm` y su imagen `.jpg`). Cada capítulo apunta a un nombre base con `data-reel-src`; para cambiar un video, reemplaza los dos archivos con el mismo nombre. Se reproducen sin sonido, solo cuando la sección está a la vista, y pasan solos al siguiente capítulo.
+
+**Recorrido guiado** (`tour.js`). El botón "¿Cómo funciona?" (en la portada, en el laboratorio y flotante abajo a la izquierda) ofrece dos recorridos: cómo diseñamos tu web y cómo funcionan las automatizaciones. Un puntero se mueve por la página, toca los botones de verdad e ilumina cada parte con una explicación corta. Avanza solo, se puede pausar, ir atrás o cerrar con Esc. Los pasos y textos están en el objeto `tours` de `tour.js`.
+
+**Vista previa en video**: al pasar el mouse por los proyectos de cafetería, tienda y clínica, la foto se convierte en la demo grabada.
 
 **Movimiento** (`motion.js` y el bloque final de `styles.css`): entrada de la portada, notificaciones que cambian, barras que se actualizan, revelado de fotos y tarjetas al hacer scroll, cifras que cuentan, profundidad en las tarjetas, registro en vivo del diagrama y transiciones en filtros, colores y pasos. Si el sistema pide reducir movimiento, o si alguien usa el botón de pausa del diagrama, todo queda quieto y completo.
 
