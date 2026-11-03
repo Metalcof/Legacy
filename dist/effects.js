@@ -16,7 +16,7 @@
     filters.forEach(button => button.setAttribute('aria-pressed', String(button === selected)));
     cases.forEach(item => { item.hidden = !all && item.dataset.sectorCase !== sector; });
     // La automatización del mismo sector queda destacada más abajo.
-    autoCards.forEach(card => card.classList.toggle('is-match', !all && card.getAttribute('href').endsWith('#' + sector)));
+    autoCards.forEach(card => card.classList.toggle('is-match', !all && card.getAttribute('href').endsWith('auto-' + sector + '.html')));
     if (summary) {
       summary.textContent = all
         ? '6 negocios, cada uno con su web y su automatización.'
