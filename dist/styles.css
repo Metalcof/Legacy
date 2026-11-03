@@ -1532,3 +1532,47 @@ html:not(.motion-ready) .wall-tile,.motion-settled .wall-tile{width:auto}
   .db-wa em{display:none}
 }
 .case--aura .case-shot img{object-position:50% 0}
+
+/* =====================================================================
+   Escenas animadas de cada proyecto (escenas/*.js)
+   ===================================================================== */
+.case-scene{grid-column:1/-1;margin-top:clamp(36px,5vw,72px);padding:clamp(14px,2vw,22px);border-radius:26px;background:color-mix(in srgb,var(--cink) 5%,transparent);border:1px solid var(--cline)}
+.case-scene:not([data-ready]){display:none}
+.scene-head{display:flex;align-items:center;justify-content:space-between;gap:12px 20px;flex-wrap:wrap;padding:4px 6px 14px}
+.scene-title{font-family:var(--cfont);font-size:clamp(19px,1.8vw,24px);font-weight:700;letter-spacing:-.02em;color:var(--cink)}
+.scene-play{display:inline-flex;align-items:center;gap:10px;min-height:42px;padding:6px 16px 6px 8px;border-radius:99px;background:var(--cacc);color:var(--con);font-weight:700;font-size:14.5px;transition:scale .15s var(--ease-out),filter .2s}
+.scene-play:hover{filter:brightness(1.08)}
+.scene-play:active{scale:.96}
+.scene-play>span:not(.scene-play-label){display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:color-mix(in srgb,var(--con) 18%,transparent)}
+.scene-ico-pause::before{content:'';width:9px;height:11px;border-inline:3px solid currentColor}
+.scene-ico-play::before{content:'';margin-left:3px;border-block:6px solid transparent;border-left:9px solid currentColor}
+.scene-play .scene-ico-play,.scene-play.is-paused .scene-ico-pause{display:none!important}
+.scene-play.is-paused .scene-ico-play{display:grid!important}
+.scene-stage{position:relative;aspect-ratio:15/7;border-radius:18px;overflow:hidden;background:color-mix(in srgb,var(--cink) 4%,var(--cbg));box-shadow:inset 0 0 0 1px var(--cline)}
+.scene-stage>svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.scene-controls{padding:16px 6px 4px}
+.scene-range{width:100%;height:22px;margin:0;accent-color:var(--cacc);cursor:pointer}
+.scene-steps{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.scene-steps button{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:6px 14px 6px 6px;border-radius:99px;border:1px solid var(--cline);color:var(--cmuted);font-size:14px;font-weight:600;transition:background-color .25s,color .25s,border-color .25s}
+.scene-steps b{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:color-mix(in srgb,var(--cink) 8%,transparent);font-size:12.5px;transition:background-color .25s,color .25s}
+.scene-steps button:hover{border-color:var(--cacc);color:var(--cink)}
+.scene-steps .is-done button{color:var(--cink)}
+.scene-steps .is-done b{background:var(--cacc);color:var(--con)}
+.scene-steps .is-current button{border-color:var(--cacc);color:var(--cink);background:color-mix(in srgb,var(--cacc) 12%,transparent)}
+.scene-steps .is-current b{background:var(--cacc);color:var(--con);animation:step-pulse 1.4s ease-in-out infinite}
+@keyframes step-pulse{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--cacc) 25%,transparent)}}
+@media (max-width:700px){
+  .scene-stage{aspect-ratio:4/3}
+  .scene-steps{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+  .scene-steps li{flex-shrink:0}
+}
+.case .case-scene{order:3}
+
+/* Colores más marcados por proyecto: se alternan claro y oscuro */
+.case--mare{--cbg:#efcfa8;--cink:#2b1a10;--cmuted:#5e4130;--cacc:#9a461b;--cline:rgba(43,26,16,.16);background:linear-gradient(160deg,#f3d8b6,#e6bb8b)}
+.case--aura{--cbg:#1d2a24;--cink:#eef1ea;--cmuted:rgba(238,241,234,.72);--cacc:#b7d39f;--con:#17221c;--cline:rgba(255,255,255,.14);background:radial-gradient(60% 70% at 85% 10%,#2f4538,#1d2a24 70%)}
+.case--alma{--cbg:#c9e4d2;--cink:#132b1e;--cmuted:#35503f;--cacc:#1f6b43;--cline:rgba(19,43,30,.16);background:linear-gradient(160deg,#d6ecdd,#b5d9c1)}
+.case--lumbre{--cbg:#230d06;--cacc:#ffad5c;--con:#2a1206;background:radial-gradient(60% 70% at 75% 40%,#5a1f0b,#230d06 70%)}
+.case--valeria{--cbg:#4b2fc4;--cink:#ffffff;--cmuted:rgba(255,255,255,.8);--cacc:#ffd36b;--con:#2a1a6b;--cline:rgba(255,255,255,.22);background:linear-gradient(150deg,#6a4ae0,#3d24a8)}
+.case--valeria .case-quote em{color:#ffd36b}
+.case--aura .case-bar,.case--valeria .case-bar{background:#f1f1ed}

@@ -16,7 +16,7 @@ function Assert-RuntimeChild {
     return $absolute
 }
 
-$sourceNames = @('index.html', 'styles.css', 'app.js', 'effects.js', 'project-journey.js', 'lab.js', 'motion.js', 'tour.js', 'soluciones.js', 'stage.js', 'config.js', 'assets', 'demos')
+$sourceNames = @('index.html', 'styles.css', 'app.js', 'effects.js', 'project-journey.js', 'lab.js', 'motion.js', 'tour.js', 'soluciones.js', 'stage.js', 'escenas', 'config.js', 'assets', 'demos')
 foreach ($name in $sourceNames) {
     if (-not (Test-Path -LiteralPath (Join-Path $workspaceRoot $name))) {
         throw "Falta un archivo o carpeta del sitio: $name"

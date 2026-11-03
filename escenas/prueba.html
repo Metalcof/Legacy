@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+<title>Prueba de escena</title>
+<link rel="stylesheet" href="../styles.css">
+<style>body{margin:0}.case{display:block!important}</style>
+</head>
+<body>
+<!-- Página solo para desarrollar escenas: escenas/prueba.html?e=mare -->
+<article class="case" id="caso"><div class="case-scene" id="host"></div></article>
+<script>
+  const key = new URLSearchParams(location.search).get('e') || 'mare';
+  const mods = { mare: 'mare', aura: 'aura', wav: 'wav', alma: 'alma', lumbre: 'lumbre', valeria: 'valeria' };
+  document.getElementById('caso').classList.add('case--' + (mods[key] || key));
+  document.getElementById('host').dataset.scene = key;
+  const s = document.createElement('script'); s.src = key + '.js';
+  s.onload = () => { const m = document.createElement('script'); m.src = 'escenas.js'; document.body.append(m); };
+  document.body.append(s);
+</script>
+</body>
+</html>
