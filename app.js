@@ -5,10 +5,25 @@
   const phone = String(config.phone || '573185314299').replace(/\D/g, '');
   const email = config.email || 'hernan.pipe12@gmail.com';
   document.querySelectorAll('[data-brand]').forEach(el => { el.textContent = brand; });
-  document.title = brand + ' — De tu idea a tu nueva web';
+  document.title = brand + ' — Web, integraciones y plataformas de gestión';
   document.getElementById('year').textContent = new Intl.DateTimeFormat('en', {year:'numeric',timeZone:'America/Bogota'}).format(new Date());
-  document.querySelectorAll('[data-email]').forEach(el => { el.href='mailto:'+email; el.textContent=email+' ↗'; });
+  document.querySelectorAll('[data-email]').forEach(el => { el.href='mailto:'+email; if(!el.children.length) el.textContent=email; });
+  document.querySelectorAll('[data-email-text]').forEach(el => { el.textContent=email; });
   document.querySelectorAll('[data-whatsapp]').forEach(el => { el.href='https://wa.me/'+phone+'?text='+encodeURIComponent('Hola, '+brand+'. Me gustaría hablar sobre un proyecto.'); });
+  // Contactos alternos y números visibles con formato +57 321 262 4537.
+  const phone2 = String(config.phone2 || '').replace(/\D/g, '');
+  const email2 = config.email2 || '';
+  const pretty = n => '+' + n.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})$/, '$1 $2 $3 $4');
+  document.querySelectorAll('[data-phone-text]').forEach(el => { el.textContent = pretty(phone); });
+  document.querySelectorAll('[data-whatsapp-2]').forEach(el => {
+    if (!phone2) { el.closest('[data-alt]')?.remove(); return; }
+    el.href = 'https://wa.me/' + phone2 + '?text=' + encodeURIComponent('Hola, ' + brand + '. Me gustaría hablar sobre un proyecto.');
+  });
+  document.querySelectorAll('[data-phone2-text]').forEach(el => { el.textContent = phone2 ? pretty(phone2) : ''; });
+  document.querySelectorAll('[data-email-2]').forEach(el => {
+    if (!email2) { el.closest('[data-alt]')?.remove(); return; }
+    el.href = 'mailto:' + email2; if (!el.children.length) el.textContent = email2; else el.querySelector('strong') && (el.querySelector('strong').textContent = email2);
+  });
 
   const menu = document.querySelector('.menu-toggle');
   const nav = document.querySelector('.navigation');
@@ -50,6 +65,11 @@
     motionButton.setAttribute('aria-label',paused?'Activar animaciones':'Pausar animaciones');
     motionButton.title=paused?'Activar animaciones':'Pausar animaciones';
     motionButton.querySelector('span').textContent=paused?'▷':'Ⅱ';
+    // Los paquetes del diagrama usan animaciones SVG: no responden a CSS, se pausan desde aquí.
+    document.querySelectorAll('svg').forEach(svg=>{
+      if(typeof svg.pauseAnimations!=='function') return;
+      if(paused) svg.pauseAnimations(); else svg.unpauseAnimations();
+    });
   }
   motionButton.addEventListener('click',()=>{
     if(reducedMotion.matches) { toast('Tu dispositivo tiene activada la opción de reducir movimiento.'); return; }
@@ -98,7 +118,8 @@
     const name=String(values.get('name')||'').trim();
     const description=String(values.get('description')||'').trim();
     if(!name||!description) { feedback.textContent='Escribe tu nombre y una breve descripción de tu idea.'; return; }
-    const message='Hola, '+brand+'. Soy '+name+'.\n\nMe interesa: '+values.get('service')+'.\n\nMi idea:\n'+description+'\n\nMe gustaría conocer una propuesta para mi proyecto.';
+    const website=String(values.get('website')||'').trim();
+    const message='Hola, '+brand+'. Soy '+name+'.\n\nMe interesa: '+values.get('service')+'.'+(website?'\nMi web actual: '+website:'')+'\n\nMi idea:\n'+description+'\n\nMe gustaría conocer una propuesta para mi proyecto.';
     const link=document.createElement('a');
     if(values.get('channel')==='email') {
       link.href='mailto:'+email+'?subject='+encodeURIComponent('Nuevo proyecto: '+values.get('service'))+'&body='+encodeURIComponent(message);

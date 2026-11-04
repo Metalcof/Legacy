@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Maré · Pedidos para recoger · Concepto de Nexo Studio</title>
+  <meta name="description" content="Automatización de pedidos para recoger de Maré, cafetería de especialidad: ticket automático, cola de barra y aviso por WhatsApp. Un concepto de Nexo Studio.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..600&amp;display=swap">
+  <link rel="stylesheet" href="auto-cafeteria.css">
+  <script src="../config.js" defer></script>
+  <script src="auto-cafeteria.js" defer></script>
+  <script src="motion.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#en-vivo">Ir a la demostración</a>
+  <div class="notice"><p><span class="notice-dot" aria-hidden="true"></span>Datos de ejemplo: no se envían mensajes ni se cobran pedidos reales.</p><nav aria-label="Volver"><a href="cafeteria.html">← Volver a Maré</a><a href="../index.html#proyectos">Ver otros proyectos ↗</a></nav></div>
+
+  <header class="top">
+    <a class="brand" href="cafeteria.html" aria-label="Maré, volver a la web de la cafetería">maré<span>.</span></a>
+    <p class="top-label">Pedidos para recoger <span class="top-sub"><span aria-hidden="true">·</span> una automatización de <span data-brand>Nexo Studio</span></span></p>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="kicker">Automatización para cafeterías</p>
+        <h1 id="hero-title">Del “¿ya está el mío?” al <span class="accent">“ya puedes pasar”</span>.</h1>
+        <p class="lead">En la hora pico, los pedidos llegan por chat, por teléfono y en la barra al mismo tiempo. Alguien los copia a mano, se pierde el orden y los clientes esperan de pie preguntando. Con esta automatización, cada pedido entra solo con su ticket, la barra lo prepara en su turno y el cliente recibe un aviso cuando está listo.</p>
+        <div class="hero-actions">
+          <button type="button" class="btn btn-primary" data-autoplay><span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.5v9l7-4.5z" fill="currentColor"/></svg></span><span data-autoplay-label>Ver el flujo completo</span></button>
+          <a class="btn btn-ghost" href="#en-vivo">Probarlo yo mismo ↓</a>
+        </div>
+      </div>
+      <div class="compare" aria-label="Antes y después">
+        <div class="compare-card before">
+          <h2>Hoy, sin automatizar</h2>
+          <ul>
+            <li>Pedidos repartidos entre WhatsApp, llamadas y la barra.</li>
+            <li>Alguien los copia en una libreta y a veces se salta uno.</li>
+            <li>El cliente llega antes de tiempo y espera sin saber.</li>
+            <li>La venta del día se conoce al cerrar caja.</li>
+          </ul>
+        </div>
+        <div class="compare-card after">
+          <h2>Con el flujo de Maré</h2>
+          <ul>
+            <li>Cada pedido crea su ticket con número y hora de recogida.</li>
+            <li>La barra ve una sola cola, en el orden correcto.</li>
+            <li>El aviso de “tu pedido está listo” sale solo por WhatsApp.</li>
+            <li>Pedidos, tiempos y ventas se actualizan al momento.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="flow" aria-label="Recorrido de un pedido">
+      <ol class="rail" data-rail>
+        <li data-step="1"><span class="rail-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10.5 18.5h3"/></svg></span><b>Pedido</b><small>El cliente elige desde su teléfono</small></li>
+        <li data-step="2"><span class="rail-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg></span><b>Ticket</b><small>Número y hora, sin copiar nada</small></li>
+        <li data-step="3"><span class="rail-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span><b>Cola de barra</b><small>Se prepara en su turno</small></li>
+        <li data-step="4"><span class="rail-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><b>Listo</b><small>La barra lo marca con un toque</small></li>
+        <li data-step="5"><span class="rail-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/></svg></span><b>Aviso</b><small>Llega el WhatsApp al cliente</small></li>
+      </ol>
+    </section>
+
+    <section class="stage" id="en-vivo" aria-labelledby="stage-title">
+      <div class="stage-head">
+        <div>
+          <p class="kicker">En vivo</p>
+          <h2 id="stage-title">Un pedido, dos pantallas.</h2>
+          <p>Haz un pedido en el teléfono y muévelo por la barra. Todo lo demás pasa solo.</p>
+        </div>
+        <div class="stage-tools">
+          <button type="button" class="btn btn-primary btn-small" data-autoplay><span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.5v9l7-4.5z" fill="currentColor"/></svg></span><span data-autoplay-label>Ver el flujo completo</span></button>
+          <button type="button" class="btn btn-ghost btn-small" data-reset>Reiniciar ejemplo</button>
+        </div>
+      </div>
+
+      <div class="views">
+        <div class="view view-client">
+          <div class="view-label"><span>01</span>Lo que ve tu cliente</div>
+          <div class="phone-wrap">
+            <div class="phone" data-phone>
+              <div class="phone-screen">
+                <div class="phone-status" aria-hidden="true"><span data-clock>10:42</span><span class="phone-icons"><i></i><i></i><i></i></span></div>
+                <div class="push" data-push role="status" aria-live="polite" hidden><span class="push-app"><span class="push-logo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/></svg></span>WhatsApp · ahora</span><b>Maré</b><span data-push-text>Tu pedido está listo.</span></div>
+
+                <div class="screen" data-screen="order">
+                  <div class="app-head"><span class="app-brand">maré.</span><span class="app-where">Recoger en Pasaje Olivo 12</span></div>
+                  <div class="screen-scroll">
+                  <h3 class="app-title">¿Qué te preparamos?</h3>
+                  <ul class="products" data-products></ul>
+                  <fieldset class="slots"><legend>¿A qué hora pasas?</legend><div class="slot-list" data-slots></div></fieldset>
+                  <label class="name-field"><span>Tu nombre</span><input type="text" data-name maxlength="24" autocomplete="off" placeholder="Para llamarte en la barra"></label>
+                  </div>
+                  <div class="order-bar"><p class="order-hint" data-hint>Elige al menos un producto.</p><button type="button" class="send" data-send disabled><span>Enviar pedido</span><b data-total>$ 0</b></button></div>
+                </div>
+
+                <div class="screen" data-screen="track" hidden>
+                  <div class="app-head"><span class="app-brand">maré.</span><span class="app-where" data-track-id>Pedido M-104</span></div>
+                  <div class="track-card">
+                    <p class="track-eyebrow">Recoge a las <b data-track-time>10:55</b></p>
+                    <h3 data-track-title>Recibimos tu pedido</h3>
+                    <ol class="track-steps" data-track-steps><li>Recibido</li><li>Preparando</li><li>Listo</li></ol>
+                    <ul class="track-items" data-track-items></ul>
+                  </div>
+                  <div class="chat" aria-label="Mensajes de Maré por WhatsApp">
+                    <p class="chat-head"><span class="chat-avatar" aria-hidden="true">m.</span><span><b>Maré</b><small>Mensajes automáticos</small></span></p>
+                    <div class="chat-body" data-chat></div>
+                  </div>
+                  <button type="button" class="again" data-again>Hacer otro pedido</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="view view-team">
+          <div class="view-label"><span>02</span>Lo que ve tu equipo</div>
+          <div class="barra" data-barra>
+            <div class="barra-top"><span class="barra-title">Barra · <span class="barra-brand">maré.</span></span><span class="barra-live"><span class="live-dot" aria-hidden="true"></span>En línea · <span data-clock>10:42</span></span></div>
+            <dl class="metrics" aria-label="Indicadores del día, datos de ejemplo">
+              <div><dt>Pedidos hoy</dt><dd data-metric="orders">26</dd></div>
+              <div><dt>Tiempo promedio</dt><dd data-metric="avg">7 min</dd></div>
+              <div><dt>Venta del día</dt><dd data-metric="sales">$ 389.000</dd></div>
+              <div><dt>En cola</dt><dd data-metric="queue">3</dd></div>
+            </dl>
+            <div class="board">
+              <section class="lane" data-lane="recibido" aria-labelledby="lane-recibido"><h3 id="lane-recibido"><span class="lane-dot"></span>Recibido <b data-count="recibido">0</b></h3><div class="lane-list" data-list="recibido"></div></section>
+              <section class="lane" data-lane="preparando" aria-labelledby="lane-preparando"><h3 id="lane-preparando"><span class="lane-dot"></span>Preparando <b data-count="preparando">0</b></h3><div class="lane-list" data-list="preparando"></div></section>
+              <section class="lane" data-lane="listo" aria-labelledby="lane-listo"><h3 id="lane-listo"><span class="lane-dot"></span>Listo <b data-count="listo">0</b></h3><div class="lane-list" data-list="listo"></div></section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="below" aria-label="Registro y beneficios">
+      <div class="log-card">
+        <div class="log-head"><h2>Lo que hizo el sistema solo</h2><p>Cada paso automático queda anotado. Nadie tuvo que escribirlo.</p></div>
+        <ol class="log" data-log></ol>
+      </div>
+      <div class="gains">
+        <h2>Lo que cambia en tu día</h2>
+        <ul>
+          <li><b>Ningún pedido se pierde.</b>Todo lo que entra queda en una sola cola, con su número y su hora.</li>
+          <li><b>La barra no contesta mensajes.</b>Confirmaciones y avisos salen solos; el equipo solo toca “listo”.</li>
+          <li><b>Menos gente esperando de pie.</b>El cliente llega cuando su café está servido, no antes.</li>
+          <li><b>Sabes cómo va el día.</b>Pedidos, tiempo de preparación y venta, en vivo y no al cierre.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="setup" aria-labelledby="setup-title">
+      <p class="kicker">Cómo lo dejamos funcionando</p>
+      <h2 id="setup-title">Tres pasos y tu barra trabaja así.</h2>
+      <ol>
+        <li><span>1</span><h3>Cargamos tu carta</h3><p>Productos, precios, horarios de recogida y lo que se agota en la vitrina.</p></li>
+        <li><span>2</span><h3>Conectamos tu WhatsApp</h3><p>Los mensajes de confirmación y de “listo” salen desde el número de tu cafetería.</p></li>
+        <li><span>3</span><h3>La barra lo usa en una tablet</h3><p>Una pantalla con la cola del día. Un toque para empezar y otro para avisar.</p></li>
+      </ol>
+      <div class="setup-cta"><p>¿Tu cafetería necesita organizar sus pedidos?</p><a class="btn btn-primary" href="../index.html#contacto">Hablemos de tu cafetería ↗</a></div>
+    </section>
+  </main>
+
+  <footer class="foot"><a class="brand brand-small" href="cafeteria.html">maré<span>.</span></a><p>Negocio, carta, nombres y cifras ficticios. Datos de ejemplo: no se envían mensajes ni se cobran pedidos reales. Los cambios se guardan solo en este navegador. Un concepto de <span data-brand>Nexo Studio</span>.</p><nav aria-label="Enlaces finales"><a href="cafeteria.html">Web de Maré</a><a href="../index.html#proyectos">Otros proyectos</a></nav></footer>
+  <div class="sr-only" role="status" aria-live="polite" data-announce></div>
+  <noscript><p class="noscript">Activa JavaScript para probar la demostración. <a href="cafeteria.html">Volver a Maré</a>.</p></noscript>
+</body>
+</html>

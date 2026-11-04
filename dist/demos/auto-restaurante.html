@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LUMBRE · Reservas y salón · Proyecto de Nexo Studio</title>
+<meta name="description" content="Reservas y salón de LUMBRE: asignación automática de mesas, confirmaciones por WhatsApp, lista de espera, liberación de no-show y comanda a cocina. Concepto interactivo de Nexo Studio.">
+<meta name="theme-color" content="#15120e">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="auto-restaurante.css">
+<script src="../config.js" defer></script>
+<script src="auto-restaurante.js" defer></script>
+<script src="motion.js" defer></script>
+</head>
+<body class="lumbre-auto">
+<a class="la-skip" href="#servicio">Ir a la demo en vivo</a>
+<div class="la-strip"><p><span class="la-strip-dot" aria-hidden="true"></span>Datos de ejemplo: no se envían mensajes ni se hacen reservas reales.</p><nav aria-label="Volver"><a href="restaurante.html">Ver la web de LUMBRE ↗</a><a href="../index.html#proyectos">Proyectos de <span data-brand>Nexo Studio</span> ↗</a></nav></div>
+
+<header class="la-top">
+<a class="la-word" href="restaurante.html" aria-label="lumbre., ver la web del restaurante">lumbre<span>.</span></a>
+<span class="la-top-tag">Reservas y salón</span>
+<a class="la-top-cta" href="#servicio">Probar en vivo</a>
+</header>
+
+<main id="contenido">
+<section class="la-hero" aria-labelledby="la-hero-title">
+<div class="la-hero-copy">
+<span class="la-eyebrow">Automatización para restaurantes</span>
+<h1 id="la-hero-title">Ninguna mesa vacía por un mensaje sin responder.</h1>
+<p>Las reservas llegan por WhatsApp, Instagram y teléfono; alguien las apunta en una libreta y las mesas se reparten a ojo. Este sistema recibe la reserva, elige la mesa que mejor encaja, confirma y recuerda solo, y libera la mesa si nadie llega.</p>
+<div class="la-hero-actions"><button type="button" class="la-btn la-btn-primary" data-autodemo><span class="la-play" aria-hidden="true"></span><span data-autodemo-label>Ver el flujo completo</span></button><a class="la-btn la-btn-ghost" href="#servicio">Probar con mi reserva <span aria-hidden="true">↓</span></a></div>
+</div>
+<div class="la-compare" aria-label="Antes y ahora en el salón">
+<div class="la-compare-head"><span>Sin sistema</span><span>Con LUMBRE</span></div>
+<ul>
+<li><p>Reservas apuntadas a mano entre servicio y servicio</p><p>El cliente reserva solo, a cualquier hora</p></li>
+<li><p>Una pareja ocupando la mesa de seis</p><p>Asigna la mesa más ajustada al grupo</p></li>
+<li><p>Mesas guardadas a quien nunca llega</p><p>Aviso a los 10 minutos, mesa libre a los 15</p></li>
+<li><p>Lista de espera en un papel junto a la puerta</p><p>Avisa por WhatsApp al siguiente en la lista</p></li>
+<li><p>Cocina se entera cuando el grupo ya está sentado</p><p>La comanda del menú sale al sentarse la mesa</p></li>
+</ul>
+</div>
+</section>
+
+<section class="la-live" id="servicio" aria-labelledby="la-live-title">
+<div class="la-live-head">
+<div><span class="la-eyebrow" id="la-live-date">En vivo · esta noche</span><h2 id="la-live-title">La noche de hoy en LUMBRE</h2></div>
+<p>Haz una reserva desde el teléfono y mira cómo reacciona el salón. El reloj es simulado: adelántalo para ver llegadas, cuentas, mesas liberadas y el cambio de turno.</p>
+</div>
+
+<div class="la-controls" role="group" aria-label="Controles de la demo">
+<div class="la-clock"><span class="la-clock-label">Hora del salón</span><strong id="la-clock" aria-live="off">18:55</strong><span class="la-clock-turn" id="la-turn">Primer turno · 19:00</span></div>
+<div class="la-control-buttons">
+<button type="button" class="la-btn la-btn-soft" id="la-advance"><span aria-hidden="true">＋</span> Adelantar 15 min</button>
+<button type="button" class="la-btn la-btn-primary" data-autodemo><span class="la-play" aria-hidden="true"></span><span data-autodemo-label>Ver el flujo completo</span></button>
+<button type="button" class="la-btn la-btn-ghost" id="la-reset">Reiniciar</button>
+</div>
+</div>
+
+<ol class="la-rail" id="la-rail" aria-label="Pasos del flujo">
+<li data-step="1"><span>1</span>Pide mesa</li>
+<li data-step="2"><span>2</span>Mejor mesa</li>
+<li data-step="3"><span>3</span>Confirma y recuerda</li>
+<li data-step="4"><span>4</span>Lista de espera</li>
+<li data-step="5"><span>5</span>Llegan · cocina</li>
+<li data-step="6"><span>6</span>No-show libera</li>
+<li data-step="7"><span>7</span>Rota el turno</li>
+<li data-step="8"><span>8</span>Métricas</li>
+</ol>
+<p class="la-narration" id="la-narration" aria-live="polite">Pide una mesa desde el teléfono o pulsa «Ver el flujo completo».</p>
+
+<div class="la-switch" role="group" aria-label="Cambiar de vista">
+<button type="button" data-view="guest" aria-pressed="true">Lo que ve tu cliente</button>
+<button type="button" data-view="floor" aria-pressed="false">Lo que ve tu salón</button>
+</div>
+
+<div class="la-stage" id="la-stage" data-active-view="guest">
+<div class="la-pane la-guest" data-pane="guest">
+<h3 class="la-pane-title"><span class="la-pane-dot" aria-hidden="true"></span>Lo que ve tu cliente</h3>
+<div class="la-phone">
+<div class="la-phone-notch" aria-hidden="true"></div>
+<div class="la-phone-screen" id="la-phone"></div>
+</div>
+</div>
+
+<div class="la-pane la-floor" data-pane="floor">
+<h3 class="la-pane-title"><span class="la-pane-dot" aria-hidden="true"></span>Lo que ve tu salón</h3>
+<dl class="la-metrics" id="la-metrics">
+<div class="la-metric"><dt>Ocupación del turno</dt><dd><strong data-metric="occupancy">0%</strong><span data-metric="occupancy-sub"></span></dd><span class="la-meter" aria-hidden="true"><i data-metric="occupancy-bar"></i></span></div>
+<div class="la-metric"><dt>Cubiertos de la noche</dt><dd><strong data-metric="covers">0</strong><span data-metric="covers-sub"></span></dd></div>
+<div class="la-metric"><dt>Mesas libres ahora</dt><dd><strong data-metric="free">0</strong><span data-metric="free-sub"></span></dd></div>
+<div class="la-metric"><dt>Lista de espera</dt><dd><strong data-metric="wait">0</strong><span data-metric="wait-sub"></span></dd></div>
+</dl>
+<div class="la-plan-card">
+<div class="la-plan-head"><p class="la-plan-title">Plano del salón <span>12 mesas · 42 sillas</span></p><ul class="la-legend" aria-label="Estados de las mesas"><li class="is-free">Libre</li><li class="is-reserved">Reservada</li><li class="is-seated">Sentados</li><li class="is-bill">Cuenta</li></ul></div>
+<div class="la-plan" id="la-plan"></div>
+<p class="la-plan-hint">Toca una mesa para ver su reserva y cambiar su estado.</p>
+</div>
+<div class="la-detail" id="la-detail" aria-live="polite"></div>
+</div>
+</div>
+
+<div class="la-panels">
+<section class="la-panel" aria-labelledby="la-wait-title"><header><h3 id="la-wait-title">Lista de espera</h3><span class="la-count" id="la-wait-count">0</span></header><ol class="la-wait" id="la-wait"></ol><h4 class="la-subhead">Próximas noches</h4><ul class="la-upcoming" id="la-upcoming"></ul></section>
+<section class="la-panel" aria-labelledby="la-kitchen-title"><header><h3 id="la-kitchen-title">Comandas a cocina</h3><span class="la-count" id="la-kitchen-count">0</span></header><ul class="la-tickets" id="la-tickets"></ul></section>
+<section class="la-panel la-panel-log" aria-labelledby="la-log-title"><header><h3 id="la-log-title">Registro automático</h3><span class="la-count la-count-live">en vivo</span></header><ol class="la-log" id="la-log"></ol></section>
+</div>
+<p class="la-sr" id="la-announce" role="status" aria-live="polite"></p>
+</section>
+
+<section class="la-how" aria-labelledby="la-how-title">
+<div class="la-how-head"><span class="la-eyebrow">Lo que hace solo, cada noche</span><h2 id="la-how-title">Seis tareas que dejan de depender de la memoria de alguien.</h2></div>
+<ol class="la-how-grid">
+<li><span class="la-how-n">01</span><h3>Recibe la reserva</h3><p>Desde la web o WhatsApp, a cualquier hora. Pide solo lo necesario: personas, día, turno y preferencia.</p></li>
+<li><span class="la-how-n">02</span><h3>Elige la mejor mesa</h3><p>Busca la mesa libre más ajustada al grupo y respeta salón o terraza cuando hay sitio.</p></li>
+<li><span class="la-how-n">03</span><h3>Confirma y recuerda</h3><p>Envía la confirmación al momento y un recordatorio dos horas antes, con opción de cancelar.</p></li>
+<li><span class="la-how-n">04</span><h3>Ordena la lista de espera</h3><p>Calcula la espera estimada y avisa al siguiente grupo en cuanto se libera una mesa que le sirve.</p></li>
+<li><span class="la-how-n">05</span><h3>Libera los no-show</h3><p>A los 10 minutos pregunta si vienen en camino; a los 15 libera la mesa y la ofrece a la lista.</p></li>
+<li><span class="la-how-n">06</span><h3>Avisa a cocina y mide</h3><p>La comanda del menú sale al sentarse la mesa, y ves la ocupación, los cubiertos y las mesas libres del turno.</p></li>
+</ol>
+<div class="la-cta">
+<div><h2>¿Tu restaurante necesita organizar su salón?</h2><p>Adaptamos el plano, los turnos y los mensajes a tu local.</p></div>
+<div class="la-cta-actions"><a class="la-btn la-btn-primary" href="../index.html#contacto">Hablemos de tu restaurante ↗</a><a class="la-btn la-btn-ghost" href="restaurante.html">Volver a la web de LUMBRE</a></div>
+</div>
+</section>
+</main>
+<footer class="la-footer"><p>Concepto interactivo de <span data-brand>Nexo Studio</span> para LUMBRE, una marca ficticia. Datos de ejemplo: no se envían mensajes ni se hacen reservas reales.</p><a href="../index.html#proyectos">Ver más proyectos ↗</a></footer>
+</body>
+</html>

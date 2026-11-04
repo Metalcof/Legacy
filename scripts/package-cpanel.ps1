@@ -16,7 +16,7 @@ function Assert-RuntimeChild {
     return $absolute
 }
 
-$sourceNames = @('index.html', 'styles.css', 'app.js', 'effects.js', 'project-journey.js', 'config.js', 'assets', 'demos')
+$sourceNames = @('index.html', 'styles.css', 'app.js', 'effects.js', 'guide.js', 'project-journey.js', 'lab.js', 'motion.js', 'tour.js', 'soluciones.js', 'stage.js', 'escenas', 'premium.js', 'brochure.html', 'config.js', 'assets', 'demos')
 foreach ($name in $sourceNames) {
     if (-not (Test-Path -LiteralPath (Join-Path $workspaceRoot $name))) {
         throw "Falta un archivo o carpeta del sitio: $name"
@@ -24,6 +24,10 @@ foreach ($name in $sourceNames) {
 }
 if (Test-Path -LiteralPath (Join-Path $workspaceRoot '.htaccess') -PathType Leaf) {
     $sourceNames += '.htaccess'
+}
+# Las propuestas personalizadas no van a GitHub, pero sí al alojamiento si se generaron.
+if (Test-Path -LiteralPath (Join-Path $workspaceRoot 'propuestas') -PathType Container) {
+    $sourceNames += 'propuestas'
 }
 
 if (Test-Path -LiteralPath $runtimeRoot) {

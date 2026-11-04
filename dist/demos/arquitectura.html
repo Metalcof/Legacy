@@ -1,25 +1,287 @@
 <!doctype html>
 <html lang="es">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>AURA — espacios con intención · Concepto de Nexo Studio</title><meta name="description" content="Concepto de una web editorial para un estudio de arquitectura, diseñado por Nexo Studio."><link rel="stylesheet" href="demos.css"><script src="../config.js" defer></script><script src="demos.js" defer></script></head>
-<body class="architecture">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AURA — espacios con intención · Concepto de Nexo Studio</title>
+<meta name="description" content="Concepto de una web editorial para un estudio de arquitectura, interiores y paisaje, diseñado por Nexo Studio.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/architecture-editorial.webp" as="image" imagesrcset="../assets/architecture-editorial-small.webp 800w, ../assets/architecture-editorial.webp 1600w" imagesizes="100vw">
+<link rel="stylesheet" href="demos.css">
+<link rel="stylesheet" href="arquitectura-plus.css">
+<script src="../config.js" defer></script>
+<script src="demos.js" defer></script>
+<script src="motion.js" defer></script>
+<script src="arquitectura-plus.js" defer></script>
+</head>
+<body class="architecture aura">
+<a class="aura-skip" href="#proyectos">Saltar a los proyectos</a>
 <div class="demo-bar"><span>Concepto ficticio · fotos IA · <span data-brand>Nexo Studio</span></span><a href="../index.html#proyectos">Volver al estudio ↗</a></div>
-<div class="wrap">
-<div class="demo-palette" role="group" aria-label="Elegir paleta de este ejemplo"><span>Prueba otra paleta</span><button type="button" data-demo-theme="original" aria-pressed="true">Original</button><button type="button" data-demo-theme="green" aria-pressed="false">Verde</button><button type="button" data-demo-theme="cyan" aria-pressed="false">Cian</button><button type="button" data-demo-theme="violet" aria-pressed="false">Violeta</button></div>
-  <header class="site-nav"><a href="#" class="wordmark" aria-label="Aura, inicio">AURA</a><nav class="nav-links" aria-label="Principal"><a href="#proyectos">Proyectos</a><a class="desktop-link" href="#enfoque">Nuestro enfoque</a><a href="#enfoque" class="round-link" aria-label="Conocer nuestro enfoque">↗</a></nav></header>
-  <main>
-    <section class="architecture-intro"><div><div class="eyebrow">Arquitectura · interiores · paisaje</div><h1>Espacios para<br><span>sentir más.</span></h1></div><div><p>La luz, el silencio y la materia. Exploramos cómo la arquitectura puede acercarnos a una forma más consciente de habitar.</p><a href="#proyectos" class="button">Explorar los proyectos <span>↘</span></a></div></section>
-    <div class="architecture-hero">
-      <img src="../assets/architecture-editorial.webp" width="1672" height="941" alt="Casa contemporánea de concreto y travertino con ventanales abiertos a un jardín tropical, imagen conceptual generada con IA" fetchpriority="high" decoding="async">
-      <div class="arch-scene-label"><span><strong>Casa Umbral</strong><br>VIVIENDA / LUZ Y JARDÍN</span><span>LUZ NATURAL<br>Y MATERIA HONESTA</span></div>
-    </div><div class="architecture-caption"><span>El espacio como una experiencia.</span><span>Arquitectura · paisaje · interiores</span></div>
-    <section class="architecture-projects" id="proyectos"><div class="section-head"><div><div class="eyebrow">Proyectos seleccionados</div><h2>Formas de habitar.</h2></div><p>Del patio tropical a un loft urbano. Cada espacio empieza por las personas que lo van a vivir.</p></div><div class="architecture-grid">
-      <article class="architecture-card" id="casa-patio"><div class="arch-project-visual"><img src="../assets/case-architecture-patio.webp" srcset="../assets/case-architecture-patio-small.webp 800w, ../assets/case-architecture-patio.webp 1600w" sizes="(max-width:700px) 92vw, 48vw" width="1600" height="900" alt="Patio tropical con un árbol entre volúmenes de concreto, piedra y madera" loading="lazy" decoding="async" ></div><div class="arch-card-title"><div><h3>Casa del patio</h3><p>Vivienda · arquitectura y paisaje</p></div><button type="button" data-project="patio" aria-label="Ver ficha de Casa del patio">↗</button></div><p class="arch-case-description">La casa se organiza alrededor de un árbol. Corredores abiertos, terrazas sombreadas y celosías de madera hacen del jardín una habitación más.</p><dl class="arch-case-facts"><div><dt>Programa</dt><dd>Vivienda + patio</dd></div><div><dt>Superficie</dt><dd>240 m²</dd></div><div><dt>Materiales</dt><dd>Piedra, concreto, madera</dd></div><div><dt>Etapa</dt><dd>Anteproyecto</dd></div></dl></article>
-      <article class="architecture-card" id="loft-luz"><div class="arch-project-visual"><img src="../assets/case-architecture-loft.webp" srcset="../assets/case-architecture-loft-small.webp 800w, ../assets/case-architecture-loft.webp 1600w" sizes="(max-width:700px) 92vw, 48vw" width="1600" height="900" alt="Loft de doble altura con grandes ventanas industriales, escalera de roble y muebles claros" loading="lazy" decoding="async" ></div><div class="arch-card-title"><div><h3>Loft Luz</h3><p>Rehabilitación · vivienda y estudio</p></div><button type="button" data-project="refugio" aria-label="Ver ficha de Loft Luz">↗</button></div><p class="arch-case-description">Una estructura industrial recupera su amplitud. La doble altura une el espacio de trabajo con la vida cotidiana; la madera aporta escala y calidez.</p><dl class="arch-case-facts"><div><dt>Programa</dt><dd>Vivienda + estudio</dd></div><div><dt>Superficie</dt><dd>180 m²</dd></div><div><dt>Materiales</dt><dd>Roble, piedra, acero</dd></div><div><dt>Etapa</dt><dd>Desarrollo de diseño</dd></div></dl></article>
-    </div></section>
-    <section class="architecture-philosophy" id="enfoque"><div class="eyebrow">Lo que guía cada decisión</div><div><h2>Menos ruido.<br>Más espacio para vivir.</h2><p>Escuchamos tus rutinas antes de dibujar. La luz, la circulación y la relación con el exterior nos ayudan a encontrar un espacio que responda a la vida diaria.</p><p>Trabajamos con volúmenes sencillos y materiales que mejoran con el tiempo. Cada propuesta se desarrolla desde el programa hasta los detalles que le dan carácter.</p></div></section>
-    <section class="architecture-scope"><div class="section-head"><div><div class="eyebrow">Del primer trazo al detalle</div><h2>Un proyecto,<br>pensado completo.</h2></div></div><div class="arch-scope-row"><span>01</span><h3>Arquitectura residencial</h3><p>Programa, distribución, orientación y relación con el terreno. Una base clara para habitar mejor.</p></div><div class="arch-scope-row"><span>02</span><h3>Interiores y rehabilitación</h3><p>Reorganización de espacios, mobiliario, luz y materialidad. Leer lo que existe para imaginar lo que puede ser.</p></div><div class="arch-scope-row"><span>03</span><h3>Paisaje y espacios abiertos</h3><p>Patios, terrazas y jardines que conectan el interior con el clima y la vegetación.</p></div></section>
-    <section class="sector-operation"><div><div class="eyebrow">La organización también diseña</div><h2>Cada proyecto empieza<br>con una conversación.</h2><p>Explora cómo se reciben y organizan las consultas del estudio para dar el siguiente paso.</p></div><a class="button" href="sector-automation.html#arquitectura">Ver la gestión de AURA <span>↗</span></a></section>
-  </main><footer class="footer"><a class="wordmark" href="#">AURA</a><p>Estudio, proyectos, ubicaciones y fichas ficticios. Fotografías creadas con IA. Diseño de <span data-brand>Nexo Studio</span>.</p><a href="../index.html#contacto">Diseñemos tu próxima web ↗</a></footer>
+
+<div class="wrap aura-top">
+  <div class="demo-palette" role="group" aria-label="Elegir paleta de este ejemplo"><span>Prueba otra paleta</span><button type="button" data-demo-theme="original" aria-pressed="true">Original</button><button type="button" data-demo-theme="green" aria-pressed="false">Verde</button><button type="button" data-demo-theme="cyan" aria-pressed="false">Cian</button><button type="button" data-demo-theme="violet" aria-pressed="false">Violeta</button></div>
+  <header class="site-nav aura-nav">
+    <a href="#" class="wordmark" aria-label="Aura, inicio">AURA</a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="#proyectos">Proyectos</a>
+      <a class="desktop-link" href="#proceso">Proceso</a>
+      <a class="desktop-link" href="#enfoque">Estudio</a>
+      <a class="aura-nav-cta" href="auto-arquitectura.html">Iniciar <span class="aura-hide-sm">un&nbsp;</span>proyecto <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
 </div>
-<dialog id="project-dialog" aria-labelledby="project-title"><div class="dialog-top"><h2 id="project-title">Casa del patio</h2><button type="button" class="dialog-close" data-close-dialog aria-label="Cerrar detalles">×</button></div><p id="project-description" style="font-size:16px;line-height:1.8;margin-top:24px"></p><dl class="project-facts"><div><dt>Tipología</dt><dd id="project-type"></dd></div><div><dt>Materialidad</dt><dd id="project-materials"></dd></div><div><dt>Idea principal</dt><dd id="project-idea"></dd></div><div><dt>Estado</dt><dd id="project-stage">Anteproyecto</dd></div></dl></dialog>
-</body></html>
+
+<main>
+  <section class="aura-hero" aria-labelledby="aura-hero-title">
+    <figure class="aura-hero-media">
+      <img src="../assets/architecture-editorial.webp" srcset="../assets/architecture-editorial-small.webp 800w, ../assets/architecture-editorial.webp 1600w" sizes="100vw" width="1672" height="941" alt="Casa contemporánea de concreto y travertino con ventanales abiertos a un jardín tropical, imagen conceptual generada con IA" fetchpriority="high" decoding="async">
+    </figure>
+    <div class="aura-hero-copy">
+      <div class="wrap">
+        <p class="aura-kicker">Arquitectura · interiores · paisaje</p>
+        <h1 id="aura-hero-title"><span class="aura-line">Espacios</span> <span class="aura-line">para sentir más</span></h1>
+      </div>
+    </div>
+    <div class="aura-hero-sheet">
+      <div class="wrap">
+        <dl>
+          <div><dt>Nº 01</dt><dd>Casa Umbral</dd></div>
+          <div><dt>Lugar</dt><dd>Anapoima, Cundinamarca</dd></div>
+          <div class="aura-hide-sm"><dt>Programa</dt><dd>Vivienda · 420 m²</dd></div>
+          <div class="aura-hide-sm"><dt>Año</dt><dd>2025</dd></div>
+        </dl>
+        <button type="button" class="aura-pill" data-project="umbral">Ver ficha <span aria-hidden="true">↗</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="aura-statement wrap" aria-label="El estudio en una frase">
+    <p class="aura-statement-text">Diseñamos casas, interiores y jardines para el clima del trópico: <em>sombra antes que aire acondicionado,</em> luz que cambia durante el día y materiales que mejoran con los años.</p>
+    <ul class="aura-statement-list" aria-label="Lo que hacemos">
+      <li><span>01</span>Arquitectura residencial</li>
+      <li><span>02</span>Interiores y rehabilitación</li>
+      <li><span>03</span>Paisaje y espacios abiertos</li>
+    </ul>
+  </section>
+
+  <section class="aura-projects" id="proyectos" aria-labelledby="proyectos-title">
+    <div class="wrap">
+      <div class="section-head aura-section-head">
+        <div><div class="eyebrow">Proyectos seleccionados</div><h2 id="proyectos-title">Formas de habitar.</h2></div>
+        <p>Del patio tropical a un loft urbano. Cada proyecto empieza por las personas que lo van a vivir.</p>
+      </div>
+      <div class="aura-toolbar">
+        <div class="aura-filters" role="group" aria-label="Filtrar proyectos">
+          <button type="button" data-aura-filter="todos" aria-pressed="true">Todos <span>6</span></button>
+          <button type="button" data-aura-filter="vivienda" aria-pressed="false">Vivienda <span>3</span></button>
+          <button type="button" data-aura-filter="interiores" aria-pressed="false">Interiores <span>2</span></button>
+          <button type="button" data-aura-filter="paisaje" aria-pressed="false">Paisaje <span>2</span></button>
+        </div>
+        <div class="aura-views" role="group" aria-label="Forma de ver los proyectos">
+          <button type="button" data-aura-view="galeria" aria-pressed="true">Galería</button>
+          <button type="button" data-aura-view="indice" aria-pressed="false">Índice</button>
+        </div>
+      </div>
+      <p class="aura-count" id="aura-count" role="status" aria-live="polite">6 proyectos</p>
+    </div>
+
+    <div class="aura-gallery" data-aura-panel="galeria">
+      <div class="aura-rail" id="aura-rail" tabindex="0" aria-label="Proyectos, se desplaza en horizontal">
+        <article class="aura-card" data-cat="vivienda" data-key="umbral">
+          <figure class="aura-card-media aura-reveal"><img src="../assets/architecture-editorial-small.webp" srcset="../assets/architecture-editorial-small.webp 800w, ../assets/architecture-editorial.webp 1600w" sizes="(max-width:700px) 84vw, 44vw" width="1672" height="941" alt="Fachada de Casa Umbral: volúmenes de concreto y travertino sobre un jardín con piscina" loading="lazy" decoding="async"></figure>
+          <div class="aura-card-meta"><span class="aura-card-no">01</span><div><h3>Casa Umbral</h3><p>Vivienda · Anapoima · 2025</p></div><span class="aura-card-area">420 m²</span></div>
+          <button type="button" class="aura-card-open" data-project="umbral" aria-label="Ver ficha de Casa Umbral"><span aria-hidden="true">↗</span></button>
+        </article>
+        <article class="aura-card" id="casa-patio" data-cat="vivienda paisaje" data-key="patio">
+          <figure class="aura-card-media aura-reveal"><img src="../assets/case-architecture-patio-small.webp" srcset="../assets/case-architecture-patio-small.webp 800w, ../assets/case-architecture-patio.webp 1600w" sizes="(max-width:700px) 84vw, 44vw" width="1600" height="900" alt="Patio tropical con un árbol entre volúmenes de concreto, piedra y madera" loading="lazy" decoding="async"></figure>
+          <div class="aura-card-meta"><span class="aura-card-no">02</span><div><h3>Casa del patio</h3><p>Vivienda y paisaje · Santa Fe de Antioquia · 2024</p></div><span class="aura-card-area">240 m²</span></div>
+          <button type="button" class="aura-card-open" data-project="patio" aria-label="Ver ficha de Casa del patio"><span aria-hidden="true">↗</span></button>
+        </article>
+        <article class="aura-card" id="loft-luz" data-cat="interiores" data-key="refugio">
+          <figure class="aura-card-media aura-reveal"><img src="../assets/case-architecture-loft-small.webp" srcset="../assets/case-architecture-loft-small.webp 800w, ../assets/case-architecture-loft.webp 1600w" sizes="(max-width:700px) 84vw, 44vw" width="1600" height="900" alt="Loft de doble altura con grandes ventanas industriales, escalera de roble y muebles claros" loading="lazy" decoding="async"></figure>
+          <div class="aura-card-meta"><span class="aura-card-no">03</span><div><h3>Loft Luz</h3><p>Interiores · Bogotá · 2024</p></div><span class="aura-card-area">180 m²</span></div>
+          <button type="button" class="aura-card-open" data-project="refugio" aria-label="Ver ficha de Loft Luz"><span aria-hidden="true">↗</span></button>
+        </article>
+        <article class="aura-card" data-cat="interiores" data-key="biblioteca">
+          <figure class="aura-card-media aura-reveal"><img src="../assets/interior-editorial-small.webp" srcset="../assets/interior-editorial-small.webp 800w, ../assets/interior-editorial.webp 1600w" sizes="(max-width:700px) 84vw, 44vw" width="1600" height="900" alt="Estudio con mesa de roble, biblioteca de madera y un ventanal de piso a techo hacia el jardín" loading="lazy" decoding="async"></figure>
+          <div class="aura-card-meta"><span class="aura-card-no">04</span><div><h3>Biblioteca del jardín</h3><p>Interiores · Cali · 2023</p></div><span class="aura-card-area">64 m²</span></div>
+          <button type="button" class="aura-card-open" data-project="biblioteca" aria-label="Ver ficha de Biblioteca del jardín"><span aria-hidden="true">↗</span></button>
+        </article>
+        <article class="aura-card" data-cat="vivienda" data-key="pabellon">
+          <figure class="aura-card-media aura-reveal"><img src="../assets/auto-arquitectura-small.webp" srcset="../assets/auto-arquitectura-small.webp 800w, ../assets/auto-arquitectura.webp 1600w" sizes="(max-width:700px) 84vw, 44vw" width="1600" height="900" alt="Maqueta de madera de una casa con patio sobre la mesa del estudio, junto a muestras de piedra y madera" loading="lazy" decoding="async"></figure>
+          <div class="aura-card-meta"><span class="aura-card-no">05</span><div><h3>Pabellón Barichara</h3><p>Vivienda · Barichara · en diseño</p></div><span class="aura-card-area">160 m²</span></div>
+          <button type="button" class="aura-card-open" data-project="pabellon" aria-label="Ver ficha de Pabellón Barichara"><span aria-hidden="true">↗</span></button>
+        </article>
+        <article class="aura-card" data-cat="paisaje" data-key="ceibas">
+          <figure class="aura-card-media aura-reveal aura-card-plan">
+            <svg viewBox="0 0 800 450" role="img" aria-label="Plano de paisaje del Jardín Las Ceibas: senderos curvos, un estanque de agua lluvia y copas de árboles dibujadas en planta">
+              <rect width="800" height="450" fill="#e3dfd4"/>
+              <g fill="none" stroke="#252824" stroke-opacity=".18" stroke-width="1"><path d="M0 50h800M0 100h800M0 150h800M0 200h800M0 250h800M0 300h800M0 350h800M0 400h800M50 0v450M100 0v450M150 0v450M200 0v450M250 0v450M300 0v450M350 0v450M400 0v450M450 0v450M500 0v450M550 0v450M600 0v450M650 0v450M700 0v450M750 0v450"/></g>
+              <rect x="70" y="60" width="660" height="330" fill="none" stroke="#252824" stroke-width="2"/>
+              <path d="M110 360 C 220 300, 260 240, 380 230 S 600 160, 700 90" fill="none" stroke="#252824" stroke-width="16" stroke-opacity=".12"/>
+              <path d="M110 360 C 220 300, 260 240, 380 230 S 600 160, 700 90" fill="none" stroke="#252824" stroke-width="1.4" stroke-dasharray="6 6"/>
+              <ellipse cx="470" cy="300" rx="110" ry="48" fill="#a9b6a1" fill-opacity=".55" stroke="#252824" stroke-width="1.4"/>
+              <path d="M380 300c40-10 140-10 180 0" fill="none" stroke="#252824" stroke-opacity=".35"/>
+              <g fill="#6f8066" fill-opacity=".28" stroke="#252824" stroke-width="1.2"><circle cx="210" cy="150" r="70"/><circle cx="600" cy="300" r="46"/><circle cx="330" cy="120" r="34"/><circle cx="640" cy="150" r="38"/><circle cx="150" cy="290" r="28"/></g>
+              <g stroke="#252824" stroke-width="1.2"><path d="M210 150l-50-40M210 150l60-30M210 150l10 66M210 150l-62 22"/></g>
+              <rect x="520" y="70" width="190" height="60" fill="#f3f1ea" stroke="#252824" stroke-width="1.6"/>
+              <g font-family="Arial, sans-serif" font-size="13" letter-spacing="2" fill="#252824"><text x="533" y="105">CASA EXISTENTE</text><text x="400" y="306">ESTANQUE</text><text x="168" y="236">CEIBA</text></g>
+              <g transform="translate(740 400)" stroke="#252824" fill="none" stroke-width="1.4"><circle r="18"/><path d="M0 14V-14l-6 10M0-14l6 10"/></g>
+            </svg>
+          </figure>
+          <div class="aura-card-meta"><span class="aura-card-no">06</span><div><h3>Jardín Las Ceibas</h3><p>Paisaje · Medellín · 2025</p></div><span class="aura-card-area">1.800 m²</span></div>
+          <button type="button" class="aura-card-open" data-project="ceibas" aria-label="Ver ficha de Jardín Las Ceibas"><span aria-hidden="true">↗</span></button>
+        </article>
+        <div class="aura-rail-end" aria-hidden="true"></div>
+      </div>
+      <div class="wrap aura-rail-controls">
+        <div class="aura-rail-progress" aria-hidden="true"><span id="aura-rail-bar"></span></div>
+        <div class="aura-rail-buttons">
+          <button type="button" data-aura-rail="-1" aria-label="Proyecto anterior"><span aria-hidden="true">←</span></button>
+          <button type="button" data-aura-rail="1" aria-label="Proyecto siguiente"><span aria-hidden="true">→</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap aura-index-panel" data-aura-panel="indice" hidden>
+      <div class="aura-index-head" aria-hidden="true"><span>Nº</span><span>Proyecto</span><span>Tipo</span><span>Lugar</span><span>Año</span><span>Área</span></div>
+      <ol class="aura-index" id="aura-index">
+        <li data-cat="vivienda" data-key="umbral"><button type="button" data-project="umbral" data-preview="../assets/architecture-editorial-small.webp"><span>01</span><strong>Casa Umbral</strong><span>Vivienda</span><span>Anapoima</span><span>2025</span><span>420 m²</span><i aria-hidden="true">↗</i></button></li>
+        <li data-cat="vivienda paisaje" data-key="patio"><button type="button" data-project="patio" data-preview="../assets/case-architecture-patio-small.webp"><span>02</span><strong>Casa del patio</strong><span>Vivienda · paisaje</span><span>Santa Fe de Antioquia</span><span>2024</span><span>240 m²</span><i aria-hidden="true">↗</i></button></li>
+        <li data-cat="interiores" data-key="refugio"><button type="button" data-project="refugio" data-preview="../assets/case-architecture-loft-small.webp"><span>03</span><strong>Loft Luz</strong><span>Interiores</span><span>Bogotá</span><span>2024</span><span>180 m²</span><i aria-hidden="true">↗</i></button></li>
+        <li data-cat="interiores" data-key="biblioteca"><button type="button" data-project="biblioteca" data-preview="../assets/interior-editorial-small.webp"><span>04</span><strong>Biblioteca del jardín</strong><span>Interiores</span><span>Cali</span><span>2023</span><span>64 m²</span><i aria-hidden="true">↗</i></button></li>
+        <li data-cat="vivienda" data-key="pabellon"><button type="button" data-project="pabellon" data-preview="../assets/auto-arquitectura-small.webp"><span>05</span><strong>Pabellón Barichara</strong><span>Vivienda</span><span>Barichara</span><span>En diseño</span><span>160 m²</span><i aria-hidden="true">↗</i></button></li>
+        <li data-cat="paisaje" data-key="ceibas"><button type="button" data-project="ceibas" data-preview="plan"><span>06</span><strong>Jardín Las Ceibas</strong><span>Paisaje</span><span>Medellín</span><span>2025</span><span>1.800 m²</span><i aria-hidden="true">↗</i></button></li>
+      </ol>
+      <figure class="aura-index-preview" aria-hidden="true"><img id="aura-preview-img" src="../assets/architecture-editorial-small.webp" alt="" width="800" height="450" loading="lazy" decoding="async"><figcaption id="aura-preview-caption">Casa Umbral</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="aura-compare-section" id="del-boceto" aria-labelledby="compare-title">
+    <div class="wrap">
+      <div class="section-head aura-section-head">
+        <div><div class="eyebrow">Casa del patio · del boceto a la obra</div><h2 id="compare-title">Primero se dibuja la sombra.</h2></div>
+        <p>Arrastra la línea para comparar el primer boceto del patio con la imagen final del proyecto.</p>
+      </div>
+      <div class="aura-compare" id="aura-compare" style="--pos:50%">
+        <div class="aura-compare-layer aura-compare-sketch" aria-hidden="true">
+          <img class="aura-sketch-base" src="../assets/case-architecture-patio-small.webp" srcset="../assets/case-architecture-patio-small.webp 800w, ../assets/case-architecture-patio.webp 1600w" sizes="(max-width:1000px) 94vw, 1240px" width="1600" height="900" alt="" loading="lazy" decoding="async">
+          <img class="aura-sketch-dodge" src="../assets/case-architecture-patio-small.webp" srcset="../assets/case-architecture-patio-small.webp 800w, ../assets/case-architecture-patio.webp 1600w" sizes="(max-width:1000px) 94vw, 1240px" width="1600" height="900" alt="" loading="lazy" decoding="async">
+          <svg class="aura-sketch-notes" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+            <g fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M330 120 C 420 170, 420 300, 420 420" stroke-dasharray="8 8"/>
+              <circle cx="420" cy="430" r="9"/>
+              <path d="M980 590 L 1240 590 M980 575v30M1240 575v30"/>
+              <path d="M1180 250 L 1330 160"/>
+            </g>
+            <g fill="currentColor" font-family="Arial, sans-serif" font-size="26" letter-spacing="3">
+              <text x="190" y="105">EL ÁRBOL SE QUEDA</text>
+              <text x="1010" y="640">PATIO 6,4 × 8 M</text>
+              <text x="1180" y="140">ALERO 1,8 M · SOMBRA OESTE</text>
+            </g>
+          </svg>
+        </div>
+        <div class="aura-compare-layer aura-compare-photo" aria-hidden="true">
+          <img src="../assets/case-architecture-patio-small.webp" srcset="../assets/case-architecture-patio-small.webp 800w, ../assets/case-architecture-patio.webp 1600w" sizes="(max-width:1000px) 94vw, 1240px" width="1600" height="900" alt="" loading="lazy" decoding="async">
+        </div>
+        <span class="aura-compare-tag is-left" aria-hidden="true">Boceto</span>
+        <span class="aura-compare-tag is-right" aria-hidden="true">Imagen final</span>
+        <div class="aura-compare-handle" aria-hidden="true"><span>↔</span></div>
+        <label class="aura-sr" for="aura-compare-range">Comparar boceto e imagen final de Casa del patio</label>
+        <input class="aura-compare-range" id="aura-compare-range" type="range" min="0" max="100" value="50" aria-valuetext="50 % boceto">
+      </div>
+      <p class="aura-compare-note">Boceto generado a partir de la imagen para este concepto. En un proyecto real aquí irían los dibujos del estudio.</p>
+    </div>
+  </section>
+
+  <section class="aura-process" id="proceso" aria-labelledby="proceso-title">
+    <div class="wrap aura-process-grid">
+      <div class="aura-process-intro">
+        <div class="eyebrow">Proceso</div>
+        <h2 id="proceso-title">De la primera conversación a la obra.</h2>
+        <p>Cinco etapas, cada una con un entregable concreto. Siempre sabes qué recibes, cuándo decides y qué viene después.</p>
+        <p class="aura-process-note">Plazos orientativos para una vivienda de unos 200 m².</p>
+      </div>
+      <ol class="aura-steps" id="aura-steps">
+        <li><span class="aura-step-no">01</span><div><h3>Conversación</h3><p class="aura-step-time">Semana 1</p><p>Una llamada o un café de 45 minutos. Hablamos de cómo vives, qué te sobra, qué te falta y del presupuesto con números reales.</p><p class="aura-step-deliver"><span>Recibes</span>Resumen de la conversación y propuesta de honorarios.</p></div></li>
+        <li><span class="aura-step-no">02</span><div><h3>Visita y levantamiento</h3><p class="aura-step-time">1 a 2 semanas</p><p>Recorremos el terreno o la casa: orientación, vientos, vistas, árboles que se quedan y medidas exactas.</p><p class="aura-step-deliver"><span>Recibes</span>Planos del estado actual y estudio de sol y sombra.</p></div></li>
+        <li><span class="aura-step-no">03</span><div><h3>Anteproyecto</h3><p class="aura-step-time">3 a 5 semanas</p><p>Exploramos dos o tres caminos con plantas, maqueta e imágenes. Decidimos juntos cuál seguir.</p><p class="aura-step-deliver"><span>Recibes</span>Planos generales, maqueta de estudio e imágenes del espacio.</p></div></li>
+        <li><span class="aura-step-no">04</span><div><h3>Proyecto ejecutivo</h3><p class="aura-step-time">6 a 10 semanas</p><p>Detallamos todo lo que la obra necesita: estructura, instalaciones, carpinterías y materiales. Te acompañamos en la licencia.</p><p class="aura-step-deliver"><span>Recibes</span>Planos para licencia y obra, y presupuesto por partidas.</p></div></li>
+        <li><span class="aura-step-no">05</span><div><h3>Obra y acompañamiento</h3><p class="aura-step-time">Lo que dure la obra</p><p>Visitamos la obra, resolvemos dudas del constructor y cuidamos que lo dibujado se construya bien.</p><p class="aura-step-deliver"><span>Recibes</span>Actas de visita y registro de cada cambio.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="architecture-philosophy aura-philosophy" id="enfoque" aria-labelledby="enfoque-title">
+    <div class="wrap aura-philosophy-grid">
+      <figure class="aura-philosophy-media aura-reveal"><img src="../assets/interior-editorial-small.webp" srcset="../assets/interior-editorial-small.webp 800w, ../assets/interior-editorial.webp 1600w" sizes="(max-width:700px) 94vw, 50vw" width="1600" height="900" alt="Estudio con mesa de roble y ventanal hacia un jardín tropical, luz de tarde sobre piso de travertino" loading="lazy" decoding="async"></figure>
+      <div class="aura-philosophy-copy">
+        <div class="eyebrow">Lo que guía cada decisión</div>
+        <h2 id="enfoque-title">Menos ruido.<br>Más espacio para vivir.</h2>
+        <p>Escuchamos tus rutinas antes de dibujar. Trabajamos con volúmenes sencillos y pocos materiales, bien elegidos, para que el espacio se entienda sin explicaciones.</p>
+        <dl class="aura-principles">
+          <div><dt>La luz primero</dt><dd>Orientamos cada espacio antes de decidir su forma. Una ventana bien puesta ahorra una lámpara.</dd></div>
+          <div><dt>Sombra y aire</dt><dd>Aleros, celosías y ventilación cruzada para una casa fresca sin depender del aire acondicionado.</dd></div>
+          <div><dt>Materia honesta</dt><dd>Piedra, madera, cal y concreto a la vista. Materiales que se pueden tocar y que envejecen con dignidad.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="architecture-scope aura-scope wrap" aria-labelledby="scope-title">
+    <div class="section-head"><div><div class="eyebrow">Del primer trazo al detalle</div><h2 id="scope-title">Un proyecto,<br>pensado completo.</h2></div></div>
+    <div class="arch-scope-row"><span>01</span><h3>Arquitectura residencial</h3><p>Programa, distribución, orientación y relación con el terreno. Una base clara para habitar mejor.</p></div>
+    <div class="arch-scope-row"><span>02</span><h3>Interiores y rehabilitación</h3><p>Reorganización de espacios, mobiliario, luz y materialidad. Leer lo que existe para imaginar lo que puede ser.</p></div>
+    <div class="arch-scope-row"><span>03</span><h3>Paisaje y espacios abiertos</h3><p>Patios, terrazas y jardines que conectan el interior con el clima y la vegetación del lugar.</p></div>
+  </section>
+
+  <section class="aura-cta" id="iniciar" aria-labelledby="cta-title">
+    <div class="wrap aura-cta-grid">
+      <div class="aura-cta-copy">
+        <p class="aura-kicker">Tu proyecto</p>
+        <h2 id="cta-title">¿Tienes un lote, una casa por reformar o solo una idea?</h2>
+        <p>Cuéntanos tu proyecto en tres minutos: tipo, metros, lugar y presupuesto aproximado. Con eso preparamos un brief y te proponemos una fecha para visitar el lugar.</p>
+        <div class="aura-cta-actions">
+          <a class="aura-cta-button" href="auto-arquitectura.html">Contar mi proyecto <span aria-hidden="true">↗</span></a>
+          <a class="aura-cta-link" href="auto-arquitectura.html#estudio">Ver cómo lo recibe el estudio</a>
+        </div>
+      </div>
+      <ol class="aura-cta-flow" aria-label="Qué pasa después de enviar tu proyecto">
+        <li><span>01</span>Respondes seis preguntas sencillas</li>
+        <li><span>02</span>El estudio recibe un brief ordenado</li>
+        <li><span>03</span>Eliges el día de la visita</li>
+        <li><span>04</span>Te llega la confirmación por WhatsApp</li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<div class="wrap">
+  <footer class="footer"><a class="wordmark" href="#">AURA</a><p>Estudio, proyectos, ubicaciones y fichas ficticios. Fotografías creadas con IA. Diseño de <span data-brand>Nexo Studio</span>.</p><a href="../index.html#contacto">Diseñemos tu próxima web ↗</a></footer>
+</div>
+
+<dialog id="project-dialog" class="aura-sheet" aria-labelledby="project-title">
+  <figure class="aura-sheet-media"><img id="project-image" src="../assets/case-architecture-patio-small.webp" alt="" width="800" height="450" decoding="async"><div class="aura-sheet-plan" id="project-plan" hidden></div></figure>
+  <div class="aura-sheet-body">
+    <div class="dialog-top"><div><p class="aura-sheet-index" id="project-index">Nº 02 · Vivienda y paisaje</p><h2 id="project-title">Casa del patio</h2></div><button type="button" class="dialog-close" data-close-dialog aria-label="Cerrar ficha">×</button></div>
+    <p id="project-description" class="aura-sheet-text"></p>
+    <dl class="project-facts aura-sheet-facts">
+      <div><dt>Ubicación</dt><dd id="project-location"></dd></div>
+      <div><dt>Superficie</dt><dd id="project-area"></dd></div>
+      <div><dt>Año</dt><dd id="project-year"></dd></div>
+      <div><dt>Estado</dt><dd id="project-stage">Anteproyecto</dd></div>
+      <div><dt>Tipología</dt><dd id="project-type"></dd></div>
+      <div><dt>Materialidad</dt><dd id="project-materials"></dd></div>
+      <div class="aura-sheet-wide"><dt>Idea principal</dt><dd id="project-idea"></dd></div>
+    </dl>
+    <p class="aura-sheet-note">Proyecto conceptual: lugar, cifras e imágenes son ficticios (fotografías creadas con IA).</p>
+    <div class="aura-sheet-nav">
+      <button type="button" data-sheet-step="-1"><span aria-hidden="true">←</span> Anterior</button>
+      <a href="auto-arquitectura.html" class="aura-sheet-cta">Quiero algo así <span aria-hidden="true">↗</span></a>
+      <button type="button" data-sheet-step="1">Siguiente <span aria-hidden="true">→</span></button>
+    </div>
+  </div>
+</dialog>
+</body>
+</html>

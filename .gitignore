@@ -6,3 +6,9 @@ node_modules/
 .DS_Store
 qa/
 assets/*.png
+
+# Datos de prospectos y propuestas personalizadas: nunca al repositorio
+*.xlsx
+*.xls
+*.csv
+propuestas/

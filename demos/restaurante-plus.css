@@ -1,0 +1,261 @@
+/* LUMBRE · capa propia de la página del restaurante. Se carga después de extra.css y todo vive bajo .restaurant. */
+.restaurant{
+  --lb-ember:#ffad5c;
+  --lb-coal:#110e0a;
+  --lb-raised:#221e18;
+  --lb-serif:Georgia,'Times New Roman',serif;
+  --lb-radius:16px;
+  --lb-radius-lg:22px;
+  --lb-ease:cubic-bezier(.2,.7,0,1);
+  --lb-shadow:0 1px 0 #fff3e00d inset,0 24px 60px -28px #000d;
+  --lb-map-bg:#1d1913;
+  --lb-map-street:#3a3328;
+  --lb-map-park:#2c3a28;
+  --lb-map-label:#8f846f;
+}
+/* Sin cursivas en ninguna parte de la marca. */
+.restaurant em,.restaurant i,.restaurant address,.restaurant cite,.restaurant dfn,.restaurant var{font-style:normal}
+
+/* Cabecera */
+.restaurant .wordmark.serif{font-family:var(--lb-serif);letter-spacing:-.04em}
+.restaurant .lb-dot{color:var(--accent)}
+.restaurant .site-header nav{gap:26px}
+.restaurant .site-header .lb-nav-link{position:relative;padding:10px 0;color:var(--muted);transition-property:color;transition-duration:.18s}
+.restaurant .site-header .lb-nav-link:hover{color:var(--ink)}
+.restaurant .site-header .lb-nav-link::after{content:"";position:absolute;left:0;right:0;bottom:4px;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--lb-ease)}
+.restaurant .site-header .lb-nav-link:hover::after{transform:scaleX(1)}
+.restaurant .site-header nav .small-button{min-height:44px;border-radius:999px;padding:9px 20px;font-weight:700}
+
+/* Portada cinematográfica */
+.restaurant .lb-hero{position:relative;isolation:isolate;display:flex;flex-direction:column;justify-content:flex-end;min-height:min(80vh,740px);margin:26px 0 0;padding:64px 64px 0;border-radius:var(--lb-radius-lg);overflow:hidden;background:var(--lb-coal);gap:0}
+.restaurant .lb-hero-media{position:absolute;inset:0;z-index:-3;margin:0}
+.restaurant .lb-hero-media img{width:100%;height:100%;object-fit:cover;object-position:center 58%;animation:lb-settle 2.4s var(--lb-ease) both}
+.restaurant .lb-hero::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(180deg,#0e0b0866 0%,#0e0b0800 30%,#120e09b8 62%,#120e09f2 88%),radial-gradient(70% 60% at 12% 100%,color-mix(in srgb,var(--lb-ember) 22%,transparent),transparent 70%)}
+.restaurant .lb-hero-copy{max-width:760px}
+.restaurant .lb-hero .eyebrow{color:var(--accent);display:inline-flex;align-items:center;gap:12px}
+.restaurant .lb-hero .eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
+.restaurant .lb-hero h1{font-family:var(--lb-serif);font-weight:400;font-size:clamp(50px,7.4vw,108px);line-height:.98;letter-spacing:-.055em;margin:20px 0 24px;color:#fbf4e6;text-wrap:balance}
+.restaurant .lb-ember-word{color:var(--accent)}
+.restaurant .lb-hero p{font-size:18px;line-height:1.75;color:#e4d9c6;max-width:540px}
+.restaurant .lb-hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.restaurant .lb-hero .button{margin:0;border-radius:999px;padding-inline:26px;gap:14px}
+.restaurant .lb-hero .button.secondary{background:#0e0b0859;border-color:#f5eedf55;color:#fbf4e6;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.restaurant .lb-hero .button.secondary:hover{border-color:var(--accent);color:var(--accent)}
+.restaurant .lb-hero-facts{list-style:none;margin:56px 0 0;padding:22px 0 26px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;border-top:1px solid #f5eedf26}
+.restaurant .lb-hero-facts li{display:flex;flex-direction:column;gap:2px;font-size:15px;line-height:1.45}
+.restaurant .lb-hero-facts span{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.restaurant .lb-hero-facts strong{font-weight:600;color:#f5eedf}
+.restaurant .lb-embers{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.restaurant .lb-embers i{position:absolute;bottom:-12px;left:var(--x);width:var(--s,4px);height:var(--s,4px);border-radius:50%;background:var(--lb-ember);box-shadow:0 0 10px 2px color-mix(in srgb,var(--lb-ember) 70%,transparent);opacity:0;animation:lb-rise var(--d,9s) linear var(--w,0s) infinite}
+.restaurant .lb-embers i:nth-child(1){--x:8%;--d:9s;--w:0s}
+.restaurant .lb-embers i:nth-child(2){--x:16%;--d:12s;--w:2s;--s:3px}
+.restaurant .lb-embers i:nth-child(3){--x:24%;--d:8s;--w:4.5s}
+.restaurant .lb-embers i:nth-child(4){--x:33%;--d:11s;--w:1s;--s:3px}
+.restaurant .lb-embers i:nth-child(5){--x:42%;--d:10s;--w:6s;--s:5px}
+.restaurant .lb-embers i:nth-child(6){--x:55%;--d:13s;--w:3s;--s:3px}
+.restaurant .lb-embers i:nth-child(7){--x:63%;--d:9.5s;--w:7s}
+.restaurant .lb-embers i:nth-child(8){--x:72%;--d:12s;--w:.5s;--s:3px}
+.restaurant .lb-embers i:nth-child(9){--x:84%;--d:10.5s;--w:5s}
+.restaurant .lb-embers i:nth-child(10){--x:93%;--d:14s;--w:2.5s;--s:3px}
+@keyframes lb-rise{0%{transform:translate3d(0,0,0);opacity:0}12%{opacity:.9}70%{opacity:.5}100%{transform:translate3d(30px,-62vh,0);opacity:0}}
+@keyframes lb-settle{from{transform:scale(1.07);opacity:.6}to{transform:scale(1);opacity:1}}
+
+.restaurant .theme-toolbar{margin-top:28px}
+.restaurant .serif-title{font-family:var(--lb-serif);font-weight:400;letter-spacing:-.045em;text-wrap:balance}
+.restaurant .section{padding:104px 0}
+.restaurant .section-heading h2{font-size:clamp(36px,4vw,56px);line-height:1.06}
+
+/* El fuego: historia */
+.restaurant .lb-story{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:76px;align-items:center}
+.restaurant .lb-story-photo{position:relative;aspect-ratio:4/5;border-radius:var(--lb-radius-lg);overflow:hidden;background:#302519;box-shadow:var(--lb-shadow)}
+.restaurant .lb-story-photo img{width:100%;height:100%;object-fit:cover;object-position:30% center}
+.restaurant .lb-story-caption{margin-top:14px;font-size:13px;color:var(--muted)}
+.restaurant .lb-story-copy h2{font-size:clamp(34px,3.4vw,50px);line-height:1.1;margin:16px 0 26px}
+.restaurant .lb-story-copy>p{color:var(--muted);font-size:17px;line-height:1.85;max-width:560px}
+.restaurant .lb-story-copy>p+p{margin-top:16px}
+.restaurant .lb-principles{list-style:none;margin:38px 0 0;padding:0;display:grid;gap:0}
+.restaurant .lb-principles li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px;padding:20px 0;border-top:1px solid var(--line)}
+.restaurant .lb-principle-n{font-family:var(--lb-serif);font-size:24px;color:var(--accent);line-height:1.2}
+.restaurant .lb-principles h3{font-size:19px;font-weight:650;letter-spacing:-.01em;line-height:1.3}
+.restaurant .lb-principles p{font-size:15px;color:var(--muted);line-height:1.7;margin-top:4px}
+
+/* Carta */
+.restaurant #carta .section-heading p{max-width:440px}
+.restaurant .dish{border-radius:var(--lb-radius);transition:border-color .25s ease,transform .35s var(--lb-ease)}
+.restaurant .dish:hover{border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+.restaurant .dish-photo img{transition:transform .8s var(--lb-ease)}
+.restaurant .dish:hover .dish-photo img{transform:scale(1.04)}
+.restaurant .dish h3{font-family:var(--lb-serif);font-weight:400;letter-spacing:-.03em}
+.restaurant .order-card{border-radius:var(--lb-radius);top:24px}
+.restaurant .order-card h3{font-family:var(--lb-serif)}
+.restaurant .lb-fullmenu{margin-top:80px;padding:52px;border:1px solid var(--line);border-radius:var(--lb-radius-lg);background:linear-gradient(180deg,var(--lb-raised),var(--bg) 70%)}
+.restaurant .lb-fullmenu-head{display:flex;justify-content:space-between;align-items:baseline;gap:30px;flex-wrap:wrap;padding-bottom:26px;border-bottom:1px solid var(--line)}
+.restaurant .lb-fullmenu-head h3{font-size:clamp(30px,3vw,42px);line-height:1.1}
+.restaurant .lb-fullmenu-head p{font-size:13px;color:var(--muted);letter-spacing:.02em}
+.restaurant .lb-fullmenu-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:44px;margin-top:34px}
+.restaurant .lb-course h4{display:flex;align-items:baseline;gap:12px;font-family:var(--lb-serif);font-weight:400;font-size:25px;letter-spacing:-.02em;line-height:1.2;padding-bottom:14px}
+.restaurant .lb-course h4 span{font-family:Manrope,Arial,sans-serif;font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--accent)}
+.restaurant .lb-course ul{list-style:none;margin:0;padding:0}
+.restaurant .lb-course li{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding:15px 0;border-top:1px dashed var(--line)}
+.restaurant .lb-course li strong{display:block;font-size:16px;font-weight:650;line-height:1.35}
+.restaurant .lb-course li div span{display:block;font-size:13.5px;line-height:1.55;color:var(--muted);margin-top:4px}
+.restaurant .lb-price{flex:none;font-size:14px;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums;padding-top:1px}
+
+/* Menú del fuego */
+.restaurant .lb-tasting{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:72px;align-items:start;padding:72px;margin-block:24px;border-radius:28px;background:radial-gradient(90% 70% at 0% 0%,color-mix(in srgb,var(--lb-ember) 13%,transparent),transparent 60%),var(--lb-coal);border:1px solid var(--line);position:relative;overflow:hidden}
+.restaurant .lb-tasting-intro{position:sticky;top:30px}
+.restaurant .lb-tasting h2{font-size:clamp(40px,4.6vw,64px);line-height:1.02;margin:16px 0 22px}
+.restaurant .lb-tasting-intro>p{color:var(--muted);font-size:17px;line-height:1.8}
+.restaurant .lb-tasting-price{margin:30px 0;display:grid;gap:0;border-top:1px solid var(--line)}
+.restaurant .lb-tasting-price div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:13px 0;border-bottom:1px solid var(--line)}
+.restaurant .lb-tasting-price dt{color:var(--muted);font-size:15px}
+.restaurant .lb-tasting-price dd{margin:0;font-weight:700;font-size:17px;font-variant-numeric:tabular-nums}
+.restaurant .lb-tasting-price small{font-weight:500;color:var(--muted);font-size:13px}
+.restaurant .lb-tasting .button{border-radius:999px;gap:14px}
+.restaurant .lb-tasting-intro>.lb-fine{font-size:12.5px;color:var(--muted);margin-top:16px;line-height:1.7}
+.restaurant .lb-steps{list-style:none;margin:0;padding:0;position:relative}
+.restaurant .lb-steps::before{content:"";position:absolute;left:23px;top:24px;bottom:24px;width:1px;background:linear-gradient(180deg,var(--lb-ember),color-mix(in srgb,var(--accent) 40%,transparent) 60%,transparent)}
+.restaurant .lb-steps li{position:relative;display:grid;grid-template-columns:48px minmax(0,1fr);gap:22px;padding:18px 0}
+.restaurant .lb-step-n{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--lb-coal);border:1px solid color-mix(in srgb,var(--accent) 60%,transparent);color:var(--accent);font-family:var(--lb-serif);font-size:20px;position:relative;z-index:1;transition:background-color .3s ease,color .3s ease,box-shadow .3s ease}
+.restaurant .lb-steps li:hover .lb-step-n{background:var(--accent);color:var(--button-ink);box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 16%,transparent),0 0 28px color-mix(in srgb,var(--lb-ember) 45%,transparent)}
+.restaurant .lb-steps h3{font-family:var(--lb-serif);font-weight:400;font-size:26px;letter-spacing:-.025em;line-height:1.2;padding-top:6px}
+.restaurant .lb-steps p{color:var(--muted);font-size:15.5px;line-height:1.7;margin-top:4px}
+.restaurant .lb-pair{display:inline-flex;align-items:center;gap:8px;margin-top:10px;padding:5px 12px;border-radius:999px;border:1px solid var(--line);font-size:12.5px;color:var(--ink);background:#f5eedf08}
+.restaurant .lb-pair::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+
+/* Bebidas */
+.restaurant .lb-drinks-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.restaurant .lb-drink-card{padding:30px;border:1px solid var(--line);border-radius:var(--lb-radius);background:var(--surface);display:flex;flex-direction:column}
+.restaurant .lb-drink-icon{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;color:var(--accent);background:color-mix(in srgb,var(--accent) 11%,transparent)}
+.restaurant .lb-drink-card h3{font-family:var(--lb-serif);font-weight:400;font-size:28px;letter-spacing:-.03em;margin-top:22px}
+.restaurant .lb-drink-card>p{color:var(--muted);font-size:15.5px;line-height:1.7;margin-top:8px}
+.restaurant .lb-drink-card ul{list-style:none;margin:22px 0 0;padding:0}
+.restaurant .lb-drink-card li{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-top:1px solid var(--line);font-size:14.5px;line-height:1.5}
+.restaurant .lb-drink-card li b{flex:none;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums}
+
+/* Eventos */
+.restaurant .lb-events{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:72px;align-items:center}
+.restaurant .lb-events-media{border-radius:var(--lb-radius-lg);overflow:hidden;aspect-ratio:5/6;background:#302519;box-shadow:var(--lb-shadow)}
+.restaurant .lb-events-media img{width:100%;height:100%;object-fit:cover}
+.restaurant .lb-events h2{font-size:clamp(34px,3.6vw,52px);line-height:1.08;margin:16px 0 20px}
+.restaurant .lb-events-copy>p{color:var(--muted);font-size:17px;line-height:1.8;max-width:560px}
+.restaurant .lb-event-options{list-style:none;margin:32px 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.restaurant .lb-event-options li{padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--surface);display:flex;flex-direction:column}
+.restaurant .lb-event-options h3{font-size:17px;font-weight:700;line-height:1.3}
+.restaurant .lb-event-options p{font-size:14px;color:var(--muted);line-height:1.6;margin:6px 0 14px}
+.restaurant .lb-event-options span{margin-top:auto;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+.restaurant .lb-events .button{border-radius:999px;gap:14px}
+
+/* Reservas */
+.restaurant .lb-reserve{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1fr);gap:72px;align-items:start;border-top:1px solid var(--line)}
+.restaurant .lb-reserve h2{font-size:clamp(40px,4.6vw,64px);line-height:1.02;margin:16px 0 22px}
+.restaurant .lb-reserve-copy>p{color:var(--muted);font-size:17px;line-height:1.8;max-width:470px}
+.restaurant .lb-reserve-points{list-style:none;margin:30px 0 0;padding:0}
+.restaurant .lb-reserve-points li{display:flex;gap:14px;align-items:center;padding:12px 0;border-top:1px solid var(--line);font-size:15.5px}
+.restaurant .lb-reserve-points li::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--lb-ember)}
+.restaurant .lb-reserve-card{padding:34px;border-radius:24px;border:1px solid var(--line);background:linear-gradient(180deg,var(--lb-raised),var(--surface));box-shadow:var(--lb-shadow);display:grid;gap:22px}
+.restaurant .lb-field{margin:0;padding:0;border:0;min-width:0}
+.restaurant .lb-field>label:not(.lb-chip),.restaurant .lb-field>legend{display:block;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;padding:0}
+.restaurant .lb-reserve-card input[type=date],.restaurant .lb-stepper input{width:100%;min-height:52px;padding:12px 16px;border-radius:12px;border:1px solid var(--line);background:var(--lb-coal);color:var(--ink);font-size:16px;color-scheme:dark}
+.restaurant .lb-reserve-card input[type=date]:focus-visible,.restaurant .lb-stepper input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.restaurant .lb-field-note{font-size:13px;color:var(--cart-danger,#f0a493);margin-top:8px;min-height:0}
+.restaurant .lb-field-note:empty{display:none}
+.restaurant .lb-turns,.restaurant .lb-zones{display:grid;gap:10px}
+.restaurant .lb-turns{grid-template-columns:repeat(2,minmax(0,1fr))}
+.restaurant .lb-zones{grid-template-columns:repeat(3,minmax(0,1fr))}
+.restaurant .lb-turns legend,.restaurant .lb-zones legend{grid-column:1/-1}
+.restaurant .lb-chip{position:relative;display:block;cursor:pointer}
+.restaurant .lb-chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.restaurant .lb-chip span{display:flex;flex-direction:column;justify-content:center;min-height:52px;padding:10px 16px;border-radius:12px;border:1px solid var(--line);background:var(--lb-coal);transition:border-color .18s ease,background-color .18s ease}
+.restaurant .lb-chip strong{font-size:16px;font-weight:700;line-height:1.3}
+.restaurant .lb-chip small{font-size:12.5px;color:var(--muted);line-height:1.4}
+.restaurant .lb-chip:hover span{border-color:color-mix(in srgb,var(--accent) 55%,transparent)}
+.restaurant .lb-chip input:checked+span{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 13%,var(--lb-coal));box-shadow:0 0 0 1px var(--accent) inset}
+.restaurant .lb-chip input:focus-visible+span{outline:3px solid var(--accent);outline-offset:3px}
+.restaurant .lb-stepper{display:grid;grid-template-columns:52px minmax(0,1fr) 52px;gap:8px}
+.restaurant .lb-stepper input{text-align:center;font-weight:700;font-variant-numeric:tabular-nums;-moz-appearance:textfield;appearance:textfield}
+.restaurant .lb-stepper input::-webkit-inner-spin-button,.restaurant .lb-stepper input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.restaurant .lb-stepper button{min-height:52px;border-radius:12px;border:1px solid var(--line);background:var(--lb-coal);color:var(--accent);font-size:22px;font-weight:600;line-height:1}
+.restaurant .lb-stepper button:hover:not(:disabled){border-color:var(--accent)}
+.restaurant .lb-check{display:flex;gap:14px;align-items:flex-start;cursor:pointer;padding:14px 16px;border-radius:12px;border:1px dashed var(--line);min-height:52px}
+.restaurant .lb-check input{width:22px;height:22px;margin:2px 0 0;accent-color:var(--accent);flex:none}
+.restaurant .lb-check span{font-size:15.5px;font-weight:600;line-height:1.45}
+.restaurant .lb-check small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.restaurant .lb-res-summary{font-family:var(--lb-serif);font-size:22px;letter-spacing:-.02em;line-height:1.3;padding-top:18px;border-top:1px solid var(--line)}
+.restaurant .lb-res-submit{width:100%;border-radius:999px;gap:14px}
+.restaurant .lb-reserve-card .form-note{margin-top:-8px}
+.restaurant .lb-reserve-card.lb-flash{animation:lb-flash 1.2s var(--lb-ease)}
+@keyframes lb-flash{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 60%,transparent),var(--lb-shadow)}100%{box-shadow:0 0 0 18px transparent,var(--lb-shadow)}}
+
+/* Visítanos */
+.restaurant .lb-visit{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:72px;align-items:center;border-top:1px solid var(--line)}
+.restaurant .lb-visit h2{font-size:clamp(34px,3.6vw,52px);line-height:1.08;margin:16px 0 28px}
+.restaurant .lb-hours{margin:0;display:grid}
+.restaurant .lb-hours div{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-top:1px solid var(--line);font-size:15.5px}
+.restaurant .lb-hours dt{color:var(--muted)}
+.restaurant .lb-hours dd{margin:0;font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+.restaurant .lb-hours div[data-today]{color:var(--ink)}
+.restaurant .lb-hours div[data-today] dt{color:var(--accent);font-weight:700}
+.restaurant .lb-address{display:flex;flex-direction:column;gap:4px;margin-top:26px;padding-top:20px;border-top:1px solid var(--line)}
+.restaurant .lb-address strong{font-size:17px}
+.restaurant .lb-address span{font-size:14px;color:var(--muted)}
+.restaurant .lb-map{margin:0;border-radius:var(--lb-radius-lg);overflow:hidden;border:1px solid var(--line);position:relative}
+.restaurant .lb-map svg{display:block;width:100%;height:auto}
+.restaurant .lb-map figcaption{position:absolute;left:16px;bottom:14px;font-size:12px;color:var(--muted)}
+.restaurant .lb-map-pin circle:first-child{transform-origin:center;transform-box:fill-box;animation:lb-pulse 2.6s ease-out infinite}
+@keyframes lb-pulse{0%{transform:scale(.6);opacity:.5}100%{transform:scale(1.6);opacity:0}}
+
+/* Cierre */
+.restaurant .lb-callout{border-radius:var(--lb-radius-lg);background:radial-gradient(70% 120% at 100% 100%,color-mix(in srgb,var(--lb-ember) 16%,transparent),transparent 60%),var(--surface);margin-top:30px}
+.restaurant .lb-callout h2{font-family:var(--lb-serif);font-weight:400;font-size:clamp(30px,3.2vw,44px);letter-spacing:-.04em;line-height:1.1}
+.restaurant .lb-callout p{max-width:560px}
+.restaurant .lb-callout .button{border-radius:999px;gap:14px}
+
+@media (max-width:1100px){
+  .restaurant .lb-nav-link{display:none}
+  .restaurant .lb-fullmenu-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .restaurant .lb-tasting{padding:52px;gap:48px}
+  .restaurant .lb-story,.restaurant .lb-events,.restaurant .lb-reserve,.restaurant .lb-visit{gap:48px}
+  .restaurant .lb-event-options{grid-template-columns:1fr}
+}
+@media (max-width:860px){
+  .restaurant .site-header{flex-wrap:nowrap;gap:14px}
+  .restaurant .site-header nav{order:2;flex-basis:auto;width:auto;margin-left:auto}
+  .restaurant .site-header .cart-trigger{order:3;margin-left:0}
+  .restaurant .lb-hero{padding:40px 32px 0;min-height:640px}
+  .restaurant .lb-hero-facts{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:40px}
+  .restaurant .lb-story,.restaurant .lb-events,.restaurant .lb-reserve,.restaurant .lb-visit,.restaurant .lb-tasting{grid-template-columns:1fr}
+  .restaurant .lb-story-photo{aspect-ratio:4/3}
+  .restaurant .lb-events-media{aspect-ratio:16/10}
+  .restaurant .lb-tasting-intro{position:static}
+  .restaurant .lb-drinks-grid{grid-template-columns:1fr}
+  .restaurant .section{padding:76px 0}
+}
+@media (max-width:600px){
+  .restaurant .site-header nav .small-button{padding:8px 16px}
+  .restaurant .cart-trigger>span:not(.cart-badge){display:none}
+  .restaurant .wordmark.serif{font-size:36px}
+  .restaurant .lb-hero{margin-top:16px;padding:28px 22px 0;min-height:620px;border-radius:18px}
+  .restaurant .lb-hero h1{font-size:clamp(44px,13vw,56px)}
+  .restaurant .lb-hero p{font-size:16.5px}
+  .restaurant .lb-hero-actions .button{flex:1 1 auto}
+  .restaurant .lb-hero-facts{gap:18px 16px;padding-bottom:22px}
+  .restaurant .lb-hero-facts li{font-size:13.5px}
+  .restaurant .lb-fullmenu{padding:28px 22px;margin-top:56px}
+  .restaurant .lb-fullmenu-grid{grid-template-columns:1fr;gap:30px}
+  .restaurant .lb-tasting{padding:34px 22px;border-radius:22px}
+  .restaurant .lb-steps h3{font-size:23px}
+  .restaurant .lb-steps li{gap:16px}
+  .restaurant .lb-drink-card{padding:24px}
+  .restaurant .lb-reserve-card{padding:24px 20px}
+  .restaurant .lb-zones{grid-template-columns:1fr 1fr 1fr}
+  .restaurant .lb-zones .lb-chip span{padding:10px}
+  .restaurant .lb-zones strong{font-size:14.5px}
+  .restaurant .lb-hours div{flex-direction:column;gap:2px}
+  .restaurant .lb-hours dd{text-align:left}
+}
+@media (prefers-reduced-motion:reduce){
+  .restaurant .lb-embers{display:none}
+  .restaurant .lb-hero-media img,.restaurant .lb-map-pin circle:first-child,.restaurant .lb-reserve-card.lb-flash{animation:none}
+  .restaurant .dish:hover .dish-photo img{transform:none}
+}

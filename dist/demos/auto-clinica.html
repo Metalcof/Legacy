@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ALMA: agenda automática para un centro de bienestar. Reservas, recordatorios 24 h antes, lista de espera y seguimiento después de la visita. Proyecto conceptual de Nexo Studio.">
+<meta name="theme-color" content="#f2f3ec">
+<title>ALMA — agenda que se cuida sola · Proyecto de Nexo Studio</title>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&amp;display=swap">
+<link rel="stylesheet" href="auto-clinica.css">
+<script src="../config.js" defer></script>
+<script src="auto-clinica.js" defer></script>
+<script src="motion.js" defer></script>
+</head>
+<body class="alma-auto">
+<a class="skip-link" href="#en-vivo">Ir a la demo interactiva</a>
+<div class="aa-notice"><span>Datos de ejemplo: no se envían mensajes ni se guardan datos de salud reales. Marca, personas y horarios ficticios.</span><a href="../index.html#proyectos">Volver a <span data-brand>Nexo Studio</span> ↗</a></div>
+
+<header class="aa-header aa-wrap">
+  <a class="aa-word" href="clinica.html" aria-label="alma., ver la web del centro">alma.</a>
+  <span class="aa-header-tag">Agenda automática</span>
+  <nav aria-label="Enlaces del proyecto">
+    <a href="clinica.html">Ver la web de ALMA</a>
+    <a href="../index.html#proyectos">Más proyectos <span aria-hidden="true">↗</span></a>
+  </nav>
+</header>
+
+<main id="contenido">
+<section class="aa-hero aa-wrap" aria-labelledby="aa-title">
+  <div class="aa-hero-copy">
+    <p class="aa-eyebrow">Automatización para un centro de bienestar</p>
+    <h1 id="aa-title">Que ninguna cita<br>se quede <span>vacía.</span></h1>
+    <p class="aa-lede">Cada inasistencia es una hora de un especialista que nadie recupera. La recepción pasa la tarde llamando para confirmar y, cuando alguien cancela a última hora, el espacio se pierde aunque haya personas esperando turno.</p>
+    <div class="aa-compare">
+      <div>
+        <h2>Hoy</h2>
+        <ul>
+          <li>Confirmaciones por teléfono, una a una.</li>
+          <li>Cancelaciones que llegan tarde o no llegan.</li>
+          <li>Huecos en la agenda con lista de espera en un cuaderno.</li>
+        </ul>
+      </div>
+      <div class="is-after">
+        <h2>Con la automatización</h2>
+        <ul>
+          <li>Confirmación al instante por WhatsApp.</li>
+          <li>Recordatorio 24 h antes con un botón para confirmar o cancelar.</li>
+          <li>El espacio libre se ofrece solo a la lista de espera.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="aa-hero-actions">
+      <button type="button" class="aa-btn" data-demo-start>
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>
+        Ver el flujo completo
+      </button>
+      <a class="aa-btn aa-btn-ghost" href="#en-vivo">Probarlo yo mismo</a>
+    </div>
+  </div>
+  <figure class="aa-hero-visual">
+    <img src="../assets/auto-clinica.webp" srcset="../assets/auto-clinica-small.webp 800w, ../assets/auto-clinica.webp 1600w" sizes="(max-width:900px) 92vw, 46vw" width="1600" height="900" alt="Recepción de ALMA con una persona ficticia revisando la agenda junto a plantas y madera, fotografía creada con IA" fetchpriority="high" decoding="async">
+    <div class="aa-float aa-float-1" aria-hidden="true">
+      <span class="aa-float-head"><b>alma.</b> · mañana, 10:00</span>
+      <span>Hola Camila, te esperamos mañana a las 10:00 con Mariana.</span>
+      <span class="aa-float-actions"><span>Confirmo</span><span>Cancelar</span></span>
+    </div>
+    <div class="aa-float aa-float-2" aria-hidden="true">
+      <span class="aa-float-dot"></span>
+      <span><b>Espacio recuperado</b><br>Mié 12:00 → lista de espera</span>
+    </div>
+  </figure>
+</section>
+
+<section class="aa-live" id="en-vivo" aria-labelledby="live-title">
+  <div class="aa-wrap">
+    <div class="aa-live-head">
+      <div>
+        <p class="aa-eyebrow">Demo interactiva</p>
+        <h2 id="live-title">Una semana de ALMA, en vivo.</h2>
+      </div>
+      <p>Reserva como paciente, adelanta el reloj y mira cómo responde la recepción. Todo ocurre en esta página y se guarda solo en tu navegador.</p>
+    </div>
+
+    <div class="aa-controls" role="group" aria-label="Controles de la simulación">
+      <div class="aa-clock">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <div><small>Reloj de la demo</small><strong id="aa-clock">lun · 08:00</strong></div>
+      </div>
+      <div class="aa-time-actions">
+        <button type="button" class="aa-btn aa-btn-time" id="aa-advance"><span id="aa-advance-label">Adelantar el reloj</span> <span aria-hidden="true">→</span></button>
+        <button type="button" class="aa-btn aa-btn-ghost aa-btn-small" id="aa-plus">+3 horas</button>
+      </div>
+      <div class="aa-demo-actions">
+        <button type="button" class="aa-btn aa-btn-dark" id="aa-demo" data-demo-start>
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>
+          <span>Ver el flujo completo</span>
+        </button>
+        <button type="button" class="aa-btn aa-btn-ghost aa-btn-small" id="aa-reset">Reiniciar</button>
+      </div>
+    </div>
+    <p class="aa-caption" id="aa-caption" aria-live="polite" hidden></p>
+
+    <ol class="aa-rail" id="aa-rail" aria-label="Recorrido de la cita de tu paciente"></ol>
+
+    <div class="aa-viewtoggle" role="tablist" aria-label="Elige qué vista ver">
+      <button type="button" role="tab" id="tab-patient" aria-controls="pane-patient" aria-selected="true" data-view="patient">Lo que ve tu paciente</button>
+      <button type="button" role="tab" id="tab-reception" aria-controls="pane-reception" aria-selected="false" data-view="reception" tabindex="-1">Lo que ve tu recepción <span class="aa-dot-badge" id="aa-reception-badge" hidden></span></button>
+    </div>
+
+    <div class="aa-stage" data-view="patient">
+      <section class="aa-pane aa-pane-patient" id="pane-patient" role="tabpanel" aria-labelledby="pane-patient-title">
+        <header class="aa-pane-head"><span class="aa-pane-num">01</span><div><h3 id="pane-patient-title">Lo que ve tu paciente</h3><p>Reserva desde el celular y recibe todo por WhatsApp.</p></div></header>
+        <div class="aa-phone">
+          <div class="aa-phone-screen">
+            <div class="aa-phone-status" aria-hidden="true"><span id="aa-phone-time">08:00</span><span class="aa-phone-notch"></span><span class="aa-phone-icons"><i></i><i></i><i></i></span></div>
+            <div class="aa-phone-tabs" role="tablist" aria-label="Pantallas del celular">
+              <button type="button" role="tab" id="ptab-book" aria-selected="true" aria-controls="pscreen-book" data-ptab="book">Reservar</button>
+              <button type="button" role="tab" id="ptab-chat" aria-selected="false" aria-controls="pscreen-chat" data-ptab="chat" tabindex="-1">WhatsApp <span class="aa-unread" id="aa-unread" hidden>0</span></button>
+            </div>
+            <div class="aa-phone-body">
+              <div class="aa-pscreen" id="pscreen-book" role="tabpanel" aria-labelledby="ptab-book">
+                <div class="aa-book-head"><span class="aa-mini-word">alma.</span><p>Reserva tu cita</p></div>
+                <div id="aa-booking"></div>
+              </div>
+              <div class="aa-pscreen aa-chat" id="pscreen-chat" role="tabpanel" aria-labelledby="ptab-chat" hidden>
+                <div class="aa-chat-head"><span class="aa-chat-avatar" aria-hidden="true">a.</span><div><strong>ALMA · Recepción</strong><small>Mensajes automáticos · simulación</small></div></div>
+                <div class="aa-chat-list" id="aa-chat" aria-live="polite"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="aa-phone-note">Simulación de WhatsApp: ningún mensaje sale de esta página.</p>
+      </section>
+
+      <section class="aa-pane aa-pane-reception" id="pane-reception" role="tabpanel" aria-labelledby="pane-reception-title">
+        <header class="aa-pane-head"><span class="aa-pane-num">02</span><div><h3 id="pane-reception-title">Lo que ve tu recepción</h3><p>La agenda de cada especialista se actualiza sola.</p></div></header>
+        <div class="aa-metrics" id="aa-metrics"></div>
+        <div class="aa-cal-card">
+          <div class="aa-cal-top">
+            <div><h4>Agenda de la semana</h4><p id="aa-week-label">Semana de ejemplo</p></div>
+            <div class="aa-spec-tabs" id="aa-spec-tabs" role="tablist" aria-label="Especialistas"></div>
+          </div>
+          <div class="aa-cal-wrap"><div class="aa-cal" id="aa-cal" aria-label="Calendario semanal" role="group"></div></div>
+          <ul class="aa-legend" aria-label="Leyenda">
+            <li><i class="lg-free"></i>Libre</li><li><i class="lg-pending"></i>Sin confirmar</li><li><i class="lg-ok"></i>Confirmada</li><li><i class="lg-wait"></i>Desde lista de espera</li><li><i class="lg-you"></i>Tu paciente</li><li><i class="lg-no"></i>No asistió</li>
+          </ul>
+        </div>
+        <div class="aa-side">
+          <div class="aa-detail" id="aa-detail" aria-live="polite"></div>
+          <div class="aa-waitlist">
+            <h4>Lista de espera</h4>
+            <p>Si alguien cancela, el espacio se ofrece aquí primero.</p>
+            <ul id="aa-waitlist"></ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="aa-bottom">
+      <section class="aa-log-card" aria-labelledby="log-title">
+        <div class="aa-card-head"><h3 id="log-title">Registro automático</h3><span class="aa-live-dot">En vivo</span></div>
+        <ol class="aa-log" id="aa-log"></ol>
+      </section>
+      <section class="aa-bars-card" aria-labelledby="bars-title">
+        <div class="aa-card-head"><h3 id="bars-title">Citas por especialista</h3><span>esta semana</span></div>
+        <ul class="aa-bars" id="aa-bars"></ul>
+      </section>
+    </div>
+  </div>
+</section>
+
+<section class="aa-how aa-wrap" aria-labelledby="how-title">
+  <div class="aa-how-head">
+    <p class="aa-eyebrow">Paso a paso</p>
+    <h2 id="how-title">Lo que hace sola,<br>mientras tu equipo atiende.</h2>
+  </div>
+  <ol class="aa-how-steps">
+    <li><span>01</span><h3>Reserva con disponibilidad real</h3><p>El paciente ve solo los horarios libres de cada especialista y elige si es primera visita o control.</p></li>
+    <li><span>02</span><h3>Confirmación inmediata</h3><p>Llega un WhatsApp con día, hora, especialista, dirección y qué traer.</p></li>
+    <li><span>03</span><h3>Recordatorio 24 h antes</h3><p>Con dos botones: confirmo o necesito cancelar. Nadie tiene que llamar.</p></li>
+    <li><span>04</span><h3>Lista de espera automática</h3><p>Si alguien cancela, el espacio se ofrece a la primera persona compatible y se agenda cuando acepta.</p></li>
+    <li><span>05</span><h3>Asistencia registrada</h3><p>Recepción marca quién llegó. Las inasistencias quedan registradas para hacer seguimiento.</p></li>
+    <li><span>06</span><h3>Seguimiento y próxima cita</h3><p>Después de la visita llega un mensaje para saber cómo sigue y una sugerencia de próximo horario.</p></li>
+  </ol>
+  <div class="aa-gains">
+    <article><h3>Menos horas vacías</h3><p>Las cancelaciones avisadas a tiempo se convierten en citas para quien estaba esperando.</p></article>
+    <article><h3>Una recepción más tranquila</h3><p>Menos llamadas de confirmación y más tiempo para recibir a las personas que llegan.</p></article>
+    <article><h3>Pacientes que vuelven</h3><p>El seguimiento y la próxima cita sugerida ayudan a que el tratamiento no se quede a mitad de camino.</p></article>
+  </div>
+</section>
+
+<section class="aa-cta aa-wrap" aria-labelledby="cta-title">
+  <div>
+    <h2 id="cta-title">¿Tu centro pierde citas por inasistencias?</h2>
+    <p>Diseñamos la web y la agenda automática de tu consultorio o centro de bienestar, conectadas a tu forma de trabajar.</p>
+  </div>
+  <div class="aa-cta-actions">
+    <a class="aa-btn aa-btn-light" href="../index.html#contacto">Hablemos de tu centro <span aria-hidden="true">↗</span></a>
+    <a class="aa-cta-link" href="clinica.html">Ver la web de ALMA</a>
+  </div>
+</section>
+</main>
+
+<footer class="aa-footer aa-wrap">
+  <p>ALMA es una marca ficticia. Proyecto conceptual de <span data-brand>Nexo Studio</span>. Datos de ejemplo: no se envían mensajes ni se guardan datos de salud reales.</p>
+  <a href="../index.html#proyectos">Ver más proyectos ↗</a>
+</footer>
+<div class="aa-toast" id="aa-toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

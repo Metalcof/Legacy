@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AURA · De la solicitud a la visita · Concepto de Nexo Studio</title>
+<meta name="description" content="Concepto interactivo de Nexo Studio: cómo un estudio de arquitectura recibe solicitudes guiadas, arma el brief, agenda la visita y confirma por WhatsApp sin perseguir a nadie.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="auto-arquitectura.css">
+<script src="../config.js" defer></script>
+<script src="motion.js" defer></script>
+<script src="auto-arquitectura.js" defer></script>
+</head>
+<body class="aa">
+<a class="aa-skip" href="#flujo">Ir al flujo interactivo</a>
+<div class="aa-strip"><span>Concepto de <span data-brand>Nexo Studio</span> · Datos de ejemplo: no se envían mensajes reales</span><a href="../index.html#proyectos">Volver al estudio ↗</a></div>
+
+<header class="aa-header aa-wrap">
+  <a class="aa-wordmark" href="arquitectura.html" aria-label="AURA, volver a la web del estudio">AURA</a>
+  <p class="aa-header-label">Solicitudes de proyecto</p>
+  <nav class="aa-header-nav" aria-label="Enlaces">
+    <a href="arquitectura.html">← Web de AURA</a>
+    <a class="aa-hide-sm" href="../index.html#proyectos">Otros proyectos</a>
+  </nav>
+</header>
+
+<main>
+  <section class="aa-hero aa-wrap" aria-labelledby="aa-title">
+    <div class="aa-hero-copy">
+      <p class="aa-kicker">Automatización para estudios de arquitectura</p>
+      <h1 id="aa-title">Del «quiero hacer una casa» a la visita agendada.</h1>
+      <p class="aa-lead">Casi todo proyecto empieza con un mensaje corto y sin datos. Aquí el cliente cuenta su proyecto en seis preguntas, el estudio recibe un brief ordenado con lo que falta, y la visita queda agendada y confirmada por WhatsApp. Sin perseguir a nadie por chat.</p>
+      <div class="aa-hero-actions">
+        <button type="button" class="aa-btn aa-btn-primary" data-demo-start>Ver el flujo completo <span aria-hidden="true">▶</span></button>
+        <a class="aa-btn aa-btn-ghost" href="#flujo">Probarlo yo mismo <span aria-hidden="true">↓</span></a>
+      </div>
+    </div>
+    <div class="aa-hero-visual" aria-hidden="true">
+      <img src="../assets/auto-arquitectura-small.webp" srcset="../assets/auto-arquitectura-small.webp 800w, ../assets/auto-arquitectura.webp 1600w" sizes="(max-width:900px) 92vw, 46vw" width="1600" height="900" alt="" fetchpriority="high" decoding="async">
+      <div class="aa-hero-doc">
+        <div class="aa-hero-doc-top"><span>AURA</span><span>Brief A-0214</span></div>
+        <strong>Casa nueva · 220 m²</strong>
+        <span>Anapoima, Cundinamarca</span>
+        <div class="aa-hero-doc-bar"><i style="width:67%"></i></div>
+        <small>4 de 6 datos · faltan fotos y topografía</small>
+      </div>
+      <div class="aa-hero-chat"><b>AURA</b>Visita confirmada: jueves 10:00. Te escribimos un día antes.</div>
+    </div>
+  </section>
+
+  <section class="aa-compare aa-wrap" aria-label="Antes y después">
+    <div class="aa-compare-col">
+      <h2>Hoy</h2>
+      <ul>
+        <li>Llega un «hola, ¿cuánto cuesta una casa?» por Instagram, sin metros ni lugar.</li>
+        <li>Pides los datos uno por uno, durante días, por tres canales distintos.</li>
+        <li>La visita se cuadra por chat y nadie la confirma el día antes.</li>
+      </ul>
+    </div>
+    <div class="aa-compare-col is-after">
+      <h2>Con este flujo</h2>
+      <ul>
+        <li>El cliente responde seis preguntas guiadas, con imágenes para elegir estilo.</li>
+        <li>El estudio recibe un brief listo para leer, con lo que falta ya marcado.</li>
+        <li>El cliente elige el día de la visita y le llega la confirmación sola.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="aa-flow" id="flujo" aria-labelledby="flujo-title">
+    <div class="aa-wrap">
+      <div class="aa-flow-head">
+        <div>
+          <p class="aa-kicker">Pruébalo · datos de ejemplo</p>
+          <h2 id="flujo-title">Un proyecto, dos miradas.</h2>
+          <p class="aa-flow-intro">Llena la solicitud como lo haría un cliente y cambia a la vista del estudio para ver qué recibe tu equipo.</p>
+        </div>
+        <div class="aa-flow-tools">
+          <button type="button" class="aa-btn aa-btn-primary aa-btn-sm" data-demo-start>Ver el flujo completo <span aria-hidden="true">▶</span></button>
+          <button type="button" class="aa-btn aa-btn-ghost aa-btn-sm" id="aa-reset">Reiniciar ejemplo</button>
+        </div>
+      </div>
+
+      <ol class="aa-map" id="aa-map" aria-label="Recorrido de la última solicitud">
+        <li data-map="0"><span>01</span>Solicitud guiada</li>
+        <li data-map="1"><span>02</span>Brief automático</li>
+        <li data-map="2"><span>03</span>Entra al pipeline</li>
+        <li data-map="3"><span>04</span>Visita agendada</li>
+        <li data-map="4"><span>05</span>Confirmación enviada</li>
+      </ol>
+
+      <div class="aa-views" role="tablist" aria-label="Elegir vista">
+        <button type="button" role="tab" id="tab-cliente" aria-controls="view-cliente" aria-selected="true" data-view="cliente"><span class="aa-view-icon" aria-hidden="true"><svg viewBox="0 0 20 20"><rect x="5.5" y="2.5" width="9" height="15" rx="2"/><path d="M9 15h2"/></svg></span>Lo que ve tu cliente</button>
+        <button type="button" role="tab" id="tab-estudio" aria-controls="view-estudio" aria-selected="false" tabindex="-1" data-view="estudio"><span class="aa-view-icon" aria-hidden="true"><svg viewBox="0 0 20 20"><rect x="2.5" y="3.5" width="15" height="11" rx="1.5"/><path d="M7 17.5h6M10 14.5v3"/></svg></span>Lo que ve tu estudio</button>
+      </div>
+
+      <div class="aa-stage">
+        <div class="aa-stage-main">
+          <!-- Vista del cliente -->
+          <div class="aa-view aa-client" id="view-cliente" role="tabpanel" aria-labelledby="tab-cliente" tabindex="-1">
+            <div class="aa-request" id="aa-request">
+              <div class="aa-request-top">
+                <span class="aa-request-brand">AURA</span>
+                <span class="aa-request-step" id="aa-step-label">Paso 1 de 6</span>
+              </div>
+              <div class="aa-progress" aria-hidden="true"><i id="aa-progress-bar"></i></div>
+              <form id="aa-form" novalidate>
+                <!-- Paso 1 -->
+                <fieldset class="aa-step" data-step="1">
+                  <legend>¿Qué quieres hacer?</legend>
+                  <p class="aa-step-help">Elige la opción que más se parezca. Luego podrás contarnos más.</p>
+                  <div class="aa-type-grid">
+                    <label class="aa-type"><input type="radio" name="type" value="casa"><span class="aa-type-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M6 24 24 10l18 14"/><path d="M11 21v17h26V21"/><path d="M20 38V28h8v10"/></svg></span><strong>Casa nueva</strong><small>Construir desde cero en tu lote</small></label>
+                    <label class="aa-type"><input type="radio" name="type" value="reforma"><span class="aa-type-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 38V16h20v22"/><path d="M28 24h12v14"/><path d="M4 38h40"/><path d="M14 22h8M14 28h8" stroke-dasharray="2 3"/></svg></span><strong>Reforma</strong><small>Ampliar o rehabilitar una casa o apartamento</small></label>
+                    <label class="aa-type"><input type="radio" name="type" value="interior"><span class="aa-type-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 40V10h32v30"/><path d="M14 34h20M17 34v-7h14v7"/><circle cx="34" cy="17" r="3"/></svg></span><strong>Interiores</strong><small>Distribución, mobiliario, luz y materiales</small></label>
+                    <label class="aa-type"><input type="radio" name="type" value="paisaje"><span class="aa-type-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="18" cy="18" r="9"/><path d="M18 27v13"/><path d="M30 40c0-8 4-14 10-16-1 8-4 13-10 16Z"/><path d="M4 40h40"/></svg></span><strong>Paisaje</strong><small>Jardín, patio o terraza</small></label>
+                  </div>
+                  <p class="aa-error" data-error-for="type" role="alert"></p>
+                </fieldset>
+                <!-- Paso 2 -->
+                <fieldset class="aa-step" data-step="2" hidden>
+                  <legend>Tamaño y lugar</legend>
+                  <p class="aa-step-help">Un número aproximado basta. Lo medimos bien en la visita.</p>
+                  <div class="aa-field">
+                    <label for="aa-area">Área aproximada</label>
+                    <div class="aa-area">
+                      <input type="range" id="aa-area-range" min="20" max="2000" step="10" value="180" aria-label="Área aproximada, deslizador" aria-controls="aa-area">
+                      <div class="aa-area-input"><input type="number" id="aa-area" name="area" min="20" max="5000" step="1" value="180" inputmode="numeric"><span>m²</span></div>
+                    </div>
+                  </div>
+                  <div class="aa-field">
+                    <label for="aa-city">¿Dónde está?</label>
+                    <input type="text" id="aa-city" name="city" maxlength="60" autocomplete="off" list="aa-cities" placeholder="Municipio o barrio">
+                    <datalist id="aa-cities"><option value="Anapoima, Cundinamarca"><option value="La Calera, Cundinamarca"><option value="Chapinero, Bogotá"><option value="El Poblado, Medellín"><option value="Rionegro, Antioquia"><option value="Barichara, Santander"><option value="Ciudad Jardín, Cali"></datalist>
+                    <p class="aa-error" data-error-for="city" role="alert"></p>
+                  </div>
+                  <div class="aa-field" role="radiogroup" aria-labelledby="aa-lot-label">
+                    <span class="aa-label" id="aa-lot-label">¿El lote o inmueble ya es tuyo?</span>
+                    <div class="aa-chips">
+                      <label class="aa-chip"><input type="radio" name="lot" value="si" checked><span>Sí</span></label>
+                      <label class="aa-chip"><input type="radio" name="lot" value="proceso"><span>En proceso de compra</span></label>
+                      <label class="aa-chip"><input type="radio" name="lot" value="no"><span>Aún lo estoy buscando</span></label>
+                    </div>
+                  </div>
+                </fieldset>
+                <!-- Paso 3 -->
+                <fieldset class="aa-step" data-step="3" hidden>
+                  <legend>Presupuesto y plazo</legend>
+                  <p class="aa-step-help">Un rango honesto nos ayuda a proponerte algo posible. Incluye diseño y obra.</p>
+                  <div class="aa-field" role="radiogroup" aria-labelledby="aa-budget-label">
+                    <span class="aa-label" id="aa-budget-label">Presupuesto aproximado</span>
+                    <div class="aa-chips" id="aa-budget-chips"></div>
+                    <p class="aa-error" data-error-for="budget" role="alert"></p>
+                  </div>
+                  <div class="aa-field" role="radiogroup" aria-labelledby="aa-time-label">
+                    <span class="aa-label" id="aa-time-label">¿Para cuándo te gustaría empezar?</span>
+                    <div class="aa-chips" id="aa-time-chips"></div>
+                    <p class="aa-error" data-error-for="timeline" role="alert"></p>
+                  </div>
+                </fieldset>
+                <!-- Paso 4 -->
+                <fieldset class="aa-step" data-step="4" hidden>
+                  <legend>¿Qué estilo te gusta?</legend>
+                  <p class="aa-step-help">Elige hasta dos imágenes. No tiene que ser exacto: es un punto de partida.</p>
+                  <div class="aa-styles" id="aa-styles"></div>
+                  <p class="aa-error" data-error-for="styles" role="alert"></p>
+                </fieldset>
+                <!-- Paso 5 -->
+                <fieldset class="aa-step" data-step="5" hidden>
+                  <legend>Lo que ya tienes</legend>
+                  <p class="aa-step-help">Marca lo que puedas compartir. Lo que falte lo pedimos después, sin prisa.</p>
+                  <div class="aa-docs" id="aa-docs"></div>
+                  <div class="aa-field">
+                    <label for="aa-note">Cuéntanos algo más <span class="aa-optional">(opcional)</span></label>
+                    <textarea id="aa-note" name="note" rows="3" maxlength="300" placeholder="Por ejemplo: somos cuatro, trabajamos desde casa y queremos un patio."></textarea>
+                  </div>
+                </fieldset>
+                <!-- Paso 6 -->
+                <fieldset class="aa-step" data-step="6" hidden>
+                  <legend>¿Cómo te contactamos?</legend>
+                  <p class="aa-step-help">Te escribimos por WhatsApp para confirmar la visita. Nada más.</p>
+                  <div class="aa-field-row">
+                    <div class="aa-field">
+                      <label for="aa-name">Tu nombre</label>
+                      <input type="text" id="aa-name" name="name" maxlength="60" autocomplete="off" placeholder="Nombre y apellido">
+                      <p class="aa-error" data-error-for="name" role="alert"></p>
+                    </div>
+                    <div class="aa-field">
+                      <label for="aa-phone">WhatsApp</label>
+                      <input type="tel" id="aa-phone" name="phone" maxlength="18" autocomplete="off" inputmode="tel" placeholder="300 000 0000">
+                      <p class="aa-error" data-error-for="phone" role="alert"></p>
+                    </div>
+                  </div>
+                  <div class="aa-field">
+                    <label for="aa-email">Correo <span class="aa-optional">(opcional)</span></label>
+                    <input type="email" id="aa-email" name="email" maxlength="80" autocomplete="off" placeholder="nombre@correo.com">
+                  </div>
+                  <p class="aa-privacy">Es un ejemplo: nada sale de este navegador.</p>
+                </fieldset>
+                <div class="aa-form-nav">
+                  <button type="button" class="aa-btn aa-btn-ghost" id="aa-back" hidden><span aria-hidden="true">←</span> Atrás</button>
+                  <button type="submit" class="aa-btn aa-btn-primary" id="aa-next">Continuar <span aria-hidden="true">→</span></button>
+                </div>
+              </form>
+              <!-- Confirmación + elección de visita -->
+              <div class="aa-done" id="aa-done" hidden tabindex="-1">
+                <p class="aa-done-tag">Solicitud <span id="aa-done-id">A-0214</span> recibida</p>
+                <h3 id="aa-done-title">Gracias. Ya tenemos tu proyecto.</h3>
+                <p id="aa-done-text">Elige cuándo podemos visitar el lugar. Es una visita de una hora, sin costo.</p>
+                <div class="aa-visit-card" id="aa-visit-card" hidden></div>
+                <div class="aa-slots" id="aa-client-slots"></div>
+                <div class="aa-done-actions">
+                  <button type="button" class="aa-btn aa-btn-primary" id="aa-client-confirm" disabled>Confirmar visita</button>
+                  <button type="button" class="aa-btn aa-btn-ghost" id="aa-new-request">Enviar otra solicitud</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="aa-phone" aria-label="Mensajes que recibe el cliente (ejemplo)" role="region">
+              <div class="aa-phone-notch" aria-hidden="true"></div>
+              <div class="aa-phone-head">
+                <span class="aa-phone-avatar" aria-hidden="true">A</span>
+                <div><strong>AURA Estudio</strong><small id="aa-phone-sub">Cuenta de empresa</small></div>
+              </div>
+              <div class="aa-phone-tabs" role="group" aria-label="Canal">
+                <button type="button" data-channel="whatsapp" aria-pressed="true">WhatsApp</button>
+                <button type="button" data-channel="email" aria-pressed="false">Correo</button>
+              </div>
+              <div class="aa-phone-body" id="aa-phone-body" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <!-- Vista del estudio -->
+          <div class="aa-view aa-studio" id="view-estudio" role="tabpanel" aria-labelledby="tab-estudio" tabindex="-1" hidden>
+            <div class="aa-metrics" id="aa-metrics"></div>
+            <div class="aa-board-head">
+              <h3>Pipeline de proyectos</h3>
+              <p>Arrastra una tarjeta o usa las flechas para cambiarla de etapa.</p>
+            </div>
+            <div class="aa-board" id="aa-board"></div>
+            <div class="aa-detail" id="aa-detail">
+              <article class="aa-brief" id="aa-brief" aria-live="polite"></article>
+              <aside class="aa-sent" aria-labelledby="aa-sent-title">
+                <h3 id="aa-sent-title">Enviado automáticamente</h3>
+                <div id="aa-sent-list"></div>
+              </aside>
+            </div>
+          </div>
+        </div>
+
+        <aside class="aa-activity" aria-labelledby="aa-activity-title">
+          <div class="aa-activity-head">
+            <h3 id="aa-activity-title">Actividad</h3>
+            <span class="aa-live"><i aria-hidden="true"></i>En vivo</span>
+          </div>
+          <p class="aa-legend"><span class="is-auto">Automático</span><span class="is-team">Tu equipo</span></p>
+          <ol class="aa-timeline" id="aa-timeline"></ol>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="aa-steps aa-wrap" aria-labelledby="aa-steps-title">
+    <div class="aa-steps-head">
+      <p class="aa-kicker">Qué hace por tu estudio</p>
+      <h2 id="aa-steps-title">Cinco tareas que dejas de hacer a mano.</h2>
+    </div>
+    <ol class="aa-steps-list">
+      <li><span>01</span><h3>Preguntar lo básico</h3><p>Tipo de proyecto, metros, lugar, presupuesto y plazo llegan juntos desde el primer mensaje.</p></li>
+      <li><span>02</span><h3>Armar el brief</h3><p>La solicitud se convierte en un documento ordenado, con referencias de estilo y lo que falta marcado.</p></li>
+      <li><span>03</span><h3>Repartir el trabajo</h3><p>Cada proyecto entra al pipeline y se asigna a quien lleva vivienda, interiores o paisaje.</p></li>
+      <li><span>04</span><h3>Cuadrar la visita</h3><p>El cliente elige entre los horarios libres del equipo. Sin cruces ni idas y vueltas.</p></li>
+      <li><span>05</span><h3>Confirmar y recordar</h3><p>Llega la confirmación por WhatsApp y un recordatorio el día anterior, con la dirección y lo que hay que tener a mano.</p></li>
+    </ol>
+    <div class="aa-needs">
+      <h3>Qué se necesita para tenerlo de verdad</h3>
+      <p>El formulario en tu web, una cuenta de WhatsApp Business, tu calendario y una hoja o CRM donde vivan los proyectos. Lo conectamos y lo dejamos funcionando con tus textos.</p>
+    </div>
+  </section>
+
+  <section class="aa-end aa-wrap" aria-labelledby="aa-end-title">
+    <h2 id="aa-end-title">¿Quieres que tu estudio reciba proyectos así?</h2>
+    <div class="aa-end-actions">
+      <a class="aa-btn aa-btn-primary" href="../index.html#contacto">Hablemos de tu estudio <span aria-hidden="true">↗</span></a>
+      <a class="aa-btn aa-btn-ghost" href="arquitectura.html">Ver la web de AURA</a>
+      <a class="aa-btn aa-btn-ghost" href="../index.html#proyectos">Volver a los proyectos</a>
+    </div>
+  </section>
+</main>
+
+<footer class="aa-footer aa-wrap"><span class="aa-wordmark">AURA</span><p>Estudio, personas, proyectos y mensajes ficticios. Datos de ejemplo: no se envían mensajes reales. Un concepto de <span data-brand>Nexo Studio</span>.</p></footer>
+
+<dialog class="aa-dialog" id="aa-visit-dialog" aria-labelledby="aa-visit-title">
+  <div class="aa-dialog-top"><div><p class="aa-kicker" id="aa-visit-kicker">Agendar visita</p><h2 id="aa-visit-title">Elige un horario</h2></div><button type="button" class="aa-dialog-close" data-close aria-label="Cerrar">×</button></div>
+  <p class="aa-dialog-text" id="aa-visit-text"></p>
+  <div class="aa-slots" id="aa-studio-slots"></div>
+  <div class="aa-dialog-actions"><button type="button" class="aa-btn aa-btn-ghost" data-close>Cancelar</button><button type="button" class="aa-btn aa-btn-primary" id="aa-studio-confirm" disabled>Agendar y avisar al cliente</button></div>
+</dialog>
+
+<div class="aa-toast" id="aa-toast" role="status" aria-live="polite"></div>
+<div class="aa-demo-bar" id="aa-demo-bar" hidden><span class="aa-demo-dot" aria-hidden="true"></span><span id="aa-demo-text">Reproduciendo el flujo…</span><button type="button" id="aa-demo-stop">Detener</button></div>
+<noscript><p class="aa-noscript">Activa JavaScript para probar el flujo. <a href="arquitectura.html">Volver a la web de AURA</a>.</p></noscript>
+</body>
+</html>

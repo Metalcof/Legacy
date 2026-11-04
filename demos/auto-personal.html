@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Flujo de clientes de Valeria Ríos, estratega de marca: brief inteligente, agenda, propuesta, firma, anticipo y proyecto en un solo recorrido. Concepto interactivo de Nexo Studio.">
+<meta name="theme-color" content="#1b1534">
+<title>Del brief al proyecto firmado · Valeria Ríos · Concepto de Nexo Studio</title>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="auto-personal.css">
+<script src="../config.js" defer></script>
+<script src="auto-personal.js" defer></script>
+<script src="motion.js" defer></script>
+</head>
+<body class="ap">
+<a class="ap-skip" href="#flujo">Ir a la demostración</a>
+<div class="ap-notice"><p><span class="ap-notice-dot" aria-hidden="true"></span>Datos de ejemplo: no se envían mensajes ni se firman documentos reales.</p><a href="../index.html#proyectos">← Volver a los proyectos de <span data-brand>Nexo Studio</span></a></div>
+
+<div class="ap-shell">
+<header class="ap-top">
+  <a class="ap-wordmark" href="portfolio.html" aria-label="Valeria Ríos, ir a su web">Valeria Ríos<span aria-hidden="true">.</span><small>Flujo de clientes</small></a>
+  <nav aria-label="Enlaces del proyecto">
+    <a href="portfolio.html">Ver la web de Valeria <span aria-hidden="true">↗</span></a>
+    <a class="ap-top-cta" href="#flujo">Probar el flujo</a>
+  </nav>
+</header>
+
+<main id="contenido">
+<section class="ap-hero" aria-labelledby="ap-title">
+  <div class="ap-hero-copy">
+    <span class="ap-eyebrow">Automatización para consultoras y estrategas de marca</span>
+    <h1 id="ap-title">Del primer mensaje al proyecto firmado, <span class="ap-hl">sin perseguir a nadie.</span></h1>
+    <p class="ap-lead"><strong>El problema:</strong> cada cliente nuevo llega por un canal distinto. Un mensaje directo, un audio, un correo de tres líneas. Valeria pasa horas preguntando lo básico, arma cada propuesta desde cero y lleva los cobros de memoria.</p>
+    <p class="ap-lead"><strong>Con este flujo:</strong> el cliente cuenta su proyecto en un brief que se adapta a sus respuestas, agenda su llamada sin intercambiar mensajes, recibe una propuesta lista para firmar y paga el anticipo. Valeria revisa y decide.</p>
+    <div class="ap-hero-actions">
+      <button type="button" class="ap-btn ap-btn-sun" data-demo-toggle><span class="ap-play" aria-hidden="true"></span><span data-demo-label>Ver el flujo completo</span></button>
+      <a class="ap-btn ap-btn-line" href="#flujo">Probarlo paso a paso <span aria-hidden="true">↓</span></a>
+    </div>
+  </div>
+  <aside class="ap-compare" aria-label="Antes y después del flujo">
+    <div class="ap-compare-head"><span>Antes</span><span>Con el flujo</span></div>
+    <ul>
+      <li><s>Preguntas por chat durante días</s><b>Un brief con todo lo necesario</b></li>
+      <li><s>«¿Qué día te queda bien?» ×5</s><b>El cliente elige horario solo</b></li>
+      <li><s>Propuesta en blanco cada vez</s><b>Propuesta armada con tu paquete</b></li>
+      <li><s>PDF por correo y esperar</s><b>Firma en línea, con aviso</b></li>
+      <li><s>Recordar quién pagó</s><b>Factura de anticipo automática</b></li>
+      <li><s>Feedback perdido en mensajes</s><b>Rondas de ajustes con registro</b></li>
+    </ul>
+    <p class="ap-compare-note">Valeria decide en tres momentos: después de la llamada, al enviar la propuesta y al compartir cada avance.</p>
+  </aside>
+</section>
+
+<section class="ap-flow" id="flujo" aria-labelledby="ap-flow-title">
+  <div class="ap-flow-head">
+    <div>
+      <span class="ap-eyebrow">Pruébalo en vivo</span>
+      <h2 id="ap-flow-title">Un cliente, de principio a fin.</h2>
+      <p>Llena el brief como si fueras un cliente, o mira la demostración completa. Cambia de vista en cualquier momento para ver qué pasa del otro lado.</p>
+    </div>
+    <div class="ap-controls">
+      <div class="ap-switch" role="group" aria-label="Cambiar de vista">
+        <button type="button" data-view="client" aria-pressed="true"><span class="ap-switch-icon" aria-hidden="true">◐</span>Lo que ve tu cliente</button>
+        <button type="button" data-view="valeria" aria-pressed="false"><span class="ap-switch-icon" aria-hidden="true">◑</span>Lo que ve Valeria</button>
+      </div>
+      <div class="ap-control-row">
+        <button type="button" class="ap-btn ap-btn-ink" data-demo-toggle><span class="ap-play" aria-hidden="true"></span><span data-demo-label>Ver el flujo completo</span></button>
+        <button type="button" class="ap-btn ap-btn-ghost" id="ap-reset">Reiniciar</button>
+      </div>
+    </div>
+  </div>
+
+  <ol class="ap-stepper" id="ap-stepper" aria-label="Etapas del flujo"></ol>
+  <p class="ap-step-caption" id="ap-step-caption" aria-hidden="true"></p>
+  <p class="ap-demo-bar" id="ap-demo-bar" hidden><span class="ap-demo-dot" aria-hidden="true"></span><span id="ap-demo-text">Demostración en curso</span></p>
+
+  <div class="ap-stage">
+    <div class="ap-screen" id="ap-screen" aria-live="off"></div>
+    <aside class="ap-side" aria-label="Actividad y métricas">
+      <div class="ap-metrics" id="ap-metrics" hidden></div>
+      <section class="ap-log-card" aria-labelledby="ap-log-title">
+        <header><h3 id="ap-log-title">Actividad automática</h3><span class="ap-log-legend"><span class="ap-dot who-client"></span>Cliente <span class="ap-dot who-auto"></span>Automático <span class="ap-dot who-valeria"></span>Valeria</span></header>
+        <ol class="ap-log" id="ap-log" role="log" aria-live="polite" aria-relevant="additions"></ol>
+      </section>
+    </aside>
+  </div>
+  <p class="ap-sr" id="ap-announce" role="status" aria-live="polite"></p>
+</section>
+
+<section class="ap-how" aria-labelledby="ap-how-title">
+  <div class="ap-section-head">
+    <span class="ap-eyebrow">Qué hace sola y qué decide Valeria</span>
+    <h2 id="ap-how-title">Siete pasos. <span class="ap-hl">Tres decisiones.</span></h2>
+    <p>La automatización se encarga de lo repetitivo: preguntar, agendar, recordar, facturar. El criterio sigue siendo de Valeria.</p>
+  </div>
+  <ol class="ap-how-list">
+    <li><span class="ap-how-num">01</span><h3>Brief inteligente</h3><p class="ap-how-auto">Pregunta objetivo, presupuesto, plazo y referencias, y sugiere un paquete según las respuestas.</p></li>
+    <li><span class="ap-how-num">02</span><h3>Calificación y respuesta</h3><p class="ap-how-auto">Puntúa el encaje del proyecto y responde en minutos con un enlace para agendar.</p></li>
+    <li class="is-decision"><span class="ap-how-num">03</span><h3>Llamada de descubrimiento</h3><p class="ap-how-auto">Confirma el horario y envía recordatorios.</p><p class="ap-how-you"><b>Valeria decide</b> si hay encaje y qué alcance proponer.</p></li>
+    <li class="is-decision"><span class="ap-how-num">04</span><h3>Propuesta</h3><p class="ap-how-auto">Arma el documento con alcance, cronograma y precio a partir del paquete.</p><p class="ap-how-you"><b>Valeria ajusta</b> y la envía cuando está lista.</p></li>
+    <li><span class="ap-how-num">05</span><h3>Firma en línea</h3><p class="ap-how-auto">Avisa cuando el cliente abre y firma, y recuerda si pasan tres días sin respuesta.</p></li>
+    <li><span class="ap-how-num">06</span><h3>Factura de anticipo</h3><p class="ap-how-auto">Se genera al firmar, con el 50 % y el IVA calculados. El pago queda registrado.</p></li>
+    <li class="is-decision"><span class="ap-how-num">07</span><h3>Proyecto y rondas</h3><p class="ap-how-auto">Crea el tablero de cuatro fases y registra cada ronda de ajustes.</p><p class="ap-how-you"><b>Valeria comparte</b> cada avance cuando lo considera listo.</p></li>
+  </ol>
+</section>
+
+<section class="ap-cta" aria-labelledby="ap-cta-title">
+  <div>
+    <span class="ap-eyebrow">¿Trabajas por proyectos?</span>
+    <h2 id="ap-cta-title">Este flujo se adapta a tus paquetes, tus tiempos y tu forma de cobrar.</h2>
+    <p>Es un concepto de <span data-brand>Nexo Studio</span>. En un proyecto real se conecta con tu correo, tu calendario y tu herramienta de firma y pagos.</p>
+  </div>
+  <div class="ap-cta-actions">
+    <a class="ap-btn ap-btn-sun" data-studio-contact href="../index.html#contacto" target="_blank" rel="noopener noreferrer">Hablar de mi negocio <span aria-hidden="true">↗</span></a>
+    <a class="ap-btn ap-btn-line-light" href="portfolio.html">Volver a la web de Valeria</a>
+  </div>
+</section>
+</main>
+
+<footer class="ap-footer"><p>Valeria Ríos es una marca ficticia. Nombres, precios, horarios y métricas son datos de ejemplo guardados solo en este navegador.</p><a href="../index.html#proyectos">Más proyectos de <span data-brand>Nexo Studio</span> ↗</a></footer>
+</div>
+</body>
+</html>
