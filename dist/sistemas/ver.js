@@ -1,8 +1,9 @@
 // Reproductor de presentaciones: arma las diapositivas desde datos.js y las anima por tiempo.
 (function () {
   const I = window.NexoIcono;
+  const M = window.NexoMock;
+  const { esc, tono, pill, iconoDe } = M;
   const LISTA = window.NEXO_SISTEMAS || [];
-  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const params = new URLSearchParams(location.search);
@@ -14,170 +15,113 @@
   document.title = S.nombre + ' · Sistemas que construimos';
   document.documentElement.style.setProperty('--c', S.color || '#3b2bf5');
 
-  // Clasifica un estado para darle color
-  const tono = t => {
-    const s = String(t).toLowerCase();
-    if (/(rechaz|vencid|inactiv|bajo|agotad|anulad|cancel|cr[ií]tic|baja\b|falla|abiert|urgente|no conforme|perdid)/.test(s)) return 'mal';
-    if (/(cotiz|producci|pendient|revisi|proceso|sin inici|espera|program|borrador|asignad|abierta|nuev|curso|parcial|por )/.test(s)) return 'esp';
-    if (/(finaliz|respond|valid|despach|activ|autoriz|aprob|entreg|cumpl|pagad|cerrad|liber|ok|listo|normal|complet|resuelt|firmad|vigente|disponible|enviad|ganad|conforme|al d[ií]a)/.test(s)) return 'ok';
-    return '';
-  };
-  const pill = t => `<span class="pill ${tono(t)}">${esc(t)}</span>`;
-
   // Cada pieza animada lleva data-at (segundos desde que entra la diapositiva) y, opcional, data-until.
   const b = (at, extra = '', until) => `class="b ${extra}" data-at="${at}"${until != null ? ` data-until="${until}"` : ''}`;
+  const corto = (t, n = 4) => String(t || '').split(/\s+/).slice(0, n).join(' ');
+  const funciones = (S.funciones || []).slice(0, 9);
+  const F = S.flujo || { pasos: [], actores: [], estados: [] };
 
-  // ---------- Diapositivas ----------
   const slides = [];
 
-  // 1. Portada
-  const f3 = (S.funciones || []).slice(0, 3);
-  slides.push({ dur: 7.5, html: `
+  // 1. Portada: nombre grande y la pantalla del sistema en perspectiva
+  slides.push({ dur: 7, html: `
     <div class="in cover">
       <div>
         <span ${b(.2, 'kick')}>${esc(S.familia)} · ${esc(S.area)}</span>
-        <h1 ${b(.6, 'h1')}>${esc(S.portada.titulo)}</h1>
-        <p ${b(1.6, 'lead')}>${esc(S.portada.bajada)}</p>
-        <p ${b(2.2, 'cover-place')}>Estufas Ecoeficientes Metalcof · Neiva, Huila</p>
+        <h1 ${b(.5, 'h1' + (S.nombre.length > 16 ? ' largo' : ''))}>${esc(S.nombre)}</h1>
+        <p ${b(1.3, 'lead')}>${esc(S.portada.bajada)}</p>
       </div>
-      <div ${b(.4, 'orb z')}>
-        <span class="glow"></span>
-        <span class="tile">${I(S.icono)}</span>
-        ${f3.map((f, i) => `<span ${b(2.8 + i * .6, 'sat s' + (i + 1))}>${I('check')}${esc(f.t)}</span>`).join('')}
+      <div class="cover-vis">
+        <span class="halo"></span>
+        <div ${b(.6, 'tilt')}>${window.NexoArte(S)}</div>
+        ${funciones.slice(0, 3).map((f, i) => `<span ${b(2.2 + i * .5, 'sat s' + (i + 1))}>${I(iconoDe(f.t, S.icono))}${esc(corto(f.t))}</span>`).join('')}
       </div>
     </div>` });
 
-  // 2. Qué es y qué hace
-  const fx = (S.funciones || []).slice(0, 9);
-  slides.push({ dur: 4 + fx.length * .55, html: `
+  // 2. Qué hace: mosaico de íconos, sin párrafos
+  slides.push({ dur: 3 + funciones.length * .4, html: `
     <div class="in">
-      <div class="fx-head">
-        <div>
-          <span ${b(.1, 'kick')}>Qué es</span>
-          <h2 ${b(.3, 'h2')} style="margin-top:14px">${esc(S.nombre)}</h2>
-          <p ${b(.8, 'lead')}>${esc(S.resumen)}</p>
-        </div>
-      </div>
-      <ul class="fx-grid">${fx.map((f, i) => `<li ${b(1.4 + i * .45, 'fx')}><span class="num">${String(i + 1).padStart(2, '0')}</span><div><strong>${esc(f.t)}</strong><span>${esc(f.d)}</span></div></li>`).join('')}</ul>
+      <span ${b(.1, 'kick')}>Qué hace</span>
+      <ul class="bento">${funciones.map((f, i) => `<li ${b(.5 + i * .3, 'z' + (i === 0 ? ' big' : ''))}><span class="bi">${I(iconoDe(f.t + ' ' + f.d, S.icono))}</span><strong>${esc(f.t)}</strong></li>`).join('')}</ul>
     </div>` });
 
-  // 3. Pantalla de ejemplo
-  const P = S.pantalla || {};
-  let cuerpo = '';
-  if (P.tipo === 'tarjetas') {
-    cuerpo = `<ul class="tarj">${(P.items || []).slice(0, 9).map((it, i) => `<li ${b(1.6 + i * .22)}><span class="th">${I(S.icono)}</span><strong>${esc(it.t)}</strong><small>${esc(it.s)}</small>${pill(it.estado)}</li>`).join('')}</ul>`;
-  } else if (P.tipo === 'kanban') {
-    let n = 0;
-    cuerpo = `<ul class="kan">${(P.carriles || []).slice(0, 4).map(c => `<li><h5>${esc(c.t)}<span>${(c.items || []).length}</span></h5>${(c.items || []).slice(0, 3).map(it => `<div ${b(1.6 + (n++) * .25, 'k')}><i></i><strong>${esc(it.t)}</strong><small>${esc(it.s)}</small></div>`).join('')}</li>`).join('')}</ul>`;
-  } else if (P.tipo === 'panel') {
-    cuerpo = `<ul class="kpis">${(P.kpis || []).slice(0, 4).map((k, i) => `<li ${b(1.5 + i * .25)}><b data-count="${esc(k.v)}" data-at="${1.5 + i * .25}">${esc(k.v)}</b><small>${esc(k.t)}</small></li>`).join('')}</ul>
-      <ul class="barras">${(P.barras || []).slice(0, 6).map((r, i) => `<li ${b(2.6 + i * .3)} style="--v:${Math.max(0, Math.min(100, +r.v || 0))}"><span>${esc(r.t)}</span><i><b></b></i><em>${esc(r.v)}%</em></li>`).join('')}</ul>`;
-  } else {
-    // Máximo 6 columnas: las primeras y las últimas (la última es el estado)
-    const n = (P.columnas || []).length;
-    const keep = n <= 6 ? [...Array(n).keys()] : [0, 1, 2, n - 3, n - 2, n - 1];
-    const cols = keep.map(i => P.columnas[i]);
-    const filas = (P.filas || []).slice(0, 8).map(f => keep.map(i => f[i] == null ? '' : f[i]));
-    cuerpo = `<table class="tbl"><thead><tr>${cols.map(c => `<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${filas.map((f, i) => `<tr ${b(1.6 + i * .2, i === 1 ? 'pk' : '')}>${f.map((c, j) => `<td>${j === f.length - 1 ? pill(c) : esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
-  }
-  slides.push({ dur: 10, html: `
-    <div class="in mock-wrap">
-      <div>
-        <span ${b(.1, 'kick')}>Así se ve</span>
-        <h2 ${b(.3, 'h2')} style="margin-top:14px">${esc(P.ruta ? P.ruta.split('/').pop().trim() : S.nombre)}, todo en una pantalla</h2>
-        <p ${b(.8, 'lead')}>Cada área entra con su usuario y ve solo lo que le corresponde. Los datos se guardan solos y quedan sincronizados.</p>
-        <p ${b(1.2, 'foot-note')}>Pantalla de ejemplo, con datos ficticios.</p>
-      </div>
-      <div ${b(.5, 'win z')}>
-        <div class="win-bar"><i></i><i></i><i></i><span>${esc(S.familia)} · ${esc(P.app || S.nombre)}</span></div>
-        <div class="win-body">
-          <aside class="side"><div class="side-app">${I(S.icono)}${esc(P.app || S.nombre)}</div>
-            ${(P.menu || []).slice(0, 4).map(g => `<small>${esc(g.g)}</small><ul>${(g.i || []).slice(0, 4).map(it => `<li class="${it === P.activo ? 'act' : ''}">${esc(it)}</li>`).join('')}</ul>`).join('')}
-          </aside>
-          <div class="main">
-            <div class="main-top"><div class="ruta">${esc(P.ruta || '')}<b>${esc(P.activo || P.app || '')}</b></div>
-              <div class="acc">${(P.acciones || []).slice(0, 3).map(a => `<span>${esc(a)}</span>`).join('')}</div></div>
-            ${cuerpo}
-            <p ${b(1.4, 'sync')} style="margin-top:10px">Sincronizado</p>
-          </div>
-        </div>
-        <span class="ficticio">Datos ficticios</span>
+  // 3. Pantalla de ejemplo con etiquetas encima
+  const notas = funciones.slice(0, 3);
+  slides.push({ dur: 9, html: `
+    <div class="in pantalla">
+      <span ${b(.1, 'kick')}>Así se ve · datos ficticios</span>
+      <div class="pant-wrap">
+        ${M.win(S, { anim: true, at: .3, t0: 1, clase: 'z' })}
+        ${notas.map((f, i) => `<span ${b(3.6 + i * 1, 'nota n' + (i + 1))}><i></i>${esc(corto(f.t))}</span>`).join('')}
+        <svg class="cursor" data-at="5.2" style="--x:62%;--y:44%" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 2l16 9-7 2-3 7z" fill="#fff" stroke="#111" stroke-width="1.5" stroke-linejoin="round"/></svg>
       </div>
     </div>` });
 
-  // 4. Flujo paso a paso
-  const F = S.flujo || { pasos: [], actores: [], estados: [] };
+  // 4. Paso a paso: íconos grandes y un punto que recorre el camino
   const pasos = (F.pasos || []).slice(0, 4);
-  slides.push({ dur: 10, html: `
+  const icPaso = ['documento', 'calendario', 'mensaje', 'firma'];
+  slides.push({ dur: 8.5, html: `
     <div class="in flujo">
       <span ${b(.1, 'kick')}>Paso a paso</span>
-      <h2 ${b(.3, 'h2')} style="margin-top:14px">${esc(F.titulo)}</h2>
-      <ol class="pasos"><span class="linea" data-at="1.4"></span>
-        ${pasos.map((p, i) => `<li ${b(1 + i * 1.4, 'paso')}><span class="dot">${I(I.pasos[i] || 'check')}</span><strong>${esc(p.t)}</strong><span>${esc(p.d)}</span></li>`).join('')}
+      <h2 ${b(.3, 'h2')}>${esc(F.titulo)}</h2>
+      <ol class="pasos"><span class="linea" data-at="1"></span><span class="viaja" data-at="1"></span>
+        ${pasos.map((p, i) => `<li ${b(.8 + i * 1.4, 'paso')}><span class="dot">${I(iconoDe(p.t + ' ' + p.d, icPaso[i]))}<b>${i + 1}</b></span><strong>${esc(p.t)}</strong></li>`).join('')}
       </ol>
     </div>` });
 
-  // 5. Quién interviene y el aviso automático
+  // 5. El aviso llega al celular
   const A = S.aviso;
   const act = (F.actores || []).slice(0, 4);
   const est = (F.estados || []).slice(0, 3);
-  const tEst = [1.2, 3.4, 5.6];
-  slides.push({ dur: 10, html: `
+  const tEst = [1, 3.2, 5.4];
+  const pantallaCel = A ? `
+      <div ${b(1.6, 'noti')}><span class="av">${I(S.icono)}</span><div><small>${esc(A.de)} · ahora</small><strong>${esc(A.asunto)}</strong></div></div>
+      <div ${b(3, 'cel-mail')}><span class="tag">${esc(A.etiqueta)}</span><h4>${esc(A.asunto)}</h4>
+        <dl>${(A.campos || []).slice(0, 3).map(c => `<div><dt>${esc(c[0])}</dt><dd>${esc(c[1])}</dd></div>`).join('')}</dl>
+        ${A.boton ? `<span class="btn">${esc(A.boton)}</span>` : ''}</div>`
+    : `<div ${b(1.4, 'cel-mail')}><span class="tag">HISTORIAL</span><h4>${esc(S.nombre)}</h4>
+        <ul class="hist">${est.map((e, i) => `<li ${b(tEst[i] + .3)}><span>${['08:15', '10:40', '15:05'][i]}</span>${pill(e)}</li>`).join('')}</ul></div>`;
+  slides.push({ dur: 9, html: `
     <div class="in aviso">
       <div>
         <span ${b(.1, 'kick')}>Cada paso queda avisado</span>
-        <h2 ${b(.3, 'h2')} style="margin-top:14px">Nadie tiene que preguntar en qué va</h2>
-        <div class="actores">${act.map((a, i) => `<div ${b(.8 + i * 1.6, 'actor')}><span class="ck">${I('check')}</span><div><strong>${esc(a.t)}</strong><span>${esc(a.d)}</span></div></div>`).join('')}</div>
-        <p class="estado" ${est.length ? '' : 'hidden'}>Estado <span class="slot">${est.map((e, i) => `<span class="pill ${tono(e)}" data-at="${tEst[i]}"${i < est.length - 1 ? ` data-until="${tEst[i + 1]}"` : ''}>${esc(e)}</span>`).join('')}</span></p>
+        <div class="actores">${act.map((x, i) => `<div ${b(.5 + i * 1.4, 'actor')}><span class="ck">${I('check')}</span><strong>${esc(x.t)}</strong></div>`).join('')}</div>
+        <p class="estado" ${est.length ? '' : 'hidden'}><span class="slot">${est.map((e, i) => `<span class="pill ${tono(e)}" data-at="${tEst[i]}"${i < est.length - 1 ? ` data-until="${tEst[i + 1]}"` : ''}>${esc(e)}</span>`).join('')}</span></p>
       </div>
-      ${A ? `<div>
-        <div ${b(2, 'mail r')}>
-          <div class="mail-h"><span class="av">${I(S.icono)}</span><div>De <b>${esc(A.de)}</b><br>Para <b>${esc(A.para)}</b></div><span class="nuevo">Nuevo</span></div>
-          <div class="mail-b"><span class="tag">${esc(A.etiqueta)}</span><h4>${esc(A.asunto)}</h4><p>${esc(A.cuerpo)}</p>
-            <dl>${(A.campos || []).slice(0, 4).map(c => `<div><dt>${esc(c[0])}</dt><dd>${esc(c[1])}</dd></div>`).join('')}</dl>
-            ${A.boton ? `<span class="btn">${esc(A.boton)}</span>` : ''}</div>
-        </div>
-        <p ${b(4, 'toast')}>${I('check')}Aviso enviado automáticamente</p>
-      </div>` : `<div ${b(1.5, 'mail r')}><div class="mail-h"><span class="av">${I('reloj')}</span><div><b>Historial</b><br>${esc(S.nombre)}</div><span class="nuevo">En vivo</span></div>
-        <div class="mail-b"><span class="tag">QUEDA REGISTRADO</span><h4>Cada cambio con fecha y responsable</h4>
-        <dl>${est.map((e, i) => `<div ${b(tEst[i] + .2)}><dt>${['08:15', '10:40', '15:05'][i]}</dt><dd>${pill(e)}</dd></div>`).join('')}<div ${b(6.4)}><dt>Responsable</dt><dd>${esc((act[act.length - 2] || act[0] || {}).t || 'Equipo')}</dd></div></dl></div></div>`}
+      <div ${b(.8, 'cel r')}><span class="cel-isla"></span><p class="cel-hora">9:41</p>${pantallaCel}</div>
     </div>` });
 
-  // 6. Antes y ahora
+  // 6. Antes y ahora, en imágenes
   const ahora = (S.ahora || []).slice(0, 6);
-  const icAhora = ['check', 'firma', 'reloj', 'personas', 'mensaje', 'documento'];
-  slides.push({ dur: 4 + ahora.length * .6, html: `
+  slides.push({ dur: 8, html: `
     <div class="in">
       <span ${b(.1, 'kick')}>Antes y ahora</span>
-      <h2 ${b(.3, 'h2')} style="margin-top:14px">Lo que cambió en el día a día</h2>
       <div class="aa">
-        <div ${b(.8, 'antes')}><small>Antes</small><span class="papel">${I('papel')}</span><strong>${esc(S.antes.titulo)}</strong><p>${esc(S.antes.d)}</p><span class="sello" data-at="2">Quedó atrás</span></div>
-        <ul class="ahora"><li class="ahora-t b" data-at="2.4" style="background:none;padding:0">Ahora</li>
-          ${ahora.map((a, i) => `<li ${b(2.8 + i * .4)}>${I(icAhora[i] || 'check')}<div><strong>${esc(a.t)}</strong><span>${esc(a.d)}</span></div></li>`).join('')}
-        </ul>
+        <div ${b(.4, 'antes')}>
+          <div class="hoja"><div class="hoja-bar"><i></i><i></i><i></i></div>
+            ${Array.from({ length: 9 }, (_, r) => `<div class="fila">${Array.from({ length: 5 }, (_, c) => `<span style="--w:${30 + ((r * 7 + c * 13) % 60)}%"${(r * 5 + c) % 11 === 3 ? ' class="err"' : ''}></span>`).join('')}</div>`).join('')}
+            <span class="post">¿Y esto quién lo tiene?</span>
+          </div>
+          <p class="antes-t">${esc(S.antes.titulo)}</p>
+          <span class="sello" data-at="1.8">Quedó atrás</span>
+        </div>
+        <span ${b(2.2, 'flecha')}>${I('flecha')}</span>
+        <div class="ahora">
+          <div ${b(2.4, 'z')}>${M.mini(S)}</div>
+          <ul>${ahora.map((x, i) => `<li ${b(3 + i * .35)}>${I(iconoDe(x.t + ' ' + x.d, 'check'))}${esc(x.t)}</li>`).join('')}</ul>
+        </div>
       </div>
     </div>` });
 
-  // 7. Hecho a la medida
+  // 7. Cierre
   const tech = String(S.tech || '').split('·').map(t => t.trim()).filter(Boolean);
-  slides.push({ dur: 7, html: `
-    <div class="in merc">
-      <span ${b(.1, 'kick')}>Hecho a la medida</span>
-      <h2 ${b(.3, 'h2')} style="margin-top:14px">Un sistema propio, pensado para esta operación</h2>
-      <div class="merc-box">
-        <div ${b(1.2)}><small>En el mercado se parece a</small><strong>${esc(S.mercado || 'Software genérico por suscripción')}</strong><p>Herramientas genéricas que se pagan cada mes, por usuario, y que hay que adaptar al negocio.</p></div>
-        <div ${b(2)}><small>Lo que se construyó</small><strong>${esc(S.nombre)}</strong><p>Con los formatos, pasos y nombres de la empresa. Crece con cada necesidad nueva.</p></div>
-      </div>
-      <div class="tech">${tech.map((t, i) => `<span ${b(3 + i * .2)}>${esc(t)}</span>`).join('')}</div>
-    </div>` });
-
-  // 8. Cierre
   slides.push({ dur: 9, fin: true, html: `
     <div class="in fin">
       <span ${b(.2, 'tile z')}>${I(S.icono)}</span>
-      <h2 ${b(.6, 'h1')}>${esc(S.cierre || S.portada.titulo)}</h2>
-      <p ${b(1.4, 'lead')}>${esc(S.nombre)} · ${esc(S.familia)} · Estufas Ecoeficientes Metalcof</p>
-      <div ${b(2.2, 'fin-acc')}>
+      <h2 ${b(.5, 'h1' + (S.nombre.length > 16 ? ' largo' : ''))}>${esc(S.nombre)}</h2>
+      <p ${b(1.1, 'lead')}>${esc(S.cierre || S.portada.bajada)}</p>
+      <div class="tech">${tech.map((t, i) => `<span ${b(1.6 + i * .15)}>${esc(t)}</span>`).join('')}</div>
+      <div ${b(2.4, 'fin-acc')}>
         <a class="pri" href="?p=${encodeURIComponent(sig.key)}">Siguiente: ${esc(sig.nombre)} ${I('flecha')}</a>
         <a href="./">Ver todos los sistemas</a>
         <a href="../index.html#contacto">Quiero uno para mi negocio</a>
@@ -200,6 +144,7 @@
         <button type="button" data-a="full" aria-label="Pantalla completa">${I('pantalla')}</button>
       </div>
     </div>`;
+  M.ajustar(deck);
 
   const secs = [...deck.querySelectorAll('.slide')];
   const barras = [...deck.querySelectorAll('.bars button')];
@@ -220,23 +165,21 @@
         const m = String(p.count).match(/^(\D*)(\d+)(.*)$/);
         if (m) {
           const k = Math.min(1, Math.max(0, (t - p.at) / 1.4));
-          const v = Math.round(+m[2] * (1 - Math.pow(1 - k, 3)));
-          p.el.textContent = m[1] + v + m[3];
+          p.el.textContent = m[1] + Math.round(+m[2] * (1 - Math.pow(1 - k, 3))) + m[3];
         }
       }
     });
     barras.forEach((bt, i) => {
-      const bb = bt.querySelector('b');
-      bb.style.transform = i < cur ? 'scaleX(1)' : i > cur ? 'scaleX(0)' : `scaleX(${Math.min(1, t / dur)})`;
+      bt.querySelector('b').style.transform = i < cur ? 'scaleX(1)' : i > cur ? 'scaleX(0)' : `scaleX(${Math.min(1, t / dur)})`;
     });
   };
 
-  const ir = (n, alFinal) => {
+  const ir = n => {
     cur = Math.max(0, Math.min(slides.length - 1, n));
-    secs.forEach((s, i) => { s.classList.toggle('act', i === cur); s.setAttribute('aria-hidden', i === cur ? 'false' : 'true'); if (i !== cur) s.inert = true; else s.inert = false; });
+    secs.forEach((s, i) => { s.classList.toggle('act', i === cur); s.setAttribute('aria-hidden', i === cur ? 'false' : 'true'); s.inert = i !== cur; });
     secs[cur].scrollTop = 0;
-    // Si está en pausa (o sin movimiento) la diapositiva se muestra completa
-    t = alFinal || !playing ? slides[cur].dur : 0;
+    // En pausa (o sin movimiento) la diapositiva se muestra completa
+    t = playing ? 0 : slides[cur].dur;
     pintar();
   };
 
@@ -253,7 +196,7 @@
     if (playing && !document.hidden) {
       t += dt;
       if (t >= slides[cur].dur) {
-        if (cur < slides.length - 1) { ir(cur + 1); }
+        if (cur < slides.length - 1) ir(cur + 1);
         else { t = slides[cur].dur; setPlay(false); }
       }
       pintar();
@@ -261,23 +204,23 @@
     requestAnimationFrame(loop);
   };
 
-  deck.addEventListener('click', e => {
-    const a = e.target.closest('[data-a]');
-    const bar = e.target.closest('.bars button');
-    if (bar) return ir(barras.indexOf(bar));
-    if (!a) return;
-    const acc = a.dataset.a;
-    if (acc === 'prev') ir(cur - 1);
-    if (acc === 'next') ir(cur + 1);
-    if (acc === 'play') { if (!playing && cur === slides.length - 1 && t >= slides[cur].dur) { setPlay(true); ir(0); } else setPlay(!playing); }
-    if (acc === 'rep') { setPlay(true); ir(0); }
-    if (acc === 'full') pantallaCompleta();
-  });
-
   const pantallaCompleta = () => {
     if (document.fullscreenElement) document.exitFullscreen && document.exitFullscreen();
     else document.documentElement.requestFullscreen && document.documentElement.requestFullscreen().catch(() => {});
   };
+
+  deck.addEventListener('click', e => {
+    const bar = e.target.closest('.bars button');
+    if (bar) return ir(barras.indexOf(bar));
+    const a = e.target.closest('[data-a]');
+    if (!a) return;
+    const acc = a.dataset.a;
+    if (acc === 'prev') ir(cur - 1);
+    if (acc === 'next') ir(cur + 1);
+    if (acc === 'play') { if (!playing && cur === slides.length - 1) { setPlay(true); ir(0); } else setPlay(!playing); }
+    if (acc === 'rep') { setPlay(true); ir(0); }
+    if (acc === 'full') pantallaCompleta();
+  });
 
   addEventListener('keydown', e => {
     if (e.altKey || e.ctrlKey || e.metaKey) return;
@@ -305,5 +248,5 @@
   requestAnimationFrame(loop);
 
   // Para pruebas: fija diapositiva y segundo
-  window.NexoDeck = { ir: (n, seg) => { setPlay(false); cur = n; ir(n); t = seg == null ? slides[n].dur : seg; pintar(); }, total: slides.length };
+  window.NexoDeck = { ir: (n, seg) => { setPlay(false); ir(n); t = seg == null ? slides[n].dur : seg; pintar(); }, total: slides.length };
 })();

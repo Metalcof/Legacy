@@ -1,0 +1,15 @@
+{
+  "$schema": "https://unpkg.com/wrangler@4.158.0/config-schema.json",
+  "name": "cromathicstudio",
+  "compatibility_date": "2026-11-04",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "dist"
+  },
+  "routes": [
+    { "pattern": "cromathicstudio.com", "custom_domain": true },
+    { "pattern": "www.cromathicstudio.com", "custom_domain": true }
+  ]
+}

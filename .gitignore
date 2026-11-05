@@ -12,3 +12,6 @@ assets/*.png
 *.xls
 *.csv
 propuestas/
+
+# Archivos locales de Cloudflare Wrangler
+.wrangler/

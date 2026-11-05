@@ -22,13 +22,14 @@
       <h2>${esc(g.t)} <small>${items.length} ${items.length === 1 ? 'sistema' : 'sistemas'}</small></h2>
       <p>${esc(g.d)}</p>
       <div class="cat-grid">${items.map(s => `
-        <a class="card" href="ver.html?p=${encodeURIComponent(s.key)}" style="--c:${esc(s.color)}">
-          <div class="card-top"><span class="tile">${I(s.icono)}</span><div><h3>${esc(s.nombre)}</h3><p class="card-meta">${esc(s.area)}</p></div></div>
-          <p>${esc(s.resumen)}</p>
-          <span class="card-cta">${I('play')}Ver presentación</span>
+        <a class="card" href="ver.html?p=${encodeURIComponent(s.key)}" style="--c:${esc(s.color)}" aria-label="Ver la presentación de ${esc(s.nombre)}">
+          <div class="thumb">${window.NexoArte(s)}<span class="play">${I('play')}</span></div>
+          <div class="card-b"><span class="tile">${I(s.icono)}</span><div><h3>${esc(s.nombre)}</h3><p class="card-meta">${esc(s.area)}</p></div></div>
         </a>`).join('')}</div>
     </section>`;
   }).join('');
+
+  window.NexoMock.ajustar(cont);
 
   const presentes = GRUPOS.filter(g => LISTA.some(s => grupoDe(s) === g.k));
   filtros.innerHTML = `<button type="button" aria-pressed="true" data-g="todos">Todos<span>${LISTA.length}</span></button>` +
