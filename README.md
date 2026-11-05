@@ -63,7 +63,7 @@ Para cambiar el acento, modifica las variables `--acento…`. Los botones usan t
 
 Las tarjetas de interfaz (agenda, pedido, citas del día) son maquetas HTML con datos de ejemplo, marcadas como tales. No se conectan a ningún sistema. Si cambias una foto, revisa que la tarjeta no tape lo importante.
 
-La tipografía es Archivo variable (`assets/archivo-var.woff2`), con los ejes de peso y de ancho. Si cambias de fuente, conserva la declaración `font-stretch` del `@font-face`.
+La tipografía de la portada es la de Sigedo: **Sora** para títulos, botones y navegación, **Plus Jakarta Sans** para el texto y **Space Grotesk** para las cifras. Son archivos variables en `assets/fonts/` (con su licencia OFL al lado), cargados desde `rediseno.css`. Archivo (`assets/archivo-var.woff2`) se conserva porque las pantallas de ejemplo de Sistemas y alguna escena de marca ficticia todavía lo usan.
 
 ### Manual de marca (versión 2.0, noviembre de 2026)
 
@@ -72,8 +72,17 @@ La web aplica el manual de marca de Cromathic Studio. Colores, tipografía y log
 - **Logo.** Los archivos están en `assets/brand/` y se usan tal cual, sin reescribirlos con texto ni aplicarles sombras o degradados: `cromathic-isologo-negativo.svg` (blanco, sobre Noche o Índigo) para la cabecera, el pie, el folleto y las propuestas; `cromathic-isologo-color.svg` (Grafito, sobre claro) para la página de Sistemas. El resto de versiones (mono Grafito, blanco e Índigo, negativo sobre Índigo y el ícono de la aplicación) quedan listas para usar. Tamaño mínimo del isologo: 120 px de ancho.
 - **Favicon e íconos.** `assets/favicon.svg` y `assets/favicon.ico`; el ícono de Apple, los de 192 y 512 px y el recortable para perfiles están en `assets/brand/`. `assets/site.webmanifest` los declara. Los PNG viven en `assets/brand/` porque `.gitignore` excluye `assets/*.png`.
 - **Color.** Índigo `#3b2bf5` para marca y acciones. Encendido `#ffc62b` y Eco `#a59dff` solo sobre fondos oscuros: sobre claro tienen un contraste de 1,5 : 1 y 2,3 : 1, y el manual lo prohíbe. Los fondos oscuros usan Noche `#0c0d12`; la Tinta `#0f1115` es para texto sobre claro.
-- **Tipografía.** Títulos: Archivo 800, ancho 118 %, interletra −0,035 em. Subtítulos: Archivo 700, ancho 108 %, interletra −0,02 em. Texto: Archivo 400, ancho 100 %, 17 px, interlínea 1,65. Las variables `--t-titulo-*` y `--t-sub-*` de `styles.css` las concentran.
-- **Folleto.** `assets/brochure-cromathic-studio.pdf` se generó imprimiendo `brochure.html` a A4 desde Chrome sin interfaz, 7 páginas. Si cambias el folleto, regenéralo.
+- **Tipografía.** El manual v2.0 indica Archivo (títulos 800 al 118 %, subtítulos 700 al 108 %). Desde el 5 de noviembre de 2026 la web usa la tipografía de Sigedo por decisión del cliente, así que esa parte del manual ya no se aplica: títulos Sora 700 con interletra −0,02 em, subtítulos Sora 600, texto Plus Jakarta Sans 400 a 17 px con interlínea 1,65 y cifras en Space Grotesk 700. Las variables `--t-titulo-*` y `--t-sub-*` (definidas en `rediseno.css`) concentran pesos e interletras. El logo y los colores siguen siendo los del manual.
+- **Folleto.** `assets/brochure-cromathic-studio.pdf` se generó imprimiendo `brochure.html` a A4 desde Edge sin interfaz, 7 páginas, con las fuentes incrustadas. Si cambias el folleto, regenéralo.
+
+### Rediseño (noviembre de 2026)
+
+Es una capa aditiva: `rediseno.css` (portada, propuestas) y `sistemas/rediseno.css` (Sistemas) se cargan después de las hojas existentes. Quitar esos `<link>` (en `index.html`, `sistemas/index.html`, `sistemas/ver.html` y la plantilla de `scripts/generar-propuestas.py`) devuelve la tipografía y las formas anteriores. Los iconos de doble tono y las flechas de los botones están en el HTML y en `soluciones.js` / `sistemas/iconos.js`: para deshacerlos hay que revertir el commit en GitHub Desktop.
+
+- **Cabecera en píldora.** Cápsula flotante con el logo, los enlaces en píldora y el botón de revisión con círculo-flecha. En el celular se despliega en un panel redondeado.
+- **Esquinas por jerarquía.** Píldora completa en lo que se pulsa; 18 px en fichas y campos pequeños; 24 px en tarjetas; 32 px en paneles; 40 px en las secciones oscuras, que ahora son losas con margen. Las miniaturas y escenas de marcas de ejemplo no se tocan.
+- **Iconos de doble tono.** Son de [Phosphor Icons](https://phosphoricons.com) (licencia MIT, en `assets/LICENSE-Phosphor-Icons.txt`). En la portada van pegados en `index.html` y `soluciones.js`; en Sistemas viven en el mapa `DT` de `sistemas/iconos.js`. Los iconos de control (flechas, play, pausa) siguen siendo de línea. Para añadir uno, copia el contenido del SVG `-duotone` de Phosphor dentro de un `<svg class="ico-dt" viewBox="0 0 256 256">`.
+- **Al pulsar** no hay escala ni giro: solo color, sombra y un desplazamiento vertical corto.
 
 ## Pensada para la campaña de revisión gratuita
 
@@ -164,7 +173,7 @@ El formulario de contacto abre WhatsApp o la aplicación de correo del visitante
 
 `project-journey.js` muestra el caso conceptual de la cafetería Maré en cuatro etapas: la idea, la conversación, la propuesta visual antes de programar y la web terminada. Puedes avanzar con las pestañas, los botones anterior/siguiente o las flechas del teclado; Inicio y Fin seleccionan la primera y la última etapa. La propuesta visual permite probar dos paletas. La etapa final carga la demo funcional dentro de una vista previa y permite abrirla completa. La marca, las personas y la conversación son ficticias.
 
-Se incluyen tipografía Archivo local en la portada (licencia en `assets/OFL-Archivo.txt`), navegación con teclado, etiquetas accesibles, un botón de pausa para el diagrama de la portada y soporte de la preferencia de movimiento reducido. `effects.js` conserva el filtro por sector del catálogo y el cambio de color de los audífonos de ejemplo. Las demos siguen usando Manrope e incluyen su propio selector de paleta; las de Maré, AURA y WAV permiten elegir Original, Verde, Cian o Violeta y conservan la elección por demo en el navegador. La única animación de la portada son los paquetes de datos del diagrama; no hay robot, canvas de partículas ni selector global de color.
+Se incluyen las tipografías Sora, Plus Jakarta Sans y Space Grotesk locales (licencias en `assets/fonts/OFL-*.txt`), navegación con teclado, etiquetas accesibles, un botón de pausa para el diagrama de la portada y soporte de la preferencia de movimiento reducido. `effects.js` conserva el filtro por sector del catálogo y el cambio de color de los audífonos de ejemplo. Las demos siguen usando Manrope e incluyen su propio selector de paleta; las de Maré, AURA y WAV permiten elegir Original, Verde, Cian o Violeta y conservan la elección por demo en el navegador. La única animación de la portada son los paquetes de datos del diagrama; no hay robot, canvas de partículas ni selector global de color.
 
 Los enlaces internos usan navegación nativa con saltos inmediatos. Las fotografías se sirven en WebP, con versiones pequeñas para pantallas de menor tamaño y carga diferida en imágenes secundarias. La vista previa del caso Maré se crea solo al abrir la última etapa.
 

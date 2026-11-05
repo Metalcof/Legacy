@@ -1,0 +1,269 @@
+/* =====================================================================
+   Rediseño de la portada — noviembre de 2026
+   Capa aditiva: se carga después de styles.css. Quitar su <link> devuelve la tipografía y las formas
+   anteriores; los iconos de doble tono y las flechas de los botones están en index.html y soluciones.js,
+   así que esos solo vuelven atrás revirtiendo el commit.
+
+   Qué cambia
+   - Tipografía de Sigedo: Sora (títulos, botones y navegación), Plus Jakarta Sans (texto)
+     y Space Grotesk (cifras). Archivos propios en assets/fonts/ (licencias OFL junto a ellos).
+   - Cabecera flotante en forma de píldora; enlaces, botones y filtros también en píldora.
+   - Esquinas por jerarquía: campos y fichas pequeñas 18 px, tarjetas 24 px, paneles 32 px,
+     píldora completa en todo lo que se pulsa.
+   - Iconos de doble tono (Phosphor, MIT) dentro de fichas redondeadas.
+
+   Qué NO cambia
+   - Colores: siguen siendo los del Manual de marca v2.0.
+   - Las miniaturas y escenas de marcas de ejemplo (Maré, AURA, WAV, ALMA, LUMBRE, Valeria):
+     cada una conserva su propia tipografía y forma.
+   - Al pasar el cursor o pulsar no hay escala, giro ni inclinación: solo color, sombra y un
+     desplazamiento vertical corto.
+   ===================================================================== */
+
+@font-face{font-family:'Sora';src:url('./assets/fonts/sora-var.woff2') format('woff2');font-weight:100 800;font-style:normal;font-display:swap}
+@font-face{font-family:'Plus Jakarta Sans';src:url('./assets/fonts/plus-jakarta-sans-var.woff2') format('woff2');font-weight:200 800;font-style:normal;font-display:swap}
+@font-face{font-family:'Space Grotesk';src:url('./assets/fonts/space-grotesk-var.woff2') format('woff2');font-weight:300 700;font-style:normal;font-display:swap}
+
+:root{
+  --font:'Plus Jakarta Sans','Segoe UI',system-ui,sans-serif;
+  --font-t:'Sora','Plus Jakarta Sans','Segoe UI',system-ui,sans-serif;
+  --font-n:'Space Grotesk','Plus Jakarta Sans','Segoe UI',system-ui,sans-serif;
+  /* Los bloques de styles.css que usan estas variables heredan los valores de Sora */
+  --t-titulo-peso:700;--t-titulo-ancho:100%;--t-titulo-ls:-.02em;
+  --t-sub-peso:600;--t-sub-ancho:100%;--t-sub-ls:-.015em;
+  /* Escala de esquinas (palancas existentes: --radio y --radio-l) */
+  --radio:14px;--radio-l:26px;
+  --r-chip:18px;--r-card:24px;--r-panel:32px;--r-slab:40px;--pill:999px;
+  --ic-dark-bg:rgba(165,157,255,.16);--ic-dark-fg:var(--acento-claro);
+}
+
+/* ---------- Tipografía ---------- */
+body{font-family:var(--font);font-size:17px;line-height:1.65;word-spacing:.05em}
+:is(h1,h2,h3,h4,.button,.navigation){word-spacing:0}
+/* Sora en los títulos del sitio; las marcas de ejemplo conservan la suya */
+:is(h1,h2,h3,h4):not(:where(.stage,.stage-view,.case-copy,.lab-frame,.reel-screen,.laptop,.phone-device,.diag-browser,.bento-visual,.wall-tile,.scene-stage,.auto-shot,.ap-shot,[class^="ls-"],[class*=" ls-"]) *){font-family:var(--font-t)}
+.button,.navigation a,.nav-cta,.path-card strong,.fm-cta,.stage-tab,.billing button,.ap-tabs button,.lab-toggles button,.tour-btn,.work-filter,.filter-chip,.plan-badge,.intro-note,.step-n,.gain-icon+h3{font-family:var(--font-t)}
+.intro h1{font-size:clamp(34px,4.8vw,70px);line-height:1.05;max-width:11em;letter-spacing:-.025em}
+h1{font-size:clamp(34px,4vw,56px);line-height:1.08}
+h2{font-size:clamp(28px,3.1vw,44px);line-height:1.14}
+h3{letter-spacing:-.02em}
+.intro-stats strong,.stats-grid strong,.fm-stats strong,.plan-price strong,.diag-score strong{font-family:var(--font-n);font-weight:700;font-stretch:100%;letter-spacing:-.03em}
+.plan h3,.gain h3,.service-col h3,.fm-card h3{letter-spacing:-.025em}
+
+/* ---------- Botones en píldora ---------- */
+.button{border-radius:var(--pill);font-weight:600;letter-spacing:-.005em}
+.button:active:not(:disabled){scale:1;translate:0 1px}
+.button-accent{box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 8px 20px -10px rgba(59,43,245,.7)}
+.button-line{border-width:1.5px}
+.button:has(>.btn-arrow){gap:12px;padding-right:9px}
+.btn-arrow{display:inline-grid;place-items:center;flex:none;width:28px;height:28px;border-radius:50%;background:#fff;color:var(--acento);transition:translate .25s var(--ease-out)}
+.btn-arrow svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.button:hover .btn-arrow{translate:3px 0}
+.button-dark .btn-arrow{color:var(--tinta)}
+.button-ghost{border-radius:var(--pill)}
+
+/* ---------- Cabecera: cápsula flotante ---------- */
+html{scroll-padding-top:100px}
+.header{position:sticky;top:14px;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  width:min(1200px,calc(100% - 28px));min-height:64px;margin:14px auto -78px;padding:7px 8px 7px 24px;
+  border-radius:var(--pill);border:1px solid rgba(255,255,255,.1);
+  background:rgba(16,17,24,.92);
+  box-shadow:0 18px 40px -22px rgba(0,0,0,.75),inset 0 1px 0 rgba(255,255,255,.07)}
+.header.is-scrolled{box-shadow:0 22px 48px -20px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.07)}
+.brand-logo{height:34px;min-width:120px}
+.navigation{gap:2px;font-size:14.5px;font-weight:600}
+.navigation>a:not(.button){padding:10px 15px;border-bottom:0;border-radius:var(--pill);color:rgba(255,255,255,.72);transition:background-color .2s,color .2s}
+.navigation>a:not(.button):hover{border-bottom-color:transparent;background:rgba(255,255,255,.09);color:#fff}
+.navigation>a.is-current{background:rgba(255,255,255,.14);color:#fff}
+.navigation>a.is-current::after{display:none}
+.nav-cta{margin-left:6px;min-height:46px;padding:6px 20px;font-size:14.5px}
+.nav-cta:has(>.btn-arrow){padding:6px 6px 6px 20px}
+/* Entre tableta y escritorio: cápsula compacta para que los enlaces quepan */
+@media (min-width:961px) and (max-width:1120px){
+  .header{padding-left:16px}
+  .brand-logo{height:30px}
+  .navigation{font-size:13.5px;gap:0}
+  .navigation>a:not(.button){padding:9px 9px}
+  .nav-cta{margin-left:4px;font-size:13.5px}
+}
+.scroll-progress{left:34px;right:34px;bottom:4px;height:2px;border-radius:var(--pill);background:var(--acento-claro);opacity:.85}
+.intro{padding-top:clamp(112px,9vw,138px)}
+
+@media (max-width:960px){
+  .header{min-height:58px;margin:10px auto -68px;top:10px;padding:6px 8px 6px 18px}
+  .menu-toggle{display:grid;width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.1)}
+  .menu-toggle span{background:#fff}
+  .navigation{left:0;right:0;top:calc(100% + 10px);gap:2px;padding:10px;border:1px solid rgba(255,255,255,.1);border-radius:28px;background:#101118;box-shadow:0 30px 60px -20px rgba(0,0,0,.8)}
+  .navigation>a:not(.button){padding:14px 18px;border-bottom:0;border-radius:18px;font-size:16px}
+  .navigation>a.is-current{background:rgba(255,255,255,.1);color:#fff}
+  .nav-cta{width:100%;margin:8px 0 2px;min-height:52px;justify-content:center}
+  .scroll-progress{left:26px;right:26px}
+  .intro{padding-top:clamp(104px,22vw,132px)}
+}
+
+/* ---------- Esquinas: píldora en lo que se pulsa ---------- */
+.skip-link,.close-dialog,.lab-toggles button,.journey-nav-button,.tour-close,.tour-btn,.ap-tabs button,.stage-tab,.auto-flow span,.diag-check{border-radius:var(--pill)}
+.menu-toggle{border-radius:50%}
+#brief-form input[type=text],#brief-form input:not([type]),#brief-form input[type=email],#brief-form input[type=tel],#brief-form select{border-radius:var(--pill);padding-inline:20px}
+#brief-form textarea{border-radius:22px;padding-inline:20px}
+.toast{border-radius:22px}
+
+/* ---------- Esquinas: paneles (32) ---------- */
+.hero-panel,.journey-panel,.brief-dialog,.lab-controls,.reel-screen,.sector-panel,.ap-panel,.fm-platform,.product-case,.plan,.tour-picker{border-radius:var(--r-panel)}
+.lab-frame[data-device="mobile"]{border-radius:40px}
+
+/* ---------- Esquinas: tarjetas (24) ---------- */
+.photo-frame,.business-photo,.sector-automation-photo,.scene-stage,.tour-card,.auto-card,.team-card,.step-list li,.diag-detail,.proposal-offer,.fm-card,.gain,.bento-tile,.cw,.path-card,.fm-stats li,.lab-frame{border-radius:var(--r-card)}
+
+/* ---------- Esquinas: fichas y piezas pequeñas (18) ---------- */
+.ui-card,.tour-spot,.tour-options button,.wall-tile,.diag-item,.diag-summary,.journey-image-frame,.journey-type-sample,.journey-wireframe,.journey-live-preview,.journey-chat-message,.fm-ba div,.fm-mods li,.ap-shot,.auto-shot,.proposal-demo-list a,.chat-msg{border-radius:var(--r-chip)}
+
+/* ---------- Iconos de doble tono ---------- */
+.ico-dt{fill:currentColor;stroke:none}
+/* Tarjetas de «¿Qué buscas?» (sobre fondo oscuro) */
+.path-ic{width:46px;height:46px;border-radius:16px;background:var(--ic-dark-bg);color:var(--ic-dark-fg);box-shadow:inset 0 0 0 1px rgba(165,157,255,.22);transition:background-color .25s,color .25s}
+.path-ic svg{width:28px;height:28px;fill:currentColor;stroke:none}
+.path-card:hover .path-ic,.path-card:focus-visible .path-ic{background:var(--acento);color:#fff;box-shadow:none}
+.path-card i{display:grid;place-items:center;flex:none;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.09);color:#fff}
+.path-card i svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+/* Ventajas (sobre fondo claro): ficha teñida con el color de cada tarjeta, sin relieve ni inclinación */
+.gain{--ic:#3b2bf5}
+.g-24{--ic:#0f8a52}.g-trust{--ic:#d6452d}.g-direct{--ic:#b57600}.g-data{--ic:#1281b8}
+.gain-icon,.g-24 .gain-icon,.g-trust .gain-icon,.g-direct .gain-icon,.g-data .gain-icon{width:60px;height:60px;border-radius:20px;background:color-mix(in srgb,var(--ic) 11%,#fff);color:var(--ic);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ic) 20%,transparent);transform:none}
+.gain:hover .gain-icon{transform:translateY(-3px)}
+.gain-icon svg{width:34px;height:34px;fill:currentColor;stroke:none}
+
+/* Diagnóstico («Revisa tu web»): icono de doble tono que se pone rojo al marcar el problema */
+.diag-icon.ico-dt{fill:currentColor;stroke:none;color:var(--suave);transition:color .2s}
+.diag-item[aria-pressed="true"] .diag-icon.ico-dt{color:#d93036;stroke:none}
+.diag-item:active{scale:1}
+
+/* ---------- Secciones oscuras: losas redondeadas ---------- */
+.intro{border-radius:0 0 var(--r-slab) var(--r-slab)}
+.auto,.reel,.sectors,.pricing,.contact{margin:7px 14px;border-radius:var(--r-slab);overflow:clip}
+.reel{border-top:0}
+.footer{margin:14px;border-top:0;border-radius:var(--r-slab);overflow:clip}
+@media (max-width:700px){
+  .intro{border-radius:0 0 28px 28px}
+  .auto,.reel,.sectors,.pricing,.contact{margin-inline:8px;border-radius:28px}
+  .footer{margin:10px 8px;border-radius:28px}
+}
+
+/* ---------- Ticker: etiquetas en píldora ---------- */
+.ticker{padding-block:20px}
+.ticker-row li{gap:12px;padding:10px 20px;margin-right:12px;border:1px solid var(--linea);border-radius:var(--pill);background:#fff;font-family:var(--font-t);font-size:clamp(15px,1.3vw,18px);font-weight:600;font-stretch:100%;letter-spacing:-.01em}
+.ticker-row li::after{width:8px;height:8px;box-shadow:0 0 0 3px var(--acento-suave)}
+
+/* ---------- Puntos laterales de sección: sin escalar ---------- */
+.section-index a::after{transition:width .25s var(--ease-out),height .25s var(--ease-out),background-color .25s}
+.section-index a.is-current::after{transform:none;width:12px;height:12px}
+.section-index span{border-radius:var(--pill)}
+
+/* ---------- Pestañas de proyectos bajo el hero: cada marca con su color ---------- */
+.stage-tabs{gap:12px}
+.stage-tab{--tab:var(--acento-claro);padding:12px 22px 14px 40px;min-width:158px;border-radius:var(--pill);color:rgba(255,255,255,.7);
+  background:linear-gradient(rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+  transition:transform .35s var(--ease-out),background-color .3s,border-color .3s,box-shadow .35s,color .3s;
+  animation:tab-in .6s var(--ease-out) both}
+.stage-tab:nth-child(2){animation-delay:.06s}.stage-tab:nth-child(3){animation-delay:.12s}.stage-tab:nth-child(4){animation-delay:.18s}.stage-tab:nth-child(5){animation-delay:.24s}.stage-tab:nth-child(6){animation-delay:.3s}
+@keyframes tab-in{from{opacity:0;transform:translateY(14px)}}
+/* punto de color de la marca */
+.stage-tab::before{content:'';position:absolute;left:18px;top:50%;width:10px;height:10px;margin-top:-5px;border-radius:50%;background:var(--tab);box-shadow:0 0 0 4px color-mix(in srgb,var(--tab) 22%,transparent);transition:box-shadow .3s}
+/* brillo que cruza al pasar el cursor */
+.stage-tab::after{content:'';position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.14) 50%,transparent 70%);transform:translateX(-120%);pointer-events:none}
+.stage-tab:hover::after{transform:translateX(120%);transition:transform .8s var(--ease-out)}
+.stage-tab:hover{transform:translateY(-3px);color:#fff;border-color:color-mix(in srgb,var(--tab) 55%,transparent);box-shadow:0 14px 30px -16px color-mix(in srgb,var(--tab) 70%,transparent)}
+.stage-tab:active{scale:1;transform:translateY(-1px)}
+/* la seleccionada: teñida con el color de la marca, con halo y punto que late */
+.stage-tab[aria-selected="true"]{transform:translateY(-3px);color:#fff;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--tab) 32%,#15171e),color-mix(in srgb,var(--tab) 10%,#15171e));
+  border-color:color-mix(in srgb,var(--tab) 75%,transparent);
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--tab) 16%,transparent),0 18px 40px -16px color-mix(in srgb,var(--tab) 80%,transparent)}
+.stage-tab[aria-selected="true"]::before{animation:tab-pulse 1.6s ease-in-out infinite}
+@keyframes tab-pulse{50%{box-shadow:0 0 0 8px color-mix(in srgb,var(--tab) 0%,transparent)}}
+.stage-tab[aria-selected="true"] span{opacity:.9}
+/* barra de avance más visible, dentro de la píldora */
+.stage-tab i{left:22px;right:22px;width:auto;bottom:6px;height:3px;border-radius:var(--pill);background:var(--tab);box-shadow:0 0 10px var(--tab)}
+@media (prefers-reduced-motion:reduce){.stage-tab,.stage-tab[aria-selected="true"]::before{animation:none}.stage-tab:hover::after{transition:none}}
+
+/* color de cada marca (después del valor por defecto) y pseudoelementos por encima del brillo .has-glow */
+.stage-tab.stage-tab--cafeteria{--tab:#e08a52}.stage-tab.stage-tab--tienda{--tab:#c6f432}.stage-tab.stage-tab--clinica{--tab:#5fcf98}
+.stage-tab.stage-tab--restaurante{--tab:#ff7a4d}.stage-tab.stage-tab--arquitectura{--tab:#c9d8a8}.stage-tab.stage-tab--personal{--tab:#b3abff}
+.stage-tabs .stage-tab::before{inset:auto;left:18px;top:50%;width:10px;height:10px;padding:0;margin-top:-5px;opacity:1;z-index:1;border-radius:50%;background:var(--tab);-webkit-mask:none;mask:none}
+.stage-tabs .stage-tab::after{inset:0;opacity:1;z-index:1;padding:0;-webkit-mask:none;mask:none;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.16) 50%,transparent 70%)}
+
+/* ---------- Pestañas de proyectos: control segmentado (sustituye al bloque anterior) ----------
+   Un solo carril en píldora; cada opción es una línea compacta (punto + nombre) a la misma altura.
+   La categoría solo se muestra en la opción activa. */
+.stage-tabs{display:flex;width:max-content;max-width:calc(100% - 2*var(--gutter));margin:clamp(22px,2.6vw,34px) auto 0;padding:5px;gap:2px;
+  border-radius:var(--pill);background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.stage-tabs .stage-tab{display:inline-flex;align-items:center;gap:8px;min-width:0;height:40px;padding:0 16px 0 14px;
+  border:0;border-radius:var(--pill);background:transparent;box-shadow:none;transform:none;color:rgba(255,255,255,.62);white-space:nowrap;
+  animation:none;transition:background-color .3s,color .3s,box-shadow .3s}
+.stage-tabs .stage-tab::before{position:static;flex:none;width:8px;height:8px;margin:0;box-shadow:none;opacity:.9}
+.stage-tabs .stage-tab strong{font-size:15px;line-height:1;letter-spacing:-.005em}
+.stage-tabs .stage-tab--cafeteria strong,.stage-tabs .stage-tab--clinica strong,.stage-tabs .stage-tab--restaurante strong{font-size:16.5px}
+.stage-tabs .stage-tab--arquitectura strong{font-size:13px;letter-spacing:.24em}
+.stage-tabs .stage-tab span{display:none;font-size:13px;line-height:1;opacity:.75}
+.stage-tabs .stage-tab:hover{transform:none;box-shadow:none;background:rgba(255,255,255,.06);color:#fff}
+.stage-tabs .stage-tab[aria-selected="true"]{transform:none;color:#fff;
+  background:color-mix(in srgb,var(--tab) 20%,#17181f);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--tab) 45%,transparent),0 6px 18px -8px color-mix(in srgb,var(--tab) 70%,transparent)}
+.stage-tabs .stage-tab[aria-selected="true"] span{display:inline;animation:tab-label .35s var(--ease-out)}
+.stage-tabs .stage-tab[aria-selected="true"] span::before{content:'· ';opacity:.6}
+@keyframes tab-label{from{opacity:0;transform:translateX(-4px)}}
+.stage-tabs .stage-tab[aria-selected="true"]::before{animation:tab-pulse 1.6s ease-in-out infinite;box-shadow:0 0 0 3px color-mix(in srgb,var(--tab) 30%,transparent)}
+.stage-tabs .stage-tab i{left:16px;right:16px;bottom:4px;height:2px;box-shadow:none;opacity:.9}
+.stage-tabs .stage-tab::after{display:none}
+@media (max-width:960px){
+  .stage-tabs{max-width:calc(100% - 32px);overflow-x:auto;scrollbar-width:none;justify-content:flex-start}
+  .stage-tabs::-webkit-scrollbar{display:none}
+  .stage-tabs .stage-tab{flex-shrink:0}
+}
+
+/* Pestañas de proyectos: todas con la misma tipografía del sitio (Sora) */
+.stage-tabs .stage-tab strong,.stage-tabs .stage-tab span{font-family:var(--font-t);font-size:14.5px;font-weight:600;font-stretch:100%;letter-spacing:-.01em;text-transform:none}
+.stage-tabs .stage-tab span{font-weight:500}
+
+/* Pestañas de proyectos: carril blanco */
+.stage-tabs{background:#fff;border-color:#fff;box-shadow:0 12px 32px -14px rgba(0,0,0,.6)}
+.stage-tabs .stage-tab{color:#555a63}
+.stage-tabs .stage-tab:hover{background:var(--niebla);color:var(--tinta)}
+.stage-tabs .stage-tab[aria-selected="true"]{color:#fff;background:var(--noche);box-shadow:0 6px 16px -8px rgba(12,13,18,.6)}
+.stage-tabs .stage-tab[aria-selected="true"] span{color:rgba(255,255,255,.75)}
+.stage-tabs .stage-tab.stage-tab strong{letter-spacing:-.01em;color:inherit}
+.stage-tabs .stage-tab{transition:background-color .25s,color .25s,box-shadow .25s}
+/* Los nombres vienen en mayúsculas desde stage.js: se muestran como nombre propio */
+.stage-tabs .stage-tab--tienda strong,.stage-tabs .stage-tab--clinica strong,.stage-tabs .stage-tab--restaurante strong,.stage-tabs .stage-tab--arquitectura strong{display:inline-block;text-transform:lowercase}
+.stage-tabs .stage-tab--tienda strong::first-letter,.stage-tabs .stage-tab--clinica strong::first-letter,.stage-tabs .stage-tab--restaurante strong::first-letter,.stage-tabs .stage-tab--arquitectura strong::first-letter{text-transform:uppercase}
+/* Pestañas de proyectos en el Índigo de la marca */
+.stage-tabs .stage-tab.stage-tab{--tab:var(--acento)}
+.stage-tabs .stage-tab:hover{background:var(--acento-suave);color:var(--acento-texto)}
+.stage-tabs .stage-tab[aria-selected="true"]{background:var(--acento);color:#fff;box-shadow:0 8px 20px -8px rgba(59,43,245,.75)}
+.stage-tabs .stage-tab[aria-selected="true"]::before{background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.3)}
+.stage-tabs .stage-tab[aria-selected="true"] i{background:#fff}
+
+/* ---------- Nuestros proyectos: tarjetas que se desapilan ---------- */
+.pj-deck{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:clamp(28px,4vw,48px)}
+.pj-card{position:relative;z-index:calc(10 - var(--i));display:flex;flex-direction:column;gap:12px;padding:24px 22px 22px;border-radius:var(--r-card);
+  background:#fff;border:1px solid #e6e4f7;box-shadow:0 1px 2px rgba(15,17,21,.04),0 30px 60px -40px rgba(28,20,120,.5);
+  transition:transform .8s var(--ease-out) calc(var(--i)*90ms),box-shadow .3s,border-color .3s}
+.pj-ic{display:grid;place-items:center;width:52px;height:52px;border-radius:18px;background:var(--acento-suave);color:var(--acento);box-shadow:inset 0 0 0 1px rgba(59,43,245,.15)}
+.pj-ic svg{width:30px;height:30px;fill:currentColor}
+.pj-card h3{font-size:19px;line-height:1.2;margin-top:4px}
+.pj-card p{font-size:15px;line-height:1.55;color:var(--suave)}
+.pj-card ul{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.pj-card li{padding:5px 11px;border-radius:var(--pill);background:var(--niebla);font-size:12.5px;font-weight:600;color:var(--tinta)}
+.pj-link{display:inline-flex;align-items:center;gap:10px;margin-top:6px;font-family:var(--font-t);font-weight:600;font-size:14.5px;color:var(--acento)}
+.pj-link span{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--acento);color:#fff;transition:translate .25s var(--ease-out)}
+.pj-link svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.pj-deck.is-open .pj-card:hover{transform:translateY(-6px);border-color:rgba(59,43,245,.35);box-shadow:0 30px 60px -30px rgba(59,43,245,.55);transition-delay:0s}
+.pj-card:hover .pj-link span{translate:3px 0}
+/* Apiladas: todas se juntan en el centro, una encima de otra, ligeramente escalonadas */
+.pj-deck.is-stacked:not(.is-open) .pj-card{transform:translate(calc((1.5 - var(--i)) * (100% + 16px)),calc(var(--i) * 10px));transition-delay:0s;cursor:pointer}
+.pj-deck.is-stacked:not(.is-open) .pj-card:not(:first-child)>*{opacity:.0;transition:opacity .2s}
+.pj-card>*{transition:opacity .4s calc(var(--i)*90ms + .2s)}
+@media (max-width:1000px){.pj-deck{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pj-deck.is-stacked:not(.is-open) .pj-card{transform:translate(calc((.5 - mod(var(--i),2)) * (100% + 16px)),calc((.5 - round(down,var(--i)/2)) * (100% + 16px) + var(--i)*8px))}}
+@media (max-width:600px){.pj-deck{grid-template-columns:1fr;gap:12px}
+  .pj-deck.is-stacked:not(.is-open) .pj-card{transform:translateY(calc(var(--i) * (-100% - 12px) + var(--i)*10px))}}

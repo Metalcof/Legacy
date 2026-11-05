@@ -1,0 +1,45 @@
+/* =====================================================================
+   Rediseño de «Sistemas que construimos» — noviembre de 2026
+   Capa aditiva sobre sistemas.css y arte.css: quitar su <link> devuelve la tipografía y las formas anteriores;
+   los iconos de doble tono viven en iconos.js y solo vuelven atrás revirtiendo el commit.
+   Misma tipografía que la portada (Sora, Plus Jakarta Sans y Space Grotesk, como en Sigedo),
+   cabecera en cápsula, tarjetas más redondeadas e iconos de doble tono.
+   Las pantallas de ejemplo (.win y lo que dibuja arte.css) conservan su propia tipografía.
+   ===================================================================== */
+@font-face{font-family:'Sora';src:url('../assets/fonts/sora-var.woff2') format('woff2');font-weight:100 800;font-style:normal;font-display:swap}
+@font-face{font-family:'Plus Jakarta Sans';src:url('../assets/fonts/plus-jakarta-sans-var.woff2') format('woff2');font-weight:200 800;font-style:normal;font-display:swap}
+@font-face{font-family:'Space Grotesk';src:url('../assets/fonts/space-grotesk-var.woff2') format('woff2');font-weight:300 700;font-style:normal;font-display:swap}
+
+:root{
+  --f-texto:'Plus Jakarta Sans','Segoe UI',system-ui,sans-serif;
+  --f-titulo:'Sora','Plus Jakarta Sans','Segoe UI',system-ui,sans-serif;
+  --f-cifra:'Space Grotesk','Plus Jakarta Sans',system-ui,sans-serif;
+  --pill:999px;
+}
+
+/* ---------- Tipografía ---------- */
+body{font-family:var(--f-texto);word-spacing:.05em}
+.cat-head h1,.cat-grupo h2,.card h3,.h1,.h2,.fx strong,.cat-play,.cat-back,.cat-filtros button,.card-cta,.kick{font-family:var(--f-titulo);word-spacing:0}
+.cat-head h1,.h1,.h2{font-weight:700;font-stretch:100%;letter-spacing:-.025em}
+.cat-grupo h2,.card h3{font-weight:600;font-stretch:100%;letter-spacing:-.015em}
+.cat-head h1{font-size:clamp(30px,4.2vw,52px)}
+.h1{font-size:clamp(32px,5.4vw,80px)}
+.h2{font-size:clamp(24px,3.2vw,46px)}
+.cat-filtros span,.card-meta{font-family:var(--f-cifra)}
+
+/* ---------- Cabecera: cápsula flotante ---------- */
+.cat-top{top:12px;width:min(1240px,calc(100% - 24px));margin:12px auto 0;border:1px solid var(--linea);border-radius:var(--pill);background:rgba(255,255,255,.9);box-shadow:0 14px 34px -22px rgba(15,17,21,.4)}
+.cat-top-in{max-width:none;padding:8px 12px 8px 10px}
+.cat-back{background:var(--hoja);border-color:transparent}
+.cat-back:hover{background:var(--niebla);border-color:transparent}
+.cat-brand{padding-right:12px}
+
+/* ---------- Esquinas ---------- */
+.card{border-radius:28px}
+.tile{border-radius:18px}
+.fx{border-radius:22px}
+.cat-play,.cat-filtros button,.cat-back,.kick{border-radius:var(--pill)}
+
+/* ---------- Iconos de doble tono ---------- */
+.ico-dt{fill:currentColor;stroke:none}
+.tile .ico{font-size:26px}

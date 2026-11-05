@@ -10,19 +10,21 @@
 <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
 <script src="config.js" defer></script>
 <style>
-@font-face{font-family:Archivo;src:url('assets/archivo-var.woff2') format('woff2');font-weight:100 900;font-stretch:62% 125%}
+@font-face{font-family:'Sora';src:url('assets/fonts/sora-var.woff2') format('woff2');font-weight:100 800}
+@font-face{font-family:'Plus Jakarta Sans';src:url('assets/fonts/plus-jakarta-sans-var.woff2') format('woff2');font-weight:200 800}
+@font-face{font-family:'Space Grotesk';src:url('assets/fonts/space-grotesk-var.woff2') format('woff2');font-weight:300 700}
 @page{size:A4;margin:0}
 :root{--ink:#0f1115;--soft:#555a63;--line:#e3e2ee;--acc:#3b2bf5;--acc2:#a59dff;--accs:#ecebff;--night:#0c0d12;--paper:#fafaf8}
 *{box-sizing:border-box;margin:0;padding:0}
 html{background:#d9d8e3}
-body{font-family:Archivo,'Segoe UI',system-ui,sans-serif;color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:'Plus Jakarta Sans','Segoe UI',system-ui,sans-serif;word-spacing:.05em;color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .toolbar{position:sticky;top:0;z-index:5;display:flex;justify-content:center;gap:10px;padding:12px;background:rgba(12,13,18,.92);color:#fff;font-size:14px}
 .toolbar a,.toolbar button{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:99px;border:0;font:inherit;font-weight:700;cursor:pointer;text-decoration:none;color:#fff;background:rgba(255,255,255,.12)}
 .toolbar .primary{background:var(--acc)}
 .page{position:relative;width:210mm;height:297mm;margin:12mm auto;overflow:hidden;background:var(--paper);box-shadow:0 30px 60px -30px rgba(0,0,0,.35);page-break-after:always;break-after:page}
 .pad{padding:18mm 17mm}
-h1,h2{font-stretch:118%;letter-spacing:-.035em;line-height:1;font-weight:800}
-h3{font-stretch:108%;letter-spacing:-.02em;line-height:1;font-weight:700}
+h1,h2{font-family:'Sora','Plus Jakarta Sans',sans-serif;word-spacing:0;letter-spacing:-.02em;line-height:1.04;font-weight:700}
+h3{font-family:'Sora','Plus Jakarta Sans',sans-serif;word-spacing:0;letter-spacing:-.015em;line-height:1.1;font-weight:600}
 h2{font-size:30pt;margin-bottom:5mm}
 .lead{font-size:12pt;line-height:1.55;color:var(--soft);max-width:150mm}
 .kicker{display:inline-flex;align-items:center;gap:6px;padding:1.6mm 4mm;border-radius:99px;background:var(--accs);color:#2a1fb8;font-size:9pt;font-weight:700;margin-bottom:6mm}
@@ -91,7 +93,7 @@ h2{font-size:30pt;margin-bottom:5mm}
 .small{margin-top:4mm;font-size:8.5pt;color:#8a8e98}
 .sectors{display:flex;flex-wrap:wrap;gap:2.5mm;margin-top:5mm}
 .sectors span{padding:2mm 4mm;border-radius:99px;background:#fff;border:1px solid var(--line);font-size:9.5pt;font-weight:600}
-.sub{margin-top:7mm;font-size:15pt;letter-spacing:-.03em;font-stretch:115%;font-weight:780}
+.sub{margin-top:7mm;font-size:15pt;letter-spacing:-.015em;font-weight:600;font-family:'Sora','Plus Jakarta Sans',sans-serif;word-spacing:0}
 
 /* Cierre */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:4mm;margin-top:8mm}
@@ -119,7 +121,7 @@ h2{font-size:30pt;margin-bottom:5mm}
 .plan.best .tag,.plan.best .setup,.plan.best li{color:rgba(255,255,255,.8)}
 .plan .price{margin-top:5mm;display:flex;align-items:baseline;gap:1.5mm}
 .plan .price small{font-size:9pt;font-weight:700}
-.plan .price b{font-size:30pt;font-stretch:118%;letter-spacing:-.05em;line-height:1}
+.plan .price b{font-size:30pt;font-family:'Space Grotesk','Plus Jakarta Sans',sans-serif;font-weight:700;letter-spacing:-.03em;line-height:1}
 .plan .setup{margin-top:1.5mm;font-size:8.6pt;color:var(--soft);line-height:1.45}
 .plan .yr{margin-top:1.5mm;font-size:8.8pt;font-weight:700;color:#0f8a52}
 .plan.best .yr{color:#9ff0c8}
@@ -137,6 +139,17 @@ h2{font-size:30pt;margin-bottom:5mm}
   .steps{grid-template-columns:1fr 1fr}
 }
 @media print{html{background:none}.toolbar{display:none}.page{margin:0;box-shadow:none}}
+
+/* Rediseño: esquinas más redondeadas y fichas de icono de doble tono */
+.prob,.gain,.svc,.plan{border-radius:7mm}
+.step,.proj,.contact a{border-radius:6mm}
+.callout,.chatdemo{border-radius:8mm}
+.closing{border-radius:10mm}
+.chat{border-radius:6mm}.chat span{border-radius:4mm}
+.gain{--ic:#3b2bf5}.c-green{--ic:#0f8a52}.c-coral{--ic:#d6452d}.c-gold{--ic:#b57600}.c-sky{--ic:#1281b8}
+.gain .ic,.c-green .ic,.c-coral .ic,.c-gold .ic,.c-sky .ic{width:14mm;height:14mm;border-radius:5mm;background:color-mix(in srgb,var(--ic) 11%,#fff);color:var(--ic);box-shadow:inset 0 0 0 .3mm color-mix(in srgb,var(--ic) 22%,transparent)}
+.gain .ic svg.dt{width:8mm;height:8mm;fill:currentColor;stroke:none}
+.plan .badge{font-family:'Sora','Plus Jakarta Sans',sans-serif}
 </style>
 </head>
 <body>
@@ -180,12 +193,12 @@ h2{font-size:30pt;margin-bottom:5mm}
   <h2>Lo que gana tu negocio con una buena web.</h2>
   <p class="lead">Una web bien hecha trabaja por ti todos los días, también cuando tú no estás.</p>
   <div class="gains">
-    <div class="gain c-green"><span class="ic"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="15"/><path d="M24 15v9l6 4"/></svg></span><h3>Atiende las 24 horas</h3><p>Tu web y tu asistente responden, agendan y toman pedidos aunque tu local esté cerrado.</p></div>
-    <div class="gain"><span class="ic"><svg viewBox="0 0 48 48"><circle cx="21" cy="21" r="11"/><path d="M29 29l9 9"/></svg></span><h3>Te encuentran en Google</h3><p>Apareces cuando alguien busca lo que ofreces en tu ciudad, con horarios y ubicación.</p></div>
-    <div class="gain c-coral"><span class="ic"><svg viewBox="0 0 48 48"><path d="M24 8l13 5v10c0 9-6 15-13 17-7-2-13-8-13-17V13z"/><path d="M18 24l4 4 8-8"/></svg></span><h3>Inspira confianza</h3><p>Dominio propio, conexión segura y fotos reales: te ven como un negocio serio.</p></div>
-    <div class="gain"><span class="ic"><svg viewBox="0 0 48 48"><rect x="15" y="7" width="18" height="34" rx="4"/><path d="M21 35h6M20 16h8M20 22h6"/></svg></span><h3>Menos tiempo en el celular</h3><p>Las preguntas de siempre se responden solas; tu equipo atiende solo lo importante.</p></div>
-    <div class="gain c-gold"><span class="ic"><svg viewBox="0 0 48 48"><path d="M8 12h5l4 18h18l4-12H15"/><circle cx="19" cy="37" r="2.5"/><circle cx="33" cy="37" r="2.5"/></svg></span><h3>Vendes sin intermediarios</h3><p>Reservas y pedidos directos, sin depender de comisiones ni de reglas ajenas.</p></div>
-    <div class="gain c-sky"><span class="ic"><svg viewBox="0 0 48 48"><circle cx="18" cy="17" r="6"/><circle cx="32" cy="19" r="5"/><path d="M7 38c1-7 6-11 11-11s10 4 11 11M28 30c2-3 4-4 6-4 4 0 7 3 8 8"/></svg></span><h3>Conoces a tus clientes</h3><p>Sabes quién te compra, cuándo vuelve y a quién escribirle con una promoción.</p></div>
+    <div class="gain c-green"><span class="ic"><svg class="dt" viewBox="0 0 256 256" aria-hidden="true"><path d="M224,128a96,96,0,1,1-96-96A96,96,0,0,1,224,128Z" opacity=".2"/><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm64-88a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48A8,8,0,0,1,192,128Z"/></svg></span><h3>Atiende las 24 horas</h3><p>Tu web y tu asistente responden, agendan y toman pedidos aunque tu local esté cerrado.</p></div>
+    <div class="gain"><span class="ic"><svg class="dt" viewBox="0 0 256 256" aria-hidden="true"><path d="M192,112a80,80,0,1,1-80-80A80,80,0,0,1,192,112Z" opacity=".2"/><path d="M229.66,218.34,179.6,168.28a88.21,88.21,0,1,0-11.32,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg></span><h3>Te encuentran en Google</h3><p>Apareces cuando alguien busca lo que ofreces en tu ciudad, con horarios y ubicación.</p></div>
+    <div class="gain c-coral"><span class="ic"><svg class="dt" viewBox="0 0 256 256" aria-hidden="true"><path d="M216,56v56c0,96-88,120-88,120S40,208,40,112V56a8,8,0,0,1,8-8H208A8,8,0,0,1,216,56Z" opacity=".2"/><path d="M208,40H48A16,16,0,0,0,32,56v56c0,52.72,25.52,84.67,46.93,102.19,23.06,18.86,46,25.26,47,25.53a8,8,0,0,0,4.2,0c1-.27,23.91-6.67,47-25.53C198.48,196.67,224,164.72,224,112V56A16,16,0,0,0,208,40Zm0,72c0,37.07-13.66,67.16-40.6,89.42A129.3,129.3,0,0,1,128,223.62a128.25,128.25,0,0,1-38.92-21.81C61.82,179.51,48,149.3,48,112l0-56,160,0ZM82.34,141.66a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32l-56,56a8,8,0,0,1-11.32,0Z"/></svg></span><h3>Inspira confianza</h3><p>Dominio propio, conexión segura y fotos reales: te ven como un negocio serio.</p></div>
+    <div class="gain"><span class="ic"><svg class="dt" viewBox="0 0 256 256" aria-hidden="true"><path d="M192,56V200H64V56Z" opacity=".2"/><path d="M176,16H80A24,24,0,0,0,56,40V216a24,24,0,0,0,24,24h96a24,24,0,0,0,24-24V40A24,24,0,0,0,176,16ZM72,64H184V192H72Zm8-32h96a8,8,0,0,1,8,8v8H72V40A8,8,0,0,1,80,32Zm96,192H80a8,8,0,0,1-8-8v-8H184v8A8,8,0,0,1,176,224Z"/></svg></span><h3>Menos tiempo en el celular</h3><p>Las preguntas de siempre se responden solas; tu equipo atiende solo lo importante.</p></div>
+    <div class="gain c-gold"><span class="ic"><svg class="dt" viewBox="0 0 256 256" aria-hidden="true"><path d="M224,96v16a32,32,0,0,1-64,0V96H96v16a32,32,0,0,1-64,0V96L46.34,45.8A8,8,0,0,1,54,40H202a8,8,0,0,1,7.69,5.8Z" opacity=".2"/><path d="M231.69,93.81,217.35,43.6A16.07,16.07,0,0,0,202,32H54A16.07,16.07,0,0,0,38.65,43.6L24.31,93.81A7.94,7.94,0,0,0,24,96v16a40,40,0,0,0,16,32v72a8,8,0,0,0,8,8H208a8,8,0,0,0,8-8V144a40,40,0,0,0,16-32V96A7.94,7.94,0,0,0,231.69,93.81ZM54,48H202l11.42,40H42.61Zm98,56v8a24,24,0,0,1-48,0v-8ZM51.06,132.2A24,24,0,0,1,40,112v-8H88v8a24,24,0,0,1-35.12,21.26A7.88,7.88,0,0,0,51.06,132.2ZM200,208H56V151.2a40.57,40.57,0,0,0,8,.8,40,40,0,0,0,32-16,40,40,0,0,0,64,0,40,40,0,0,0,32,16,40.57,40.57,0,0,0,8-.8Zm16-96a24,24,0,0,1-11.07,20.2,8.08,8.08,0,0,0-1.8,1.05A24,24,0,0,1,168,112v-8h48Z"/></svg></span><h3>Vendes sin intermediarios</h3><p>Reservas y pedidos directos, sin depender de comisiones ni de reglas ajenas.</p></div>
+    <div class="gain c-sky"><span class="ic"><svg class="dt" viewBox="0 0 256 256" aria-hidden="true"><path d="M168,144a40,40,0,1,1-40-40A40,40,0,0,1,168,144ZM64,56A32,32,0,1,0,96,88,32,32,0,0,0,64,56Zm128,0a32,32,0,1,0,32,32A32,32,0,0,0,192,56Z" opacity=".2"/><path d="M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1,0-16,24,24,0,1,0-23.24-30,8,8,0,1,1-15.5-4A40,40,0,1,1,219,117.51a67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,244.8,150.4ZM190.92,212a8,8,0,1,1-13.85,8,57,57,0,0,0-98.15,0,8,8,0,1,1-13.84-8,72.06,72.06,0,0,1,33.74-29.92,48,48,0,1,1,58.36,0A72.06,72.06,0,0,1,190.92,212ZM128,176a32,32,0,1,0-32-32A32,32,0,0,0,128,176ZM72,120a8,8,0,0,0-8-8A24,24,0,1,1,87.24,82a8,8,0,1,0,15.5-4A40,40,0,1,0,37,117.51,67.94,67.94,0,0,0,9.6,139.19a8,8,0,1,0,12.8,9.61A51.6,51.6,0,0,1,64,128,8,8,0,0,0,72,120Z"/></svg></span><h3>Conoces a tus clientes</h3><p>Sabes quién te compra, cuándo vuelve y a quién escribirle con una promoción.</p></div>
   </div>
   <div class="foot"><span data-brand>Cromathic Studio</span><span>3</span></div>
 </section>

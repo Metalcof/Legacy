@@ -1,7 +1,8 @@
 /* Cromathic Studio — implementación del Manual de marca v2.0 (noviembre de 2026).
    Color: Índigo (#3b2bf5) para marca y acciones; Encendido (#ffc62b) y Eco (#a59dff) solo sobre fondos oscuros;
    Hoja y Niebla como fondos claros, Tinta para el texto sobre claro y Noche para los fondos oscuros.
-   Tipografía: Archivo (SIL OFL), variable en peso y ancho. Títulos 800 al 118 %, subtítulos 700 al 108 %, texto 400 al 100 %.
+   Tipografía: desde noviembre de 2026 la define rediseno.css (Sora, Plus Jakarta Sans y Space Grotesk, como Sigedo); aquí quedan
+   las reglas históricas con Archivo. Rediseno.css también trae la cabecera en píldora, la escala de esquinas y los iconos de doble tono.
    Logo: archivos de assets/brand/. El isologo va en un solo color y nunca se reescribe con otra letra. Ver assets/OFL-Archivo.txt */
 @font-face{font-family:Archivo;src:url('./assets/archivo-var.woff2') format('woff2');font-weight:100 900;font-stretch:62% 125%;font-style:normal;font-display:swap}
 
