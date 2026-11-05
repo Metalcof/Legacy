@@ -243,27 +243,41 @@ html{scroll-padding-top:100px}
 .stage-tabs .stage-tab[aria-selected="true"]::before{background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.3)}
 .stage-tabs .stage-tab[aria-selected="true"] i{background:#fff}
 
-/* ---------- Nuestros proyectos: tarjetas que se desapilan ---------- */
-.pj-deck{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:clamp(28px,4vw,48px)}
-.pj-card{position:relative;z-index:calc(10 - var(--i));display:flex;flex-direction:column;gap:12px;padding:24px 22px 22px;border-radius:var(--r-card);
-  background:#fff;border:1px solid #e6e4f7;box-shadow:0 1px 2px rgba(15,17,21,.04),0 30px 60px -40px rgba(28,20,120,.5);
-  transition:transform .8s var(--ease-out) calc(var(--i)*90ms),box-shadow .3s,border-color .3s}
-.pj-ic{display:grid;place-items:center;width:52px;height:52px;border-radius:18px;background:var(--acento-suave);color:var(--acento);box-shadow:inset 0 0 0 1px rgba(59,43,245,.15)}
-.pj-ic svg{width:30px;height:30px;fill:currentColor}
-.pj-card h3{font-size:19px;line-height:1.2;margin-top:4px}
-.pj-card p{font-size:15px;line-height:1.55;color:var(--suave)}
-.pj-card ul{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
-.pj-card li{padding:5px 11px;border-radius:var(--pill);background:var(--niebla);font-size:12.5px;font-weight:600;color:var(--tinta)}
-.pj-link{display:inline-flex;align-items:center;gap:10px;margin-top:6px;font-family:var(--font-t);font-weight:600;font-size:14.5px;color:var(--acento)}
-.pj-link span{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--acento);color:#fff;transition:translate .25s var(--ease-out)}
-.pj-link svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.pj-deck.is-open .pj-card:hover{transform:translateY(-6px);border-color:rgba(59,43,245,.35);box-shadow:0 30px 60px -30px rgba(59,43,245,.55);transition-delay:0s}
-.pj-card:hover .pj-link span{translate:3px 0}
-/* Apiladas: todas se juntan en el centro, una encima de otra, ligeramente escalonadas */
-.pj-deck.is-stacked:not(.is-open) .pj-card{transform:translate(calc((1.5 - var(--i)) * (100% + 16px)),calc(var(--i) * 10px));transition-delay:0s;cursor:pointer}
-.pj-deck.is-stacked:not(.is-open) .pj-card:not(:first-child)>*{opacity:.0;transition:opacity .2s}
-.pj-card>*{transition:opacity .4s calc(var(--i)*90ms + .2s)}
-@media (max-width:1000px){.pj-deck{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .pj-deck.is-stacked:not(.is-open) .pj-card{transform:translate(calc((.5 - mod(var(--i),2)) * (100% + 16px)),calc((.5 - round(down,var(--i)/2)) * (100% + 16px) + var(--i)*8px))}}
-@media (max-width:600px){.pj-deck{grid-template-columns:1fr;gap:12px}
-  .pj-deck.is-stacked:not(.is-open) .pj-card{transform:translateY(calc(var(--i) * (-100% - 12px) + var(--i)*10px))}}
+/* ---------- Nuestros proyectos: tarjetas en abanico que se desapilan ----------
+   Escritorio: abanico superpuesto. Al pasar el cursor la tarjeta pasa al frente, crece y sube.
+   Celular: una debajo de otra, sin inclinación. */
+.pj-deck{position:relative;height:clamp(440px,36vw,500px);margin-top:clamp(24px,3vw,40px)}
+.pj-card{--w:clamp(250px,21vw,300px);--gap:calc(var(--w) * .9);
+  position:absolute;left:50%;top:10px;width:var(--w);margin-left:calc(var(--w) / -2);display:flex;flex-direction:column;gap:12px;padding:10px 10px 12px;
+  border-radius:28px;background:#fff;border:1px solid rgba(15,17,21,.06);color:var(--tinta);text-decoration:none;
+  box-shadow:0 2px 4px rgba(15,17,21,.04),0 26px 50px -24px rgba(15,17,21,.35);
+  transform:translateX(calc(var(--x) * var(--gap))) translateY(var(--y)) rotate(var(--r));
+  transition:transform .7s var(--ease-out) calc(var(--i) * 80ms),box-shadow .35s;will-change:transform}
+.pj-card:nth-child(1){--x:-1.5;--y:34px;--r:-6deg;z-index:1}
+.pj-card:nth-child(2){--x:-.5;--y:6px;--r:-2.5deg;z-index:2}
+.pj-card:nth-child(3){--x:.5;--y:6px;--r:2.5deg;z-index:3}
+.pj-card:nth-child(4){--x:1.5;--y:34px;--r:6deg;z-index:4}
+.pj-img{position:relative;display:block;aspect-ratio:4/3;border-radius:20px;overflow:hidden;background:var(--niebla)}
+.pj-img img{width:100%;height:100%;object-fit:cover}
+.pj-img em{position:absolute;left:10px;top:10px;padding:4px 10px;border-radius:var(--pill);background:rgba(255,255,255,.85);font-size:11.5px;font-weight:700;font-style:normal;color:var(--tinta);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.pj-img i{position:absolute;right:10px;top:10px;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--noche);color:#fff}
+.pj-img i svg{width:13px;height:13px;fill:currentColor;margin-left:2px}
+.pj-info{display:flex;flex-direction:column;gap:2px;padding:2px 8px 0}
+.pj-info strong{font-family:var(--font-t);font-size:17px;line-height:1.2;font-weight:600;letter-spacing:-.015em}
+.pj-info small{font-size:13px;color:var(--suave)}
+.pj-btn{display:flex;justify-content:center;align-items:center;min-height:44px;margin-top:2px;border-radius:var(--pill);background:var(--noche);color:#fff;font-family:var(--font-t);font-size:14px;font-weight:600;transition:background-color .25s}
+/* al pasar el cursor: al frente, más grande y arriba (la de abajo sube más) */
+.pj-deck.is-open .pj-card:hover,.pj-deck.is-open .pj-card:focus-visible{z-index:10;transition-delay:0s;
+  transform:translateX(calc(var(--x) * var(--gap))) translateY(-18px) rotate(0deg) scale(1.08);
+  box-shadow:0 4px 8px rgba(15,17,21,.05),0 40px 70px -26px rgba(28,20,120,.5)}
+.pj-card:hover .pj-btn{background:var(--acento)}
+/* apiladas antes de entrar en pantalla */
+.pj-deck.is-stacked:not(.is-open) .pj-card{transform:translateY(calc(var(--i) * 5px)) rotate(calc((var(--i) - 1.5) * 2.5deg));transition-delay:0s;cursor:pointer}
+@media (max-width:700px){
+  .pj-deck{height:auto;display:grid;gap:14px}
+  .pj-card,.pj-deck.is-stacked:not(.is-open) .pj-card,.pj-deck.is-open .pj-card:hover{position:relative;left:auto;top:auto;margin:0;width:100%;transform:none}
+  .pj-deck.is-stacked:not(.is-open) .pj-card{opacity:0;transform:translateY(24px)}
+  .pj-card{transition:transform .6s var(--ease-out) calc(var(--i) * 80ms),opacity .6s calc(var(--i) * 80ms)}
+}
+@media (prefers-reduced-motion:reduce){.pj-card{transition:none}}
+@media (min-width:701px) and (max-width:1000px){.pj-card{--w:clamp(190px,26vw,250px);--gap:calc(var(--w) * .74)}.pj-deck{height:clamp(380px,48vw,440px)}.pj-info strong{font-size:15px}}
