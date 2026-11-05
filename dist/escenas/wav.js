@@ -109,9 +109,9 @@
 .sc-wav-d-frame{background:conic-gradient(from 25deg,#8d9098,#f1f2f5 10%,#6f727a 24%,#cfd2d8 38%,#5b5e65 52%,#eceef2 66%,#767980 82%,#8d9098);-webkit-mask:radial-gradient(closest-side,transparent 85%,#000 86.5%);mask:radial-gradient(closest-side,transparent 85%,#000 86.5%);transform:translateZ(calc(var(--d) * -.015))}
 .sc-wav-d-cone{inset:6.5%!important;background:repeating-radial-gradient(closest-side,rgba(255,255,255,.05) 0 1.4%,rgba(255,255,255,0) 1.4% 4.5%),radial-gradient(closest-side,#33343a 0%,#1b1c20 38%,#0f1013 72%,#3a3b42 84%,#101013 90%,#2d2e33 96%,#0b0b0d 100%);transform:translateZ(calc(var(--d) * .01))}
 .sc-wav-d-shine{inset:6.5%!important;background:linear-gradient(135deg,rgba(255,255,255,.26),rgba(255,255,255,0) 42%,rgba(255,255,255,0) 70%,rgba(169,139,255,.18));transform:translateZ(calc(var(--d) * .012))}
-.sc-wav-d-ring{inset:29%!important;border:2px solid #c6ee6a;box-shadow:0 0 14px rgba(198,238,106,.55),inset 0 0 10px rgba(198,238,106,.35);transform:translateZ(calc(var(--d) * .04))}
+.sc-wav-d-ring{inset:29%!important;border:2px solid #5d6068;box-shadow:inset 0 1px 0 rgba(255,255,255,.18);transform:translateZ(calc(var(--d) * .04))}
 .sc-wav-d-cap{inset:34%!important;background:radial-gradient(circle at 36% 30%,#fff,#d4d6db 22%,#8a8d94 55%,#3b3d42 100%);box-shadow:0 0 0 1px rgba(0,0,0,.45);transform:translateZ(calc(var(--d) * .06))}
-.sc-wav-flashes{position:absolute;inset:0}
+.sc-wav-flashes{position:absolute;inset:0;display:none}
 .sc-wav-flash{position:absolute;left:0;top:0;width:0;height:0;will-change:transform,opacity}
 .sc-wav-flash::before{content:'';position:absolute;left:-30px;top:-30px;width:60px;height:60px;border-radius:50%;border:2px solid #c6ee6a;box-shadow:0 0 18px rgba(198,238,106,.8),inset 0 0 14px rgba(198,238,106,.5)}
 .sc-wav-flash::after{content:'';position:absolute;left:-7px;top:-7px;width:14px;height:14px;border-radius:50%;background:#efffc4;box-shadow:0 0 16px 6px rgba(198,238,106,.75)}
@@ -121,7 +121,7 @@
 .sc-wav-sheen{position:absolute;inset:0;overflow:hidden;-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
 .sc-wav-sheen>span{position:absolute;top:-15%;bottom:-15%;left:0;width:30%;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.08) 30%,rgba(255,255,255,.5) 50%,rgba(255,255,255,.08) 70%,rgba(255,255,255,0));will-change:transform}
 .sc-wav-waves{position:absolute;inset:0}
-.sc-wav-ring{position:absolute;left:0;top:0;border-radius:50%;border:1.5px solid #c6ee6a;box-shadow:0 0 12px rgba(198,238,106,.35),inset 0 0 12px rgba(198,238,106,.18);will-change:transform,opacity}
+.sc-wav-ring{position:absolute;left:0;top:0;border-radius:50%;border:1.5px solid rgba(255,255,255,.55);box-shadow:0 0 12px rgba(255,255,255,.18);will-change:transform,opacity}
 .sc-wav-ring.is-l{-webkit-mask-image:linear-gradient(90deg,#000 22%,rgba(0,0,0,0) 46%);mask-image:linear-gradient(90deg,#000 22%,rgba(0,0,0,0) 46%)}
 .sc-wav-ring.is-r{-webkit-mask-image:linear-gradient(270deg,#000 22%,rgba(0,0,0,0) 46%);mask-image:linear-gradient(270deg,#000 22%,rgba(0,0,0,0) 46%)}
 .sc-wav-ring.is-v{border-color:#a98bff;box-shadow:0 0 12px rgba(169,139,255,.4),inset 0 0 12px rgba(169,139,255,.2)}

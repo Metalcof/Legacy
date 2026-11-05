@@ -79,12 +79,14 @@
   // Miniatura escalada: la ventana se dibuja a 820×512 y se encoge para caber
   const mini = (S, o = {}) => `<div class="escala ${o.clase || ''}"><div class="escala-in">${win(S, { ficticio: false, at: o.at, anim: false })}</div></div>`;
 
+  // Las miniaturas (820 de ancho) y las ilustraciones (480) se escalan al ancho de su caja
+  const base = el => el.classList.contains('arte') ? 480 : 820;
   const ro = 'ResizeObserver' in window ? new ResizeObserver(es => es.forEach(e => {
     const w = e.contentRect.width;
-    if (w) e.target.firstElementChild.style.transform = `scale(${w / 820})`;
+    if (w) e.target.firstElementChild.style.transform = `scale(${w / base(e.target)})`;
   })) : null;
-  const ajustar = root => (root || document).querySelectorAll('.escala').forEach(el => {
-    if (ro) ro.observe(el); else el.firstElementChild.style.transform = `scale(${el.clientWidth / 820})`;
+  const ajustar = root => (root || document).querySelectorAll('.escala,.arte').forEach(el => {
+    if (ro) ro.observe(el); else el.firstElementChild.style.transform = `scale(${el.clientWidth / base(el)})`;
   });
 
   window.NexoMock = { esc, tono, pill, iconoDe, win, mini, ajustar };

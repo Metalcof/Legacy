@@ -23,7 +23,7 @@
       <p>${esc(g.d)}</p>
       <div class="cat-grid">${items.map(s => `
         <a class="card" href="ver.html?p=${encodeURIComponent(s.key)}" style="--c:${esc(s.color)}" aria-label="Ver la presentación de ${esc(s.nombre)}">
-          <div class="thumb"><div class="thumb-in">${window.NexoMock.mini(s)}</div><span class="play">${I('play')}</span></div>
+          <div class="thumb">${window.NexoArte(s)}<span class="play">${I('play')}</span></div>
           <div class="card-b"><span class="tile">${I(s.icono)}</span><div><h3>${esc(s.nombre)}</h3><p class="card-meta">${esc(s.area)}</p></div></div>
         </a>`).join('')}</div>
     </section>`;

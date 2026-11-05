@@ -33,7 +33,7 @@
       </div>
       <div class="cover-vis">
         <span class="halo"></span>
-        <div ${b(.6, 'tilt')}>${M.mini(S)}</div>
+        <div ${b(.6, 'tilt')}>${window.NexoArte(S)}</div>
         ${funciones.slice(0, 3).map((f, i) => `<span ${b(2.2 + i * .5, 'sat s' + (i + 1))}>${I(iconoDe(f.t, S.icono))}${esc(corto(f.t))}</span>`).join('')}
       </div>
     </div>` });
