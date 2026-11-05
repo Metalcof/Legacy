@@ -70,3 +70,27 @@
   addEventListener('resize', update);
   update();
 })();
+
+// Formación: los módulos de la plataforma se filtran por área.
+(() => {
+  const tabs = [...document.querySelectorAll('[data-fm-group]')];
+  const items = [...document.querySelectorAll('[data-fm-in]')];
+  if (!tabs.length) return;
+  const select = (key, focus) => {
+    tabs.forEach(t => { const on = t.dataset.fmGroup === key; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; if (on && focus) t.focus(); });
+    items.forEach(li => {
+      const show = key === 'all' || li.dataset.fmIn === key;
+      li.hidden = !show;
+      li.classList.remove('is-in');
+      if (show) { void li.offsetWidth; li.classList.add('is-in'); }
+    });
+  };
+  tabs.forEach(t => t.addEventListener('click', () => select(t.dataset.fmGroup)));
+  tabs[0].parentElement.addEventListener('keydown', event => {
+    const step = { ArrowRight: 1, ArrowLeft: -1 }[event.key];
+    if (!step) return;
+    event.preventDefault();
+    const i = tabs.findIndex(t => t.getAttribute('aria-selected') === 'true');
+    select(tabs[(i + step + tabs.length) % tabs.length].dataset.fmGroup, true);
+  });
+})();
