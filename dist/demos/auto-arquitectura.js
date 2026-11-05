@@ -10,9 +10,9 @@
   const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
 
   // Marca del estudio que firma el concepto.
-  const studioName = window.SITE_CONFIG && typeof window.SITE_CONFIG.name === 'string' && window.SITE_CONFIG.name.trim() ? window.SITE_CONFIG.name.trim() : 'Nexo Studio';
+  const studioName = window.SITE_CONFIG && typeof window.SITE_CONFIG.name === 'string' && window.SITE_CONFIG.name.trim() ? window.SITE_CONFIG.name.trim() : 'Cromathic Studio';
   $$('[data-brand]').forEach((element) => { element.textContent = studioName; });
-  document.title = document.title.replace('Nexo Studio', studioName);
+  document.title = document.title.replace('Cromathic Studio', studioName);
 
   // ——— Datos del dominio ———
   const STAGES = [

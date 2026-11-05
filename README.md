@@ -31,7 +31,7 @@ C:\xampp\php\php.exe -S 127.0.0.1:4173
 El sitio está hecho con HTML, CSS y JavaScript. Puede funcionar directamente en Apache: el servidor no necesita Node, compilación ni base de datos.
 
 1. Edita `config.js` con el nombre de tu empresa y tus datos de contacto.
-2. Desde esta carpeta, ejecuta `powershell -ExecutionPolicy Bypass -File scripts/package-cpanel.ps1`. Se creará `.sites-runtime/nexo-studio-cpanel.zip` con los archivos necesarios del sitio. No incluye herramientas de desarrollo, capturas ni configuración de Sites.
+2. Desde esta carpeta, ejecuta `powershell -ExecutionPolicy Bypass -File scripts/package-cpanel.ps1`. Se creará `.sites-runtime/cromathic-studio-cpanel.zip` con los archivos necesarios del sitio. No incluye herramientas de desarrollo, capturas ni configuración de Sites.
 3. En el administrador de archivos de cPanel, abre `public_html` o la carpeta de documentos asignada a tu dominio. Si allí ya hay una web, guarda una copia antes de reemplazarla.
 4. Sube el ZIP y extráelo en esa carpeta. `index.html`, `styles.css`, `app.js`, `effects.js`, `project-journey.js`, `config.js`, `assets/` y `demos/` deben quedar directamente allí, sin una carpeta `dist/` intermedia. El paquete incluye `.htaccess` si existe en el proyecto.
 5. Cuando el dominio apunte a tu alojamiento y tengas el certificado SSL activo, abre tu dominio y comprueba el formulario, las seis demos, el laboratorio de automatizaciones y los enlaces de contacto. Puedes borrar el ZIP del alojamiento después de extraerlo.

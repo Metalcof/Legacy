@@ -2,9 +2,9 @@
 // WAV ops — un pedido de la tienda dispara pago, inventario, factura, guía, avisos y métricas.
 // Todo es de ejemplo y vive en este navegador (localStorage), no se cobra ni se envía nada.
 (() => {
-  const studio = window.SITE_CONFIG && typeof window.SITE_CONFIG.name === 'string' && window.SITE_CONFIG.name.trim() ? window.SITE_CONFIG.name.trim() : 'Nexo Studio';
+  const studio = window.SITE_CONFIG && typeof window.SITE_CONFIG.name === 'string' && window.SITE_CONFIG.name.trim() ? window.SITE_CONFIG.name.trim() : 'Cromathic Studio';
   document.querySelectorAll('[data-brand]').forEach((element) => { element.textContent = studio; });
-  document.title = document.title.replace('Nexo Studio', studio);
+  document.title = document.title.replace('Cromathic Studio', studio);
 
   const KEY = 'nexo-auto-tienda-v1';
   const PRICE = 349900;

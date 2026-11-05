@@ -2,11 +2,11 @@
 
 (() => {
   const config = window.SITE_CONFIG || {};
-  const studio = typeof config.name === 'string' && config.name.trim() ? config.name.trim() : 'Nexo Studio';
+  const studio = typeof config.name === 'string' && config.name.trim() ? config.name.trim() : 'Cromathic Studio';
   document.querySelectorAll('[data-brand]').forEach(node => { node.textContent = studio; });
-  document.title = document.title.replace('Nexo Studio', studio);
+  document.title = document.title.replace('Cromathic Studio', studio);
   const description = document.querySelector('meta[name="description"]');
-  if (description) description.content = description.content.replace('Nexo Studio', studio);
+  if (description) description.content = description.content.replace('Cromathic Studio', studio);
   const phone = String(config.phone || '573185314299').replace(/\D/g, '');
   document.querySelectorAll('[data-studio-contact]').forEach(link => {
     link.href = `https://wa.me/${phone}?text=${encodeURIComponent(`Hola, ${studio}. Me gustaría crear una página personal con un diseño como este portfolio.`)}`;

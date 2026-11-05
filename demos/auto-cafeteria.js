@@ -2,11 +2,11 @@
 // Maré · pedidos para recoger. Pedido del cliente → ticket → cola de barra → listo → aviso por WhatsApp.
 (() => {
   /* ---------- Marca del estudio ---------- */
-  const studio = window.SITE_CONFIG && typeof window.SITE_CONFIG.name === 'string' && window.SITE_CONFIG.name.trim() ? window.SITE_CONFIG.name.trim() : 'Nexo Studio';
+  const studio = window.SITE_CONFIG && typeof window.SITE_CONFIG.name === 'string' && window.SITE_CONFIG.name.trim() ? window.SITE_CONFIG.name.trim() : 'Cromathic Studio';
   document.querySelectorAll('[data-brand]').forEach((element) => { element.textContent = studio; });
-  document.title = document.title.replace('Nexo Studio', studio);
+  document.title = document.title.replace('Cromathic Studio', studio);
   const description = document.querySelector('meta[name="description"]');
-  if (description) description.content = description.content.replace('Nexo Studio', studio);
+  if (description) description.content = description.content.replace('Cromathic Studio', studio);
 
   /* ---------- Datos ---------- */
   const STORAGE_KEY = 'nexo-auto-cafeteria-v1';

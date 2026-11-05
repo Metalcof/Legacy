@@ -3,9 +3,9 @@
 // no se envían mensajes, no se hacen reservas reales y el reloj del salón es simulado.
 (() => {
   const config = window.SITE_CONFIG || {};
-  const studio = typeof config.name === 'string' && config.name.trim() ? config.name.trim() : 'Nexo Studio';
+  const studio = typeof config.name === 'string' && config.name.trim() ? config.name.trim() : 'Cromathic Studio';
   document.querySelectorAll('[data-brand]').forEach(node => { node.textContent = studio; });
-  document.title = document.title.replace('Nexo Studio', studio);
+  document.title = document.title.replace('Cromathic Studio', studio);
 
   const KEY = 'nexo-auto-restaurante-v1';
   const CART_KEY = 'nexo-lumbre-demo-order-v1';

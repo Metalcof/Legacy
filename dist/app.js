@@ -1,7 +1,7 @@
 'use strict';
 (() => {
   const config = window.SITE_CONFIG || {};
-  const brand = typeof config.name === 'string' && config.name.trim() ? config.name.trim() : 'Nexo Studio';
+  const brand = typeof config.name === 'string' && config.name.trim() ? config.name.trim() : 'Cromathic Studio';
   const phone = String(config.phone || '573185314299').replace(/\D/g, '');
   const email = config.email || 'hernan.pipe12@gmail.com';
   document.querySelectorAll('[data-brand]').forEach(el => { el.textContent = brand; });

@@ -3,9 +3,9 @@
 // lista de espera, asistencia y seguimiento. No se envían mensajes ni se guardan datos reales.
 (() => {
   const config = window.SITE_CONFIG || {};
-  const studio = typeof config.name === 'string' && config.name.trim() ? config.name.trim() : 'Nexo Studio';
+  const studio = typeof config.name === 'string' && config.name.trim() ? config.name.trim() : 'Cromathic Studio';
   document.querySelectorAll('[data-brand]').forEach(node => { node.textContent = studio; });
-  document.title = document.title.replace('Nexo Studio', studio);
+  document.title = document.title.replace('Cromathic Studio', studio);
 
   const $ = id => document.getElementById(id);
   const STORAGE = 'nexo-auto-clinica-v1';

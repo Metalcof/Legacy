@@ -119,7 +119,7 @@ def page(row, slug, key):
 </head>
 <body class="proposal">
   <header class="header proposal-header">
-    <a class="brand" href="../index.html"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8"/><path d="M11.5 12 20.5 20"/><circle cx="9" cy="10" r="3.2"/><circle cx="23" cy="22" r="3.2"/></svg><span data-brand>Nexo Studio</span></a>
+    <a class="brand" href="../index.html"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8"/><path d="M11.5 12 20.5 20"/><circle cx="9" cy="10" r="3.2"/><circle cx="23" cy="22" r="3.2"/></svg><span data-brand>Cromathic Studio</span></a>
     <a class="button button-accent nav-cta" data-wa href="#">Agendar la revisión</a>
   </header>
   <main>
@@ -187,14 +187,14 @@ def page(row, slug, key):
   </main>
   <footer class="footer on-dark proposal-footer">
     <div class="shell footer-bottom">
-      <small>Página preparada para {esc(empresa)} por <span data-brand>Nexo Studio</span>. Las marcas de los ejemplos son ficticias.</small>
+      <small>Página preparada para {esc(empresa)} por <span data-brand>Cromathic Studio</span>. Las marcas de los ejemplos son ficticias.</small>
       <small>Si prefieren no recibir más mensajes nuestros, respondan "no" y no volveremos a escribirles.</small>
     </div>
   </footer>
   <script>
     document.addEventListener('DOMContentLoaded', () => {{
       const c = window.SITE_CONFIG || {{}};
-      const brand = (c.name || 'Nexo Studio').trim();
+      const brand = (c.name || 'Cromathic Studio').trim();
       const phone = String(c.phone || '').replace(/\\D/g, '');
       const email = c.email || '';
       const text = {js(wa_text)};
@@ -234,7 +234,7 @@ def main():
             links.append({'Empresa': empresa, 'Hoja': name, 'País': clean(row.get('País')), 'Sector detectado': sk, 'Enlace': f'propuestas/{slug}.html'})
     # Evita que alguien liste la carpeta en el servidor.
     with open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8') as f:
-        f.write('<!DOCTYPE html><meta charset="UTF-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=../index.html"><title>Nexo Studio</title>')
+        f.write('<!DOCTYPE html><meta charset="UTF-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=../index.html"><title>Cromathic Studio</title>')
     with open(os.path.join(OUT, 'enlaces.csv'), 'w', encoding='utf-8-sig', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=list(links[0].keys()))
         writer.writeheader(); writer.writerows(links)

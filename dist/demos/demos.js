@@ -1,10 +1,10 @@
 'use strict';
 
-const demoStudioName = window.SITE_CONFIG && typeof window.SITE_CONFIG.name === 'string' && window.SITE_CONFIG.name.trim() ? window.SITE_CONFIG.name.trim() : 'Nexo Studio';
+const demoStudioName = window.SITE_CONFIG && typeof window.SITE_CONFIG.name === 'string' && window.SITE_CONFIG.name.trim() ? window.SITE_CONFIG.name.trim() : 'Cromathic Studio';
 document.querySelectorAll('[data-brand]').forEach((element) => { element.textContent = demoStudioName; });
-document.title = document.title.replace('Nexo Studio', demoStudioName);
+document.title = document.title.replace('Cromathic Studio', demoStudioName);
 const demoDescription = document.querySelector('meta[name="description"]');
-if (demoDescription) demoDescription.content = demoDescription.content.replace('Nexo Studio', demoStudioName);
+if (demoDescription) demoDescription.content = demoDescription.content.replace('Cromathic Studio', demoStudioName);
 
 const demoThemeButtons = document.querySelectorAll('button[data-demo-theme]');
 if (demoThemeButtons.length) {

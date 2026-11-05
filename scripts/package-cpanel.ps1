@@ -42,7 +42,7 @@ if (Test-Path -LiteralPath $runtimeRoot) {
 $packageId = [System.Guid]::NewGuid().ToString('N')
 $stageRoot = Assert-RuntimeChild (Join-Path $runtimeRoot "cpanel-stage-$packageId")
 $temporaryZip = Assert-RuntimeChild (Join-Path $runtimeRoot "cpanel-$packageId.zip")
-$outputZip = Assert-RuntimeChild (Join-Path $runtimeRoot 'nexo-studio-cpanel.zip')
+$outputZip = Assert-RuntimeChild (Join-Path $runtimeRoot 'cromathic-studio-cpanel.zip')
 
 try {
     New-Item -ItemType Directory -Path $stageRoot | Out-Null

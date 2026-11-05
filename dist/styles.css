@@ -1,4 +1,4 @@
-/* Nexo Studio — sistema visual "Producto".
+/* Cromathic Studio — sistema visual "Producto".
    Lienzo porcelana, acento azul ultramar para marca y acciones, amarillo solo como señal de datos en vivo.
    Titulares en Archivo expandida (eje de ancho) para una voz propia.
    Tipografía: Archivo (SIL OFL), variable en peso y ancho. Ver assets/OFL-Archivo.txt */
@@ -709,7 +709,7 @@ h3,h4{font-stretch:104%}
 
 /* Pie: la marca en grande */
 .footer-wordmark{overflow:hidden;margin-top:clamp(32px,4vw,56px);line-height:.8}
-.footer-wordmark span{display:block;font-size:clamp(56px,12.6vw,188px);font-weight:820;font-stretch:125%;letter-spacing:-.06em;white-space:nowrap;background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.15));-webkit-background-clip:text;background-clip:text;color:transparent;transform:translateY(12%)}
+.footer-wordmark span{display:block;font-size:clamp(28px,8.4vw,128px);font-weight:820;font-stretch:125%;letter-spacing:-.06em;white-space:nowrap;background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.15));-webkit-background-clip:text;background-clip:text;color:transparent;transform:translateY(12%)}
 .footer-bottom{margin-top:0}
 
 @media (max-width:700px){
@@ -721,7 +721,7 @@ h1{font-size:clamp(36px,4.5vw,62px)}
 .nowrap{white-space:nowrap}
 @media (max-width:420px){h1{font-size:34px;font-stretch:112%}}
 .hero-link path{stroke:var(--acento);stroke-width:2.5;filter:drop-shadow(0 0 3px rgba(255,255,255,.95))}
-.footer-wordmark span{font-size:clamp(44px,10.4vw,156px)}
+.footer-wordmark span{font-size:clamp(28px,8.5vw,126px)}
 .on-dark .text-link,.contact .text-link,.footer .text-link{text-decoration-color:var(--acento-claro)}
 .navigation a{white-space:nowrap}
 @media (min-width:961px) and (max-width:1180px){
