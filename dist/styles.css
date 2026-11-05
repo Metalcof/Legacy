@@ -1962,6 +1962,10 @@ em,i,cite,address,dfn,var{font-style:normal}
 .fm-more strong{font-weight:750}
 .fm-more span{color:var(--suave);line-height:1.5}
 .fm-note{margin-top:24px;font-size:14px;color:var(--suave)}
+.fm-cta{justify-self:start;width:fit-content;display:inline-flex;align-items:center;gap:10px;margin-top:22px;min-height:50px;padding:0 22px;border-radius:99px;background:var(--noche);color:#fff;font-size:15.5px;font-weight:750;text-decoration:none;transition:transform .25s,box-shadow .25s}
+.fm-cta:hover{transform:translateY(-2px);box-shadow:0 18px 36px -18px rgba(28,20,120,.7)}
+.fm-cta svg{width:16px;height:16px;fill:#fff}
+.fm-note .fm-cta{margin-top:0}
 
 @media (max-width:1100px){.fm-mods{grid-template-columns:repeat(2,minmax(0,1fr))}.fm-stats{grid-template-columns:1fr 1fr}}
 @media (max-width:860px){.fm-grid,.fm-more ul{grid-template-columns:1fr}}
