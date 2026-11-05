@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cromathic Studio — Brochure</title>
 <meta name="description" content="Brochure de Cromathic Studio: páginas web modernas, agenda y pedidos en línea, asistentes de WhatsApp y mantenimiento mensual.">
+<link rel="icon" href="assets/favicon.ico" sizes="any">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
 <script src="config.js" defer></script>
 <style>
 @font-face{font-family:Archivo;src:url('assets/archivo-var.woff2') format('woff2');font-weight:100 900;font-stretch:62% 125%}
@@ -19,14 +21,14 @@ body{font-family:Archivo,'Segoe UI',system-ui,sans-serif;color:var(--ink);-webki
 .toolbar .primary{background:var(--acc)}
 .page{position:relative;width:210mm;height:297mm;margin:12mm auto;overflow:hidden;background:var(--paper);box-shadow:0 30px 60px -30px rgba(0,0,0,.35);page-break-after:always;break-after:page}
 .pad{padding:18mm 17mm}
-h1,h2,h3{font-stretch:118%;letter-spacing:-.045em;line-height:1;font-weight:800}
+h1,h2{font-stretch:118%;letter-spacing:-.035em;line-height:1;font-weight:800}
+h3{font-stretch:108%;letter-spacing:-.02em;line-height:1;font-weight:700}
 h2{font-size:30pt;margin-bottom:5mm}
 .lead{font-size:12pt;line-height:1.55;color:var(--soft);max-width:150mm}
 .kicker{display:inline-flex;align-items:center;gap:6px;padding:1.6mm 4mm;border-radius:99px;background:var(--accs);color:#2a1fb8;font-size:9pt;font-weight:700;margin-bottom:6mm}
 .foot{position:absolute;left:17mm;right:17mm;bottom:10mm;display:flex;justify-content:space-between;font-size:8pt;color:#8a8e98}
-.brand{display:flex;align-items:center;gap:3mm;font-weight:800;font-stretch:118%;font-size:14pt;letter-spacing:-.03em}
-.brand svg{width:9mm;height:9mm}
-.brand rect{fill:var(--acc)}.brand path{stroke:#fff;stroke-width:2;stroke-linecap:round}.brand circle{fill:#fff}
+.brand{display:flex;align-items:center}
+.brand img{display:block;width:46mm;height:auto}
 
 /* Portada */
 .cover{background:var(--night);color:#fff}
@@ -142,7 +144,7 @@ h2{font-size:30pt;margin-bottom:5mm}
 
 <!-- 1. Portada -->
 <section class="page cover pad">
-  <div class="brand"><svg viewBox="0 0 32 32"><rect width="32" height="32" rx="8"/><path d="M11.5 12 20.5 20"/><circle cx="9" cy="10" r="3.2"/><circle cx="23" cy="22" r="3.2"/></svg><span data-brand>Cromathic Studio</span></div>
+  <div class="brand"><img src="assets/brand/cromathic-isologo-negativo.svg" alt="Cromathic Studio" width="174" height="41"></div>
   <h1>Webs que venden. Sistemas que te devuelven el tiempo.</h1>
   <p class="lead">Páginas web modernas, agenda y pedidos en línea conectados a WhatsApp y un asistente que responde a tus clientes las 24 horas. Para negocios de Latinoamérica y España.</p>
   <span class="pill"><i></i>Revisión gratuita de 20 minutos, sin compromiso</span>

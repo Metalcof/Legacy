@@ -65,6 +65,16 @@ Las tarjetas de interfaz (agenda, pedido, citas del día) son maquetas HTML con 
 
 La tipografía es Archivo variable (`assets/archivo-var.woff2`), con los ejes de peso y de ancho. Si cambias de fuente, conserva la declaración `font-stretch` del `@font-face`.
 
+### Manual de marca (versión 2.0, noviembre de 2026)
+
+La web aplica el manual de marca de Cromathic Studio. Colores, tipografía y logo salen de ahí; las demos de clientes ficticios (Maré, AURA, WAV, ALMA, LUMBRE, Valeria) conservan su propia identidad a propósito.
+
+- **Logo.** Los archivos están en `assets/brand/` y se usan tal cual, sin reescribirlos con texto ni aplicarles sombras o degradados: `cromathic-isologo-negativo.svg` (blanco, sobre Noche o Índigo) para la cabecera, el pie, el folleto y las propuestas; `cromathic-isologo-color.svg` (Grafito, sobre claro) para la página de Sistemas. El resto de versiones (mono Grafito, blanco e Índigo, negativo sobre Índigo y el ícono de la aplicación) quedan listas para usar. Tamaño mínimo del isologo: 120 px de ancho.
+- **Favicon e íconos.** `assets/favicon.svg` y `assets/favicon.ico`; el ícono de Apple, los de 192 y 512 px y el recortable para perfiles están en `assets/brand/`. `assets/site.webmanifest` los declara. Los PNG viven en `assets/brand/` porque `.gitignore` excluye `assets/*.png`.
+- **Color.** Índigo `#3b2bf5` para marca y acciones. Encendido `#ffc62b` y Eco `#a59dff` solo sobre fondos oscuros: sobre claro tienen un contraste de 1,5 : 1 y 2,3 : 1, y el manual lo prohíbe. Los fondos oscuros usan Noche `#0c0d12`; la Tinta `#0f1115` es para texto sobre claro.
+- **Tipografía.** Títulos: Archivo 800, ancho 118 %, interletra −0,035 em. Subtítulos: Archivo 700, ancho 108 %, interletra −0,02 em. Texto: Archivo 400, ancho 100 %, 17 px, interlínea 1,65. Las variables `--t-titulo-*` y `--t-sub-*` de `styles.css` las concentran.
+- **Folleto.** `assets/brochure-cromathic-studio.pdf` se generó imprimiendo `brochure.html` a A4 desde Chrome sin interfaz, 7 páginas. Si cambias el folleto, regenéralo.
+
 ## Pensada para la campaña de revisión gratuita
 
 La página responde al correo de prospección: quien llega encuentra la revisión gratuita de 20 minutos, la web con mantenimiento mensual, la agenda o pedidos en línea conectados a WhatsApp y el asistente de WhatsApp 24 h, con las mismas palabras del correo.
