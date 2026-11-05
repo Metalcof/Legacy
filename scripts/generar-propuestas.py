@@ -116,7 +116,7 @@ def page(row, slug, key):
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png">
   <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="../rediseno.css?v=20261105e">
+  <link rel="stylesheet" href="../rediseno.css?v=20261105f">
   <script src="../config.js" defer></script>
   <script src="../soluciones.js" defer></script>
 </head>

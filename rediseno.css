@@ -281,3 +281,154 @@ html{scroll-padding-top:100px}
 }
 @media (prefers-reduced-motion:reduce){.pj-card{transition:none}}
 @media (min-width:701px) and (max-width:1000px){.pj-card{--w:clamp(190px,26vw,250px);--gap:calc(var(--w) * .74)}.pj-deck{height:clamp(380px,48vw,440px)}.pj-info strong{font-size:15px}}
+
+/* =====================================================================
+   Hero claro (noviembre de 2026): tarjeta enmarcada con geometría sutil,
+   texto a la izquierda, dispositivos a la derecha, datos de confianza bajo el botón.
+   ===================================================================== */
+/* Cabecera clara: cápsula blanca de cristal, texto oscuro, logo a color */
+.header{background:rgba(255,255,255,.82);border-color:rgba(15,17,21,.08);color:var(--tinta);
+  -webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);
+  box-shadow:0 14px 34px -20px rgba(15,17,21,.35),inset 0 1px 0 rgba(255,255,255,.9)}
+.header.is-scrolled{box-shadow:0 18px 40px -18px rgba(15,17,21,.4)}
+.header .brand-logo{content:url('assets/brand/cromathic-isologo-color.svg')}
+.header .navigation>a:not(.button){color:#3d414b}
+.header .navigation>a:not(.button):hover{background:var(--niebla);color:var(--tinta)}
+.header .navigation>a.is-current{background:var(--acento-suave);color:var(--acento-texto)}
+.header :focus-visible{outline-color:var(--acento)}
+.scroll-progress{background:var(--acento);opacity:.7}
+@media (max-width:960px){
+  .menu-toggle{background:var(--niebla)}
+  .menu-toggle span{background:var(--tinta)}
+  .navigation{background:#fff;border-color:rgba(15,17,21,.08);box-shadow:0 30px 60px -24px rgba(15,17,21,.35)}
+  .header .navigation>a.is-current{background:var(--acento-suave)}
+}
+
+/* Tarjeta del hero */
+#inicio.intro{--focus:var(--acento);color:var(--tinta);margin:14px 14px 0;border-radius:var(--r-slab);
+  border:1px solid rgba(15,17,21,.06);background:#f4f4fb;box-shadow:inset 0 1px 0 #fff;
+  display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);grid-template-areas:"copy stage" "stats stage" "paths paths";
+  column-gap:clamp(16px,3vw,48px);align-items:center;padding:clamp(118px,9vw,140px) max(var(--gutter),calc((100% - var(--shell))/2)) clamp(28px,3vw,44px)}
+/* Geometría: retícula fina que se desvanece, un gran círculo y un arco en Índigo muy suave */
+#inicio.intro::before{inset:0;z-index:-1;background:
+  radial-gradient(60% 70% at 78% 40%,rgba(59,43,245,.12),transparent 70%),
+  radial-gradient(40% 50% at 10% 0%,rgba(165,157,255,.18),transparent 70%),
+  linear-gradient(rgba(59,43,245,.06) 1px,transparent 1px) 0 0/56px 56px,
+  linear-gradient(90deg,rgba(59,43,245,.06) 1px,transparent 1px) 0 0/56px 56px,#f6f6fb;
+  -webkit-mask-image:linear-gradient(#000 55%,rgba(0,0,0,.6));mask-image:linear-gradient(#000 55%,rgba(0,0,0,.6))}
+#inicio.intro::after{content:'';inset:auto;right:-140px;top:60px;width:min(56vw,760px);aspect-ratio:1;border-radius:50%;
+  border:1px solid rgba(59,43,245,.14);box-shadow:0 0 0 70px rgba(59,43,245,.025),0 0 0 140px rgba(59,43,245,.02);opacity:1;mix-blend-mode:normal;background:none}
+
+/* Columna de texto */
+#inicio .intro-copy{grid-area:copy;width:auto;margin:0;justify-items:start;text-align:left;position:relative;z-index:1}
+#inicio .intro-note{margin-bottom:22px;border-color:rgba(59,43,245,.18);background:#fff;color:#3d414b;box-shadow:0 6px 18px -12px rgba(28,20,120,.35)}
+#inicio h1{color:var(--tinta);font-size:clamp(36px,4.3vw,66px);max-width:11em;margin:0;text-align:left;line-height:1.04}
+#inicio h1>:nth-child(n+4){color:var(--acento)}
+#inicio .lead{color:var(--suave);margin:20px 0 0;max-width:32em}
+#inicio .intro-actions{justify-content:flex-start;margin-top:30px}
+#inicio .button-ghost{border-color:rgba(15,17,21,.16);color:var(--tinta);background:#fff}
+#inicio .button-ghost:hover{border-color:var(--tinta);background:#fff}
+#inicio .ghost-play{background:var(--tinta)}
+#inicio .ghost-play svg{fill:#fff}
+#inicio .intro-promise{color:var(--suave)}
+
+/* Datos de confianza en fila, separados por líneas verticales */
+#inicio .intro-stats{grid-area:stats;width:auto;margin:30px 0 0;padding:0;border:0;display:flex;flex-wrap:wrap;gap:14px 0;align-self:start}
+#inicio .intro-stats>div{display:flex;align-items:center;gap:10px;padding-right:22px;margin-right:22px;border-right:1px solid rgba(15,17,21,.12)}
+#inicio .intro-stats>div:nth-of-type(3){border-right:0;margin-right:0}
+#inicio .intro-stats strong{font-size:28px;color:var(--acento);letter-spacing:-.02em}
+#inicio .intro-stats span{margin:0;font-size:13.5px;line-height:1.3;color:var(--suave);max-width:13em}
+#inicio .intro-stats p{flex-basis:100%;font-size:12.5px;color:#8a8e98}
+
+/* Dispositivos a la derecha */
+#inicio .stage{grid-area:stage;margin:0;padding-bottom:10px;min-width:0}
+#inicio .stage-devices{width:100%}
+#inicio .stage-tabs{max-width:100%}
+
+/* «¿Qué buscas?» en una fila de tarjetas blancas al pie de la tarjeta */
+#inicio .intro-paths{grid-area:paths;width:auto;margin:clamp(24px,3vw,40px) 0 0}
+#inicio .paths{width:100%;margin:0}
+#inicio .paths-title{color:var(--suave)}
+#inicio .path-card{background:#fff;border-color:rgba(15,17,21,.07);color:var(--tinta);box-shadow:0 10px 30px -22px rgba(28,20,120,.45)}
+#inicio .path-card:hover,#inicio .path-card:focus-visible{background:#fff;border-color:rgba(59,43,245,.35)}
+#inicio .path-card small{color:var(--suave)}
+#inicio .path-ic{background:var(--acento-suave);color:var(--acento);box-shadow:none}
+#inicio .path-card i{background:var(--niebla);color:var(--tinta)}
+
+@media (max-width:1000px){
+  #inicio.intro{grid-template-columns:1fr;grid-template-areas:"copy" "stats" "stage" "paths";padding-top:clamp(100px,18vw,120px)}
+  #inicio .stage{margin-top:28px}
+}
+@media (max-width:700px){
+  #inicio.intro{margin:8px 8px 0;border-radius:28px}
+  #inicio .intro-stats>div{padding-right:14px;margin-right:14px}
+  #inicio .intro-stats strong{font-size:24px}
+  #inicio .paths-grid{grid-template-columns:1fr}
+}
+/* Ajustes del hero claro */
+#inicio h1{font-size:clamp(34px,3.7vw,58px);max-width:none}
+#inicio h1 .w,#inicio h1 .nowrap{display:inline}
+#inicio h1>:nth-child(3)::after{content:"\A";white-space:pre}
+#inicio .intro-stats{flex-wrap:nowrap}
+#inicio .intro-stats>div{padding-right:16px;margin-right:16px;gap:8px}
+#inicio .intro-stats span{font-size:12.5px;max-width:9.5em}
+#inicio .intro-stats p{display:none}
+#inicio .stage-tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;justify-content:flex-start;max-width:100%}
+#inicio .stage-tabs::-webkit-scrollbar{display:none}
+#inicio .stage-tabs .stage-tab{flex-shrink:0;height:36px;padding:0 12px 0 11px;gap:7px}
+#inicio .stage-tabs .stage-tab strong,#inicio .stage-tabs .stage-tab span{font-size:13.5px}
+@media (max-width:700px){#inicio .intro-stats{flex-wrap:wrap}#inicio .intro-stats>div:nth-of-type(2){border-right:0}}
+@media (max-width:700px){
+  #inicio .intro-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  #inicio .intro-stats>div,#inicio .intro-stats>div:nth-of-type(2){flex-direction:column;align-items:flex-start;gap:2px;padding:10px 12px;margin:0;border:1px solid rgba(15,17,21,.08);border-radius:16px;background:#fff}
+  #inicio .intro-stats span{font-size:11.5px;max-width:none}
+}
+
+/* =====================================================================
+   Hero: forma de la referencia (tarjeta con muescas). Sin retícula ni anillos.
+   Arriba del todo, el logo y el botón viven en pestañas recortadas en las esquinas
+   de la tarjeta, unidas al marco con esquinas curvas invertidas. Al bajar, la
+   cabecera vuelve a ser la cápsula flotante.
+   ===================================================================== */
+#inicio.intro{background:linear-gradient(135deg,#eef0fb 0%,#f5f4fb 45%,#ece9ff 100%);border:0;box-shadow:none}
+#inicio.intro::before{background:radial-gradient(55% 65% at 80% 45%,rgba(59,43,245,.13),transparent 70%),radial-gradient(45% 55% at 0% 100%,rgba(165,157,255,.16),transparent 70%);-webkit-mask-image:none;mask-image:none}
+#inicio.intro::after{display:none}
+
+@media (min-width:1360px){
+  .header{transition:background-color .3s,box-shadow .3s,border-color .3s,width .3s,padding .3s,border-radius .3s}
+  .header:not(.is-scrolled){width:calc(100% - 28px);min-height:80px;margin:14px auto -94px;padding:0;
+    background:transparent;border-color:transparent;box-shadow:none;border-radius:0;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .header:not(.is-scrolled) .scroll-progress{opacity:0}
+  /* pestaña del logo (esquina superior izquierda) */
+  .header:not(.is-scrolled) .brand{position:relative;align-self:stretch;padding:0 36px 0 30px;background:var(--hoja);border-radius:0 0 34px 0}
+  .header:not(.is-scrolled) .brand::before,.header:not(.is-scrolled) .brand::after{content:'';position:absolute;width:34px;height:34px;pointer-events:none;
+    background:radial-gradient(circle at 100% 100%,transparent 33.5px,var(--hoja) 34px)}
+  .header:not(.is-scrolled) .brand::before{left:100%;top:0}
+  .header:not(.is-scrolled) .brand::after{left:0;top:100%}
+  /* pestaña del botón (esquina superior derecha): una forma detrás del botón */
+  .header:not(.is-scrolled) .nav-cta{margin-right:18px}
+  .header:not(.is-scrolled)::after{content:"";position:absolute;right:0;top:0;z-index:-1;width:294px;height:114px;pointer-events:none;background:
+    radial-gradient(circle at 0 100%,transparent 33.5px,var(--hoja) 34px) 0 0/34px 34px no-repeat,
+    linear-gradient(var(--hoja),var(--hoja)) 34px 0/260px 46px no-repeat,
+    linear-gradient(var(--hoja),var(--hoja)) 68px 46px/226px 34px no-repeat,
+    radial-gradient(circle at 100% 0,var(--hoja) 33.5px,transparent 34px) 34px 46px/34px 34px no-repeat,
+    radial-gradient(circle at 0 100%,transparent 33.5px,var(--hoja) 34px) 260px 80px/34px 34px no-repeat}
+  #inicio.intro{padding-top:clamp(140px,10vw,168px)}
+}
+/* Logo más grande en la pestaña del hero */
+@media (min-width:1360px){
+  .header:not(.is-scrolled){min-height:96px;margin-bottom:-110px}
+  .header:not(.is-scrolled) .brand{padding:0 44px 0 36px}
+  .header:not(.is-scrolled) .brand-logo{height:50px}
+  .header:not(.is-scrolled)::after{height:130px;background:
+    radial-gradient(circle at 0 100%,transparent 33.5px,var(--hoja) 34px) 0 0/34px 34px no-repeat,
+    linear-gradient(var(--hoja),var(--hoja)) 34px 0/260px 62px no-repeat,
+    linear-gradient(var(--hoja),var(--hoja)) 68px 62px/226px 34px no-repeat,
+    radial-gradient(circle at 100% 0,var(--hoja) 33.5px,transparent 34px) 34px 62px/34px 34px no-repeat,
+    radial-gradient(circle at 0 100%,transparent 33.5px,var(--hoja) 34px) 260px 96px/34px 34px no-repeat}
+  #inicio.intro{padding-top:clamp(150px,11vw,178px)}
+}
+/* Los enlaces terminan antes de la curva de la pestaña del botón (la pestaña ocupa 294 px desde el borde) */
+@media (min-width:1360px){.header:not(.is-scrolled) .nav-cta{margin-left:92px}}
+.nav-cta{white-space:nowrap}
+.header .brand{flex-shrink:0}
