@@ -24,10 +24,11 @@ h1,h2,h3,h4,p{margin:0}
 .cat-top-in{max-width:1240px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:16px;justify-content:space-between}
 .cat-back{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border-radius:99px;border:1px solid var(--linea);background:#fff;font-weight:650;font-size:14.5px;text-decoration:none}
 .cat-back:hover{border-color:#c9c7bf}
-.cat-brand{font-weight:800;font-stretch:115%;letter-spacing:-.02em}
+.cat-brand{display:block;line-height:0}
+.cat-brand img{display:block;height:34px;width:auto;min-width:120px}
 .cat{max-width:1240px;margin:0 auto;padding:clamp(32px,5vw,64px) 20px 80px}
 .cat-head{max-width:760px}
-.cat-head h1{font-size:clamp(32px,4.6vw,58px);line-height:1.02;font-weight:800;font-stretch:118%;letter-spacing:-.045em}
+.cat-head h1{font-size:clamp(32px,4.6vw,58px);line-height:1.02;font-weight:800;font-stretch:118%;letter-spacing:-.035em}
 .cat-head p{margin-top:14px;font-size:clamp(16px,1.4vw,18.5px);color:var(--suave);max-width:62ch}
 .cat-play{margin-top:22px;display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border-radius:99px;background:var(--tinta);color:#fff;font-weight:700;text-decoration:none}
 .cat-play:hover{background:#000}
@@ -38,7 +39,7 @@ h1,h2,h3,h4,p{margin:0}
 .cat-filtros span{opacity:.6;font-size:12.5px;margin-left:4px}
 .cat-grupo{margin-top:34px}
 .cat-grupo[hidden]{display:none}
-.cat-grupo h2{display:flex;align-items:baseline;gap:10px;font-size:clamp(20px,2vw,26px);font-weight:800;font-stretch:112%;letter-spacing:-.03em;margin-bottom:6px}
+.cat-grupo h2{display:flex;align-items:baseline;gap:10px;font-size:clamp(20px,2vw,26px);font-weight:700;font-stretch:108%;letter-spacing:-.02em;margin-bottom:6px}
 .cat-grupo h2 small{font-size:14px;font-weight:600;color:var(--suave);letter-spacing:0;font-stretch:100%}
 .cat-grupo>p{color:var(--suave);font-size:15px;margin-bottom:16px;max-width:70ch}
 .cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
@@ -46,7 +47,7 @@ h1,h2,h3,h4,p{margin:0}
 .card:hover{transform:translateY(-3px);border-color:#d6d4cc;box-shadow:0 24px 50px -30px rgba(15,17,21,.35)}
 .card-top{display:flex;align-items:center;gap:12px}
 .tile{display:grid;place-items:center;width:48px;height:48px;border-radius:15px;background:var(--c);color:#fff;font-size:24px;box-shadow:0 12px 24px -12px var(--c),inset 0 1px 0 rgba(255,255,255,.25);flex-shrink:0}
-.card h3{font-size:18.5px;line-height:1.15;font-weight:780;font-stretch:108%;letter-spacing:-.02em}
+.card h3{font-size:18.5px;line-height:1.15;font-weight:700;font-stretch:108%;letter-spacing:-.02em}
 .card-meta{font-size:13px;font-weight:650;color:var(--suave)}
 .card p{font-size:14.5px;color:var(--suave);line-height:1.5;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
 .card-cta{margin-top:auto;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:750;color:var(--c)}
@@ -74,8 +75,8 @@ h1,h2,h3,h4,p{margin:0}
 .b.on{opacity:1;transform:none}
 .kick{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.08);border:1px solid var(--linea-n);font-size:13px;font-weight:700;letter-spacing:.02em;color:rgba(255,255,255,.85)}
 .kick::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--cl);box-shadow:0 0 0 4px color-mix(in srgb,var(--cl) 30%,transparent)}
-.h1{font-size:clamp(34px,6vw,88px);line-height:.98;font-weight:820;font-stretch:120%;letter-spacing:-.05em;text-wrap:balance}
-.h2{font-size:clamp(26px,3.6vw,52px);line-height:1.03;font-weight:800;font-stretch:116%;letter-spacing:-.04em;text-wrap:balance}
+.h1{font-size:clamp(34px,6vw,88px);line-height:.98;font-weight:800;font-stretch:118%;letter-spacing:-.035em;text-wrap:balance}
+.h2{font-size:clamp(26px,3.6vw,52px);line-height:1.03;font-weight:800;font-stretch:118%;letter-spacing:-.035em;text-wrap:balance}
 .lead{font-size:clamp(16px,1.5vw,21px);line-height:1.5;color:rgba(255,255,255,.72);max-width:60ch;text-wrap:pretty}
 .foot-note{margin-top:14px;font-size:13px;color:rgba(255,255,255,.5)}
 

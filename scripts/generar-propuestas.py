@@ -112,14 +112,16 @@ def page(row, slug, key):
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#0c0d12">
   <title>Una idea para {esc(empresa)}</title>
+  <link rel="icon" href="../assets/favicon.ico" sizes="any">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png">
   <link rel="stylesheet" href="../styles.css">
   <script src="../config.js" defer></script>
   <script src="../soluciones.js" defer></script>
 </head>
 <body class="proposal">
   <header class="header proposal-header">
-    <a class="brand" href="../index.html"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8"/><path d="M11.5 12 20.5 20"/><circle cx="9" cy="10" r="3.2"/><circle cx="23" cy="22" r="3.2"/></svg><span data-brand>Cromathic Studio</span></a>
+    <a class="brand" href="../index.html" aria-label="Cromathic Studio, ir al inicio"><img class="brand-logo" src="../assets/brand/cromathic-isologo-negativo.svg" alt="" width="160" height="38"></a>
     <a class="button button-accent nav-cta" data-wa href="#">Agendar la revisión</a>
   </header>
   <main>

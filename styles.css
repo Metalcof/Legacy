@@ -1,7 +1,8 @@
-/* Cromathic Studio — sistema visual "Producto".
-   Lienzo porcelana, acento azul ultramar para marca y acciones, amarillo solo como señal de datos en vivo.
-   Titulares en Archivo expandida (eje de ancho) para una voz propia.
-   Tipografía: Archivo (SIL OFL), variable en peso y ancho. Ver assets/OFL-Archivo.txt */
+/* Cromathic Studio — implementación del Manual de marca v2.0 (noviembre de 2026).
+   Color: Índigo (#3b2bf5) para marca y acciones; Encendido (#ffc62b) y Eco (#a59dff) solo sobre fondos oscuros;
+   Hoja y Niebla como fondos claros, Tinta para el texto sobre claro y Noche para los fondos oscuros.
+   Tipografía: Archivo (SIL OFL), variable en peso y ancho. Títulos 800 al 118 %, subtítulos 700 al 108 %, texto 400 al 100 %.
+   Logo: archivos de assets/brand/. El isologo va en un solo color y nunca se reescribe con otra letra. Ver assets/OFL-Archivo.txt */
 @font-face{font-family:Archivo;src:url('./assets/archivo-var.woff2') format('woff2');font-weight:100 900;font-stretch:62% 125%;font-style:normal;font-display:swap}
 
 :root{
@@ -28,6 +29,9 @@
   --focus:var(--tinta);
   --font:Archivo,'Segoe UI',system-ui,sans-serif;
   --mono:ui-monospace,'Cascadia Mono',Consolas,Menlo,monospace;
+  /* Marca: tipografía del manual (título, subtítulo) */
+  --t-titulo-peso:800;--t-titulo-ancho:118%;--t-titulo-ls:-.035em;
+  --t-sub-peso:700;--t-sub-ancho:108%;--t-sub-ls:-.02em;
   --radio:8px;
   --radio-l:14px;
   --shell:1240px;
@@ -36,7 +40,7 @@
 
 *{box-sizing:border-box}
 html{scroll-behavior:auto;scroll-padding-top:92px;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--hoja);color:var(--tinta);font-family:var(--font);font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--hoja);color:var(--tinta);font-family:var(--font);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
 body.dialog-open{overflow:hidden}
 h1,h2,h3,h4,p,ul,ol,figure,blockquote,dl,dd{margin:0}
 ul,ol{padding:0;list-style:none}
@@ -54,11 +58,12 @@ button{cursor:pointer;color:inherit;background:none;border:0;padding:0;touch-act
 .skip-link:focus{transform:none}
 
 /* ---------- Tipografía ---------- */
-h1,h2,h3,h4{font-weight:800;font-stretch:106%;letter-spacing:-.03em;text-wrap:balance}
+h1,h2{font-weight:var(--t-titulo-peso);font-stretch:var(--t-titulo-ancho);letter-spacing:var(--t-titulo-ls);text-wrap:balance}
+h3,h4{font-weight:var(--t-sub-peso);font-stretch:var(--t-sub-ancho);letter-spacing:var(--t-sub-ls);text-wrap:balance}
 h1{font-size:clamp(34px,4.2vw,58px);line-height:1.06;letter-spacing:-.035em}
 h2{font-size:clamp(28px,3.2vw,44px);line-height:1.1}
 h3{font-size:clamp(20px,1.9vw,24px);line-height:1.22;font-weight:700;letter-spacing:-.02em}
-h4{font-size:21px;line-height:1.25;font-weight:700;letter-spacing:-.015em}
+h4{font-size:21px;line-height:1.25;font-weight:var(--t-sub-peso);letter-spacing:var(--t-sub-ls)}
 .lead{font-size:clamp(18px,1.45vw,20px);line-height:1.6;color:var(--suave)}
 .section-lead{color:var(--suave);margin-top:14px;max-width:34em}
 .feature-tagline{font-size:clamp(19px,1.7vw,22px);font-weight:600;color:var(--suave);margin-top:10px}
@@ -78,18 +83,16 @@ h4{font-size:21px;line-height:1.25;font-weight:700;letter-spacing:-.015em}
 
 /* ---------- Cabecera ---------- */
 .header{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:76px;padding-inline:max(var(--gutter),calc((100% - var(--shell))/2));background:#fff;border-bottom:1px solid var(--linea)}
-.brand{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-stretch:112%;font-size:21px;letter-spacing:-.03em;white-space:nowrap}
-.brand-mark{width:32px;height:32px;flex-shrink:0}
-.brand-mark rect{fill:var(--acento)}
-.brand-mark path{stroke:#fff;stroke-width:2;stroke-linecap:round}
-.brand-mark circle{fill:#fff}
+/* Logo (manual v2.0): isologo en archivo SVG, proporción fija, nunca menor de 120 px de ancho */
+.brand{display:inline-flex;align-items:center;white-space:nowrap}
+.brand-logo{display:block;height:38px;width:auto;min-width:120px}
 .navigation{display:flex;align-items:center;gap:26px;font-size:15px;font-weight:600}
 .navigation>a:not(.button){padding-block:8px;border-bottom:3px solid transparent}
 .navigation>a:not(.button):hover{border-bottom-color:var(--acento)}
 .menu-toggle{display:none}
 
 /* Panel oscuro con diagrama */
-.hero-panel{background:var(--tinta);border-radius:var(--radio-l);padding:clamp(16px,2vw,26px);position:relative;
+.hero-panel{background:var(--noche);border-radius:var(--radio-l);padding:clamp(16px,2vw,26px);position:relative;
   background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:28px 28px}
 .panel-top{display:flex;align-items:center;gap:12px;font-size:15px}
 .panel-top strong{font-weight:700;margin-right:auto}
@@ -233,12 +236,12 @@ h4{font-size:21px;line-height:1.25;font-weight:700;letter-spacing:-.015em}
 .faq-list details p{padding:0 40px 22px 0;color:var(--suave);max-width:40em}
 
 /* ---------- Contacto y pie ---------- */
-.contact{background:var(--tinta);padding-block:clamp(56px,8vw,104px)}
+.contact{background:var(--noche);padding-block:clamp(56px,8vw,104px)}
 .contact-inner{display:flex;align-items:center;justify-content:space-between;gap:28px 48px;flex-wrap:wrap}
 .contact h2{max-width:15em;font-size:clamp(30px,3.8vw,54px)}
 .contact-actions{display:flex;align-items:center;gap:18px 28px;flex-wrap:wrap}
 .contact .text-link,.footer .text-link{color:#fff}
-.footer{background:var(--tinta);border-top:1px solid rgba(255,255,255,.14);padding-top:clamp(40px,5vw,64px)}
+.footer{background:var(--noche);border-top:1px solid rgba(255,255,255,.14);padding-top:clamp(40px,5vw,64px)}
 .footer-grid{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:32px clamp(24px,4vw,56px)}
 .footer-brand p{margin-top:14px;color:rgba(255,255,255,.78);font-size:16px;max-width:20em}
 .footer-col h2{font-size:15px;font-weight:700;font-stretch:100%;letter-spacing:0;margin-bottom:14px;color:#fff}
@@ -248,7 +251,6 @@ h4{font-size:21px;line-height:1.25;font-weight:700;letter-spacing:-.015em}
 .footer-col a i{font-style:normal;display:inline-block}
 .footer-col .text-link{font-size:16px;font-weight:600}
 .footer-bottom{display:flex;justify-content:space-between;gap:12px 32px;flex-wrap:wrap;margin-top:clamp(32px,4vw,56px);padding-block:22px;border-top:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.7);font-size:14px}
-.footer .brand-mark rect{fill:var(--acento)}
 
 .whatsapp-float{position:fixed;right:20px;bottom:20px;z-index:25;width:56px;height:56px;border-radius:50%;background:var(--acento);color:#fff;display:grid;place-items:center;box-shadow:0 12px 28px -8px rgba(59,43,245,.6)}
 .whatsapp-float svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -334,7 +336,6 @@ h4{font-size:21px;line-height:1.25;font-weight:700;letter-spacing:-.015em}
   .footer-grid{grid-template-columns:1fr}
 }
 @media (max-width:360px){
-  .brand{font-size:19px}
   .panel-top{flex-wrap:wrap}
 }
 @media (prefers-reduced-motion:reduce){
@@ -581,7 +582,7 @@ body.motion-paused *{animation-play-state:paused!important}
 .ls-whatsapp{bottom:9px}
 
 /* ---------- Demos grabadas ---------- */
-.reel{background:var(--tinta);padding-block:clamp(56px,7vw,104px);overflow:hidden}
+.reel{background:var(--noche);padding-block:clamp(56px,7vw,104px);overflow:hidden}
 .reel-grid{display:grid;grid-template-columns:minmax(0,4.4fr) minmax(0,7.6fr);gap:clamp(28px,4vw,64px);align-items:center}
 .reel-copy h2{font-size:clamp(30px,3.6vw,50px);letter-spacing:-.04em}
 .reel-copy>p{color:rgba(255,255,255,.75);margin:14px 0 26px;max-width:34em}
@@ -645,10 +646,10 @@ body.motion-paused *{animation-play-state:paused!important}
    Va al final para afinar lo anterior sin reescribirlo.
    ===================================================================== */
 html{-moz-osx-font-smoothing:grayscale}
-h1,h2{font-stretch:118%;font-weight:780;letter-spacing:-.048em}
+h1,h2{font-stretch:var(--t-titulo-ancho);font-weight:var(--t-titulo-peso);letter-spacing:var(--t-titulo-ls)}
 h1{font-size:clamp(40px,5.4vw,78px);line-height:.98}
 h2{line-height:1.02}
-h3,h4{font-stretch:104%}
+h3,h4{font-stretch:var(--t-sub-ancho)}
 .hero-copy h1{margin-bottom:26px}
 .lead,.section-lead,.section-head p,.feature-copy li,.service>p,.business-case-copy>p,.sector-automation-copy>p,.faq-list details p,.lab-head p,.reel-copy>p{text-wrap:pretty}
 .feature-tagline{color:var(--acento-texto);font-weight:600}
@@ -658,7 +659,6 @@ h3,h4{font-stretch:104%}
 
 /* Cabecera translúcida */
 .header{background:rgba(250,250,248,.8);-webkit-backdrop-filter:saturate(1.6) blur(14px);backdrop-filter:saturate(1.6) blur(14px);border-bottom-color:rgba(15,17,21,.07)}
-.brand{font-stretch:118%}
 .button{border-radius:10px;letter-spacing:-.005em}
 .nav-cta{border-radius:9px}
 .button-line{border-width:1.5px}
@@ -679,7 +679,7 @@ h3,h4{font-stretch:104%}
 .check-list li::before{box-shadow:0 4px 10px -4px rgba(59,43,245,.6)}
 .cta-band .button-dark{background:#fff;color:var(--tinta)}
 .cta-band .button-dark:hover{background:var(--acento-suave)}
-.contact{background:var(--tinta);background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,.07) 1px,transparent 0);background-size:26px 26px}
+.contact{background:var(--noche);background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,.07) 1px,transparent 0);background-size:26px 26px}
 .contact .button-accent{background:#fff;color:var(--tinta);box-shadow:none}
 .contact .button-accent:hover{background:var(--acento-claro)}
 
@@ -708,8 +708,6 @@ h3,h4{font-stretch:104%}
 .hero-visual .ui-card{z-index:2}
 
 /* Pie: la marca en grande */
-.footer-wordmark{overflow:hidden;margin-top:clamp(32px,4vw,56px);line-height:.8}
-.footer-wordmark span{display:block;font-size:clamp(28px,8.4vw,128px);font-weight:820;font-stretch:125%;letter-spacing:-.06em;white-space:nowrap;background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.15));-webkit-background-clip:text;background-clip:text;color:transparent;transform:translateY(12%)}
 .footer-bottom{margin-top:0}
 
 @media (max-width:700px){
@@ -721,7 +719,6 @@ h1{font-size:clamp(36px,4.5vw,62px)}
 .nowrap{white-space:nowrap}
 @media (max-width:420px){h1{font-size:34px;font-stretch:112%}}
 .hero-link path{stroke:var(--acento);stroke-width:2.5;filter:drop-shadow(0 0 3px rgba(255,255,255,.95))}
-.footer-wordmark span{font-size:clamp(28px,8.5vw,126px)}
 .on-dark .text-link,.contact .text-link,.footer .text-link{text-decoration-color:var(--acento-claro)}
 .navigation a{white-space:nowrap}
 @media (min-width:961px) and (max-width:1180px){
@@ -788,7 +785,7 @@ html:not(.motion-ready) .ticker,.motion-settled .ticker{-webkit-mask-image:none;
 .tour-launch{display:flex;align-items:center;gap:14px;margin-top:34px;padding-top:24px;border-top:1px solid var(--linea)}
 .tour-launch p{font-size:15.5px;color:var(--suave);line-height:1.45}
 .tour-launch strong{color:var(--tinta)}
-.tour-launch-btn{position:relative;flex-shrink:0;width:52px;height:52px;border-radius:50%;background:var(--tinta);display:grid;place-items:center;transition:scale .15s var(--ease-out),background-color .2s}
+.tour-launch-btn{position:relative;flex-shrink:0;width:52px;height:52px;border-radius:50%;background:var(--noche);display:grid;place-items:center;transition:scale .15s var(--ease-out),background-color .2s}
 .tour-launch-btn:hover{background:var(--acento)}
 .tour-launch-btn:active{scale:.94}
 .tour-launch-btn svg{width:22px;height:22px;fill:#fff;margin-left:3px}
@@ -1976,3 +1973,10 @@ em,i,cite,address,dfn,var{font-style:normal}
   .fm-tabs button{flex-shrink:0}
   .fm-platform-head{flex-direction:column}
 }
+
+/* ---------- Marca: tipografía (Manual v2.0) ----------
+   Título: Archivo 800, ancho 118 %, interletra −0,035 em.  Subtítulo: Archivo 700, ancho 108 %, interletra −0,02 em.
+   No se tocan las miniaturas de marcas de ejemplo (.ls-*, .case-*, .stage-tab--*, .db-fixed-*): cada una
+   representa la identidad de un cliente ficticio, no la de Cromathic. */
+.lab-head h2,.stats-grid strong,.intro h1,.intro-stats strong,.plan-price strong,.cta-band h2,.contact h2{font-weight:var(--t-titulo-peso);font-stretch:var(--t-titulo-ancho);letter-spacing:var(--t-titulo-ls)}
+.tour-card h2,.work-end>p,.service-col h3,.diag-detail h3,.sector-info h3,.step-list h3,.step-n,.bento-copy h3,.gain h3,.plan h3,.ap-copy h3,.fm-card h3,.fm-platform h3,.fm-more h3,.fm-stats strong,.catalog-conclusion>p,.diag-score strong{font-weight:var(--t-sub-peso);font-stretch:var(--t-sub-ancho);letter-spacing:var(--t-sub-ls)}
