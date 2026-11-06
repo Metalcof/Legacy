@@ -359,6 +359,14 @@ html{scroll-padding-top:100px}
 #inicio .stage{grid-area:stage;margin:0;padding-bottom:10px;min-width:0}
 #inicio .stage-devices{width:100%}
 #inicio .stage-tabs{max-width:100%}
+/* El celular se veía diminuto (21% del ancho, la web de ejemplo quedaba ilegible):
+   más grande y con más aire respecto al portátil. */
+#inicio .laptop{width:80%;margin-left:0}
+#inicio .phone-device{width:30%;right:0;bottom:-14px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.14),0 40px 70px -24px rgba(15,17,21,.55)}
+@media (max-width:760px){
+  #inicio .laptop{width:100%}
+  #inicio .phone-device{width:40%;right:2%;bottom:-10px}
+}
 
 /* «¿Qué buscas?» en una fila de tarjetas blancas al pie de la tarjeta */
 #inicio .intro-paths{grid-area:paths;width:auto;margin:clamp(24px,3vw,40px) 0 0}
