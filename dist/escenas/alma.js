@@ -289,7 +289,7 @@
 
   window.NexoEscenas.alma = {
     title: 'Tu visita a ALMA, sin filas ni esperas',
-    duration: 20000,
+    duration: 12000,
     steps: [
       { label: 'Reservas en línea', at: 0 },
       { label: 'Confirmación', at: 0.14 },

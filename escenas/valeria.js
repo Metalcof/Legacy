@@ -204,7 +204,7 @@
 
   window.NexoEscenas.valeria = {
     title: 'Así nace una marca con Valeria',
-    duration: 19000,
+    duration: 11500,
     steps: [
       { label: 'La retícula', at: 0 },
       { label: 'El símbolo', at: 0.16 },

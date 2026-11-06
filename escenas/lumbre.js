@@ -477,7 +477,7 @@
   window.NexoEscenas = window.NexoEscenas || {};
   window.NexoEscenas.lumbre = {
     title: 'Del fuego a tu mesa en LUMBRE',
-    duration: 17000,
+    duration: 10500,
     steps: [
       { label: 'Encendemos la leña', at: 0 },
       { label: 'Brasas listas', at: .2 },

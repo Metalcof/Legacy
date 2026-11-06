@@ -128,13 +128,13 @@
 .sc-wav-bagwrap{position:absolute;inset:0;will-change:opacity}
 .sc-wav-bag3d{position:absolute;transform-style:preserve-3d;transform-origin:50% 100%;will-change:transform}
 .sc-wav-bf{position:absolute;left:0;top:0;width:100%;height:100%}
-.sc-wav-bf--front{background:linear-gradient(162deg,#272930 0%,#17191d 36%,#0d0e11 78%,#0a0b0d 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 1px 0 0 rgba(255,255,255,.05),inset 0 -24px 34px rgba(0,0,0,.4);-webkit-box-reflect:below 0 linear-gradient(to bottom,rgba(255,255,255,.16),rgba(255,255,255,0) 38%);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+.sc-wav-bf--front{background:linear-gradient(162deg,#272930 0%,#17191d 36%,#0d0e11 78%,#0a0b0d 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 1px 0 0 rgba(255,255,255,.05),inset 0 -24px 34px rgba(0,0,0,.4);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
 .sc-wav-bf--front::before{content:'';position:absolute;left:0;right:0;top:0;height:11%;background:linear-gradient(180deg,#2c2f36,#1a1c21);border-bottom:2px solid #c6ee6a;box-shadow:0 1px 8px rgba(198,238,106,.25)}
 .sc-wav-bf--front::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,rgba(255,255,255,0) 35%,rgba(255,255,255,.06) 48%,rgba(255,255,255,0) 60%)}
 .sc-wav-bf--front b{position:relative;display:block;font-weight:850;font-stretch:115%;letter-spacing:-.065em;line-height:1;color:#f2f4ef;margin-top:6%}
 .sc-wav-bf--front b span{color:#c6ee6a}
 .sc-wav-bf--front small{position:relative;display:block;margin-top:.7em;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:rgba(242,244,239,.5)}
-.sc-wav-bf--side{background:linear-gradient(90deg,#0b0c0f,#16181d 44%,#07080a 50%,#121418 56%,#0a0b0e);box-shadow:inset 0 1px 0 rgba(255,255,255,.1);-webkit-box-reflect:below 0 linear-gradient(to bottom,rgba(255,255,255,.12),rgba(255,255,255,0) 38%)}
+.sc-wav-bf--side{background:linear-gradient(90deg,#0b0c0f,#16181d 44%,#07080a 50%,#121418 56%,#0a0b0e);box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
 .sc-wav-bf--back{background:linear-gradient(180deg,#1a1c21 0%,#0b0c0e 30%,#050506 100%)}
 .sc-wav-bagfloor{position:absolute;background:radial-gradient(closest-side,rgba(0,0,0,.92),rgba(0,0,0,.5) 50%,rgba(0,0,0,0))}
 .sc-wav-bf--lin{background:linear-gradient(90deg,#060708,#121318)}
@@ -564,7 +564,7 @@
   window.NexoEscenas = window.NexoEscenas || {};
   window.NexoEscenas.wav = {
     title: 'Así se arma un Wave One',
-    duration: 17000,
+    duration: 10500,
     steps: [
       { label: 'Las piezas', at: 0 },
       { label: 'Ensamblaje', at: 0.2 },

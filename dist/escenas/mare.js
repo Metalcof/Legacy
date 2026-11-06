@@ -555,7 +555,7 @@
 .sc-mare-p{position:absolute;left:0;top:0;transform-origin:0 0}
 .sc-mare-p>svg{display:block;width:100%;height:100%;overflow:visible}
 .sc-mare-bf{backface-visibility:hidden;-webkit-backface-visibility:hidden}
-.sc-mare-refl{-webkit-box-reflect:below var(--ro,0px) linear-gradient(to bottom,rgba(0,0,0,0) 62%,rgba(0,0,0,.2))}
+/* .sc-mare-refl: reflejo quitado por rendimiento (-webkit-box-reflect fuerza repintado continuo en Chrome) */
 .sc-mare-bg{background:radial-gradient(60% 50% at 30% 40%,#c9a273,#6d4a30 60%,#2b1d14);overflow:hidden}
 .sc-mare-bg>canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .sc-mare-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(40,24,14,.12),rgba(40,24,14,.1) 40%,rgba(30,18,10,.5))}
@@ -1042,7 +1042,7 @@ body.motion-paused .sc-mare .sc-mare-amb,body.motion-paused .sc-mare .sc-mare-am
   window.NexoEscenas = window.NexoEscenas || {};
   window.NexoEscenas.mare = {
     title: 'Así preparamos tu pausa en Maré',
-    duration: 18000,
+    duration: 11000,
     steps: [
       { label: 'Molemos el grano', at: 0 },
       { label: 'Extraemos el espresso', at: 0.16 },

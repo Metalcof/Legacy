@@ -1740,7 +1740,7 @@ body.motion-paused .sc-aura-caus{animation:none}
   window.NexoEscenas = window.NexoEscenas || {};
   window.NexoEscenas.aura = {
     title: 'Una casa AURA, de cero a habitable',
-    duration: 22000,
+    duration: 13000,
     steps: [
       { label: 'Plano y terreno', at: 0 },
       { label: 'Cimientos', at: 0.15 },

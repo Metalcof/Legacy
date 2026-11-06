@@ -249,7 +249,7 @@ html{scroll-padding-top:100px}
 .pj-deck{position:relative;height:clamp(440px,36vw,500px);margin-top:clamp(24px,3vw,40px)}
 .pj-card{--w:clamp(250px,21vw,300px);--gap:calc(var(--w) * .9);
   position:absolute;left:50%;top:10px;width:var(--w);margin-left:calc(var(--w) / -2);display:flex;flex-direction:column;gap:12px;padding:10px 10px 12px;
-  border-radius:28px;background:#fff;border:1px solid rgba(15,17,21,.06);color:var(--tinta);text-decoration:none;
+  border-radius:30px;background:#fff;border:1px solid rgba(15,17,21,.06);color:var(--tinta);text-decoration:none;
   box-shadow:0 2px 4px rgba(15,17,21,.04),0 26px 50px -24px rgba(15,17,21,.35);
   transform:translateX(calc(var(--x) * var(--gap))) translateY(var(--y)) rotate(var(--r));
   transition:transform .7s var(--ease-out) calc(var(--i) * 80ms),box-shadow .35s;will-change:transform}
@@ -257,20 +257,32 @@ html{scroll-padding-top:100px}
 .pj-card:nth-child(2){--x:-.5;--y:6px;--r:-2.5deg;z-index:2}
 .pj-card:nth-child(3){--x:.5;--y:6px;--r:2.5deg;z-index:3}
 .pj-card:nth-child(4){--x:1.5;--y:34px;--r:6deg;z-index:4}
-.pj-img{position:relative;display:block;aspect-ratio:4/3;border-radius:20px;overflow:hidden;background:var(--niebla)}
-.pj-img img{width:100%;height:100%;object-fit:cover}
-.pj-img em{position:absolute;left:10px;top:10px;padding:4px 10px;border-radius:var(--pill);background:rgba(255,255,255,.85);font-size:11.5px;font-weight:700;font-style:normal;color:var(--tinta);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
-.pj-img i{position:absolute;right:10px;top:10px;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--noche);color:#fff}
-.pj-img i svg{width:13px;height:13px;fill:currentColor;margin-left:2px}
+/* Escena de cada proyecto: un tinte muy suave del color de esa marca, con su
+   ícono principal y un segundo ícono más pequeño que completa la idea (p. ej.
+   calendario + moneda para nómina). Nada de capturas de pantalla fingidas. */
+.pj-visual{position:relative;display:block;aspect-ratio:4/3;border-radius:24px;overflow:hidden;
+  background:color-mix(in srgb,var(--c,#555) 12%,#fff);background:var(--niebla)}
+.pj-visual::before{content:'';position:absolute;right:-28%;bottom:-32%;width:72%;aspect-ratio:1/1;border-radius:50%;
+  background:color-mix(in srgb,var(--c,#555) 16%,transparent)}
+.pj-scene{position:absolute;inset:0;display:grid;place-items:center}
+.pj-ico-a{width:72px;height:72px;color:var(--c,var(--tinta));filter:drop-shadow(0 10px 18px rgba(15,17,21,.14));transition:transform .4s var(--ease-out)}
+.pj-ico-b{position:absolute;left:calc(50% + 20px);top:calc(50% + 16px);display:grid;place-items:center;width:36px;height:36px;
+  border-radius:13px;background:#fff;color:var(--c,var(--tinta));box-shadow:0 10px 18px -6px rgba(15,17,21,.3);transition:transform .4s var(--ease-out)}
+.pj-ico-b svg{width:18px;height:18px}
+.pj-tag{position:absolute;left:10px;top:10px;padding:4px 10px;border-radius:var(--pill);background:rgba(255,255,255,.9);font-family:var(--font-t);font-size:11.5px;font-weight:700;color:var(--tinta)}
+.pj-go{position:absolute;right:10px;top:10px;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--noche);color:#fff}
+.pj-go svg{width:13px;height:13px;fill:currentColor;margin-left:2px}
 .pj-info{display:flex;flex-direction:column;gap:2px;padding:2px 8px 0}
 .pj-info strong{font-family:var(--font-t);font-size:17px;line-height:1.2;font-weight:600;letter-spacing:-.015em}
-.pj-info small{font-size:13px;color:var(--suave)}
+.pj-info small{font-family:var(--font-t);font-size:13px;color:var(--suave)}
 .pj-btn{display:flex;justify-content:center;align-items:center;min-height:44px;margin-top:2px;border-radius:var(--pill);background:var(--noche);color:#fff;font-family:var(--font-t);font-size:14px;font-weight:600;transition:background-color .25s}
 /* al pasar el cursor: al frente, más grande y arriba (la de abajo sube más) */
 .pj-deck.is-open .pj-card:hover,.pj-deck.is-open .pj-card:focus-visible{z-index:10;transition-delay:0s;
   transform:translateX(calc(var(--x) * var(--gap))) translateY(-18px) rotate(0deg) scale(1.08);
-  box-shadow:0 4px 8px rgba(15,17,21,.05),0 40px 70px -26px rgba(28,20,120,.5)}
+  box-shadow:0 4px 8px rgba(15,17,21,.05),0 40px 70px -26px rgba(28,20,120,.5),0 28px 50px -24px color-mix(in srgb,var(--c,var(--acento)) 55%,transparent)}
 .pj-card:hover .pj-btn{background:var(--acento)}
+.pj-card:hover .pj-ico-a{transform:translateY(-3px) scale(1.05)}
+.pj-card:hover .pj-ico-b{transform:scale(1.1) rotate(-6deg)}
 /* apiladas antes de entrar en pantalla */
 .pj-deck.is-stacked:not(.is-open) .pj-card{transform:translateY(calc(var(--i) * 5px)) rotate(calc((var(--i) - 1.5) * 2.5deg));transition-delay:0s;cursor:pointer}
 @media (max-width:700px){
@@ -286,9 +298,12 @@ html{scroll-padding-top:100px}
    Hero claro (noviembre de 2026): tarjeta enmarcada con geometría sutil,
    texto a la izquierda, dispositivos a la derecha, datos de confianza bajo el botón.
    ===================================================================== */
-/* Cabecera clara: cápsula blanca de cristal, texto oscuro, logo a color */
-.header{background:rgba(255,255,255,.82);border-color:rgba(15,17,21,.08);color:var(--tinta);
-  -webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);
+/* Cabecera clara: cápsula blanca, texto oscuro, logo a color.
+   Sin desenfoque: el propio styles.css lo apaga a propósito (sección «Rendimiento»)
+   porque un blur en algo sticky recalcula en cada cuadro de scroll. Blanco casi sólido
+   da el mismo efecto de cristal sin ese costo. */
+.header{background:rgba(255,255,255,.96);border-color:rgba(15,17,21,.08);color:var(--tinta);
+  -webkit-backdrop-filter:none;backdrop-filter:none;
   box-shadow:0 14px 34px -20px rgba(15,17,21,.35),inset 0 1px 0 rgba(255,255,255,.9)}
 .header.is-scrolled{box-shadow:0 18px 40px -18px rgba(15,17,21,.4)}
 .header .brand-logo{content:url('assets/brand/cromathic-isologo-color.svg')}
