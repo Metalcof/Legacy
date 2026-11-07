@@ -448,13 +448,15 @@
     <path d="M12 20H180V152H12Z" fill="none" stroke="#fff" stroke-opacity=".1" stroke-width="1.2"/>
     <rect x="4" y="1" width="242" height="3" rx="1.5" fill="#fff" fill-opacity=".3"/>
     <rect x="190" y="28" width="46" height="22" rx="4" fill="#0c0806" stroke="#fff" stroke-opacity=".1"/>
-    <text data-k="digits" x="213" y="44" text-anchor="middle" font-family="${SANS}" font-size="13" font-weight="700" fill="#ffb35c">20°</text>
     ${[86, 124].map(y => `<g transform="translate(213 ${y})"><circle r="15" fill="#000" fill-opacity=".35" transform="translate(1.5 2)"/><circle r="14" fill="url(#sc-mare-chromeR)"/><circle r="9.5" fill="#2b2622"/><rect x="-1.4" y="-9" width="2.8" height="7" rx="1.4" fill="#f6efe5"/></g>`).join('')}
     <text x="213" y="160" text-anchor="middle" font-family="Georgia,serif" font-size="8" letter-spacing="2.4" fill="#fff" fill-opacity=".5">MARÉ</text>
     <rect x="14" y="170" width="24" height="10" rx="2" fill="#141110"/><rect x="212" y="170" width="24" height="10" rx="2" fill="#141110"/>
   `);
   const OVEN_SIDE = svg(OD, 170, `<rect width="${OD}" height="170" rx="6" fill="url(#sc-mare-graphSide)"/><path d="${Array.from({ length: 6 }, (_, i) => `M${40 + i * 16} 30V80`).join('')}" stroke="#000" stroke-opacity=".45" stroke-width="5" stroke-linecap="round"/><rect width="${OD}" height="3" fill="#fff" fill-opacity=".14"/>`);
   const OVEN_TOP = svg(OW, OD, `<rect width="${OW}" height="${OD}" rx="8" fill="#3a342f"/><rect width="${OW}" height="${OD}" rx="8" fill="url(#sc-mare-steelTop)" opacity=".25"/><path d="${Array.from({ length: 9 }, (_, i) => `M${60 + i * 16} 40V120`).join('')}" stroke="#000" stroke-opacity=".4" stroke-width="5" stroke-linecap="round"/>`);
+  // La temperatura va en su propia pieza: si estuviera dentro del frente, cada cambio de número
+  // obligaría a redibujar todo el frente (con su textura metálica) en cada cuadro.
+  const OVEN_DIGITS = svg(46, 22, `<text data-k="digits" x="23" y="16" text-anchor="middle" font-family="${SANS}" font-size="13" font-weight="700" fill="#ffb35c">20°</text>`);
   const OVEN_IN = svg(188, 152, `
     <rect width="188" height="152" fill="url(#sc-mare-cavity)"/>
     <path d="M0 0L22 18H166L188 0ZM0 152L22 132H166L188 152Z" fill="#000" fill-opacity=".35"/>
@@ -764,6 +766,7 @@ body.motion-paused .sc-mare .sc-mare-amb,body.motion-paused .sc-mare .sc-mare-am
     part('oven', `translate3d(125px,-180px,85px) rotateY(90deg)`, OD, 170, OVEN_SIDE, 'sc-mare-bf');
     part('oven', `translate3d(-125px,-180px,-85px) rotateY(-90deg)`, OD, 170, OVEN_SIDE, 'sc-mare-bf');
     part('oven', `translate3d(-125px,-180px,85px)`, OW, OH, OVEN_FRONT(tex), 'sc-mare-bf sc-mare-refl', '--ro:-12px');
+    part('oven', `translate3d(65px,-152px,85.6px)`, 46, 22, OVEN_DIGITS, 'sc-mare-bf');
     obj('door', [POS.oven[0] - 125 + 8, -28, POS.oven[2] + 87]);
     const door = part('door', 'translate3d(0px,-136px,0px)', 176, 136, DOOR);
 
@@ -837,10 +840,18 @@ body.motion-paused .sc-mare .sc-mare-amb,body.motion-paused .sc-mare .sc-mare-am
     };
     R.tagV = R.tags.map(t => t.querySelector('b'));
 
-    const set = (el, a) => { for (const k in a) el.setAttribute(k, a[k]); };
-    const tr = (el, s) => el.setAttribute('transform', s);
-    const op = (el, v) => el.setAttribute('opacity', f3(clamp(v)));
-    const cssOp = (el, v) => { el.style.opacity = f3(clamp(v)); el.style.visibility = v > 0.002 ? 'visible' : 'hidden'; };
+    // Solo se escribe lo que cambió: reescribir un atributo o un texto con el mismo valor
+    // obliga igual a redibujar el SVG que lo contiene (con el horno caliente eso trababa la escena).
+    const memo = (el, k, v) => { const c = el.__m || (el.__m = {}); if (c[k] === v) return false; c[k] = v; return true; };
+    const set = (el, a) => { for (const k in a) { const v = String(a[k]); if (memo(el, k, v)) el.setAttribute(k, v); } };
+    const tr = (el, s) => { if (memo(el, 'transform', s)) el.setAttribute('transform', s); };
+    const op = (el, v) => { const s = f3(clamp(v)); if (memo(el, 'opacity', s)) el.setAttribute('opacity', s); };
+    const txt = (el, s) => { if (memo(el, '#text', s)) el.textContent = s; };
+    const cssOp = (el, v) => {
+      const s = f3(clamp(v)), vis = v > 0.002 ? 'visible' : 'hidden';
+      if (memo(el, 'css-op', s)) el.style.opacity = s;
+      if (memo(el, 'css-vis', vis)) el.style.visibility = vis;
+    };
 
     // ---------- Medidas (al montar y al cambiar de tamaño) ----------
     let L = null, lastP = 0, viewHidden = false;
@@ -886,8 +897,9 @@ body.motion-paused .sc-mare .sc-mare-amb,body.motion-paused .sc-mare .sc-mare-am
       const grind = bell(p, 0.055, 0.065, 0.135, 0.145);
       O.grinder.extra = ` translate3d(${n(grind * Math.sin(p * 2600) * 0.6)}px,0px,0px)`;
       tr(R.dial, `rotate(${n(150 * seg(p, 0.05, 0.065) - 150 * seg(p, 0.14, 0.155))})`);
-      R.gdisp.textContent = `${(18 * eIO(seg(p, 0.06, 0.14))).toFixed(1).replace('.', ',')}`;
+      txt(R.gdisp, `${(18 * eIO(seg(p, 0.06, 0.14))).toFixed(1).replace('.', ',')}`);
       R.grounds.forEach((g, i) => {
+        if (grind <= 0) { op(g, 0); return; } // fuera de la molienda no se mueven (evita redibujar el molino)
         const t = frac(p * 95 + i / 7);
         set(g, { cx: n(100 + ((i % 3) - 1) * 3.4 + Math.sin(i * 7 + t * 4) * 1.2), cy: n(288 + t * 18), opacity: f3(grind * (t < 0.85 ? 1 : (1 - t) / 0.15)) });
       });
@@ -915,7 +927,7 @@ body.motion-paused .sc-mare .sc-mare-amb,body.motion-paused .sc-mare .sc-mare-am
       const press = bell(p, 0.25, 0.265, 0.325, 0.345);
       tr(R.g1, `rotate(${n(-120 + 150 * press)})`);
       tr(R.g2, `rotate(${n(-60 + 70 * eIO(seg(p, 0.36, 0.4)) - 70 * eIO(seg(p, 0.48, 0.5)))})`);
-      R.tagV[1].textContent = `${Math.round(25 * seg(p, 0.255, 0.33))} s`;
+      txt(R.tagV[1], `${Math.round(25 * seg(p, 0.255, 0.33))} s`);
 
       // La taza pasa de la bandeja de goteo a su platillo (bajo la vista cenital).
       const ct = eIO(seg(p, 0.53, 0.6));
@@ -936,16 +948,17 @@ body.motion-paused .sc-mare .sc-mare-amb,body.motion-paused .sc-mare .sc-mare-am
       Object.assign(O.pSh, { x: pX, z: pZ, op: 1 - lift * 0.55 });
       O.pSh.extra = ` scale3d(${f3(1 + lift * 0.25)},1,${f3(1 + lift * 0.25)})`;
       tr(R.milk, `translate(38 38) scale(${f3(1 + foam * 0.04)}) translate(-38 -38)`);
-      tr(R.swirl, `rotate(${n((p * 9000) % 360)})`);
+      tr(R.swirl, `rotate(${n((clamp(p, 0.39, 0.48) * 9000) % 360)})`); // solo gira mientras sale vapor
       tr(R.knob, `rotate(${n(80 * steamOn)})`);
       R.puffs.forEach((pf, i) => {
+        if (steamOn <= 0.001) { op(pf, 0); return; }
         const t = frac(p * 42 + i / 7);
         const x = Math.sin(i * 2.3 + t * 3) * 14 + (i % 2 ? 8 : -8);
         const y = -34 * lift - 8 - t * 70;
         set(pf, { cx: n(x), cy: n(y), r: n(8 + t * 16), opacity: f3(steamOn * (1 - t) * Math.min(1, t * 5) * 0.95) });
       });
       O.puffs.vis = steamOn > 0.001;
-      R.tagV[2].textContent = `${Math.round(lerp(20, 65, eIO(seg(p, 0.4, 0.47))))} °C`;
+      txt(R.tagV[2], `${Math.round(lerp(20, 65, eIO(seg(p, 0.4, 0.47))))} °C`);
 
       // 4 · Dibujamos el arte latte (vista cenital a pantalla completa).
       const lo = seg(p, 0.5, 0.535), lc = seg(p, 0.635, 0.668);
@@ -985,7 +998,7 @@ body.motion-paused .sc-mare .sc-mare-amb,body.motion-paused .sc-mare .sc-mare-am
       op(R.elem, heat); op(R.elem2, heat * 0.8);
       op(R.doorGlow, heat * 0.2);
       O.spill.op = heat; O.spill.vis = heat > 0.002;
-      R.digits.textContent = `${Math.round(lerp(20, 200, heatOn))}°`;
+      txt(R.digits, `${Math.round(lerp(20, 200, heatOn))}°`);
       const bake = eIO(seg(p, 0.7, 0.81));
       op(R.baked, bake);
       op(R.raw, 1 - seg(p, 0.76, 0.81));
