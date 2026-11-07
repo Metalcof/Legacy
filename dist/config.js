@@ -2,7 +2,7 @@
 window.SITE_CONFIG = {
   name: 'Cromathic Studio',
   phone: '573185314299',          // WhatsApp principal (código de país + número, sin espacios ni +)
-  email: 'hernan.pipe12@gmail.com',
+  email: 'contacto@cromathicstudio.com',
   phone2: '573212624537',         // WhatsApp alterno
-  email2: 'luistru9@gmail.com'    // Correo alterno
+  email2: ''                      // Correo alterno (vacío = no se muestra)
 };

@@ -3,7 +3,7 @@
   const config = window.SITE_CONFIG || {};
   const brand = typeof config.name === 'string' && config.name.trim() ? config.name.trim() : 'Cromathic Studio';
   const phone = String(config.phone || '573185314299').replace(/\D/g, '');
-  const email = config.email || 'hernan.pipe12@gmail.com';
+  const email = config.email || 'contacto@cromathicstudio.com';
   document.querySelectorAll('[data-brand]').forEach(el => { el.textContent = brand; });
   document.title = brand + ' — Web, integraciones y plataformas de gestión';
   document.getElementById('year').textContent = new Intl.DateTimeFormat('en', {year:'numeric',timeZone:'America/Bogota'}).format(new Date());

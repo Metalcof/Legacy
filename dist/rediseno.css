@@ -455,3 +455,7 @@ html{scroll-padding-top:100px}
 @media (min-width:1360px){.header:not(.is-scrolled) .nav-cta{margin-left:92px}}
 .nav-cta{white-space:nowrap}
 .header .brand{flex-shrink:0}
+
+/* Contacto: con menos tarjetas (ya no hay correo alterno) cada una gana ancho y el correo se lee completo. */
+.contact-ways{grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr))}
+.cw strong{white-space:normal;overflow-wrap:anywhere}

@@ -10,7 +10,7 @@ Edita `config.js`. El nombre se aplica a la página principal y a los créditos 
 window.SITE_CONFIG = {
   name: 'El nombre de tu empresa',
   phone: '573185314299',
-  email: 'hernan.pipe12@gmail.com'
+  email: 'contacto@cromathicstudio.com'
 };
 ```
 
