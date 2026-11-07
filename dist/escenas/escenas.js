@@ -76,7 +76,9 @@
     function paint() {
       try { api.render?.(progress); } catch (error) { console.error(`Escena ${key}:`, error); }
       range.value = String(Math.round(progress * 1000));
-      host.style.setProperty('--scene-progress', progress.toFixed(4));
+      // En la barra y no en el contenedor: una variable heredada en el contenedor obligaba a recalcular
+      // los estilos de cientos de piezas de la escena en cada cuadro.
+      range.style.setProperty('--scene-progress', progress.toFixed(4));
       let current = 0;
       def.steps.forEach((step, index) => { if (progress >= step.at - 0.0001) current = index; });
       [...steps.children].forEach((li, index) => {

@@ -396,7 +396,9 @@
     return `M${-w} ${y}Q0 ${n(y + k + h * 1.6)} ${w} ${y}Q0 ${n(y + k - h * 0.6)} ${-w} ${y}Z`;
   });
   const HEART = 'M0-46C-11-52-12-64-4-65C-2-65 0-63 0-61C0-63 2-65 4-65C12-64 11-52 0-46Z';
-  const artStatic = () => `${LEAVES.map(d => `<path d="${d}" fill="url(#sc-mare-milk)" stroke="#fffaf2" stroke-opacity=".5" stroke-width="1.5"/>`).join('')}<path d="${HEART}" fill="url(#sc-mare-milk)"/><path d="M0-56V66" stroke="#b77a45" stroke-width="2.4" stroke-linecap="round"/>`;
+  // El trazo de la rosetta termina dentro de la última hoja (antes llegaba a 66 y se salía del café).
+  const STEM_END = 56;
+  const artStatic = () => `<g clip-path="url(#sc-mare-cupArtClip)">${LEAVES.map(d => `<path d="${d}" fill="url(#sc-mare-milk)" stroke="#fffaf2" stroke-opacity=".5" stroke-width="1.5"/>`).join('')}<path d="${HEART}" fill="url(#sc-mare-milk)"/><path d="M0-56V${STEM_END}" stroke="#b77a45" stroke-width="2.4" stroke-linecap="round"/></g>`;
   const CUP_TOP = svg(100, 100, `
     <circle cx="50" cy="50" r="46" fill="url(#sc-mare-cerTop)"/>
     <circle cx="50" cy="50" r="46" fill="none" stroke="#bcae9a" stroke-opacity=".6"/>
@@ -404,6 +406,8 @@
     <circle cx="50" cy="50" r="41.5" fill="url(#sc-mare-innerWall)"/>
     <circle data-k="coffee" cx="50" cy="50" r="40" fill="url(#sc-mare-esp)" opacity="0"/>
     <g data-k="crema" opacity="0"><circle cx="50" cy="50" r="40" fill="url(#sc-mare-crema)"/><circle cx="50" cy="50" r="40" fill="url(#sc-mare-foam)"/></g>
+    <!-- Círculo del café (centro 50,50 · radio 39) expresado en las coordenadas del dibujo escalado. -->
+    <clipPath id="sc-mare-cupArtClip"><circle cx="0" cy="-5.6" r="108"/></clipPath>
     <g data-k="cupArt" opacity="0" transform="translate(50 52) scale(.36)">${artStatic()}</g>
     <circle cx="50" cy="50" r="40.5" fill="url(#sc-mare-innerWall)"/>
     <path d="M18 30A38 38 0 0 1 44 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-opacity=".9"/>
@@ -448,13 +452,15 @@
     <path d="M12 20H180V152H12Z" fill="none" stroke="#fff" stroke-opacity=".1" stroke-width="1.2"/>
     <rect x="4" y="1" width="242" height="3" rx="1.5" fill="#fff" fill-opacity=".3"/>
     <rect x="190" y="28" width="46" height="22" rx="4" fill="#0c0806" stroke="#fff" stroke-opacity=".1"/>
-    <text data-k="digits" x="213" y="44" text-anchor="middle" font-family="${SANS}" font-size="13" font-weight="700" fill="#ffb35c">20°</text>
     ${[86, 124].map(y => `<g transform="translate(213 ${y})"><circle r="15" fill="#000" fill-opacity=".35" transform="translate(1.5 2)"/><circle r="14" fill="url(#sc-mare-chromeR)"/><circle r="9.5" fill="#2b2622"/><rect x="-1.4" y="-9" width="2.8" height="7" rx="1.4" fill="#f6efe5"/></g>`).join('')}
     <text x="213" y="160" text-anchor="middle" font-family="Georgia,serif" font-size="8" letter-spacing="2.4" fill="#fff" fill-opacity=".5">MARÉ</text>
     <rect x="14" y="170" width="24" height="10" rx="2" fill="#141110"/><rect x="212" y="170" width="24" height="10" rx="2" fill="#141110"/>
   `);
   const OVEN_SIDE = svg(OD, 170, `<rect width="${OD}" height="170" rx="6" fill="url(#sc-mare-graphSide)"/><path d="${Array.from({ length: 6 }, (_, i) => `M${40 + i * 16} 30V80`).join('')}" stroke="#000" stroke-opacity=".45" stroke-width="5" stroke-linecap="round"/><rect width="${OD}" height="3" fill="#fff" fill-opacity=".14"/>`);
   const OVEN_TOP = svg(OW, OD, `<rect width="${OW}" height="${OD}" rx="8" fill="#3a342f"/><rect width="${OW}" height="${OD}" rx="8" fill="url(#sc-mare-steelTop)" opacity=".25"/><path d="${Array.from({ length: 9 }, (_, i) => `M${60 + i * 16} 40V120`).join('')}" stroke="#000" stroke-opacity=".4" stroke-width="5" stroke-linecap="round"/>`);
+  // La temperatura va en su propia pieza: si estuviera dentro del frente, cada cambio de número
+  // obligaría a redibujar todo el frente (con su textura metálica) en cada cuadro.
+  const OVEN_DIGITS = svg(46, 22, `<text data-k="digits" x="23" y="16" text-anchor="middle" font-family="${SANS}" font-size="13" font-weight="700" fill="#ffb35c">20°</text>`);
   const OVEN_IN = svg(188, 152, `
     <rect width="188" height="152" fill="url(#sc-mare-cavity)"/>
     <path d="M0 0L22 18H166L188 0ZM0 152L22 132H166L188 152Z" fill="#000" fill-opacity=".35"/>
@@ -521,10 +527,14 @@
       <circle r="138" fill="#e9dfd0"/>
       <circle r="135" fill="url(#sc-mare-crema)"/>
       <circle r="135" fill="url(#sc-mare-foam)" transform="scale(1)"/>
+      <!-- El dibujo queda recortado al círculo del café: ni la hoja de abajo ni el trazo se salen a la taza. -->
+      <clipPath id="sc-mare-artClip"><circle r="133"/></clipPath>
+      <g clip-path="url(#sc-mare-artClip)">
       <g data-k="art" transform="translate(0 14) scale(2.15)">
         ${LEAVES.map((d, i) => `<path data-k="leaf${i}" d="${d}" fill="url(#sc-mare-milk)" stroke="#fffaf2" stroke-opacity=".55" stroke-width="1.2" opacity="0"/>`).join('')}
         <path data-k="head" d="${HEART}" fill="url(#sc-mare-milk)" opacity="0"/>
-        <path data-k="stem" d="M0-56V66" pathLength="1" stroke="#b77a45" stroke-width="1.6" stroke-linecap="round" fill="none" stroke-dasharray="1" stroke-dashoffset="1"/>
+        <path data-k="stem" d="M0-56V${STEM_END}" pathLength="1" stroke="#b77a45" stroke-width="1.6" stroke-linecap="round" fill="none" stroke-dasharray="1" stroke-dashoffset="1"/>
+      </g>
       </g>
       <circle r="136" fill="url(#sc-mare-innerWall)"/>
       <path d="M-120-60A134 134 0 0 1-40-128" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-opacity=".9"/>
@@ -559,10 +569,6 @@
 .sc-mare-bg{background:radial-gradient(60% 50% at 30% 40%,#c9a273,#6d4a30 60%,#2b1d14);overflow:hidden}
 .sc-mare-bg>canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .sc-mare-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(40,24,14,.12),rgba(40,24,14,.1) 40%,rgba(30,18,10,.5))}
-.sc-mare-bk{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,232,190,.5) 0,rgba(255,232,190,.42) 52%,rgba(255,244,222,.75) 64%,rgba(255,232,190,0) 70%);mix-blend-mode:screen}
-.sc-mare-bk.is-g{background:radial-gradient(circle,rgba(220,240,190,.32) 0,rgba(220,240,190,.26) 52%,rgba(236,250,214,.5) 64%,rgba(220,240,190,0) 70%)}
-.sc-mare-amb.sc-mare-bk{animation:sc-mare-twinkle 7s ease-in-out infinite alternate}
-@keyframes sc-mare-twinkle{0%{opacity:.35;transform:scale(.94)}100%{opacity:1;transform:scale(1.04)}}
 .sc-mare-top{background-size:100% 100%}
 .sc-mare-top::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(60,36,18,.45),rgba(60,36,18,0) 30%,rgba(255,240,214,0) 78%,rgba(255,240,214,.18)),linear-gradient(90deg,rgba(40,24,12,.5),rgba(40,24,12,0) 22%,rgba(40,24,12,0) 70%,rgba(40,24,12,.45))}
 .sc-mare-edge{background-size:100% 600%;background-position:0 100%}
@@ -571,18 +577,18 @@
 .sc-mare-cab::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(0,0,0,.45) 0 3px,rgba(0,0,0,0) 3px 64px),linear-gradient(180deg,rgba(10,5,2,.85),rgba(10,5,2,.35) 30%,rgba(10,5,2,.55))}
 .sc-mare-shd{border-radius:50%;background:radial-gradient(closest-side,rgba(30,16,6,.6),rgba(30,16,6,.28) 50%,rgba(30,16,6,0))}
 .sc-mare-shb{border-radius:24px;background:rgba(30,16,6,.42);box-shadow:0 0 34px 22px rgba(30,16,6,.3)}
-.sc-mare-spill{border-radius:50%;background:radial-gradient(closest-side,rgba(255,160,70,.55),rgba(255,140,60,.22) 50%,rgba(255,140,60,0));mix-blend-mode:screen}
+.sc-mare-spill{border-radius:50%;background:radial-gradient(closest-side,rgba(255,170,90,.42),rgba(255,150,70,.16) 50%,rgba(255,150,70,0))}
 .sc-mare-steam{position:absolute;inset:0}
 .sc-mare-steam span{position:absolute;left:28%;bottom:4%;width:40%;height:62%;border-radius:50%;background:radial-gradient(50% 50% at 50% 50%,rgba(255,252,246,.7),rgba(255,252,246,.25) 55%,rgba(255,252,246,0));opacity:.45;transform:translate(4%,-14%) scale(.9,.95);transform-origin:50% 100%;animation:sc-mare-rise 3.4s ease-in-out infinite}
 .sc-mare-steam span:nth-child(2){left:42%;width:30%;animation-delay:-1.1s;animation-duration:3.9s}
 .sc-mare-steam span:nth-child(3){left:20%;width:34%;animation-delay:-2.3s;animation-duration:4.3s}
 @keyframes sc-mare-rise{0%{opacity:0;transform:translate(0,20%) scale(.6,.5)}30%{opacity:.85}70%{opacity:.4}100%{opacity:0;transform:translate(10%,-55%) scale(1.15,1.2)}}
 .sc-mare-fx{position:absolute;inset:0;pointer-events:none}
-.sc-mare-beams{background:linear-gradient(112deg,rgba(255,232,190,0) 8%,rgba(255,232,190,.2) 16%,rgba(255,232,190,0) 26%,rgba(255,232,190,0) 30%,rgba(255,232,190,.14) 37%,rgba(255,232,190,0) 46%);mix-blend-mode:screen}
+.sc-mare-beams{background:linear-gradient(112deg,rgba(255,232,190,0) 8%,rgba(255,232,190,.2) 16%,rgba(255,232,190,0) 26%,rgba(255,232,190,0) 30%,rgba(255,232,190,.14) 37%,rgba(255,232,190,0) 46%)}
 .sc-mare-amb.sc-mare-beams{animation:sc-mare-breathe 9s ease-in-out infinite alternate}
 @keyframes sc-mare-breathe{0%{opacity:.65}100%{opacity:1}}
 .sc-mare-vig{background:radial-gradient(120% 100% at 50% 45%,rgba(20,10,4,0) 52%,rgba(20,10,4,.5) 100%)}
-.sc-mare-grain{opacity:.07;mix-blend-mode:overlay;background-size:160px 160px}
+.sc-mare-grain{opacity:.035;background-size:160px 160px}
 .sc-mare-macro{position:absolute;inset:0;visibility:hidden;opacity:0;overflow:hidden;z-index:6}
 .sc-mare-macro>svg{position:absolute;inset:0;width:100%;height:100%;display:block}
 .sc-mare-macro::after{content:'';position:absolute;inset:0;background:radial-gradient(90% 90% at 50% 50%,rgba(30,16,6,0) 55%,rgba(30,16,6,.5))}
@@ -613,18 +619,37 @@ body.motion-paused .sc-mare .sc-mare-amb,body.motion-paused .sc-mare .sc-mare-am
   }
 
   // Fondo: la foto de la cafetería, desenfocada una vez en un canvas (profundidad de campo precalculada).
-  function paintBackdrop(host) {
+  // Las luces desenfocadas (bokeh) se pintan aquí una sola vez: como elementos con mix-blend-mode
+  // obligaban a redibujar todo el fondo en cada cuadro y la escena caía a ~16 fps.
+  function paintBackdrop(host, lights = []) {
     const pic = new Image();
     pic.decoding = 'async';
     pic.onload = () => {
-      const w = 480, h = 270, c = makeCanvas(w, h), x = c.getContext('2d');
+      const w = 960, h = 540, c = makeCanvas(w, h), x = c.getContext('2d');
       if (filterOK()) {
-        x.filter = 'blur(4px) saturate(1.12) brightness(.92) contrast(.95)';
-        x.drawImage(pic, -24, -16, w + 48, h + 32);
+        x.filter = 'blur(8px) saturate(1.12) brightness(.92) contrast(.95)';
+        x.drawImage(pic, -48, -32, w + 96, h + 64);
+        x.filter = 'none';
       } else {
         const s = makeCanvas(48, 27); s.getContext('2d').drawImage(pic, 0, 0, 48, 27);
         x.imageSmoothingQuality = 'high'; x.drawImage(s, 0, 0, w, h);
       }
+      // Coordenadas del plano (2700×1520) llevadas al lienzo.
+      const kx = w / 2700, ky = h / 1520;
+      x.globalCompositeOperation = 'screen';
+      lights.forEach(({ left, top, size, green }) => {
+        const r = size / 2 * kx, cx = left * kx + r, cy = top * ky + r;
+        const g = x.createRadialGradient(cx, cy, 0, cx, cy, r);
+        const [c1, c2, c3] = green ? ['220,240,190', '220,240,190', '236,250,214'] : ['255,232,190', '255,232,190', '255,244,222'];
+        const a = green ? [.32, .26, .5] : [.5, .42, .75];
+        g.addColorStop(0, `rgba(${c1},${a[0]})`);
+        g.addColorStop(.74, `rgba(${c2},${a[1]})`);
+        g.addColorStop(.91, `rgba(${c3},${a[2]})`);
+        g.addColorStop(1, `rgba(${c1},0)`);
+        x.fillStyle = g;
+        x.beginPath(); x.arc(cx, cy, r, 0, Math.PI * 2); x.fill();
+      });
+      x.globalCompositeOperation = 'source-over';
       host.prepend(c);
     };
     pic.src = BG_PHOTO;
@@ -712,15 +737,13 @@ body.motion-paused .sc-mare .sc-mare-amb,body.motion-paused .sc-mare .sc-mare-am
     // Fondo lejano con bokeh (un plano a gran distancia: el paralaje lo da la propia perspectiva).
     obj('bg', [-100, -120, -1050]);
     const bgRec = part('bg', 'translate3d(-1350px,-760px,0px)', 2700, 1520, '', 'sc-mare-bg');
-    paintBackdrop(bgRec.el);
     const bk = rng(77);
-    for (let i = 0; i < 16; i++) {
-      const d = document.createElement('div');
-      const s = 40 + bk() * 120;
-      d.className = `sc-mare-bk sc-mare-amb${i % 4 === 3 ? ' is-g' : ''}`;
-      d.style.cssText = `left:${n(bk() * 2600)}px;top:${n(60 + bk() * 760)}px;width:${n(s)}px;height:${n(s)}px;animation-delay:${n(-bk() * 7)}s;animation-duration:${n(5 + bk() * 5)}s`;
-      bgRec.el.appendChild(d);
-    }
+    const lights = Array.from({ length: 16 }, (_, i) => {
+      const size = 40 + bk() * 120, left = bk() * 2600, top = 60 + bk() * 760;
+      bk(); bk(); // mantiene la misma secuencia aleatoria que antes (retraso y duración del parpadeo)
+      return { size, left, top, green: i % 4 === 3 };
+    });
+    paintBackdrop(bgRec.el, lights);
 
     // Barra: mármol, canto y mueble de madera.
     obj('counter', [0, 0, 0]);
@@ -751,6 +774,7 @@ body.motion-paused .sc-mare .sc-mare-amb,body.motion-paused .sc-mare .sc-mare-am
     part('oven', `translate3d(125px,-180px,85px) rotateY(90deg)`, OD, 170, OVEN_SIDE, 'sc-mare-bf');
     part('oven', `translate3d(-125px,-180px,-85px) rotateY(-90deg)`, OD, 170, OVEN_SIDE, 'sc-mare-bf');
     part('oven', `translate3d(-125px,-180px,85px)`, OW, OH, OVEN_FRONT(tex), 'sc-mare-bf sc-mare-refl', '--ro:-12px');
+    part('oven', `translate3d(65px,-152px,85.6px)`, 46, 22, OVEN_DIGITS, 'sc-mare-bf');
     obj('door', [POS.oven[0] - 125 + 8, -28, POS.oven[2] + 87]);
     const door = part('door', 'translate3d(0px,-136px,0px)', 176, 136, DOOR);
 
@@ -771,6 +795,11 @@ body.motion-paused .sc-mare .sc-mare-amb,body.motion-paused .sc-mare .sc-mare-am
     obj('drip', [POS.machine[0], 0, 60]);
     part('drip', flat(200, 80, -24), 200, 80, DRIP_TOP);
     part('drip', 'translate3d(-100px,-24px,40px)', 200, 24, DRIP_FRONT, 'sc-mare-refl', '--ro:0px');
+
+    // Lanceta de vapor. Las piezas se pintan en el orden en que se crean (no por profundidad),
+    // así que va antes de la jarra: su punta queda dentro, tapada por la pared y por la leche.
+    obj('wand', [74, -200, 48], true);
+    part('wand', 'translate3d(-9px,-9px,0px)', 70, 110, WAND);
 
     // Jarra de leche.
     obj('pitcher', POS.pitcherRest, true);
@@ -802,9 +831,7 @@ body.motion-paused .sc-mare .sc-mare-amb,body.motion-paused .sc-mare .sc-mare-am
     obj('group', [POS.machine[0], -140, 56], true);
     part('group', stand(110, 66), 110, 72, GROUP);
 
-    // Lanceta de vapor y nubes de vapor.
-    obj('wand', [74, -200, 48], true);
-    part('wand', 'translate3d(-9px,-9px,0px)', 70, 110, WAND);
+    // Nubes de vapor (la lanceta se crea antes de la jarra, más arriba).
     obj('puffs', [112, -112, 52], true);
     const puffsRec = part('puffs', 'translate3d(-70px,-150px,0px)', 140, 160, PUFFS);
 
@@ -824,13 +851,21 @@ body.motion-paused .sc-mare .sc-mare-amb,body.motion-paused .sc-mare .sc-mare-am
     };
     R.tagV = R.tags.map(t => t.querySelector('b'));
 
-    const set = (el, a) => { for (const k in a) el.setAttribute(k, a[k]); };
-    const tr = (el, s) => el.setAttribute('transform', s);
-    const op = (el, v) => el.setAttribute('opacity', f3(clamp(v)));
-    const cssOp = (el, v) => { el.style.opacity = f3(clamp(v)); el.style.visibility = v > 0.002 ? 'visible' : 'hidden'; };
+    // Solo se escribe lo que cambió: reescribir un atributo o un texto con el mismo valor
+    // obliga igual a redibujar el SVG que lo contiene (con el horno caliente eso trababa la escena).
+    const memo = (el, k, v) => { const c = el.__m || (el.__m = {}); if (c[k] === v) return false; c[k] = v; return true; };
+    const set = (el, a) => { for (const k in a) { const v = String(a[k]); if (memo(el, k, v)) el.setAttribute(k, v); } };
+    const tr = (el, s) => { if (memo(el, 'transform', s)) el.setAttribute('transform', s); };
+    const op = (el, v) => { const s = f3(clamp(v)); if (memo(el, 'opacity', s)) el.setAttribute('opacity', s); };
+    const txt = (el, s) => { if (memo(el, '#text', s)) el.textContent = s; };
+    const cssOp = (el, v) => {
+      const s = f3(clamp(v)), vis = v > 0.002 ? 'visible' : 'hidden';
+      if (memo(el, 'css-op', s)) el.style.opacity = s;
+      if (memo(el, 'css-vis', vis)) el.style.visibility = vis;
+    };
 
     // ---------- Medidas (al montar y al cambiar de tamaño) ----------
-    let L = null, lastP = 0;
+    let L = null, lastP = 0, viewHidden = false;
     function layout() {
       const W = stage.clientWidth, H = stage.clientHeight;
       if (!W || !H) return false;
@@ -873,8 +908,9 @@ body.motion-paused .sc-mare .sc-mare-amb,body.motion-paused .sc-mare .sc-mare-am
       const grind = bell(p, 0.055, 0.065, 0.135, 0.145);
       O.grinder.extra = ` translate3d(${n(grind * Math.sin(p * 2600) * 0.6)}px,0px,0px)`;
       tr(R.dial, `rotate(${n(150 * seg(p, 0.05, 0.065) - 150 * seg(p, 0.14, 0.155))})`);
-      R.gdisp.textContent = `${(18 * eIO(seg(p, 0.06, 0.14))).toFixed(1).replace('.', ',')}`;
+      txt(R.gdisp, `${(18 * eIO(seg(p, 0.06, 0.14))).toFixed(1).replace('.', ',')}`);
       R.grounds.forEach((g, i) => {
+        if (grind <= 0) { op(g, 0); return; } // fuera de la molienda no se mueven (evita redibujar el molino)
         const t = frac(p * 95 + i / 7);
         set(g, { cx: n(100 + ((i % 3) - 1) * 3.4 + Math.sin(i * 7 + t * 4) * 1.2), cy: n(288 + t * 18), opacity: f3(grind * (t < 0.85 ? 1 : (1 - t) / 0.15)) });
       });
@@ -902,7 +938,7 @@ body.motion-paused .sc-mare .sc-mare-amb,body.motion-paused .sc-mare .sc-mare-am
       const press = bell(p, 0.25, 0.265, 0.325, 0.345);
       tr(R.g1, `rotate(${n(-120 + 150 * press)})`);
       tr(R.g2, `rotate(${n(-60 + 70 * eIO(seg(p, 0.36, 0.4)) - 70 * eIO(seg(p, 0.48, 0.5)))})`);
-      R.tagV[1].textContent = `${Math.round(25 * seg(p, 0.255, 0.33))} s`;
+      txt(R.tagV[1], `${Math.round(25 * seg(p, 0.255, 0.33))} s`);
 
       // La taza pasa de la bandeja de goteo a su platillo (bajo la vista cenital).
       const ct = eIO(seg(p, 0.53, 0.6));
@@ -923,21 +959,25 @@ body.motion-paused .sc-mare .sc-mare-amb,body.motion-paused .sc-mare .sc-mare-am
       Object.assign(O.pSh, { x: pX, z: pZ, op: 1 - lift * 0.55 });
       O.pSh.extra = ` scale3d(${f3(1 + lift * 0.25)},1,${f3(1 + lift * 0.25)})`;
       tr(R.milk, `translate(38 38) scale(${f3(1 + foam * 0.04)}) translate(-38 -38)`);
-      tr(R.swirl, `rotate(${n((p * 9000) % 360)})`);
+      tr(R.swirl, `rotate(${n((clamp(p, 0.39, 0.48) * 9000) % 360)})`); // solo gira mientras sale vapor
       tr(R.knob, `rotate(${n(80 * steamOn)})`);
       R.puffs.forEach((pf, i) => {
+        if (steamOn <= 0.001) { op(pf, 0); return; }
         const t = frac(p * 42 + i / 7);
         const x = Math.sin(i * 2.3 + t * 3) * 14 + (i % 2 ? 8 : -8);
         const y = -34 * lift - 8 - t * 70;
         set(pf, { cx: n(x), cy: n(y), r: n(8 + t * 16), opacity: f3(steamOn * (1 - t) * Math.min(1, t * 5) * 0.95) });
       });
       O.puffs.vis = steamOn > 0.001;
-      R.tagV[2].textContent = `${Math.round(lerp(20, 65, eIO(seg(p, 0.4, 0.47))))} °C`;
+      txt(R.tagV[2], `${Math.round(lerp(20, 65, eIO(seg(p, 0.4, 0.47))))} °C`);
 
       // 4 · Dibujamos el arte latte (vista cenital a pantalla completa).
       const lo = seg(p, 0.5, 0.535), lc = seg(p, 0.635, 0.668);
       const mv = eOut(lo) * (1 - eIO(lc));
       cssOp(R.macro, mv);
+      // Con la vista cenital tapando todo, la barra 3D de atrás no se dibuja.
+      const covered = mv > 0.995;
+      if (covered !== viewHidden) { view.style.visibility = covered ? 'hidden' : ''; viewHidden = covered; }
       cssOp(R.label, mv * seg(p, 0.52, 0.545));
       R.label.style.transform = `translate(-50%,${n((1 - mv) * 8)}px)`;
       if (mv > 0.002) {
@@ -969,7 +1009,7 @@ body.motion-paused .sc-mare .sc-mare-amb,body.motion-paused .sc-mare .sc-mare-am
       op(R.elem, heat); op(R.elem2, heat * 0.8);
       op(R.doorGlow, heat * 0.2);
       O.spill.op = heat; O.spill.vis = heat > 0.002;
-      R.digits.textContent = `${Math.round(lerp(20, 200, heatOn))}°`;
+      txt(R.digits, `${Math.round(lerp(20, 200, heatOn))}°`);
       const bake = eIO(seg(p, 0.7, 0.81));
       op(R.baked, bake);
       op(R.raw, 1 - seg(p, 0.76, 0.81));
