@@ -396,7 +396,9 @@
     return `M${-w} ${y}Q0 ${n(y + k + h * 1.6)} ${w} ${y}Q0 ${n(y + k - h * 0.6)} ${-w} ${y}Z`;
   });
   const HEART = 'M0-46C-11-52-12-64-4-65C-2-65 0-63 0-61C0-63 2-65 4-65C12-64 11-52 0-46Z';
-  const artStatic = () => `${LEAVES.map(d => `<path d="${d}" fill="url(#sc-mare-milk)" stroke="#fffaf2" stroke-opacity=".5" stroke-width="1.5"/>`).join('')}<path d="${HEART}" fill="url(#sc-mare-milk)"/><path d="M0-56V66" stroke="#b77a45" stroke-width="2.4" stroke-linecap="round"/>`;
+  // El trazo de la rosetta termina dentro de la última hoja (antes llegaba a 66 y se salía del café).
+  const STEM_END = 56;
+  const artStatic = () => `<g clip-path="url(#sc-mare-cupArtClip)">${LEAVES.map(d => `<path d="${d}" fill="url(#sc-mare-milk)" stroke="#fffaf2" stroke-opacity=".5" stroke-width="1.5"/>`).join('')}<path d="${HEART}" fill="url(#sc-mare-milk)"/><path d="M0-56V${STEM_END}" stroke="#b77a45" stroke-width="2.4" stroke-linecap="round"/></g>`;
   const CUP_TOP = svg(100, 100, `
     <circle cx="50" cy="50" r="46" fill="url(#sc-mare-cerTop)"/>
     <circle cx="50" cy="50" r="46" fill="none" stroke="#bcae9a" stroke-opacity=".6"/>
@@ -404,6 +406,8 @@
     <circle cx="50" cy="50" r="41.5" fill="url(#sc-mare-innerWall)"/>
     <circle data-k="coffee" cx="50" cy="50" r="40" fill="url(#sc-mare-esp)" opacity="0"/>
     <g data-k="crema" opacity="0"><circle cx="50" cy="50" r="40" fill="url(#sc-mare-crema)"/><circle cx="50" cy="50" r="40" fill="url(#sc-mare-foam)"/></g>
+    <!-- Círculo del café (centro 50,50 · radio 39) expresado en las coordenadas del dibujo escalado. -->
+    <clipPath id="sc-mare-cupArtClip"><circle cx="0" cy="-5.6" r="108"/></clipPath>
     <g data-k="cupArt" opacity="0" transform="translate(50 52) scale(.36)">${artStatic()}</g>
     <circle cx="50" cy="50" r="40.5" fill="url(#sc-mare-innerWall)"/>
     <path d="M18 30A38 38 0 0 1 44 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-opacity=".9"/>
@@ -523,10 +527,14 @@
       <circle r="138" fill="#e9dfd0"/>
       <circle r="135" fill="url(#sc-mare-crema)"/>
       <circle r="135" fill="url(#sc-mare-foam)" transform="scale(1)"/>
+      <!-- El dibujo queda recortado al círculo del café: ni la hoja de abajo ni el trazo se salen a la taza. -->
+      <clipPath id="sc-mare-artClip"><circle r="133"/></clipPath>
+      <g clip-path="url(#sc-mare-artClip)">
       <g data-k="art" transform="translate(0 14) scale(2.15)">
         ${LEAVES.map((d, i) => `<path data-k="leaf${i}" d="${d}" fill="url(#sc-mare-milk)" stroke="#fffaf2" stroke-opacity=".55" stroke-width="1.2" opacity="0"/>`).join('')}
         <path data-k="head" d="${HEART}" fill="url(#sc-mare-milk)" opacity="0"/>
-        <path data-k="stem" d="M0-56V66" pathLength="1" stroke="#b77a45" stroke-width="1.6" stroke-linecap="round" fill="none" stroke-dasharray="1" stroke-dashoffset="1"/>
+        <path data-k="stem" d="M0-56V${STEM_END}" pathLength="1" stroke="#b77a45" stroke-width="1.6" stroke-linecap="round" fill="none" stroke-dasharray="1" stroke-dashoffset="1"/>
+      </g>
       </g>
       <circle r="136" fill="url(#sc-mare-innerWall)"/>
       <path d="M-120-60A134 134 0 0 1-40-128" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-opacity=".9"/>
@@ -788,6 +796,11 @@ body.motion-paused .sc-mare .sc-mare-amb,body.motion-paused .sc-mare .sc-mare-am
     part('drip', flat(200, 80, -24), 200, 80, DRIP_TOP);
     part('drip', 'translate3d(-100px,-24px,40px)', 200, 24, DRIP_FRONT, 'sc-mare-refl', '--ro:0px');
 
+    // Lanceta de vapor. Las piezas se pintan en el orden en que se crean (no por profundidad),
+    // así que va antes de la jarra: su punta queda dentro, tapada por la pared y por la leche.
+    obj('wand', [74, -200, 48], true);
+    part('wand', 'translate3d(-9px,-9px,0px)', 70, 110, WAND);
+
     // Jarra de leche.
     obj('pitcher', POS.pitcherRest, true);
     obj('pSh', POS.pitcherRest);
@@ -818,9 +831,7 @@ body.motion-paused .sc-mare .sc-mare-amb,body.motion-paused .sc-mare .sc-mare-am
     obj('group', [POS.machine[0], -140, 56], true);
     part('group', stand(110, 66), 110, 72, GROUP);
 
-    // Lanceta de vapor y nubes de vapor.
-    obj('wand', [74, -200, 48], true);
-    part('wand', 'translate3d(-9px,-9px,0px)', 70, 110, WAND);
+    // Nubes de vapor (la lanceta se crea antes de la jarra, más arriba).
     obj('puffs', [112, -112, 52], true);
     const puffsRec = part('puffs', 'translate3d(-70px,-150px,0px)', 140, 160, PUFFS);
 
