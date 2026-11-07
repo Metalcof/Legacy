@@ -74,7 +74,7 @@
 
   /* ---------- 4. Títulos que suben desde una máscara, palabra por palabra ---------- */
   if (!still() && 'IntersectionObserver' in window) {
-    const titles = document.querySelectorAll('.work-head h2, .auto-copy h2, .reel-copy h2, .lab-head h2, .faq-intro h2, .contact h2, #journey-heading');
+    const titles = document.querySelectorAll('.work-head h2, .auto-copy h2, .reel-copy h2, .lab-head h2, .faq-intro h2, .contact h2, #journey-heading, #sectors-title, #diag-title, #gains-title, #services-title, #pricing-title, #steps-title');
     const observer = new IntersectionObserver(entries => entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       entry.target.classList.add('is-revealed');

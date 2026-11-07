@@ -559,10 +559,6 @@
 .sc-mare-bg{background:radial-gradient(60% 50% at 30% 40%,#c9a273,#6d4a30 60%,#2b1d14);overflow:hidden}
 .sc-mare-bg>canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .sc-mare-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(40,24,14,.12),rgba(40,24,14,.1) 40%,rgba(30,18,10,.5))}
-.sc-mare-bk{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,232,190,.5) 0,rgba(255,232,190,.42) 52%,rgba(255,244,222,.75) 64%,rgba(255,232,190,0) 70%);mix-blend-mode:screen}
-.sc-mare-bk.is-g{background:radial-gradient(circle,rgba(220,240,190,.32) 0,rgba(220,240,190,.26) 52%,rgba(236,250,214,.5) 64%,rgba(220,240,190,0) 70%)}
-.sc-mare-amb.sc-mare-bk{animation:sc-mare-twinkle 7s ease-in-out infinite alternate}
-@keyframes sc-mare-twinkle{0%{opacity:.35;transform:scale(.94)}100%{opacity:1;transform:scale(1.04)}}
 .sc-mare-top{background-size:100% 100%}
 .sc-mare-top::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(60,36,18,.45),rgba(60,36,18,0) 30%,rgba(255,240,214,0) 78%,rgba(255,240,214,.18)),linear-gradient(90deg,rgba(40,24,12,.5),rgba(40,24,12,0) 22%,rgba(40,24,12,0) 70%,rgba(40,24,12,.45))}
 .sc-mare-edge{background-size:100% 600%;background-position:0 100%}
@@ -571,18 +567,18 @@
 .sc-mare-cab::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(0,0,0,.45) 0 3px,rgba(0,0,0,0) 3px 64px),linear-gradient(180deg,rgba(10,5,2,.85),rgba(10,5,2,.35) 30%,rgba(10,5,2,.55))}
 .sc-mare-shd{border-radius:50%;background:radial-gradient(closest-side,rgba(30,16,6,.6),rgba(30,16,6,.28) 50%,rgba(30,16,6,0))}
 .sc-mare-shb{border-radius:24px;background:rgba(30,16,6,.42);box-shadow:0 0 34px 22px rgba(30,16,6,.3)}
-.sc-mare-spill{border-radius:50%;background:radial-gradient(closest-side,rgba(255,160,70,.55),rgba(255,140,60,.22) 50%,rgba(255,140,60,0));mix-blend-mode:screen}
+.sc-mare-spill{border-radius:50%;background:radial-gradient(closest-side,rgba(255,170,90,.42),rgba(255,150,70,.16) 50%,rgba(255,150,70,0))}
 .sc-mare-steam{position:absolute;inset:0}
 .sc-mare-steam span{position:absolute;left:28%;bottom:4%;width:40%;height:62%;border-radius:50%;background:radial-gradient(50% 50% at 50% 50%,rgba(255,252,246,.7),rgba(255,252,246,.25) 55%,rgba(255,252,246,0));opacity:.45;transform:translate(4%,-14%) scale(.9,.95);transform-origin:50% 100%;animation:sc-mare-rise 3.4s ease-in-out infinite}
 .sc-mare-steam span:nth-child(2){left:42%;width:30%;animation-delay:-1.1s;animation-duration:3.9s}
 .sc-mare-steam span:nth-child(3){left:20%;width:34%;animation-delay:-2.3s;animation-duration:4.3s}
 @keyframes sc-mare-rise{0%{opacity:0;transform:translate(0,20%) scale(.6,.5)}30%{opacity:.85}70%{opacity:.4}100%{opacity:0;transform:translate(10%,-55%) scale(1.15,1.2)}}
 .sc-mare-fx{position:absolute;inset:0;pointer-events:none}
-.sc-mare-beams{background:linear-gradient(112deg,rgba(255,232,190,0) 8%,rgba(255,232,190,.2) 16%,rgba(255,232,190,0) 26%,rgba(255,232,190,0) 30%,rgba(255,232,190,.14) 37%,rgba(255,232,190,0) 46%);mix-blend-mode:screen}
+.sc-mare-beams{background:linear-gradient(112deg,rgba(255,232,190,0) 8%,rgba(255,232,190,.2) 16%,rgba(255,232,190,0) 26%,rgba(255,232,190,0) 30%,rgba(255,232,190,.14) 37%,rgba(255,232,190,0) 46%)}
 .sc-mare-amb.sc-mare-beams{animation:sc-mare-breathe 9s ease-in-out infinite alternate}
 @keyframes sc-mare-breathe{0%{opacity:.65}100%{opacity:1}}
 .sc-mare-vig{background:radial-gradient(120% 100% at 50% 45%,rgba(20,10,4,0) 52%,rgba(20,10,4,.5) 100%)}
-.sc-mare-grain{opacity:.07;mix-blend-mode:overlay;background-size:160px 160px}
+.sc-mare-grain{opacity:.035;background-size:160px 160px}
 .sc-mare-macro{position:absolute;inset:0;visibility:hidden;opacity:0;overflow:hidden;z-index:6}
 .sc-mare-macro>svg{position:absolute;inset:0;width:100%;height:100%;display:block}
 .sc-mare-macro::after{content:'';position:absolute;inset:0;background:radial-gradient(90% 90% at 50% 50%,rgba(30,16,6,0) 55%,rgba(30,16,6,.5))}
@@ -613,18 +609,37 @@ body.motion-paused .sc-mare .sc-mare-amb,body.motion-paused .sc-mare .sc-mare-am
   }
 
   // Fondo: la foto de la cafetería, desenfocada una vez en un canvas (profundidad de campo precalculada).
-  function paintBackdrop(host) {
+  // Las luces desenfocadas (bokeh) se pintan aquí una sola vez: como elementos con mix-blend-mode
+  // obligaban a redibujar todo el fondo en cada cuadro y la escena caía a ~16 fps.
+  function paintBackdrop(host, lights = []) {
     const pic = new Image();
     pic.decoding = 'async';
     pic.onload = () => {
-      const w = 480, h = 270, c = makeCanvas(w, h), x = c.getContext('2d');
+      const w = 960, h = 540, c = makeCanvas(w, h), x = c.getContext('2d');
       if (filterOK()) {
-        x.filter = 'blur(4px) saturate(1.12) brightness(.92) contrast(.95)';
-        x.drawImage(pic, -24, -16, w + 48, h + 32);
+        x.filter = 'blur(8px) saturate(1.12) brightness(.92) contrast(.95)';
+        x.drawImage(pic, -48, -32, w + 96, h + 64);
+        x.filter = 'none';
       } else {
         const s = makeCanvas(48, 27); s.getContext('2d').drawImage(pic, 0, 0, 48, 27);
         x.imageSmoothingQuality = 'high'; x.drawImage(s, 0, 0, w, h);
       }
+      // Coordenadas del plano (2700×1520) llevadas al lienzo.
+      const kx = w / 2700, ky = h / 1520;
+      x.globalCompositeOperation = 'screen';
+      lights.forEach(({ left, top, size, green }) => {
+        const r = size / 2 * kx, cx = left * kx + r, cy = top * ky + r;
+        const g = x.createRadialGradient(cx, cy, 0, cx, cy, r);
+        const [c1, c2, c3] = green ? ['220,240,190', '220,240,190', '236,250,214'] : ['255,232,190', '255,232,190', '255,244,222'];
+        const a = green ? [.32, .26, .5] : [.5, .42, .75];
+        g.addColorStop(0, `rgba(${c1},${a[0]})`);
+        g.addColorStop(.74, `rgba(${c2},${a[1]})`);
+        g.addColorStop(.91, `rgba(${c3},${a[2]})`);
+        g.addColorStop(1, `rgba(${c1},0)`);
+        x.fillStyle = g;
+        x.beginPath(); x.arc(cx, cy, r, 0, Math.PI * 2); x.fill();
+      });
+      x.globalCompositeOperation = 'source-over';
       host.prepend(c);
     };
     pic.src = BG_PHOTO;
@@ -712,15 +727,13 @@ body.motion-paused .sc-mare .sc-mare-amb,body.motion-paused .sc-mare .sc-mare-am
     // Fondo lejano con bokeh (un plano a gran distancia: el paralaje lo da la propia perspectiva).
     obj('bg', [-100, -120, -1050]);
     const bgRec = part('bg', 'translate3d(-1350px,-760px,0px)', 2700, 1520, '', 'sc-mare-bg');
-    paintBackdrop(bgRec.el);
     const bk = rng(77);
-    for (let i = 0; i < 16; i++) {
-      const d = document.createElement('div');
-      const s = 40 + bk() * 120;
-      d.className = `sc-mare-bk sc-mare-amb${i % 4 === 3 ? ' is-g' : ''}`;
-      d.style.cssText = `left:${n(bk() * 2600)}px;top:${n(60 + bk() * 760)}px;width:${n(s)}px;height:${n(s)}px;animation-delay:${n(-bk() * 7)}s;animation-duration:${n(5 + bk() * 5)}s`;
-      bgRec.el.appendChild(d);
-    }
+    const lights = Array.from({ length: 16 }, (_, i) => {
+      const size = 40 + bk() * 120, left = bk() * 2600, top = 60 + bk() * 760;
+      bk(); bk(); // mantiene la misma secuencia aleatoria que antes (retraso y duración del parpadeo)
+      return { size, left, top, green: i % 4 === 3 };
+    });
+    paintBackdrop(bgRec.el, lights);
 
     // Barra: mármol, canto y mueble de madera.
     obj('counter', [0, 0, 0]);
@@ -830,7 +843,7 @@ body.motion-paused .sc-mare .sc-mare-amb,body.motion-paused .sc-mare .sc-mare-am
     const cssOp = (el, v) => { el.style.opacity = f3(clamp(v)); el.style.visibility = v > 0.002 ? 'visible' : 'hidden'; };
 
     // ---------- Medidas (al montar y al cambiar de tamaño) ----------
-    let L = null, lastP = 0;
+    let L = null, lastP = 0, viewHidden = false;
     function layout() {
       const W = stage.clientWidth, H = stage.clientHeight;
       if (!W || !H) return false;
@@ -938,6 +951,9 @@ body.motion-paused .sc-mare .sc-mare-amb,body.motion-paused .sc-mare .sc-mare-am
       const lo = seg(p, 0.5, 0.535), lc = seg(p, 0.635, 0.668);
       const mv = eOut(lo) * (1 - eIO(lc));
       cssOp(R.macro, mv);
+      // Con la vista cenital tapando todo, la barra 3D de atrás no se dibuja.
+      const covered = mv > 0.995;
+      if (covered !== viewHidden) { view.style.visibility = covered ? 'hidden' : ''; viewHidden = covered; }
       cssOp(R.label, mv * seg(p, 0.52, 0.545));
       R.label.style.transform = `translate(-50%,${n((1 - mv) * 8)}px)`;
       if (mv > 0.002) {
